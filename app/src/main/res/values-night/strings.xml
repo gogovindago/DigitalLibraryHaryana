@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_okay">Ok</string>
+    <string name="reg_Mobile">Registered Mobile Number</string>
+    <string name="home">Home</string>
+    <string name="send">Send</string>
+    <string name="skip">Skip Login</string>
+    <string name="other_digital_libraries"><font color='black'> Other</font> Digital Libraries</string>
+    <string name="trending_ebooks"><font color='black'> Trending </font> eBooks</string>
+    <string name="trending_journals"><font color='black'> Trending </font> Journals</string>
+    <string name="trending_videos"><font color='black'> Trending </font> Videos</string>
+    <string name="already_existing_account_sign_in"><u> ALREADY EXISTING ACCOUNT ! SIGN IN </u></string>
+
+</resources>

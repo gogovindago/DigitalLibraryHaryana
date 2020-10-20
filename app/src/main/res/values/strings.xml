@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Digital Library Haryana</string>
+    <string name="department_of_higher_education_haryana_the_officialapp" translatable="false"> Department of Higher Education, Haryana \n<u> the official App </u></string>
+    <string name="department_of_higher_education_haryana" translatable="false"> Department of Higher Education, Haryana</string>
+    <string name="the_official_app"><u>the official App</u></string>
+    <string name="Login">Login</string>
+    <string name="create_Account">Create Account</string>
+    <string name="action_okay">Ok</string>
+    <string name="selectlanguage" translatable="false">Select Your Language</string>
+    <string name="english" translatable="false">English</string>
+    <string name="login">Login</string>
+    <string name="user_id">User Id</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log In</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="forgot_passwordd">Forgot Password ?</string>
+    <string name="reg_Mobile">Registered Mobile Number</string>
+    <string name="home">Home</string>
+    <string name="send">Send</string>
+    <string name="create_account"><u>Create Account</u></string>
+    <string name="skip">Skip Login</string>
+    <string name="other_digital_libraries"><font color='black'> Other</font> Digital Libraries</string>
+    <string name="make_sure_reloading_page">Make sure you have good internet in your Mobile.Reload page again.</string>
+    <string name="oops_there_is_no_interenet">Oops!! There is no internet connection. Please enable your internet connection.</string>
+    <string name="trending_ebooks"><font color='black'> Trending </font> eBooks</string>
+    <string name="trending_journals"><font color='black'> Trending </font> Journals</string>
+    <string name="trending_videos"><font color='black'> Trending </font> Videos</string>
+    <string name="already_existing_account_sign_in"><u> ALREADY EXISTING ACCOUNT ! SIGN IN </u></string>
+
+</resources>

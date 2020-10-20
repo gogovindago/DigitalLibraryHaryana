@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "204534602230",
+    "firebase_url": "https://digital-library-haryana.firebaseio.com",
+    "project_id": "digital-library-haryana",
+    "storage_bucket": "digital-library-haryana.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:204534602230:android:277b68cbba7f08e1764fd7",
+        "android_client_info": {
+          "package_name": "dhe.digital.library.haryana"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "204534602230-a704md7aqkts1u14t416k5dgtnnoqfq2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpq8ny-fGQOduXuOJdkZQXXDeMSy0BXeE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "204534602230-a704md7aqkts1u14t416k5dgtnnoqfq2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
