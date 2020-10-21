@@ -225,19 +225,22 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
         rvVideos = (RecyclerView) findViewById(R.id.rvVideos);
 
 
-        DataModelLeft[] drawerItem = new DataModelLeft[4];
+        DataModelLeft[] drawerItem = new DataModelLeft[9];
 
 
-        //drawerItem[0] = new DataModelLeft(R.drawable.dashboard, "My Dashboard");
-        //drawerItem[1] = new DataModelLeft(R.drawable.personwhite, "My Profile");
-        drawerItem[0] = new DataModelLeft(R.drawable.rate_review, "Rate App");
-        drawerItem[1] = new DataModelLeft(R.drawable.share, "Share App");
-        drawerItem[2] = new DataModelLeft(R.drawable.notifications, "My Notification");
+        drawerItem[0] = new DataModelLeft(R.drawable.ic_baseline_library_books_24, "Public Library");
+        drawerItem[1] = new DataModelLeft(R.drawable.ic_baseline_book_online_24, "E-Books");
+        drawerItem[2] = new DataModelLeft(R.drawable.ic_baseline_account_balance_wallet_24, "journals");
+        drawerItem[3] = new DataModelLeft(R.drawable.ic_baseline_video_library_24, "Videos");
+        drawerItem[4] = new DataModelLeft(R.drawable.ic_baseline_apps_24, "Our Others Apps");
+        drawerItem[5] = new DataModelLeft(R.drawable.rate_review, "Rate App");
+        drawerItem[6] = new DataModelLeft(R.drawable.share, "Share App");
+        drawerItem[7] = new DataModelLeft(R.drawable.notifications, "My Notification");
         if (skiplogin) {
-            drawerItem[3] = new DataModelLeft(R.drawable.ic_baseline_exit_to_app_24, "Login/Signup");
+            drawerItem[8] = new DataModelLeft(R.drawable.ic_baseline_exit_to_app_24, "Login/Signup");
 
         } else {
-            drawerItem[3] = new DataModelLeft(R.drawable.ic_baseline_exit_to_app_24, "Logout");
+            drawerItem[8] = new DataModelLeft(R.drawable.ic_baseline_exit_to_app_24, "Logout");
 
         }
 
@@ -413,22 +416,51 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
         Fragment fragment = null;
 
         switch (position) {
-//            case 0:
-//
-//                Intent intent2 = new Intent(this, MapsActivity.class);
-//                startActivity(intent2);
-//                // fragment = new FixturesFragment();
-//                // fragment = new Upload_service();
-//                //  fragment = new ConnectFragment();
-//                break;
-//            case 1:
-//                mDrawerLayout.closeDrawers();
-//                Intent myprofile = new Intent(this, ProfileActivity.class);
-//                startActivity(myprofile);
-//
-//                break;
-
             case 0:
+                mDrawerLayout.closeDrawers();
+                Intent AllothersDlib = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                AllothersDlib.putExtra("typeId", "1");
+                AllothersDlib.putExtra("titleOfPage", "All Digitals Libraries");
+                startActivity(AllothersDlib);
+                break;
+
+            case 1:
+                mDrawerLayout.closeDrawers();
+                Intent Allebooks = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                Allebooks.putExtra("typeId", "2");
+                Allebooks.putExtra("titleOfPage", "All E-books");
+                startActivity(Allebooks);
+                break;
+
+            case 2:
+                mDrawerLayout.closeDrawers();
+                Intent AllJournals = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                AllJournals.putExtra("typeId", "3");
+                AllJournals.putExtra("titleOfPage", "All Journals");
+                startActivity(AllJournals);
+                break;
+
+            case 3:
+                mDrawerLayout.closeDrawers();
+                Intent AllVideos = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                AllVideos.putExtra("typeId", "4");
+                AllVideos.putExtra("titleOfPage", "All Videos");
+                startActivity(AllVideos);
+                break;
+
+            case 4:
+                mDrawerLayout.closeDrawers();
+
+                /*  String result = extras.getString("title");
+                webViewUrl = extras.getString("bookurl");
+*/
+                Intent othersApps = new Intent(MainActivity.this, OpenBooksActivity.class);
+                othersApps.putExtra("title", "Our Other Apps");
+                othersApps.putExtra("bookurl", "https://play.google.com/store/apps/details?id=shikshasahyog.hry.edu.govt");
+                startActivity(othersApps);
+                break;
+
+            case 5:
                 mDrawerLayout.closeDrawers();
                 // Intent intent = new Intent(this, RoomDBMainActivity.class);
                 // startActivity(intent);
@@ -436,7 +468,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
 
                 rateApp();
                 break;
-            case 1:
+            case 6:
 
                 mDrawerLayout.closeDrawers();
 
@@ -448,13 +480,13 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 startActivity(Intent.createChooser(shareIntent, "Share via"));
 
                 break;
-            case 2:
+            case 7:
 
                 mDrawerLayout.closeDrawers();
                 Intent notification = new Intent(this, NotificationsActivity.class);
                 startActivity(notification);
                 break;
-            case 3:
+            case 8:
 
 
                 if (skiplogin) {

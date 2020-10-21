@@ -57,15 +57,19 @@
                     android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
 
                 <TextView
+                    android:layout_toLeftOf="@+id/webviewReload"
+                    android:layout_toRightOf="@+id/webviewForward"
                     android:id="@+id/toolbartitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:padding="5dp"
-                    android:text="ADMISSION"
+                    android:text="ggggguguiguguigiuguiguigiugug"
                     android:textAllCaps="true"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textSize="14sp"
+                    android:layout_toEndOf="@+id/webviewForward"
+                    android:layout_toStartOf="@+id/webviewReload" />
 
                 <ImageView
                     android:id="@+id/webviewReload"
