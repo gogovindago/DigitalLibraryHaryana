@@ -16,6 +16,7 @@ import java.util.Locale;
 import dhe.digital.library.haryana.R;
 import dhe.digital.library.haryana.apicall.WebAPiCall;
 import dhe.digital.library.haryana.databinding.ActivityForgetPasswordBinding;
+import dhe.digital.library.haryana.models.ForgotPasswordRequest;
 import dhe.digital.library.haryana.utility.BaseActivity;
 import dhe.digital.library.haryana.utility.GlobalClass;
 import dhe.digital.library.haryana.utility.MyLoaders;
@@ -28,7 +29,7 @@ public class ForgetPasswordActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_forget_password);
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_forget_password);
 
 
@@ -61,18 +62,20 @@ public class ForgetPasswordActivity extends BaseActivity {
                     // startActivity(i);
 
 
-                    username = binding.edtUserId.getText().toString().trim();
+                    username = binding.edtUserMno.getText().toString().trim();
 
                     if (GlobalClass.isNetworkConnected(ForgetPasswordActivity.this)) {
 
-
-//                        WebAPiCall webapiCall = new WebAPiCall();
-//                        webapiCall.ForgotPassworDataMethod( ForgetPasswordActivity.this,  ForgetPasswordActivity.this, username, selectedDate);
+                        ForgotPasswordRequest forgotPasswordRequest = new ForgotPasswordRequest();
+                        //forgotPasswordRequest.setPhoneNo(binding.edtUserId.getText().toString().trim());
+                        forgotPasswordRequest.setPhoneNo(username);
+                        WebAPiCall webapiCall = new WebAPiCall();
+                        webapiCall.forgotPasswordPostDataMethod(ForgetPasswordActivity.this, ForgetPasswordActivity.this, forgotPasswordRequest);
 
 
                     } else {
 
-                        Toast.makeText( ForgetPasswordActivity.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
+                        Toast.makeText(ForgetPasswordActivity.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -90,7 +93,7 @@ public class ForgetPasswordActivity extends BaseActivity {
                 int mDay = c.get(Calendar.DAY_OF_MONTH);
 
 
-                DatePickerDialog datePickerDialog = new DatePickerDialog( ForgetPasswordActivity.this,
+                DatePickerDialog datePickerDialog = new DatePickerDialog(ForgetPasswordActivity.this,
                         new DatePickerDialog.OnDateSetListener() {
 
                             @Override
@@ -110,7 +113,7 @@ public class ForgetPasswordActivity extends BaseActivity {
                                 binding.edtdob.setText(selectedDate);
 
 
-                                Toast.makeText( ForgetPasswordActivity.this, selectedDate, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ForgetPasswordActivity.this, selectedDate, Toast.LENGTH_SHORT).show();
 
                             }
                         }, mYear, mMonth, mDay);
@@ -129,12 +132,12 @@ public class ForgetPasswordActivity extends BaseActivity {
 
     public boolean Check_Data(View view) {
 
-        if (TextUtils.isEmpty(binding.edtUserId.getText().toString().trim())) {
-            myLoaders.showSnackBar(view, "Please Enter your Correct User ID");
+        if (TextUtils.isEmpty(binding.edtUserMno.getText().toString().trim())) {
+            myLoaders.showSnackBar(view, "Please Enter your 10 digits Registered Mobile Number");
             return false;
 
-        } else if (TextUtils.isEmpty(binding.edtdob.getText().toString().trim())) {
-            myLoaders.showSnackBar(view, "Please Select Your correct dob from calender");
+        } else if (binding.edtUserMno.getText().toString().trim().length() != 10) {
+            myLoaders.showSnackBar(view, "Please Enter your 10 digits Registered Mobile Number");
             return false;
         }
         return true;

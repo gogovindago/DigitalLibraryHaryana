@@ -86,8 +86,15 @@
             android:theme="@style/DigitalLibraryHaryana"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".ui.activity.ViewAllDataActivity"
             android:theme="@style/DigitalLibraryHaryana" />
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".ui.activity.ForgetPasswordActivity"
+            android:theme="@style/DigitalLibraryHaryana"
+
+            />
     </application>
 
 </manifest>

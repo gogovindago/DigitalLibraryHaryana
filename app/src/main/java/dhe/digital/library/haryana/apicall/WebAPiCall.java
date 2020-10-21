@@ -16,12 +16,17 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import dhe.digital.library.haryana.allinterface.GetAllData_interface;
 import dhe.digital.library.haryana.allinterface.GetbannersData_interface;
 import dhe.digital.library.haryana.allinterface.LoginData_interface;
+import dhe.digital.library.haryana.allinterface.OtpVerifyData_interface;
 import dhe.digital.library.haryana.allinterface.SignupData_interface;
+import dhe.digital.library.haryana.models.ForgotPasswordRequest;
+import dhe.digital.library.haryana.models.ForgotPasswordResponse;
 import dhe.digital.library.haryana.models.HomePageResponse;
 import dhe.digital.library.haryana.models.LoginRequest;
 import dhe.digital.library.haryana.models.LoginResponse;
 import dhe.digital.library.haryana.models.SignupRequest;
 import dhe.digital.library.haryana.models.SignupResponse;
+import dhe.digital.library.haryana.models.VerifyOtpRequest;
+import dhe.digital.library.haryana.models.VerifyOtpResponse;
 import dhe.digital.library.haryana.models.ViewAllResponse;
 import dhe.digital.library.haryana.retrofitinterface.ApiClient;
 import dhe.digital.library.haryana.ui.activity.MainActivity;
@@ -285,9 +290,95 @@ public class WebAPiCall {
     }
 
 
+
+    public void forgotPasswordPostDataMethod(final Activity activity, final Context context, ForgotPasswordRequest request) {
+
+        loadershowwithMsg(context, "We are Sending auto generated password on your Registered Mobile number.");
+
+        // Call<LoginResponse> userpost_responseCall = ApiClient.getClient().LoginUser(PhoneNo, Password, FcmToken);
+        Call<ForgotPasswordResponse> userpost_responseCall = ApiClient.getClient().ForgetPasswordUser(request);
+        userpost_responseCall.enqueue(new Callback<ForgotPasswordResponse>() {
+            @Override
+            public void onResponse(Call<ForgotPasswordResponse> call, Response<ForgotPasswordResponse> response) {
+                dailoghide(context);
+                if (response.isSuccessful()) {
+
+
+                    if (response.body().getResponse() == 200) {
+
+                        dailogsuccessWithActivity(context,activity, " Password has been Changed Successfully.", "New auto generated password has been sent on your Registered Mobile number .");
+
+
+
+                    } else {
+                        dailogError(context, "Mobile Number Not Found!", "The Mobile Number You have entered is not Regitered with Us.");
+                    }
+
+
+                } else {
+                    GlobalClass.showtost(context, "Something went wrong. Please try after sometimes." + response.message());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ForgotPasswordResponse> call, Throwable t) {
+
+                dailoghide(context);
+                t.printStackTrace();
+
+                Log.d("dddddd", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+
+
+    public void VerifyOtpPostDataMethod(final Activity activity, final Context context, OtpVerifyData_interface otpVerifyData_interface, VerifyOtpRequest request) {
+
+        loadershowwithMsg(context, "Registration Process is going on....");
+
+        // Call<LoginResponse> userpost_responseCall = ApiClient.getClient().LoginUser(PhoneNo, Password, FcmToken);
+        Call<VerifyOtpResponse> userpost_responseCall = ApiClient.getClient().verifyOTP(request);
+        userpost_responseCall.enqueue(new Callback<VerifyOtpResponse>() {
+            @Override
+            public void onResponse(Call<VerifyOtpResponse> call, Response<VerifyOtpResponse> response) {
+                dailoghide(context);
+                if (response.isSuccessful()) {
+
+
+                    if (response.body().getResponse() == 200) {
+
+                        // dailogsuccessanddismis(context,activity, "New Password Sent Successfull.", "New auto generated password has been sent on your Registered Mobile number .");
+                        otpVerifyData_interface.userOtpVerifydata(response.body().getResponse());
+
+
+                    } else {
+                        dailogError(context, "Mobile Number Not Found!", "The Mobile Number You have entered is not Regitered with Us.");
+                    }
+
+
+                } else {
+                    GlobalClass.showtost(context, "Something went wrong. Please try after sometimes." + response.message());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<VerifyOtpResponse> call, Throwable t) {
+
+                dailoghide(context);
+                t.printStackTrace();
+
+                Log.d("dddddd", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+
     public void signupPostDataMethod(final Activity activity, final Context context, final SignupData_interface data_interface, SignupRequest request) {
 
-        loadershowwithMsg(context, "OTP sent on given Mobile for Registration....");
+        loadershowwithMsg(context, "A 4 digits OTP sent on given Mobile Number for Registration....");
 
         Call<SignupResponse> userpost_responseCall = ApiClient.getClient().signupUser(request);
         userpost_responseCall.enqueue(new Callback<SignupResponse>() {

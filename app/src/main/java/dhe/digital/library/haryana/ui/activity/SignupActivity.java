@@ -16,23 +16,23 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
 import dhe.digital.library.haryana.R;
+import dhe.digital.library.haryana.allinterface.OtpVerifyData_interface;
 import dhe.digital.library.haryana.allinterface.SignupData_interface;
 import dhe.digital.library.haryana.apicall.WebAPiCall;
-
-
 import dhe.digital.library.haryana.databinding.ActivitySignupBinding;
 import dhe.digital.library.haryana.models.SignupRequest;
 import dhe.digital.library.haryana.models.SignupResponse;
+import dhe.digital.library.haryana.models.VerifyOtpRequest;
 import dhe.digital.library.haryana.utility.BaseActivity;
 import dhe.digital.library.haryana.utility.CSPreferences;
 import dhe.digital.library.haryana.utility.GlobalClass;
 import dhe.digital.library.haryana.utility.MyLoaders;
 
-public class SignupActivity extends BaseActivity implements SignupData_interface {
+public class SignupActivity extends BaseActivity implements SignupData_interface, OtpVerifyData_interface {
     ActivitySignupBinding binding;
     private MyLoaders myLoaders;
     private static final String TAG = "LoginActivity";
-    private String refreshedToken, adminotp;
+    private String refreshedToken, adminotp, userMobileno;
     Boolean firstTimelogin = true;
     String imageurl = "https://i.picsum.photos/id/599/200/200.jpg?hmac=2WLKs3sxIsaEQ-6WZaa6YMxgl6ZC4cNnid0aqupm2is";
     SignupResponse.Data data2;
@@ -75,11 +75,25 @@ public class SignupActivity extends BaseActivity implements SignupData_interface
 
     @Override
     public void initListeners() {
+
+        binding.txtLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i = new Intent(SignupActivity.this, LoginActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+
+
+
         binding.btnotp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if (Check_Data(v)) {
+
                     SignupRequest signupRequest = new SignupRequest();
                     signupRequest.setFCMToken(refreshedToken);
                     signupRequest.setPassword(binding.edtconfirmpass.getText().toString().trim());
@@ -110,41 +124,28 @@ public class SignupActivity extends BaseActivity implements SignupData_interface
                 if (Check_Dataotp(v)) {
                     String userEnteredOTP = binding.edtotp.getText().toString().trim();
 
-                    if (adminotp.equalsIgnoreCase(userEnteredOTP)) {
+                    // if (adminotp.equalsIgnoreCase(userEnteredOTP)) {
 
-                        try {
-                            CSPreferences.putString(SignupActivity.this, "User_Name", data2.getFullName());
-                            CSPreferences.putString(SignupActivity.this, "Purpose", data2.getPurpose());
-                            CSPreferences.putString(SignupActivity.this, "Status", data2.getStatus());
-                            CSPreferences.putString(SignupActivity.this, "LibraryId", String.valueOf(data2.getLibraryId()));
-                            CSPreferences.putString(SignupActivity.this, "otp", String.valueOf(data2.getOtp()));
-                            CSPreferences.putString(SignupActivity.this, "PhoneNo", data2.getPhoneNo());
-                            CSPreferences.putString(SignupActivity.this, "Email", data2.getEmail());
-                            CSPreferences.putString(SignupActivity.this, "token", data2.getToken());
-                            CSPreferences.putBolean(SignupActivity.this, "firstTimelogin", firstTimelogin);
-                            CSPreferences.putBolean(SignupActivity.this, "skiplogin", false);
+                    VerifyOtpRequest otpRequest = new VerifyOtpRequest();
+                    otpRequest.setOtp(userEnteredOTP);
+                    otpRequest.setPhoneNo(userMobileno);
+                    if (GlobalClass.isNetworkConnected(SignupActivity.this)) {
 
+                        WebAPiCall webapiCall = new WebAPiCall();
+                        webapiCall.VerifyOtpPostDataMethod(SignupActivity.this, SignupActivity.this, SignupActivity.this, otpRequest);
 
-                            if (data2.getPic() == null) {
-                                data2.setPic(imageurl);
-                            }
-
-                            CSPreferences.putString(SignupActivity.this, "pic", data2.getPic());
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        Intent intentlogin = new Intent(SignupActivity.this, MainActivity.class);
-                        intentlogin.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        intentlogin.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intentlogin);
-                        finish();
 
                     } else {
-                        GlobalClass.dailogError(SignupActivity.this, "Wrong OTP", "Please Enter valid  OTP");
 
-
+                        Toast.makeText(SignupActivity.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
                     }
+
+
+//                    } else {
+//                        GlobalClass.dailogError(SignupActivity.this, "Wrong OTP", "Please Enter valid  OTP");
+//
+//
+//                    }
 
 
                 }
@@ -198,10 +199,10 @@ public class SignupActivity extends BaseActivity implements SignupData_interface
 
         try {
             data2 = data;
-            adminotp = String.valueOf(data.getOtp());
+            //adminotp = String.valueOf(data.getOtp());
             binding.txtmsg.setVisibility(View.VISIBLE);
 
-            String userMobileno = binding.edtmobile.getText().toString().trim();
+            userMobileno = binding.edtmobile.getText().toString().trim();
 
             String mask = userMobileno.replaceAll("\\w(?=\\w{4})", "*");
             binding.txtmsg.setText(getString(R.string.digitsoptmsg) + mask);
@@ -216,6 +217,48 @@ public class SignupActivity extends BaseActivity implements SignupData_interface
             e.printStackTrace();
         }
 
+
+    }
+
+    @Override
+    public void userOtpVerifydata(Integer data) {
+
+
+        if (data == 200) {
+
+
+            try {
+                CSPreferences.putString(SignupActivity.this, "User_Name", data2.getFullName());
+                CSPreferences.putString(SignupActivity.this, "Purpose", data2.getPurpose());
+                CSPreferences.putString(SignupActivity.this, "Status", data2.getStatus());
+                CSPreferences.putString(SignupActivity.this, "LibraryId", String.valueOf(data2.getLibraryId()));
+                CSPreferences.putString(SignupActivity.this, "otp", String.valueOf(data2.getOtp()));
+                CSPreferences.putString(SignupActivity.this, "PhoneNo", data2.getPhoneNo());
+                CSPreferences.putString(SignupActivity.this, "Email", data2.getEmail());
+                CSPreferences.putString(SignupActivity.this, "token", data2.getToken());
+                CSPreferences.putBolean(SignupActivity.this, "firstTimelogin", firstTimelogin);
+                CSPreferences.putBolean(SignupActivity.this, "skiplogin", false);
+
+
+                if (data2.getPic() == null) {
+                    data2.setPic(imageurl);
+                }
+
+                CSPreferences.putString(SignupActivity.this, "pic", data2.getPic());
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Intent intentlogin = new Intent(SignupActivity.this, MainActivity.class);
+            intentlogin.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intentlogin.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intentlogin);
+            finish();
+
+        } else {
+
+
+        }
 
     }
 }

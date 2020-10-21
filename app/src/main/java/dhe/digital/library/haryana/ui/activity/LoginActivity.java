@@ -100,14 +100,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             public void onClick(View v) {
                 Intent i = new Intent(LoginActivity.this, SignupActivity.class);
                 startActivity(i);
+                finish();
 
             }
         });
         txtforget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Intent i = new Intent(LoginActivity.this, ForgetPasswordActivity.class);
-                //   startActivity(i);
+                 Intent i = new Intent(LoginActivity.this, ForgetPasswordActivity.class);
+                   startActivity(i);
+
 
             }
         });

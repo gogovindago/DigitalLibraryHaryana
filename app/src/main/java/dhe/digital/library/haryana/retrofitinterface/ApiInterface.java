@@ -1,10 +1,14 @@
 package dhe.digital.library.haryana.retrofitinterface;
 
+import dhe.digital.library.haryana.models.ForgotPasswordRequest;
+import dhe.digital.library.haryana.models.ForgotPasswordResponse;
 import dhe.digital.library.haryana.models.HomePageResponse;
 import dhe.digital.library.haryana.models.LoginRequest;
 import dhe.digital.library.haryana.models.LoginResponse;
 import dhe.digital.library.haryana.models.SignupRequest;
 import dhe.digital.library.haryana.models.SignupResponse;
+import dhe.digital.library.haryana.models.VerifyOtpRequest;
+import dhe.digital.library.haryana.models.VerifyOtpResponse;
 import dhe.digital.library.haryana.models.ViewAllResponse;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -27,7 +31,7 @@ public interface ApiInterface {
     @POST("UserRegister")
     Call<SignupResponse> signupUser(@Body SignupRequest request);
 
-//http://112.196.99.107:81/api/commonapi/GetAllHomeImages/1
+    //http://112.196.99.107:81/api/commonapi/GetAllHomeImages/1
     @GET("GetAllHomeImages/{typeId}")
     Call<ViewAllResponse> getAllDataAPi(@Path("typeId") String s);
 
@@ -37,8 +41,16 @@ public interface ApiInterface {
 
 
     //http://112.196.99.107:81/DigitalLibrary/api/commonapi/UserLogin/7018401817/1234
-       @POST("UserLogin")
-        Call<LoginResponse> LoginUser(@Body LoginRequest request);
+    @POST("UserLogin")
+    Call<LoginResponse> LoginUser(@Body LoginRequest request);
+
+    // http://112.196.99.107:81/api/commonapi/ForgetPassword
+    @POST("ForgetPassword")
+    Call<ForgotPasswordResponse> ForgetPasswordUser(@Body ForgotPasswordRequest request);
+
+    //http://112.196.99.107:81/api/commonapi/VerifyOTP
+    @POST("VerifyOTP")
+    Call<VerifyOtpResponse> verifyOTP(@Body VerifyOtpRequest request);
 
 
 //    @GET("UserLogin/{PhoneNo}/{Password}/{FcmToken}")
