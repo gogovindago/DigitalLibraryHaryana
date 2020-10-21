@@ -91,7 +91,7 @@ public class ViewAllDataActivity extends BaseActivity implements RvNotificationA
         if (GlobalClass.isNetworkConnected(ViewAllDataActivity.this)) {
 
             WebAPiCall webapiCall = new WebAPiCall();
-            webapiCall.getAllDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, ViewAllDataActivity.this,1);
+            webapiCall.getAllDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, ViewAllDataActivity.this,"1");
 
         } else {
 
