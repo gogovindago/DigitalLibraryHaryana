@@ -70,22 +70,24 @@
 
         </activity>
         <activity
-            android:theme="@style/DigitalLibraryHaryana"
-
             android:name=".ui.activity.NotificationsActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
-            android:screenOrientation="portrait"/>
-        <activity
+
+            android:screenOrientation="portrait"
             android:theme="@style/DigitalLibraryHaryana"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
             android:name=".ui.activity.NotificationDetailActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
-            android:screenOrientation="portrait"/>
-        <activity
+            android:screenOrientation="portrait"
             android:theme="@style/DigitalLibraryHaryana"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
             android:name=".ui.activity.OpenBooksActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
-            android:screenOrientation="fullUser"/>
-        <activity android:name=".ui.activity.ViewAllDataActivity" />
+            android:screenOrientation="fullUser"
+            android:theme="@style/DigitalLibraryHaryana"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".ui.activity.ViewAllDataActivity"
+            android:theme="@style/DigitalLibraryHaryana" />
     </application>
 
 </manifest>

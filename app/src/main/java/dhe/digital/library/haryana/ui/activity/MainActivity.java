@@ -18,7 +18,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,7 +47,6 @@ import com.google.android.play.core.install.model.UpdateAvailability;
 import com.shashank.sony.fancygifdialoglib.FancyGifDialog;
 import com.shashank.sony.fancygifdialoglib.FancyGifDialogListener;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
-import com.smarteist.autoimageslider.IndicatorView.draw.controller.DrawController;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
@@ -83,7 +81,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
     ImageView toggle, profile_image;
     ImageButton mainNotification;
     LinearLayout llmain;
-    TextView toolbartxt, uname, textView, txtrole, txtwelcome;
+    TextView toolbartxt, uname, textView, txtrole, txtwelcome, rvViewAll, tebooksViewAll, JournalsViewAll, VideosViewAll;
     Toolbar toolbar;
     SwipeRefreshLayout mSwipeRefreshLayout;
 
@@ -140,6 +138,12 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
         mDrawerList = findViewById(R.id.left_drawer);
         uname = findViewById(R.id.uname);
         textView = findViewById(R.id.textView);
+
+        rvViewAll = findViewById(R.id.rvViewAll);
+        tebooksViewAll = findViewById(R.id.tebooksViewAll);
+        JournalsViewAll = findViewById(R.id.JournalsViewAll);
+        VideosViewAll = findViewById(R.id.VideosViewAll);
+
         txtrole = findViewById(R.id.txtrole);
         txtwelcome = findViewById(R.id.txtwelcome);
         profile_image = findViewById(R.id.profile_image);
@@ -356,6 +360,48 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
 //                MainActivity.drawerCheck();
                 Intent notification = new Intent(MainActivity.this, NotificationsActivity.class);
                 startActivity(notification);
+            }
+        });
+
+
+        /*rvViewAll tebooksViewAll JournalsViewAll VideosViewAll*/
+        rvViewAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent rvViewAll = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                rvViewAll.putExtra("typeId", "1");
+                rvViewAll.putExtra("titleOfPage", "All Digitals Libraries");
+                startActivity(rvViewAll);
+            }
+        });
+
+        tebooksViewAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent rvViewAll = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                rvViewAll.putExtra("typeId", "2");
+                rvViewAll.putExtra("titleOfPage", "All Ebooks");
+                startActivity(rvViewAll);
+            }
+        });
+
+        JournalsViewAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent rvViewAll = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                rvViewAll.putExtra("typeId", "3");
+                rvViewAll.putExtra("titleOfPage", "All Journals");
+                startActivity(rvViewAll);
+            }
+        });
+
+        VideosViewAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent rvViewAll = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                rvViewAll.putExtra("typeId", "4");
+                rvViewAll.putExtra("titleOfPage", "All Videos");
+                startActivity(rvViewAll);
             }
         });
 
@@ -594,7 +640,6 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
         }
 
 
-
     }
 
     @Override
@@ -650,7 +695,6 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             startActivity(certificate);
 
         }
-
 
 
     }

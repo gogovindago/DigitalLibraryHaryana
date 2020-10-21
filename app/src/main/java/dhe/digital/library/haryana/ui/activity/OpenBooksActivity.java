@@ -31,17 +31,13 @@ public class OpenBooksActivity extends AppCompatActivity implements View.OnClick
     private static ProgressBar webViewProgressBar, progressBar;
     private static ImageView back, forward, refresh, close;
     TextView toolbartitle;
-    String Registration_Id;
 
-    //  private static final String webViewUrl = "http://androhub.com";
-    // private static final String webViewUrl = "http://dmerharyana.org/";
     private static String webViewUrl = "https://www.highereduhry.com/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_openbooks);
-        //binding = DataBindingUtil.setContentView(this, R.layout.activity_admission);
 
 
         webViewUrl = CSPreferences.readString(this, "admissionURL");

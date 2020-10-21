@@ -7,58 +7,55 @@ import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import dhe.digital.library.haryana.R;
-import dhe.digital.library.haryana.adapter.RvNotificationAdapter;
+import dhe.digital.library.haryana.adapter.ViewAllItemsAdapter;
 import dhe.digital.library.haryana.allinterface.GetAllData_interface;
 import dhe.digital.library.haryana.apicall.WebAPiCall;
 import dhe.digital.library.haryana.databinding.ActivityViewalldataBinding;
-import dhe.digital.library.haryana.models.DataModel;
 import dhe.digital.library.haryana.models.ViewAllResponse;
+import dhe.digital.library.haryana.ui.welcome.WelcomeActivity;
 import dhe.digital.library.haryana.utility.BaseActivity;
+import dhe.digital.library.haryana.utility.CSPreferences;
 import dhe.digital.library.haryana.utility.GlobalClass;
 
-public class ViewAllDataActivity extends BaseActivity implements RvNotificationAdapter.ItemListener, GetAllData_interface {
+public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAdapter.ItemListener, GetAllData_interface {
 
-    ArrayList arrayList;
+
     ActivityViewalldataBinding binding;
+    boolean skiplogin;
+    private List<ViewAllResponse.Datum> arrayList = new ArrayList<ViewAllResponse.Datum>();
+    ViewAllItemsAdapter allItemsAdapter;
+    String typeId, titleOfPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_viewalldata);
 
+        allItemsAdapter = new ViewAllItemsAdapter(this, arrayList, this);
+        binding.recyclerView.setAdapter(allItemsAdapter);
+        binding.simpleSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
 
-        arrayList = new ArrayList();
-        //arrayList.add(new DataModel("Plantation", R.drawable.notifications, "#4CAF50"));
-        arrayList.add(new DataModel("Admission", R.drawable.notifications, "#FF9800"));
-//        arrayList.add(new DataModel("Result Declare", R.drawable.notifications, "#F94336"));
-//        arrayList.add(new DataModel("New Events", R.drawable.notifications, "#4CAF50"));
-//        arrayList.add(new DataModel("Item 5", R.drawable.notifications, "#4CAF50"));
-//        arrayList.add(new DataModel("Item 2", R.drawable.notifications, "#3E51B1"));
-//        arrayList.add(new DataModel("Item 3", R.drawable.notifications, "#673BB7"));
-//        arrayList.add(new DataModel("Result Declare", R.drawable.notifications, "#F94336"));
-//        arrayList.add(new DataModel("New Events", R.drawable.notifications, "#4CAF50"));
-//        arrayList.add(new DataModel("Item 5", R.drawable.notifications, "#4CAF50"));
-//        arrayList.add(new DataModel("Item 4", R.drawable.notifications, "#4BAA50"));
-//        arrayList.add(new DataModel("Item 1", R.drawable.notifications, "#09A9FF"));
-//        arrayList.add(new DataModel("Item 2", R.drawable.notifications, "#3E51B1"));
-//        arrayList.add(new DataModel("Item 3", R.drawable.notifications, "#673BB7"));
-//        arrayList.add(new DataModel("Item 4", R.drawable.notifications, "#4BAA50"));
-//        arrayList.add(new DataModel("Item 5", R.drawable.notifications, "#F94336"));
-//        arrayList.add(new DataModel("Item 2", R.drawable.notifications, "#3E51B1"));
-//        arrayList.add(new DataModel("Item 3", R.drawable.notifications, "#673BB7"));
-//        arrayList.add(new DataModel("Item 4", R.drawable.notifications, "#4BAA50"));
-//        arrayList.add(new DataModel("Item 5", R.drawable.notifications, "#F94336"));
-//        arrayList.add(new DataModel("Item 6", R.drawable.notifications, "#0A9B88"));
+            public void onRefresh() {
 
-        RvNotificationAdapter adaptermain = new RvNotificationAdapter(this, arrayList, this);
-        binding.recyclerView.setAdapter(adaptermain);
+                if (GlobalClass.isNetworkConnected(ViewAllDataActivity.this)) {
+                    WebAPiCall webapiCall = new WebAPiCall();
+                    webapiCall.getAllDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, ViewAllDataActivity.this, typeId);
 
+                } else {
+
+                    Toast.makeText(ViewAllDataActivity.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
+                }
+                shuffle();
+                binding.simpleSwipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
         /**
          AutoFitGridLayoutManager that auto fits the cells by the column width defined.
@@ -71,16 +68,33 @@ public class ViewAllDataActivity extends BaseActivity implements RvNotificationA
         /**
          Simple GridLayoutManager that spans two columns
          **/
-        LinearLayoutManager manager = new LinearLayoutManager(this, GridLayoutManager.VERTICAL, false);
-        binding.recyclerView.setLayoutManager(manager);
+        //  LinearLayoutManager manager = new LinearLayoutManager(this, GridLayoutManager.VERTICAL, false);
+        //  binding.recyclerView.setLayoutManager(manager);
+    }
+
+    public void shuffle() {
+        arrayList.clear();
+        allItemsAdapter.notifyDataSetChanged();
+
+        //  renewItems();
+
     }
 
     @Override
-    public void onItemClick(DataModel item, int currposition) {
+    public void onItemClick(ViewAllResponse.Datum item, int currposition) {
 
-        // Toast.makeText(getApplicationContext(), item.text + " is clicked", Toast.LENGTH_SHORT).show();
-        Intent captureplant = new Intent(this, NotificationDetailActivity.class);
-        startActivity(captureplant);
+        if (skiplogin) {
+            Intent welcomeintent = new Intent(this, WelcomeActivity.class);
+            startActivity(welcomeintent);
+
+        } else {
+
+            Intent certificate = new Intent(this, OpenBooksActivity.class);
+            certificate.putExtra("bookurl", item.getFilePath());
+            certificate.putExtra("title", item.getDescription());
+            startActivity(certificate);
+
+        }
     }
 
 
@@ -88,16 +102,39 @@ public class ViewAllDataActivity extends BaseActivity implements RvNotificationA
     public void initData() {
 
 
+        skiplogin = CSPreferences.getBoolean(this, "skiplogin");
+        try {
+
+            Bundle extras = getIntent().getExtras();
+
+            if (extras != null) {
+
+
+                titleOfPage = extras.getString("titleOfPage");
+                typeId = extras.getString("typeId");
+                // webViewUrl = extras.getString("typeId");
+
+                binding.toolbar.tvToolbarTitle.setAllCaps(true);
+                binding.toolbar.tvToolbarTitle.setText(titleOfPage);
+
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
         if (GlobalClass.isNetworkConnected(ViewAllDataActivity.this)) {
 
             WebAPiCall webapiCall = new WebAPiCall();
-            webapiCall.getAllDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, ViewAllDataActivity.this,"1");
+            webapiCall.getAllDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, ViewAllDataActivity.this, typeId);
 
         } else {
 
             Toast.makeText(ViewAllDataActivity.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
         }
-        
+
 
         binding.toolbar.notifcation.setVisibility(View.GONE);
 
@@ -117,6 +154,14 @@ public class ViewAllDataActivity extends BaseActivity implements RvNotificationA
 
     @Override
     public void GetAllData(List<ViewAllResponse.Datum> list) {
+
+        arrayList.clear();
+        arrayList.addAll(list);
+        GridLayoutManager manager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
+        binding.recyclerView.setLayoutManager(manager);
+        allItemsAdapter = new ViewAllItemsAdapter(this, arrayList, this);
+        binding.recyclerView.setAdapter(allItemsAdapter);
+        allItemsAdapter.notifyDataSetChanged();
 
 
     }

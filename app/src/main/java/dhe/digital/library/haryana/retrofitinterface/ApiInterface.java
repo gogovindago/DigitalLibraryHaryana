@@ -27,9 +27,9 @@ public interface ApiInterface {
     @POST("UserRegister")
     Call<SignupResponse> signupUser(@Body SignupRequest request);
 
-
-    @GET("GetHomeImages{typeId}")
-    Call<ViewAllResponse> getAllDataAPi( @Path("typeId") String s);
+//http://112.196.99.107:81/api/commonapi/GetAllHomeImages/1
+    @GET("GetAllHomeImages/{typeId}")
+    Call<ViewAllResponse> getAllDataAPi(@Path("typeId") String s);
 
 
     @GET("GetHomeImages")
