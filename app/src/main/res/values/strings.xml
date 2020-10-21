@@ -18,7 +18,8 @@
     <string name="home">Home</string>
     <string name="send">Send</string>
     <string name="create_account"><u>Create Account</u></string>
-    <string name="skip">Skip Login</string>
+    <string name="skip"><u> Skip </u></string>
+    <string name="digitsoptmsg">We have sent a 4 digits Otp on your Registered mobile which last four digits is.</string>
     <string name="other_digital_libraries"><font color='black'> Other</font> Digital Libraries</string>
     <string name="make_sure_reloading_page">Make sure you have good internet in your Mobile.Reload page again.</string>
     <string name="oops_there_is_no_interenet">Oops!! There is no internet connection. Please enable your internet connection.</string>

@@ -89,6 +89,7 @@ public class WelcomeActivity extends BaseActivity implements AdapterView.OnItemS
             public void onClick(View view) {
                 Intent intentlogin = new Intent(WelcomeActivity.this, LoginActivity.class);
                 startActivity(intentlogin);
+                finish();
 
             }
         });
@@ -99,6 +100,7 @@ public class WelcomeActivity extends BaseActivity implements AdapterView.OnItemS
                 //Intent intentsignup = new Intent(WelcomeActivity.this, SignupActivityold.class);
                 Intent intentsignup = new Intent(WelcomeActivity.this, SignupActivity.class);
                 startActivity(intentsignup);
+                finish();
 
             }
         });
@@ -108,10 +110,34 @@ public class WelcomeActivity extends BaseActivity implements AdapterView.OnItemS
             @Override
             public void onClick(View view) {
                 //Intent intentsignup = new Intent(WelcomeActivity.this, SignupActivityold.class);
+
+                try {
+                    CSPreferences.putString(WelcomeActivity.this, "User_Name", "Digital Library Haryana");
+//                    CSPreferences.putString(WelcomeActivity.this, "Purpose", data2.getPurpose());
+//                    CSPreferences.putString(WelcomeActivity.this, "Status", data2.getStatus());
+//                    CSPreferences.putString(WelcomeActivity.this, "LibraryId", String.valueOf(data2.getLibraryId()));
+//                    CSPreferences.putString(WelcomeActivity.this, "otp", String.valueOf(data2.getOtp()));
+//                    CSPreferences.putString(WelcomeActivity.this, "PhoneNo", data2.getPhoneNo());
+//                    CSPreferences.putString(WelcomeActivity.this, "Email", data2.getEmail());
+//                    CSPreferences.putString(WelcomeActivity.this, "token", data2.getToken());
+                  //  CSPreferences.putBolean(WelcomeActivity.this, "firstTimelogin", firstTimelogin);
+                    CSPreferences.putBolean(WelcomeActivity.this, "skiplogin", true);
+
+
+//                    if (data2.getPic() == null) {
+//                        data2.setPic(imageurl);
+//                    }
+//
+//                    CSPreferences.putString(WelcomeActivity.this, "pic", data2.getPic());
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
                 intent.putExtra("skiplogin", "skiplogin");
                 CSPreferences.putBolean(WelcomeActivity.this, "skiplogin", true);
                 startActivity(intent);
+                finish();
 
             }
         });

@@ -66,6 +66,7 @@ import dhe.digital.library.haryana.adapter.TrendingsVideosAdapter;
 import dhe.digital.library.haryana.allinterface.GetbannersData_interface;
 import dhe.digital.library.haryana.apicall.WebAPiCall;
 import dhe.digital.library.haryana.models.HomePageResponse;
+import dhe.digital.library.haryana.ui.welcome.WelcomeActivity;
 import dhe.digital.library.haryana.utility.BaseActivity;
 import dhe.digital.library.haryana.utility.CSPreferences;
 import dhe.digital.library.haryana.utility.DataModelLeft;
@@ -103,7 +104,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
     TrendingsEBooksAdapter trendingsEBooksAdapter;
     TrendingsVideosAdapter trendingsVideosAdapter;
     TrendingsJournalsAdapter trendingsJournalsAdapter;
-
+    boolean skiplogin;
     SliderView sliderView;
     SliderAdapter sliderAdapter;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -144,10 +145,10 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
         profile_image = findViewById(R.id.profile_image);
 
         try {
-
+            skiplogin = CSPreferences.getBoolean(this, "skiplogin");
             if (CSPreferences.getBoolean(this, "firstTimelogin")) {
 
-                GlobalClass.dailogsuccess(this, "Login Successfull.", "Welcome to Shiksha Sahyogi,Haryana.");
+                GlobalClass.dailogsuccess(this, "Login Successfull.", "Welcome to Digital Library,Haryana.");
                 CSPreferences.putBolean(this, "firstTimelogin", false);
                 mDrawerLayout.openDrawer(GravityCompat.START);
 
@@ -159,19 +160,12 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             }
 
 
-            if (CSPreferences.readString(this, "role").equalsIgnoreCase("Employee")) {
-                uname.setText("User ID : " + CSPreferences.readString(this, "User_Id"));
-
-            } else {
-                uname.setText("User Name : " + CSPreferences.readString(this, "User_Name"));
-            }
-
-
+            uname.setText(CSPreferences.readString(this, "PhoneNo"));
             // textView.setText(CSPreferences.readString(this, "User_Email"));
-            textView.setText(CSPreferences.readString(this, "Emp_Name"));
-            toolbartxt.setText(CSPreferences.readString(this, "Emp_Name"));
-            txtrole.setText(CSPreferences.readString(this, "role"));
-            txtwelcome.setText("Welcome, " + CSPreferences.readString(this, "Emp_Name"));
+            textView.setText(CSPreferences.readString(this, "Email"));
+            toolbartxt.setText(CSPreferences.readString(this, "User_Name"));
+            // txtrole.setText(CSPreferences.readString(this, "Email"));
+            txtwelcome.setText("Welcome, " + CSPreferences.readString(this, "User_Name"));
 
 
             Glide.with(MainActivity.this)
@@ -235,7 +229,13 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
         drawerItem[0] = new DataModelLeft(R.drawable.rate_review, "Rate App");
         drawerItem[1] = new DataModelLeft(R.drawable.share, "Share App");
         drawerItem[2] = new DataModelLeft(R.drawable.notifications, "My Notification");
-        drawerItem[3] = new DataModelLeft(R.drawable.ic_baseline_exit_to_app_24, "Logout");
+        if (skiplogin) {
+            drawerItem[3] = new DataModelLeft(R.drawable.ic_baseline_exit_to_app_24, "Login/Signup");
+
+        } else {
+            drawerItem[3] = new DataModelLeft(R.drawable.ic_baseline_exit_to_app_24, "Logout");
+
+        }
 
 
         DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this, R.layout.list_view_item_row, drawerItem);
@@ -249,8 +249,6 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 new IntentFilter("videocall"));
 
     }
-
-
 
 
     public void shuffle() {
@@ -412,8 +410,20 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 break;
             case 3:
 
-                mDrawerLayout.closeDrawers();
-                logout();
+
+                if (skiplogin) {
+                    mDrawerLayout.closeDrawers();
+                    Intent welcomeintent = new Intent(this, WelcomeActivity.class);
+                    startActivity(welcomeintent);
+                    finish();
+
+                } else {
+                    mDrawerLayout.closeDrawers();
+                    logout();
+
+                }
+
+
                 break;
 
 
@@ -569,42 +579,81 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
 
     @Override
     public void onItemClick(HomePageResponse.TrendingeBook item, int currposition) {
-        Intent certificate = new Intent(this, OpenBooksActivity.class);
-        certificate.putExtra("bookurl", item.getBookIframeUrl());
-        certificate.putExtra("title", item.getBookTitle());
-        startActivity(certificate);
+
+        if (skiplogin) {
+            Intent welcomeintent = new Intent(this, WelcomeActivity.class);
+            startActivity(welcomeintent);
+
+        } else {
+
+            Intent certificate = new Intent(this, OpenBooksActivity.class);
+            certificate.putExtra("bookurl", item.getBookIframeUrl());
+            certificate.putExtra("title", item.getBookTitle());
+            startActivity(certificate);
+
+        }
+
+
+
     }
 
     @Override
     public void onItemClick(HomePageResponse.TrendingVideo item, int currposition) {
-        Intent certificate = new Intent(this, OpenBooksActivity.class);
-        certificate.putExtra("bookurl", item.getVideoIframeUrl());
-        certificate.putExtra("title", item.getVideoTitle());
-        startActivity(certificate);
+
+        if (skiplogin) {
+            Intent welcomeintent = new Intent(this, WelcomeActivity.class);
+            startActivity(welcomeintent);
+
+        } else {
+
+            Intent certificate = new Intent(this, OpenBooksActivity.class);
+            certificate.putExtra("bookurl", item.getVideoIframeUrl());
+            certificate.putExtra("title", item.getVideoTitle());
+            startActivity(certificate);
+
+        }
+
     }
 
     @Override
     public void onItemClick(HomePageResponse.TrendingJournal item, int currposition) {
-        Intent certificate = new Intent(this, OpenBooksActivity.class);
-        certificate.putExtra("bookurl", item.getBookIframeUrl());
-        certificate.putExtra("title", item.getBookTitle());
-        startActivity(certificate);
+
+
+        if (skiplogin) {
+            Intent welcomeintent = new Intent(this, WelcomeActivity.class);
+            startActivity(welcomeintent);
+
+        } else {
+            Intent certificate = new Intent(this, OpenBooksActivity.class);
+            certificate.putExtra("bookurl", item.getBookIframeUrl());
+            certificate.putExtra("title", item.getBookTitle());
+            startActivity(certificate);
+
+        }
+
 
     }
-
 
 
     @Override
     public void onItemClick(HomePageResponse.OtherDigitalTrendingLibrary item, int currposition) {
 
-        Intent certificate = new Intent(this, OpenBooksActivity.class);
-        certificate.putExtra("bookurl", item.getLibraryUrl());
-        certificate.putExtra("title", item.getLibraryName());
-        startActivity(certificate);
+
+        if (skiplogin) {
+            Intent welcomeintent = new Intent(this, WelcomeActivity.class);
+            startActivity(welcomeintent);
+
+        } else {
+            Intent certificate = new Intent(this, OpenBooksActivity.class);
+            certificate.putExtra("bookurl", item.getLibraryUrl());
+            certificate.putExtra("title", item.getLibraryName());
+            startActivity(certificate);
+
+        }
+
 
 
     }
-
 
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
@@ -643,7 +692,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                         Toast.makeText(MainActivity.this, "Logout", Toast.LENGTH_SHORT).show();
                         mDrawerLayout.closeDrawers();
                         CSPreferences.clearPref(MainActivity.this);
-                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        Intent intent = new Intent(MainActivity.this, WelcomeActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
                                 Intent.FLAG_ACTIVITY_CLEAR_TASK |
                                 Intent.FLAG_ACTIVITY_NEW_TASK);

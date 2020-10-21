@@ -10,13 +10,19 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.RecyclerView;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import dhe.digital.library.haryana.allinterface.GetAllData_interface;
 import dhe.digital.library.haryana.allinterface.GetbannersData_interface;
 import dhe.digital.library.haryana.allinterface.LoginData_interface;
+import dhe.digital.library.haryana.allinterface.SignupData_interface;
 import dhe.digital.library.haryana.models.HomePageResponse;
 import dhe.digital.library.haryana.models.LoginRequest;
 import dhe.digital.library.haryana.models.LoginResponse;
+import dhe.digital.library.haryana.models.SignupRequest;
+import dhe.digital.library.haryana.models.SignupResponse;
+import dhe.digital.library.haryana.models.ViewAllResponse;
 import dhe.digital.library.haryana.retrofitinterface.ApiClient;
 import dhe.digital.library.haryana.ui.activity.MainActivity;
 import dhe.digital.library.haryana.utility.GlobalClass;
@@ -190,13 +196,52 @@ public class WebAPiCall {
     }
 
 
+    public void getAllDataMethod(final Activity activity, final Context context, RecyclerView llmain, final GetAllData_interface getAllData_interface, String typeId) {
+
+        loadershowwithMsg(context, "Loading...");
+
+        Call<ViewAllResponse> responseCall = ApiClient.getClient().getAllDataAPi(typeId);
+        responseCall.enqueue(new Callback<ViewAllResponse>() {
+            @Override
+            public void onResponse(Call<ViewAllResponse> call, Response<ViewAllResponse> response) {
+                dailoghide(context);
+                if (response.isSuccessful()) {
+
+                    if (response.body().getResponse() == 200) {
+                        llmain.setVisibility(View.VISIBLE);
+
+                        getAllData_interface.GetAllData(response.body().getData());
+
+
+                    } else {
+
+                    }
+
+
+                } else {
+                    GlobalClass.showtost(context, "" + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ViewAllResponse> call, Throwable t) {
+
+                dailoghide(context);
+                t.printStackTrace();
+
+                Log.d("dddddd", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+
     //    @GET("UserLogin/{PhoneNo}/{Password}/{FcmToken}")
-  //  public void loginPostDataMethod(final Activity activity, final Context context, final LoginData_interface loginData_interface, String PhoneNo, String Password, String FcmToken) {
+    //  public void loginPostDataMethod(final Activity activity, final Context context, final LoginData_interface loginData_interface, String PhoneNo, String Password, String FcmToken) {
     public void loginPostDataMethod(final Activity activity, final Context context, final LoginData_interface loginData_interface, LoginRequest request) {
 
         loadershowwithMsg(context, "We are veryfing your Detail for login.");
 
-       // Call<LoginResponse> userpost_responseCall = ApiClient.getClient().LoginUser(PhoneNo, Password, FcmToken);
+        // Call<LoginResponse> userpost_responseCall = ApiClient.getClient().LoginUser(PhoneNo, Password, FcmToken);
         Call<LoginResponse> userpost_responseCall = ApiClient.getClient().LoginUser(request);
         userpost_responseCall.enqueue(new Callback<LoginResponse>() {
             @Override
@@ -238,6 +283,52 @@ public class WebAPiCall {
             }
         });
     }
+
+
+    public void signupPostDataMethod(final Activity activity, final Context context, final SignupData_interface data_interface, SignupRequest request) {
+
+        loadershowwithMsg(context, "OTP sent on given Mobile for Registration....");
+
+        Call<SignupResponse> userpost_responseCall = ApiClient.getClient().signupUser(request);
+        userpost_responseCall.enqueue(new Callback<SignupResponse>() {
+            @Override
+            public void onResponse(Call<SignupResponse> call, Response<SignupResponse> response) {
+                dailoghide(context);
+                if (response.isSuccessful()) {
+
+
+                    if (response.body().getResponse() == 200) {
+
+                        // dailogsuccess(context, "Login Successfull.", "Welcome to Shiksha Sahyogi,Haryana.");
+                        data_interface.alluserdata((SignupResponse.Data) response.body().getData());
+
+                    } else if (response.body().getResponse() == 303) {
+                        data_interface.alluserdata((SignupResponse.Data) response.body().getData());
+
+                    } else {
+
+                        dailogError(context, "Something went wrong !", "Please try after sometimes.");
+
+                    }
+
+
+                } else {
+                    GlobalClass.showtost(context, "" + response.message());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<SignupResponse> call, Throwable t) {
+
+                dailoghide(context);
+                t.printStackTrace();
+
+                Log.d("dddddd", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
 
 
 

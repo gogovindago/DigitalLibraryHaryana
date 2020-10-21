@@ -84,7 +84,8 @@
             android:theme="@style/DigitalLibraryHaryana"
             android:name=".ui.activity.OpenBooksActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="fullUser"/>
+        <activity android:name=".ui.activity.ViewAllDataActivity" />
     </application>
 
 </manifest>

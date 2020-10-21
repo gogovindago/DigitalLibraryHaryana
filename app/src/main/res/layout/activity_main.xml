@@ -128,7 +128,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:visibility="gone">
+                        android:visibility="visible">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -180,18 +180,48 @@
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical">
 
-                                    <TextView
-                                        android:id="@+id/message"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center|start"
-                                        android:layout_marginStart="5dp"
-                                        android:layout_marginLeft="5dp"
+                                    <RelativeLayout
                                         android:layout_marginTop="8dp"
-                                        android:gravity="center|start"
-                                        android:text="@string/other_digital_libraries"
-                                        android:textSize="20sp"
-                                        android:textStyle="bold" />
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+
+                                        <TextView
+                                            android:id="@+id/message"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center|start"
+                                            android:layout_marginStart="5dp"
+                                            android:layout_marginLeft="5dp"
+                                            android:layout_marginTop="0dp"
+                                            android:gravity="center|start"
+                                            android:text="@string/other_digital_libraries"
+                                            android:textSize="20sp"
+                                            android:textStyle="bold" />
+
+                                        <TextView
+
+                                            android:background="@drawable/viewallbg"
+                                            android:layout_alignParentEnd="true"
+                                            android:id="@+id/rvViewAll"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_marginStart="5dp"
+                                            android:layout_marginLeft="5dp"
+                                            android:layout_marginEnd="5dp"
+                                            android:gravity="center"
+                                            android:text="View All"
+                                            android:textSize="14sp"
+                                            android:textStyle="bold"
+                                            android:textColor="@color/white"
+                                            android:layout_alignParentRight="true"
+                                            android:paddingLeft="16dp"
+                                            android:paddingStart="16dp"
+                                            android:paddingTop="5dp"
+                                            android:paddingBottom="5dp"
+                                            android:paddingEnd="16dp"/>
+                                    </RelativeLayout>
 
                                     <androidx.recyclerview.widget.RecyclerView
                                         android:id="@+id/recyclerView"
@@ -209,17 +239,48 @@
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical">
 
-                                    <TextView
-                                        android:id="@+id/txttrandings"
+
+                                    <RelativeLayout
+                                        android:layout_marginTop="8dp"
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginStart="5dp"
-                                        android:layout_marginLeft="5dp"
-                                        android:gravity="center|start"
-                                        android:text="@string/trending_ebooks"
-                                        android:textSize="20sp"
-                                        android:textStyle="bold" />
+                                        android:layout_height="wrap_content">
+
+                                        <TextView
+                                            android:id="@+id/txttrandings"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_marginStart="5dp"
+                                            android:layout_marginLeft="5dp"
+                                            android:gravity="center|start"
+                                            android:text="@string/trending_ebooks"
+                                            android:textSize="20sp"
+                                            android:textStyle="bold" />
+
+                                        <TextView
+
+                                            android:background="@drawable/viewallbg"
+                                            android:layout_alignParentEnd="true"
+                                            android:id="@+id/tebooksViewAll"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_marginStart="5dp"
+                                            android:layout_marginLeft="5dp"
+                                            android:layout_marginEnd="5dp"                                            android:gravity="center"
+                                            android:text="View All"
+                                            android:textSize="14sp"
+                                            android:textStyle="bold"
+                                            android:textColor="@color/white"
+                                            android:layout_alignParentRight="true"
+                                            android:paddingLeft="16dp"
+                                            android:paddingStart="16dp"
+                                            android:paddingTop="5dp"
+                                            android:paddingBottom="5dp"
+                                            android:paddingEnd="16dp"/>
+                                    </RelativeLayout>
+
+
 
                                     <androidx.recyclerview.widget.RecyclerView
                                         android:id="@+id/rvTrandingsEbooks"
@@ -237,17 +298,48 @@
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical">
 
-                                    <TextView
-                                        android:id="@+id/txtJournals"
+                                    <RelativeLayout
+                                        android:layout_marginTop="8dp"
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginStart="5dp"
-                                        android:layout_marginLeft="5dp"
-                                        android:gravity="center|start"
-                                        android:text="@string/trending_journals"
-                                        android:textSize="20sp"
-                                        android:textStyle="bold" />
+                                        android:layout_height="wrap_content">
+
+                                        <TextView
+                                            android:id="@+id/txtJournals"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_marginStart="5dp"
+                                            android:layout_marginLeft="5dp"
+                                            android:gravity="center|start"
+                                            android:text="@string/trending_journals"
+                                            android:textSize="20sp"
+                                            android:textStyle="bold" />
+
+                                        <TextView
+
+                                            android:background="@drawable/viewallbg"
+                                            android:layout_alignParentEnd="true"
+                                            android:id="@+id/JournalsViewAll"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_marginStart="5dp"
+                                            android:layout_marginLeft="5dp"
+                                            android:layout_marginEnd="5dp"                                            android:gravity="center"
+                                            android:text="View All"
+                                            android:textSize="14sp"
+                                            android:textStyle="bold"
+                                            android:textColor="@color/white"
+                                            android:layout_alignParentRight="true"
+                                            android:paddingLeft="16dp"
+                                            android:paddingStart="16dp"
+                                            android:paddingTop="5dp"
+                                            android:paddingBottom="5dp"
+                                            android:paddingEnd="16dp"/>
+                                    </RelativeLayout>
+
+
+
 
                                     <androidx.recyclerview.widget.RecyclerView
                                         android:id="@+id/rvJournals"
@@ -264,18 +356,47 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical">
-
-                                    <TextView
-                                        android:id="@+id/txtVideos"
+                                    <RelativeLayout
+                                        android:layout_marginTop="8dp"
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginStart="5dp"
-                                        android:layout_marginLeft="5dp"
-                                        android:gravity="center|start"
-                                        android:text="@string/trending_videos"
-                                        android:textSize="20sp"
-                                        android:textStyle="bold" />
+                                        android:layout_height="wrap_content">
+
+                                        <TextView
+                                            android:id="@+id/txtVideos"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_marginStart="5dp"
+                                            android:layout_marginLeft="5dp"
+                                            android:gravity="center|start"
+                                            android:text="@string/trending_videos"
+                                            android:textSize="20sp"
+                                            android:textStyle="bold" />
+
+                                        <TextView
+
+                                            android:background="@drawable/viewallbg"
+                                            android:layout_alignParentEnd="true"
+                                            android:id="@+id/VideosViewAll"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_marginStart="5dp"
+                                            android:layout_marginLeft="5dp"
+                                            android:layout_marginEnd="5dp"                                            android:gravity="center"
+                                            android:text="View All"
+                                            android:textSize="14sp"
+                                            android:textStyle="bold"
+                                            android:textColor="@color/white"
+                                            android:layout_alignParentRight="true"
+                                            android:paddingLeft="16dp"
+                                            android:paddingStart="16dp"
+                                            android:paddingTop="5dp"
+                                            android:paddingBottom="5dp"
+                                            android:paddingEnd="16dp"/>
+                                    </RelativeLayout>
+
+
 
                                     <androidx.recyclerview.widget.RecyclerView
                                         android:id="@+id/rvVideos"
@@ -321,7 +442,7 @@
                     android:layout_weight="0.2"
                     android:gravity="center|start"
                     android:orientation="vertical"
-                    android:paddingTop="5dp">
+                    android:paddingTop="0dp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -347,11 +468,11 @@
                             android:id="@+id/profile_image"
                             android:layout_width="90dp"
                             android:layout_height="90dp"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center|start"
+                            android:layout_below="@+id/txtwelcome"
+                            android:layout_gravity="center"
                             android:layout_marginStart="8dp"
                             android:layout_marginLeft="8dp"
-                            android:layout_marginTop="12dp"
+                            android:layout_marginTop="1dp"
                             android:src="@mipmap/ic_launcher_round"
                             app:civ_border_color="@color/purple_200"
                             app:civ_border_width="5dp" />
@@ -397,7 +518,7 @@
                             android:layout_marginStart="8dp"
                             android:layout_marginLeft="8dp"
                             android:layout_toEndOf="@+id/profile_image"
-                            android:layout_toRightOf="@+id/uname"
+                            android:layout_toRightOf="@+id/profile_image"
                             android:gravity="center|start"
                             android:text=""
                             android:textColor="@android:color/white"
@@ -410,7 +531,7 @@
                         android:layout_alignParentBottom="true"
                         android:layout_marginStart="0dp"
                         android:layout_marginEnd="0dp"
-                        android:layout_weight="0.001"
+                        android:layout_weight="0.003"
                         android:background="@color/white">
 
                     </View>

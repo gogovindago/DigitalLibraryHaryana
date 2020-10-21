@@ -56,7 +56,7 @@ CSPreferences.putString(this, "token", data.getToken());CSPreferences.putString(
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                String auth_key = auth_key = CSPreferences.readString(SplashActivity.this, "token");
+                String auth_key = CSPreferences.readString(SplashActivity.this, "token");
                 if (!auth_key.isEmpty()) {
                     Intent i = new Intent(SplashActivity.this, MainActivity.class);
                     startActivity(i);

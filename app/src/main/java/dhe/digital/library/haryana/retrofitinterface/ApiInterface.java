@@ -3,6 +3,9 @@ package dhe.digital.library.haryana.retrofitinterface;
 import dhe.digital.library.haryana.models.HomePageResponse;
 import dhe.digital.library.haryana.models.LoginRequest;
 import dhe.digital.library.haryana.models.LoginResponse;
+import dhe.digital.library.haryana.models.SignupRequest;
+import dhe.digital.library.haryana.models.SignupResponse;
+import dhe.digital.library.haryana.models.ViewAllResponse;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -19,6 +22,14 @@ import retrofit2.http.Query;
 
 
 public interface ApiInterface {
+
+
+    @POST("UserRegister")
+    Call<SignupResponse> signupUser(@Body SignupRequest request);
+
+
+    @GET("GetHomeImages{typeId}")
+    Call<ViewAllResponse> getAllDataAPi( @Path("typeId") String s);
 
 
     @GET("GetHomeImages")

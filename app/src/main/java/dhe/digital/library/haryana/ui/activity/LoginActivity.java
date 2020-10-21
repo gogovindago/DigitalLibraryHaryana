@@ -224,6 +224,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             CSPreferences.putString(this, "LibraryId", String.valueOf(data.getLibraryId()));
             CSPreferences.putString(this, "otp", String.valueOf(data.getOtp()));
             CSPreferences.putString(this, "PhoneNo", data.getPhoneNo());
+            CSPreferences.putString(this, "Email", data.getEmail());
             CSPreferences.putString(this, "token", data.getToken());
             CSPreferences.putBolean(this, "firstTimelogin", firstTimelogin);
             CSPreferences.putBolean(this, "skiplogin", false);
