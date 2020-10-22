@@ -64,6 +64,8 @@
                     android:background="@drawable/bg_homeslider"
                     android:gravity="center"
                     android:text="test"
+                    android:maxLines="2"
+                    android:paddingBottom="2dp"
                     android:paddingLeft="2dp"
                     android:paddingRight="2dp"
                     android:textAllCaps="false"

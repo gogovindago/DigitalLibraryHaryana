@@ -63,6 +63,18 @@ public class HomePageResponse {
         @Expose
         private List<TrendingJournal> trendingJournals = new ArrayList<TrendingJournal>();
 
+        @SerializedName("importantLinks")
+        @Expose
+        private List<ImportantLink> importantLinks = null;
+
+
+        public List<ImportantLink> getImportantLinks() {
+            return importantLinks;
+        }
+
+        public void setImportantLinks(List<ImportantLink> importantLinks) {
+            this.importantLinks = importantLinks;
+        }
         public List<TrendingJournal> getTrendingJournals() {
             return trendingJournals;
         }
@@ -105,7 +117,54 @@ public class HomePageResponse {
 
     }
 
+    public class ImportantLink {
 
+        @SerializedName("id")
+        @Expose
+        private Integer id;
+        @SerializedName("title")
+        @Expose
+        private String title;
+        @SerializedName("imageLogo")
+        @Expose
+        private String imageLogo;
+        @SerializedName("url")
+        @Expose
+        private String url;
+
+        public Integer getId() {
+            return id;
+        }
+
+        public void setId(Integer id) {
+            this.id = id;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public String getImageLogo() {
+            return imageLogo;
+        }
+
+        public void setImageLogo(String imageLogo) {
+            this.imageLogo = imageLogo;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
+    }
 
     public class TrendingJournal {
 

@@ -16,16 +16,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dhe.digital.library.haryana.R;
-import dhe.digital.library.haryana.models.ViewAllResponse;
+import dhe.digital.library.haryana.models.HomePageResponse;
 
-public class ViewAllItemsAdapter extends RecyclerView.Adapter<ViewAllItemsAdapter.ViewHolder> {
+public class ImportantLinksAdapter extends RecyclerView.Adapter<ImportantLinksAdapter.ViewHolder> {
 
-    List<ViewAllResponse.Datum> mValues = new ArrayList<ViewAllResponse.Datum>();
+    List<HomePageResponse.ImportantLink> mValues = new ArrayList<HomePageResponse.ImportantLink>();
     Context mContext;
     protected ItemListener mListener;
     int currposition;
 
-    public ViewAllItemsAdapter(Context context, List values, ItemListener itemListener) {
+    public ImportantLinksAdapter(Context context, List values, ItemListener itemListener) {
 
         mValues = values;
         mContext = context;
@@ -37,7 +37,7 @@ public class ViewAllItemsAdapter extends RecyclerView.Adapter<ViewAllItemsAdapte
         public TextView textView;
         public SimpleDraweeView imageView;
         public RelativeLayout relativeLayout;
-        ViewAllResponse.Datum item;
+        HomePageResponse.ImportantLink item;
         public int currposition;
 
         public ViewHolder(View v) {
@@ -51,11 +51,11 @@ public class ViewAllItemsAdapter extends RecyclerView.Adapter<ViewAllItemsAdapte
 
         }
 
-        public void setData(ViewAllResponse.Datum item, int currposition) {
+        public void setData(HomePageResponse.ImportantLink item, int currposition) {
             this.currposition = currposition;
             this.item = item;
-            textView.setText(item.getDescription());
-            imageView.setImageURI(item.getFilePath());
+            textView.setText(item.getTitle());
+            imageView.setImageURI(item.getImageLogo());
             // relativeLayout.setBackgroundColor(Color.parseColor(item.color));
 
         }
@@ -70,9 +70,9 @@ public class ViewAllItemsAdapter extends RecyclerView.Adapter<ViewAllItemsAdapte
     }
 
     @Override
-    public ViewAllItemsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ImportantLinksAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(mContext).inflate(R.layout.recycler_view_itemall, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.recycler_view_itemmain, parent, false);
 
         return new ViewHolder(view);
     }
@@ -92,6 +92,6 @@ public class ViewAllItemsAdapter extends RecyclerView.Adapter<ViewAllItemsAdapte
     }
 
     public interface ItemListener {
-        void onItemClick(ViewAllResponse.Datum item, int currposition);
+        void onItemClick(HomePageResponse.ImportantLink item, int currposition);
     }
 }

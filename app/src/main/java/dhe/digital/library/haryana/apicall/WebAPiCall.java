@@ -180,6 +180,7 @@ public class WebAPiCall {
                         getbannersData_interface.GetTrendingeBookData(response.body().getData().getTrendingeBooks());
                         getbannersData_interface.GetTrendingVideosData(response.body().getData().getTrendingVideos());
                         getbannersData_interface.GetTrendingJournalData(response.body().getData().getTrendingJournals());
+                        getbannersData_interface.GetImportantsLinkData(response.body().getData().getImportantLinks());
 
 
                     } else {

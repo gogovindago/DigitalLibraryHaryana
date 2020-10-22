@@ -57,6 +57,7 @@ import java.util.List;
 
 import dhe.digital.library.haryana.R;
 import dhe.digital.library.haryana.adapter.DrawerItemCustomAdapter;
+import dhe.digital.library.haryana.adapter.ImportantLinksAdapter;
 import dhe.digital.library.haryana.adapter.OthesDigitalLibAdapter;
 import dhe.digital.library.haryana.adapter.SliderAdapter;
 import dhe.digital.library.haryana.adapter.TrendingsEBooksAdapter;
@@ -72,7 +73,7 @@ import dhe.digital.library.haryana.utility.DataModelLeft;
 import dhe.digital.library.haryana.utility.GlobalClass;
 
 
-public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter.ItemListener, GetbannersData_interface, TrendingsEBooksAdapter.ItemListener, TrendingsVideosAdapter.ItemListener, TrendingsJournalsAdapter.ItemListener {
+public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter.ItemListener, GetbannersData_interface, TrendingsEBooksAdapter.ItemListener, TrendingsVideosAdapter.ItemListener, TrendingsJournalsAdapter.ItemListener, ImportantLinksAdapter.ItemListener {
 
     private AppUpdateManager mAppUpdateManager;
     private static final int RC_APP_UPDATE = 11;
@@ -84,7 +85,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
     ImageButton mainNotification;
     LinearLayout llmain;
     RelativeLayout uprofile;
-    TextView toolbartxt, uname, textView, txtrole, txtwelcome, rvViewAll, tebooksViewAll, JournalsViewAll, VideosViewAll;
+    TextView toolbartxt, uname, textView, txtrole, txtwelcome, rvViewAll, tebooksViewAll, JournalsViewAll, VideosViewAll,importantlinkViewAll;
     Toolbar toolbar;
     SwipeRefreshLayout mSwipeRefreshLayout;
 
@@ -93,18 +94,20 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
     private ListView mDrawerList;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
-    RecyclerView recyclerView, rvTrandingsEbooks, rvJournals, rvVideos;
+    RecyclerView recyclerView, rvTrandingsEbooks, rvJournals, rvVideos, rvimportantlink;
 
     List<HomePageResponse.Banner> sliderItemList = new ArrayList<HomePageResponse.Banner>();
     private List<HomePageResponse.OtherDigitalTrendingLibrary> otherDigitalTrendingLibraries = new ArrayList<HomePageResponse.OtherDigitalTrendingLibrary>();
     private List<HomePageResponse.TrendingVideo> trendingVideos = new ArrayList<HomePageResponse.TrendingVideo>();
     private List<HomePageResponse.TrendingeBook> trendingeBooks = new ArrayList<HomePageResponse.TrendingeBook>();
     private List<HomePageResponse.TrendingJournal> trendingJournals = new ArrayList<HomePageResponse.TrendingJournal>();
+    private List<HomePageResponse.ImportantLink> importantLinkList = new ArrayList<HomePageResponse.ImportantLink>();
 
     OthesDigitalLibAdapter adaptermain;
     TrendingsEBooksAdapter trendingsEBooksAdapter;
     TrendingsVideosAdapter trendingsVideosAdapter;
     TrendingsJournalsAdapter trendingsJournalsAdapter;
+    ImportantLinksAdapter importantLinksAdapter;
 
     boolean skiplogin;
     SliderView sliderView;
@@ -149,11 +152,11 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
         tebooksViewAll = findViewById(R.id.tebooksViewAll);
         JournalsViewAll = findViewById(R.id.JournalsViewAll);
         VideosViewAll = findViewById(R.id.VideosViewAll);
+        importantlinkViewAll = findViewById(R.id.importantlinkViewAll);
 
         txtrole = findViewById(R.id.txtrole);
         txtwelcome = findViewById(R.id.txtwelcome);
         profile_image = findViewById(R.id.profile_image);
-
 
 
         setupToolbar();
@@ -192,8 +195,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
         rvTrandingsEbooks = (RecyclerView) findViewById(R.id.rvTrandingsEbooks);
         rvJournals = (RecyclerView) findViewById(R.id.rvJournals);
         rvVideos = (RecyclerView) findViewById(R.id.rvVideos);
-
-
+        rvimportantlink = (RecyclerView) findViewById(R.id.rvimportantlink);
 
 
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(videocall,
@@ -385,16 +387,16 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
 //
 //            uprofile.setClickable(true);
 
-            uprofile.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mDrawerLayout.closeDrawers();
-                    Intent notification = new Intent(MainActivity.this, ProfileActivity.class);
-                    startActivity(notification);
-                }
-            });
+        uprofile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawerLayout.closeDrawers();
+                Intent notification = new Intent(MainActivity.this, ProfileActivity.class);
+                startActivity(notification);
+            }
+        });
 
-     //   }
+        //   }
 
 
         mainNotification.setOnClickListener(new View.OnClickListener() {
@@ -444,6 +446,16 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 Intent rvViewAll = new Intent(MainActivity.this, ViewAllDataActivity.class);
                 rvViewAll.putExtra("typeId", "4");
                 rvViewAll.putExtra("titleOfPage", "All Videos");
+                startActivity(rvViewAll);
+            }
+        });
+
+        importantlinkViewAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent rvViewAll = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                rvViewAll.putExtra("typeId", "5");
+                rvViewAll.putExtra("titleOfPage", "Important Links");
                 startActivity(rvViewAll);
             }
         });
@@ -696,6 +708,18 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
     }
 
     @Override
+    public void GetImportantsLinkData(List<HomePageResponse.ImportantLink> list) {
+        importantLinkList.clear();
+        importantLinkList.addAll(list);
+        LinearLayoutManager manager = new LinearLayoutManager(this, GridLayoutManager.HORIZONTAL, false);
+        rvimportantlink.setLayoutManager(manager);
+        importantLinksAdapter = new ImportantLinksAdapter(this, importantLinkList, this);
+        rvimportantlink.setAdapter(importantLinksAdapter);
+        importantLinksAdapter.notifyDataSetChanged();
+
+    }
+
+    @Override
     public void onItemClick(HomePageResponse.TrendingeBook item, int currposition) {
 
         if (skiplogin) {
@@ -769,6 +793,14 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
         }
 
 
+    }
+
+    @Override
+    public void onItemClick(HomePageResponse.ImportantLink item, int currposition) {
+        Intent certificate = new Intent(this, OpenBooksActivity.class);
+        certificate.putExtra("bookurl", item.getUrl());
+        certificate.putExtra("title", item.getTitle());
+        startActivity(certificate);
     }
 
 
