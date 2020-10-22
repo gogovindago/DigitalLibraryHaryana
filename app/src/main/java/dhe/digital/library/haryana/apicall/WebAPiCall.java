@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,12 +18,14 @@ import dhe.digital.library.haryana.allinterface.GetAllData_interface;
 import dhe.digital.library.haryana.allinterface.GetbannersData_interface;
 import dhe.digital.library.haryana.allinterface.LoginData_interface;
 import dhe.digital.library.haryana.allinterface.OtpVerifyData_interface;
+import dhe.digital.library.haryana.allinterface.ProfileData_interface;
 import dhe.digital.library.haryana.allinterface.SignupData_interface;
 import dhe.digital.library.haryana.models.ForgotPasswordRequest;
 import dhe.digital.library.haryana.models.ForgotPasswordResponse;
 import dhe.digital.library.haryana.models.HomePageResponse;
 import dhe.digital.library.haryana.models.LoginRequest;
 import dhe.digital.library.haryana.models.LoginResponse;
+import dhe.digital.library.haryana.models.ProfileDataResponse;
 import dhe.digital.library.haryana.models.SignupRequest;
 import dhe.digital.library.haryana.models.SignupResponse;
 import dhe.digital.library.haryana.models.VerifyOtpRequest;
@@ -240,6 +243,45 @@ public class WebAPiCall {
     }
 
 
+    public void ProfileDataMethod(final Activity activity, final Context context, ConstraintLayout llmain, final ProfileData_interface profileData_interface, String MobileNo) {
+
+        loadershowwithMsg(context, "Loading...");
+
+        Call<ProfileDataResponse> responseCall = ApiClient.getClient().getProfileDataAPi(MobileNo);
+        responseCall.enqueue(new Callback<ProfileDataResponse>() {
+            @Override
+            public void onResponse(Call<ProfileDataResponse> call, Response<ProfileDataResponse> response) {
+                dailoghide(context);
+                if (response.isSuccessful()) {
+
+                    if (response.body().getResponse() == 200) {
+                        llmain.setVisibility(View.VISIBLE);
+
+                        profileData_interface.userprofiledata(response.body().getData());
+
+
+                    } else {
+
+                    }
+
+
+                } else {
+                    GlobalClass.showtost(context, "" + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProfileDataResponse> call, Throwable t) {
+
+                dailoghide(context);
+                t.printStackTrace();
+
+                Log.d("dddddd", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+
     //    @GET("UserLogin/{PhoneNo}/{Password}/{FcmToken}")
     //  public void loginPostDataMethod(final Activity activity, final Context context, final LoginData_interface loginData_interface, String PhoneNo, String Password, String FcmToken) {
     public void loginPostDataMethod(final Activity activity, final Context context, final LoginData_interface loginData_interface, LoginRequest request) {
@@ -290,7 +332,6 @@ public class WebAPiCall {
     }
 
 
-
     public void forgotPasswordPostDataMethod(final Activity activity, final Context context, ForgotPasswordRequest request) {
 
         loadershowwithMsg(context, "We are Sending auto generated password on your Registered Mobile number.");
@@ -306,8 +347,7 @@ public class WebAPiCall {
 
                     if (response.body().getResponse() == 200) {
 
-                        dailogsuccessWithActivity(context,activity, " Password has been Changed Successfully.", "New auto generated password has been sent on your Registered Mobile number .");
-
+                        dailogsuccessWithActivity(context, activity, " Password has been Changed Successfully.", "New auto generated password has been sent on your Registered Mobile number .");
 
 
                     } else {
@@ -331,7 +371,6 @@ public class WebAPiCall {
             }
         });
     }
-
 
 
     public void VerifyOtpPostDataMethod(final Activity activity, final Context context, OtpVerifyData_interface otpVerifyData_interface, VerifyOtpRequest request) {
@@ -396,6 +435,8 @@ public class WebAPiCall {
                     } else if (response.body().getResponse() == 303) {
                         data_interface.alluserdata((SignupResponse.Data) response.body().getData());
 
+                    } else if (response.body().getResponse() == 304) {
+                        dailogsuccess(context, "Already,This Mobile Number is Registered", "Already,This Mobile Number is Registered with us,Please try with different number. ");
                     } else {
 
                         dailogError(context, "Something went wrong !", "Please try after sometimes.");

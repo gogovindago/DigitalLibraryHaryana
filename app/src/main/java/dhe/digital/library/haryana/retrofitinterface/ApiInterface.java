@@ -5,6 +5,7 @@ import dhe.digital.library.haryana.models.ForgotPasswordResponse;
 import dhe.digital.library.haryana.models.HomePageResponse;
 import dhe.digital.library.haryana.models.LoginRequest;
 import dhe.digital.library.haryana.models.LoginResponse;
+import dhe.digital.library.haryana.models.ProfileDataResponse;
 import dhe.digital.library.haryana.models.SignupRequest;
 import dhe.digital.library.haryana.models.SignupResponse;
 import dhe.digital.library.haryana.models.VerifyOtpRequest;
@@ -34,6 +35,10 @@ public interface ApiInterface {
     //http://112.196.99.107:81/api/commonapi/GetAllHomeImages/1
     @GET("GetAllHomeImages/{typeId}")
     Call<ViewAllResponse> getAllDataAPi(@Path("typeId") String s);
+
+    //http://112.196.99.107:81/api/commonapi/GetProfile/9499486861
+    @GET("GetProfile/{MobileNo}")
+    Call<ProfileDataResponse> getProfileDataAPi(@Path("MobileNo") String s);
 
 
     @GET("GetHomeImages")

@@ -90,7 +90,7 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
         } else {
 
             Intent certificate = new Intent(this, OpenBooksActivity.class);
-            certificate.putExtra("bookurl", item.getFilePath());
+            certificate.putExtra("bookurl", item.getUrl());
             certificate.putExtra("title", item.getDescription());
             startActivity(certificate);
 

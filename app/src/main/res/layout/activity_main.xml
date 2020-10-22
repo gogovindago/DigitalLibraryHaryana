@@ -445,9 +445,23 @@
                     android:paddingTop="0dp">
 
                     <RelativeLayout
+                        android:id="@+id/uprofile"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="0.2">
+                        <ImageView
+                            android:visibility="gone"
+                            android:layout_marginEnd="5dp"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/forward_white"
+                            android:layout_alignParentEnd="true"
+                            android:id="@+id/goyesno"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="5dp">
+
+                        </ImageView>
 
                         <TextView
                             android:id="@+id/txtwelcome"
@@ -492,7 +506,8 @@
                             android:gravity="center|start"
                             android:text=""
                             android:textColor="@android:color/white"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                             />
 
                         <TextView
                             android:id="@+id/textView"

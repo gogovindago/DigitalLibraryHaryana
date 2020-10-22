@@ -18,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -78,9 +79,11 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
     private static final String TAG = "MainActivity";
 
     private static DrawerLayout mDrawerLayout;
-    ImageView toggle, profile_image;
+    ImageView toggle, profile_image, goyesno;
+    ;
     ImageButton mainNotification;
     LinearLayout llmain;
+    RelativeLayout uprofile;
     TextView toolbartxt, uname, textView, txtrole, txtwelcome, rvViewAll, tebooksViewAll, JournalsViewAll, VideosViewAll;
     Toolbar toolbar;
     SwipeRefreshLayout mSwipeRefreshLayout;
@@ -102,11 +105,12 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
     TrendingsEBooksAdapter trendingsEBooksAdapter;
     TrendingsVideosAdapter trendingsVideosAdapter;
     TrendingsJournalsAdapter trendingsJournalsAdapter;
+
     boolean skiplogin;
     SliderView sliderView;
     SliderAdapter sliderAdapter;
     private ActionBarDrawerToggle mDrawerToggle;
-
+    DataModelLeft[] drawerItem;
 
     public static void drawerCheck() {
 
@@ -125,6 +129,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.simpleSwipeRefreshLayout);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
         mTextMessage = findViewById(R.id.message);
+        goyesno = findViewById(R.id.goyesno);
         mainNotification = findViewById(R.id.notifcationmain);
 
         toggle = findViewById(R.id.toggle);
@@ -136,6 +141,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
         mDrawerLayout = findViewById(R.id.drawer_layout);
         llmain = findViewById(R.id.llmain);
         mDrawerList = findViewById(R.id.left_drawer);
+        uprofile = findViewById(R.id.uprofile);
         uname = findViewById(R.id.uname);
         textView = findViewById(R.id.textView);
 
@@ -148,43 +154,6 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
         txtwelcome = findViewById(R.id.txtwelcome);
         profile_image = findViewById(R.id.profile_image);
 
-        try {
-            skiplogin = CSPreferences.getBoolean(this, "skiplogin");
-            if (CSPreferences.getBoolean(this, "firstTimelogin")) {
-
-                GlobalClass.dailogsuccess(this, "Login Successfull.", "Welcome to Digital Library,Haryana.");
-                CSPreferences.putBolean(this, "firstTimelogin", false);
-                mDrawerLayout.openDrawer(GravityCompat.START);
-
-
-            } else {
-
-                mDrawerLayout.closeDrawers();
-
-            }
-
-
-            uname.setText(CSPreferences.readString(this, "PhoneNo"));
-            // textView.setText(CSPreferences.readString(this, "User_Email"));
-            textView.setText(CSPreferences.readString(this, "Email"));
-            toolbartxt.setText(CSPreferences.readString(this, "User_Name"));
-            // txtrole.setText(CSPreferences.readString(this, "Email"));
-            txtwelcome.setText("Welcome, " + CSPreferences.readString(this, "User_Name"));
-
-
-            Glide.with(MainActivity.this)
-                    .load(CSPreferences.readString(MainActivity.this, "pic").trim()) // image url
-                    .placeholder(R.mipmap.ic_launcher_round) // any placeholder to load at start
-                    .error(R.mipmap.ic_launcher_round)  // any image in case of error
-                    .override(140, 140) // resizing
-                    .centerCrop()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(profile_image);
-
-
-        } catch (Exception e) {
-
-        }
 
 
         setupToolbar();
@@ -225,32 +194,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
         rvVideos = (RecyclerView) findViewById(R.id.rvVideos);
 
 
-        DataModelLeft[] drawerItem = new DataModelLeft[9];
 
-
-        drawerItem[0] = new DataModelLeft(R.drawable.ic_baseline_library_books_24, "Public Library");
-        drawerItem[1] = new DataModelLeft(R.drawable.ic_baseline_book_online_24, "E-Books");
-        drawerItem[2] = new DataModelLeft(R.drawable.ic_baseline_account_balance_wallet_24, "journals");
-        drawerItem[3] = new DataModelLeft(R.drawable.ic_baseline_video_library_24, "Videos");
-        drawerItem[4] = new DataModelLeft(R.drawable.ic_baseline_apps_24, "Our Others Apps");
-        drawerItem[5] = new DataModelLeft(R.drawable.rate_review, "Rate App");
-        drawerItem[6] = new DataModelLeft(R.drawable.share, "Share App");
-        drawerItem[7] = new DataModelLeft(R.drawable.notifications, "My Notification");
-        if (skiplogin) {
-            drawerItem[8] = new DataModelLeft(R.drawable.ic_baseline_exit_to_app_24, "Login/Signup");
-
-        } else {
-            drawerItem[8] = new DataModelLeft(R.drawable.ic_baseline_exit_to_app_24, "Logout");
-
-        }
-
-
-        DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this, R.layout.list_view_item_row, drawerItem);
-        mDrawerList.setAdapter(adapter);
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-        mDrawerLayout = findViewById(R.id.drawer_layout);
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-        setupDrawerToggle();
 
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(videocall,
                 new IntentFilter("videocall"));
@@ -268,6 +212,82 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
 
     @Override
     public void initData() {
+
+        try {
+            skiplogin = CSPreferences.getBoolean(this, "skiplogin");
+            if (skiplogin) {
+                uprofile.setClickable(false);
+                goyesno.setVisibility(View.GONE);
+
+            } else {
+                uprofile.setClickable(true);
+                goyesno.setVisibility(View.VISIBLE);
+            }
+
+            drawerItem = new DataModelLeft[9];
+
+
+            drawerItem[0] = new DataModelLeft(R.drawable.ic_baseline_library_books_24, "Public Library");
+            drawerItem[1] = new DataModelLeft(R.drawable.ic_baseline_book_online_24, "E-Books");
+            drawerItem[2] = new DataModelLeft(R.drawable.ic_baseline_account_balance_wallet_24, "journals");
+            drawerItem[3] = new DataModelLeft(R.drawable.ic_baseline_video_library_24, "Videos");
+            drawerItem[4] = new DataModelLeft(R.drawable.ic_baseline_apps_24, "Our Others Apps");
+            drawerItem[5] = new DataModelLeft(R.drawable.rate_review, "Rate App");
+            drawerItem[6] = new DataModelLeft(R.drawable.share, "Share App");
+            drawerItem[7] = new DataModelLeft(R.drawable.notifications, "My Notification");
+            if (skiplogin) {
+                drawerItem[8] = new DataModelLeft(R.drawable.ic_baseline_exit_to_app_24, "Login/Signup");
+
+            } else {
+                drawerItem[8] = new DataModelLeft(R.drawable.ic_baseline_exit_to_app_24, "Logout");
+
+            }
+
+
+            DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this, R.layout.list_view_item_row, drawerItem);
+            mDrawerList.setAdapter(adapter);
+            mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+            mDrawerLayout = findViewById(R.id.drawer_layout);
+            mDrawerLayout.setDrawerListener(mDrawerToggle);
+            setupDrawerToggle();
+
+
+            if (CSPreferences.getBoolean(this, "firstTimelogin")) {
+
+                GlobalClass.dailogsuccess(this, "Login Successfull.", "Welcome to Digital Library,Haryana.");
+                CSPreferences.putBolean(this, "firstTimelogin", false);
+                mDrawerLayout.openDrawer(GravityCompat.START);
+
+
+            } else {
+
+                mDrawerLayout.closeDrawers();
+
+            }
+
+
+            uname.setText(CSPreferences.readString(this, "PhoneNo"));
+            // textView.setText(CSPreferences.readString(this, "User_Email"));
+            textView.setText(CSPreferences.readString(this, "Email"));
+            toolbartxt.setText(CSPreferences.readString(this, "User_Name"));
+            // txtrole.setText(CSPreferences.readString(this, "Email"));
+            txtwelcome.setText("Welcome, " + CSPreferences.readString(this, "User_Name"));
+
+
+            Glide.with(MainActivity.this)
+                    .load(CSPreferences.readString(MainActivity.this, "pic").trim()) // image url
+                    .placeholder(R.mipmap.ic_launcher_round) // any placeholder to load at start
+                    .error(R.mipmap.ic_launcher_round)  // any image in case of error
+                    .override(140, 140) // resizing
+                    .centerCrop()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(profile_image);
+
+
+        } catch (Exception e) {
+
+        }
+
 
         mAppUpdateManager = AppUpdateManagerFactory.create(this);
 
@@ -357,10 +377,30 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
         });
 
 
+//        if (skiplogin) {
+//            uprofile.setClickable(true);
+//            goyesno
+//
+//        } else {
+//
+//            uprofile.setClickable(true);
+
+            uprofile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mDrawerLayout.closeDrawers();
+                    Intent notification = new Intent(MainActivity.this, ProfileActivity.class);
+                    startActivity(notification);
+                }
+            });
+
+     //   }
+
+
         mainNotification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                MainActivity.drawerCheck();
+                mDrawerLayout.closeDrawers();
                 Intent notification = new Intent(MainActivity.this, NotificationsActivity.class);
                 startActivity(notification);
             }
