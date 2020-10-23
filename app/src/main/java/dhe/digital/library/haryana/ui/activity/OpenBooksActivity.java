@@ -22,6 +22,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 import dhe.digital.library.haryana.R;
 import dhe.digital.library.haryana.databinding.ActivityOpenbooksBinding;
@@ -34,7 +36,7 @@ public class OpenBooksActivity extends AppCompatActivity implements View.OnClick
     private static ImageView back, forward, refresh, close;
     TextView toolbartitle;
 
-    private static String webViewUrl = "https://www.highereduhry.com/";
+    private static String webViewUrl = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -210,7 +212,11 @@ public class OpenBooksActivity extends AppCompatActivity implements View.OnClick
         if (isInternetConnected())
           //  webView.loadUrl("https://drive.google.com/viewerng/viewer?embedded=true&url="+pdfurl);
             if (getFileExtension(url).equalsIgnoreCase("pdf")){
-                webView.loadUrl("https://drive.google.com/viewerng/viewer?embedded=true&url="+url);
+                try {
+                    webView.loadUrl("https://drive.google.com/viewerng/viewer?embedded=true&url="+URLEncoder.encode(url, "ISO-8859-1"));
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
             }else {
                 webView.loadUrl(url);
 
