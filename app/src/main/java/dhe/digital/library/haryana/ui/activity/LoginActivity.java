@@ -39,13 +39,15 @@ import dhe.digital.library.haryana.utility.MyLoaders;
 import com.google.android.gms.auth.api.credentials.Credential;
 import com.google.android.gms.auth.api.credentials.HintRequest;
 
+import java.util.regex.Pattern;
+
 public class LoginActivity extends BaseActivity implements View.OnClickListener, LoginData_interface, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     @TargetApi(Build.VERSION_CODES.O)
 
     GoogleApiClient mGoogleApiClient;
     private int RESOLVE_HINT = 2;
     TextView login, createaccount, txtforget;
-    private TextInputEditText edtemail;
+    private TextInputEditText edtmobile;
     private TextInputEditText edtpass;
     Boolean firstTimelogin = true;
     private String refreshedToken;
@@ -140,7 +142,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                     Credential credential = data.getParcelableExtra(Credential.EXTRA_KEY);
                     // credential.getId();  <-- will need to process phone number string
                     String mobilenumberwithcountrycode = credential.getId().substring(3);
-                    edtemail.setText(mobilenumberwithcountrycode);
+                    edtmobile.setText(mobilenumberwithcountrycode);
 
                 }
             }
@@ -152,16 +154,25 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         login = (TextView) findViewById(R.id.button);
         txtforget = (TextView) findViewById(R.id.txtforget);
         createaccount = (TextView) findViewById(R.id.button2);
-        edtemail = (TextInputEditText) findViewById(R.id.textInputEditText);
+        edtmobile = (TextInputEditText) findViewById(R.id.textInputEditText);
         edtpass = (TextInputEditText) findViewById(R.id.textInputEditText2);
         login.setOnClickListener(this);
     }
-
+    private boolean isValidMobile(String phone) {
+        if (!Pattern.matches("[a-zA-Z]+", phone)) {
+            return phone.length() >= 10 && phone.length() < 11;
+            //return phone.length()==10;
+        }
+        return false;
+    }
     public boolean Check_Data(View view) {
 
-        if (TextUtils.isEmpty(edtemail.getText().toString().trim())) {
-            myLoaders.showSnackBar(view, "Please Enter your Correct User ID");
-            return false;
+        if (TextUtils.isEmpty(edtmobile.getText().toString().trim())) {
+                myLoaders.showSnackBar(view, "Please Enter Registered Mobile Number");
+                return false;
+            } else if (!isValidMobile(edtmobile.getText().toString().trim())) {
+                myLoaders.showSnackBar(view, "Please Enter 10 digits Registered Mobile Number");
+                return false;
 
         } else if (TextUtils.isEmpty(edtpass.getText().toString().trim())) {
             myLoaders.showSnackBar(view, "Please Enter Password");
@@ -183,13 +194,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 LoginRequest loginRequest = new LoginRequest();
                 loginRequest.setFCMToken(refreshedToken);
                 loginRequest.setPassword(edtpass.getText().toString().trim());
-                loginRequest.setPhoneNo(edtemail.getText().toString().trim());
+                loginRequest.setPhoneNo(edtmobile.getText().toString().trim());
 
 
                 if (GlobalClass.isNetworkConnected(LoginActivity.this)) {
 
                     WebAPiCall webapiCall = new WebAPiCall();
-                    //  webapiCall.loginPostDataMethod(this, this, LoginActivity.this, edtemail.getText().toString().trim(), edtpass.getText().toString().trim(), refreshedToken);
+                    //  webapiCall.loginPostDataMethod(this, this, LoginActivity.this, edtmobile.getText().toString().trim(), edtpass.getText().toString().trim(), refreshedToken);
                     webapiCall.loginPostDataMethod(this, this, LoginActivity.this, loginRequest);
 
 

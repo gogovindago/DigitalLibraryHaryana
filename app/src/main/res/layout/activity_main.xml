@@ -165,6 +165,7 @@
                         </LinearLayout>
 
                         <androidx.core.widget.NestedScrollView
+                            android:layout_marginTop="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:fillViewport="true">
@@ -176,6 +177,7 @@
 
 
                                 <LinearLayout
+                                    android:visibility="gone"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical">
@@ -464,6 +466,62 @@
                                         android:scrollbars="vertical"
                                         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
                                 </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+                                    <RelativeLayout
+                                        android:layout_marginTop="8dp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+                                        <TextView
+                                            android:id="@+id/txtudaan"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_marginStart="5dp"
+                                            android:layout_marginLeft="5dp"
+                                            android:gravity="center|start"
+                                            android:text="@string/Udaan_videos"
+                                            android:textSize="19sp"
+                                            android:textStyle="bold" />
+
+                                        <TextView
+
+                                            android:background="@drawable/viewallbg"
+                                            android:layout_alignParentEnd="true"
+                                            android:id="@+id/udaanlinkViewAll"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_marginStart="5dp"
+                                            android:layout_marginLeft="5dp"
+                                            android:layout_marginEnd="5dp"                                            android:gravity="center"
+                                            android:text="View All"
+                                            android:textSize="14sp"
+                                            android:textStyle="bold"
+                                            android:textColor="@color/white"
+                                            android:layout_alignParentRight="true"
+                                            android:paddingLeft="16dp"
+                                            android:paddingStart="16dp"
+                                            android:paddingTop="5dp"
+                                            android:paddingBottom="5dp"
+                                            android:paddingEnd="16dp"/>
+                                    </RelativeLayout>
+
+
+
+                                    <androidx.recyclerview.widget.RecyclerView
+                                        android:id="@+id/rvudaan"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="5dp"
+                                        android:layout_marginLeft="5dp"
+                                        android:layout_marginBottom="5dp"
+                                        android:scrollbars="vertical"
+                                        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+                                </LinearLayout>
                             </LinearLayout>
                         </androidx.core.widget.NestedScrollView>
                     </LinearLayout>
@@ -561,6 +619,8 @@
                             android:layout_toRightOf="@+id/profile_image"
                             android:gravity="center|start"
                             android:text=""
+                            android:textSize="11sp"
+
                             android:textColor="@android:color/white"
                             android:textStyle="bold"
                              />
@@ -575,8 +635,11 @@
                             android:layout_marginLeft="8dp"
                             android:layout_toEndOf="@+id/profile_image"
                             android:layout_toRightOf="@+id/profile_image"
+                            android:layout_toLeftOf="@+id/goyesno"
+                            android:layout_toStartOf="@+id/goyesno"
                             android:gravity="center|start"
                             android:text=""
+android:textSize="11sp"
                             android:textColor="@android:color/white"
                             android:textStyle="bold" />
 

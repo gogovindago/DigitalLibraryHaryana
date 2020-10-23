@@ -21,6 +21,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.File;
+
 import dhe.digital.library.haryana.R;
 import dhe.digital.library.haryana.databinding.ActivityOpenbooksBinding;
 import dhe.digital.library.haryana.utility.CSPreferences;
@@ -40,7 +42,7 @@ public class OpenBooksActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_openbooks);
 
 
-        webViewUrl = CSPreferences.readString(this, "admissionURL");
+       /// webViewUrl = CSPreferences.readString(this, "admissionURL");
 
 
         initViews();
@@ -83,6 +85,8 @@ public class OpenBooksActivity extends AppCompatActivity implements View.OnClick
 
 
     private void setUpWebView() {
+
+
         webView = (WebView) findViewById(R.id.sitesWebView);
         webView.setWebViewClient(new MyWebViewClient());
         webView.getSettings().setJavaScriptEnabled(true);
@@ -193,10 +197,25 @@ public class OpenBooksActivity extends AppCompatActivity implements View.OnClick
             finish();
     }
 
-
+    private static String getFileExtension(String fileName) {
+        if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
+            return fileName.substring(fileName.lastIndexOf(".")+1);
+        else return "";
+    }
     private void LoadWebViewUrl(String url) {
+
+
+
+
         if (isInternetConnected())
-            webView.loadUrl(url);
+          //  webView.loadUrl("https://drive.google.com/viewerng/viewer?embedded=true&url="+pdfurl);
+            if (getFileExtension(url).equalsIgnoreCase("pdf")){
+                webView.loadUrl("https://drive.google.com/viewerng/viewer?embedded=true&url="+url);
+            }else {
+                webView.loadUrl(url);
+
+            }
+
         else {
             refresh.setVisibility(View.VISIBLE);
             Toast.makeText(OpenBooksActivity.this, R.string.oops_there_is_no_interenet, Toast.LENGTH_LONG).show();

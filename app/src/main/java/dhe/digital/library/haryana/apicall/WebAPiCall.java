@@ -181,6 +181,7 @@ public class WebAPiCall {
                         getbannersData_interface.GetTrendingVideosData(response.body().getData().getTrendingVideos());
                         getbannersData_interface.GetTrendingJournalData(response.body().getData().getTrendingJournals());
                         getbannersData_interface.GetImportantsLinkData(response.body().getData().getImportantLinks());
+                        getbannersData_interface.GetUdaanVideosData(response.body().getData().getTrendingUdaanVideos());
 
 
                     } else {
@@ -418,7 +419,7 @@ public class WebAPiCall {
 
     public void signupPostDataMethod(final Activity activity, final Context context, final SignupData_interface data_interface, SignupRequest request) {
 
-        loadershowwithMsg(context, "A 4 digits OTP sent on given Mobile Number for Registration....");
+        loadershowwithMsg(context, "we are sending a 4 digits OTP on given Mobile Number for Registration....");
 
         Call<SignupResponse> userpost_responseCall = ApiClient.getClient().signupUser(request);
         userpost_responseCall.enqueue(new Callback<SignupResponse>() {
@@ -430,7 +431,7 @@ public class WebAPiCall {
 
                     if (response.body().getResponse() == 200) {
 
-                        // dailogsuccess(context, "Login Successfull.", "Welcome to Shiksha Sahyogi,Haryana.");
+                         dailogsuccess(context, "OTP Sent.", "Please check your Mobile. OTP is  valid for 10 minutes.");
                         data_interface.alluserdata((SignupResponse.Data) response.body().getData());
 
                     } else if (response.body().getResponse() == 303) {

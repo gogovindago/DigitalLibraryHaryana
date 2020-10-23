@@ -67,6 +67,19 @@ public class HomePageResponse {
         @Expose
         private List<ImportantLink> importantLinks = null;
 
+        @SerializedName("trendingUdaanVideos")
+        @Expose
+        private List<TrendingUdaanVideo> trendingUdaanVideos = new ArrayList<TrendingUdaanVideo>();
+
+
+        public List<TrendingUdaanVideo> getTrendingUdaanVideos() {
+            return trendingUdaanVideos;
+        }
+
+        public void setTrendingUdaanVideos(List<TrendingUdaanVideo> trendingUdaanVideos) {
+            this.trendingUdaanVideos = trendingUdaanVideos;
+        }
+
 
         public List<ImportantLink> getImportantLinks() {
             return importantLinks;
@@ -113,6 +126,55 @@ public class HomePageResponse {
 
         public void setTrendingeBooks(List<TrendingeBook> trendingeBooks) {
             this.trendingeBooks = trendingeBooks;
+        }
+
+    }
+
+    public class TrendingUdaanVideo {
+
+        @SerializedName("videoId")
+        @Expose
+        private Integer videoId;
+        @SerializedName("video_Title")
+        @Expose
+        private String videoTitle;
+        @SerializedName("video_Image")
+        @Expose
+        private String videoImage;
+        @SerializedName("videoIframeUrl")
+        @Expose
+        private String videoIframeUrl;
+
+        public Integer getVideoId() {
+            return videoId;
+        }
+
+        public void setVideoId(Integer videoId) {
+            this.videoId = videoId;
+        }
+
+        public String getVideoTitle() {
+            return videoTitle;
+        }
+
+        public void setVideoTitle(String videoTitle) {
+            this.videoTitle = videoTitle;
+        }
+
+        public String getVideoImage() {
+            return videoImage;
+        }
+
+        public void setVideoImage(String videoImage) {
+            this.videoImage = videoImage;
+        }
+
+        public String getVideoIframeUrl() {
+            return videoIframeUrl;
+        }
+
+        public void setVideoIframeUrl(String videoIframeUrl) {
+            this.videoIframeUrl = videoIframeUrl;
         }
 
     }

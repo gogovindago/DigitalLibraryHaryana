@@ -15,6 +15,7 @@ public interface GetbannersData_interface {
     void GetTrendingeBookData(List<HomePageResponse.TrendingeBook> list);
     void GetTrendingJournalData(List<HomePageResponse.TrendingJournal> list);
     void GetImportantsLinkData(List<HomePageResponse.ImportantLink> list);
+    void GetUdaanVideosData(List<HomePageResponse.TrendingUdaanVideo> list);
 
 
 }

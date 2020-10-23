@@ -15,6 +15,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
+import java.util.regex.Pattern;
+
 import dhe.digital.library.haryana.R;
 import dhe.digital.library.haryana.allinterface.OtpVerifyData_interface;
 import dhe.digital.library.haryana.allinterface.SignupData_interface;
@@ -36,6 +38,7 @@ public class SignupActivity extends BaseActivity implements SignupData_interface
     Boolean firstTimelogin = true;
     String imageurl = "https://i.picsum.photos/id/599/200/200.jpg?hmac=2WLKs3sxIsaEQ-6WZaa6YMxgl6ZC4cNnid0aqupm2is";
     SignupResponse.Data data2;
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +88,6 @@ public class SignupActivity extends BaseActivity implements SignupData_interface
                 finish();
             }
         });
-
 
 
         binding.btnotp.setOnClickListener(new View.OnClickListener() {
@@ -155,6 +157,13 @@ public class SignupActivity extends BaseActivity implements SignupData_interface
 
     }
 
+    private boolean isValidMobile(String phone) {
+        if (!Pattern.matches("[a-zA-Z]+", phone)) {
+            return phone.length() >= 10 && phone.length() < 11;
+            //return phone.length()==10;
+        }
+        return false;
+    }
 
     public boolean Check_Data(View view) {
 
@@ -163,10 +172,14 @@ public class SignupActivity extends BaseActivity implements SignupData_interface
             return false;
 
         } else if (TextUtils.isEmpty(binding.edtmobile.getText().toString().trim())) {
-            myLoaders.showSnackBar(view, "Please Enter 10-digits Mobile");
+            myLoaders.showSnackBar(view, "Please Enter Mobile Number");
             return false;
-        } else if (TextUtils.isEmpty(binding.edtemail.getText().toString().trim())) {
-            myLoaders.showSnackBar(view, "Please Enter Email-Id");
+        } else if (!isValidMobile(binding.edtmobile.getText().toString().trim())) {
+            myLoaders.showSnackBar(view, "Please Enter 10 digits Mobile Number");
+            return false;
+
+        } else if (!binding.edtemail.getText().toString().trim().matches(emailPattern)) {
+            myLoaders.showSnackBar(view, "Please Enter Valid Email-Id");
             return false;
         } else if (TextUtils.isEmpty(binding.edtpass.getText().toString().trim())) {
             myLoaders.showSnackBar(view, "Please Enter Password");

@@ -17,7 +17,7 @@ import dhe.digital.library.haryana.utility.CSPreferences;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private static int splashTimeOut = 5000;
+    private static int splashTimeOut = 3000;
     private ImageView logo;
 
     @Override
