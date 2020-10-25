@@ -1,6 +1,7 @@
 package dhe.digital.library.haryana.adapter;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,13 +48,14 @@ public class ImportantLinksAdapter extends RecyclerView.Adapter<ImportantLinksAd
             v.setOnClickListener(this);
             textView = (TextView) v.findViewById(R.id.textView);
             imageView = v.findViewById(R.id.imageView);
-            relativeLayout = (RelativeLayout) v.findViewById(R.id.relativeLayout);
+           // relativeLayout = (RelativeLayout) v.findViewById(R.id.relativeLayout);
 
         }
 
         public void setData(HomePageResponse.ImportantLink item, int currposition) {
             this.currposition = currposition;
             this.item = item;
+           // textView.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
             textView.setText(item.getTitle());
             imageView.setImageURI(item.getImageLogo());
             // relativeLayout.setBackgroundColor(Color.parseColor(item.color));
@@ -73,7 +75,7 @@ public class ImportantLinksAdapter extends RecyclerView.Adapter<ImportantLinksAd
     public ImportantLinksAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         //View view = LayoutInflater.from(mContext).inflate(R.layout.recycler_view_itemmain, parent, false);
-        View view = LayoutInflater.from(mContext).inflate(R.layout.recycler_view_itemmain, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.list_view_link_item_row, parent, false);
 
         return new ViewHolder(view);
     }

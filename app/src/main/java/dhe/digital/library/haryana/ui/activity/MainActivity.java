@@ -823,10 +823,16 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
 
     @Override
     public void onItemClick(HomePageResponse.ImportantLink item, int currposition) {
-        Intent certificate = new Intent(this, OpenBooksActivity.class);
-        certificate.putExtra("bookurl", item.getUrl());
-        certificate.putExtra("title", item.getTitle());
-        startActivity(certificate);
+        if (item.getUrl()!=null) {
+
+            Intent certificate = new Intent(this, OpenBooksActivity.class);
+            certificate.putExtra("bookurl", item.getUrl());
+            certificate.putExtra("title", item.getTitle());
+            startActivity(certificate);
+        }else {
+
+            GlobalClass.dailogError(MainActivity.this,"No Url Found","NO any url found to redirect to next page.");
+        }
     }
 
     @Override
@@ -836,6 +842,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             startActivity(welcomeintent);
 
         } else {
+
             Intent certificate = new Intent(this, OpenBooksActivity.class);
             certificate.putExtra("bookurl", item.getVideoIframeUrl());
             certificate.putExtra("title", item.getVideoTitle());
