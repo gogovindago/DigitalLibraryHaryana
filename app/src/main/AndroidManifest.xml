@@ -82,7 +82,6 @@
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".ui.activity.OpenBooksActivity"
-            android:screenOrientation="fullUser"
             android:theme="@style/DigitalLibraryHaryana"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity

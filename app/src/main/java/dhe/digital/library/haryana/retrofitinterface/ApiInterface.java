@@ -6,24 +6,18 @@ import dhe.digital.library.haryana.models.HomePageResponse;
 import dhe.digital.library.haryana.models.LoginRequest;
 import dhe.digital.library.haryana.models.LoginResponse;
 import dhe.digital.library.haryana.models.ProfileDataResponse;
+import dhe.digital.library.haryana.models.ReadViewsCountRequest;
+import dhe.digital.library.haryana.models.ReadViewsCountResponse;
 import dhe.digital.library.haryana.models.SignupRequest;
 import dhe.digital.library.haryana.models.SignupResponse;
 import dhe.digital.library.haryana.models.VerifyOtpRequest;
 import dhe.digital.library.haryana.models.VerifyOtpResponse;
 import dhe.digital.library.haryana.models.ViewAllResponse;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-import retrofit2.http.Part;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 
 public interface ApiInterface {
@@ -52,6 +46,10 @@ public interface ApiInterface {
     // http://112.196.99.107:81/api/commonapi/ForgetPassword
     @POST("ForgetPassword")
     Call<ForgotPasswordResponse> ForgetPasswordUser(@Body ForgotPasswordRequest request);
+
+    // http://112.196.99.107:81/api/commonapi/ReadData
+    @POST("ReadData")
+    Call<ReadViewsCountResponse> ReadCountIncreaseData(@Body ReadViewsCountRequest request);
 
     //http://112.196.99.107:81/api/commonapi/VerifyOTP
     @POST("VerifyOTP")

@@ -4,14 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
-
 import androidx.databinding.DataBindingUtil;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
-import com.bumptech.glide.Glide;
-
 import java.util.List;
-
 import dhe.digital.library.haryana.R;
 import dhe.digital.library.haryana.allinterface.ProfileData_interface;
 import dhe.digital.library.haryana.apicall.WebAPiCall;

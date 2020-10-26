@@ -1,6 +1,7 @@
 package dhe.digital.library.haryana.ui.activity;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -26,8 +27,12 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import dhe.digital.library.haryana.R;
+import dhe.digital.library.haryana.apicall.WebAPiCall;
 import dhe.digital.library.haryana.databinding.ActivityOpenbooksBinding;
+import dhe.digital.library.haryana.models.ForgotPasswordRequest;
+import dhe.digital.library.haryana.models.ReadViewsCountRequest;
 import dhe.digital.library.haryana.utility.CSPreferences;
+import dhe.digital.library.haryana.utility.GlobalClass;
 
 public class OpenBooksActivity extends AppCompatActivity implements View.OnClickListener {
     ActivityOpenbooksBinding binding;
@@ -36,7 +41,7 @@ public class OpenBooksActivity extends AppCompatActivity implements View.OnClick
     private static ImageView back, forward, refresh, close;
     TextView toolbartitle;
 
-    private static String webViewUrl = "";
+    private static String webViewUrl = "", PhoneNo, itemType, itemid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +49,7 @@ public class OpenBooksActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_openbooks);
 
 
-       /// webViewUrl = CSPreferences.readString(this, "admissionURL");
+        /// webViewUrl = CSPreferences.readString(this, "admissionURL");
 
 
         initViews();
@@ -63,18 +68,54 @@ public class OpenBooksActivity extends AppCompatActivity implements View.OnClick
         toolbartitle = (TextView) findViewById(R.id.toolbartitle);
         webViewProgressBar = (ProgressBar) findViewById(R.id.webViewProgressBar);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
+
         try {
+            PhoneNo = CSPreferences.readString(this, "PhoneNo");
 
             Bundle extras = getIntent().getExtras();
 
             if (extras != null) {
 
-
                 String result = extras.getString("title");
                 webViewUrl = extras.getString("bookurl");
+                itemType = extras.getString("itemType");
+                int itemid = extras.getInt("itemid");
+                String typeId = extras.getString("typeId");
 
                 toolbartitle.setAllCaps(true);
                 toolbartitle.setText(result);
+
+                if (typeId.equalsIgnoreCase("4")||typeId.equalsIgnoreCase("5")){
+                    itemType="video";
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                }else {
+
+                    itemType="book";
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+                }
+
+
+                if (!typeId.equalsIgnoreCase("6")) {
+
+                    if (GlobalClass.isNetworkConnected(OpenBooksActivity.this)) {
+
+                        ReadViewsCountRequest readViewsCountRequest = new ReadViewsCountRequest();
+
+                        readViewsCountRequest.setBookid(String.valueOf(itemid));
+                        readViewsCountRequest.setPhone(PhoneNo);
+                        readViewsCountRequest.setType(itemType);
+
+                        WebAPiCall webapiCall = new WebAPiCall();
+                        webapiCall.readCountDataMethod(OpenBooksActivity.this, OpenBooksActivity.this, readViewsCountRequest);
+
+
+                    } else {
+
+                        Toast.makeText(OpenBooksActivity.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
+                    }
+                }
 
 
             }
@@ -106,7 +147,7 @@ public class OpenBooksActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.webviewBack:
-               // isWebViewCanGoBack();
+                // isWebViewCanGoBack();
                 finish();
                 break;
             case R.id.webviewForward:
@@ -200,24 +241,23 @@ public class OpenBooksActivity extends AppCompatActivity implements View.OnClick
     }
 
     private static String getFileExtension(String fileName) {
-        if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
-            return fileName.substring(fileName.lastIndexOf(".")+1);
+        if (fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
+            return fileName.substring(fileName.lastIndexOf(".") + 1);
         else return "";
     }
+
     private void LoadWebViewUrl(String url) {
 
 
-
-
         if (isInternetConnected())
-          //  webView.loadUrl("https://drive.google.com/viewerng/viewer?embedded=true&url="+pdfurl);
-            if (getFileExtension(url).equalsIgnoreCase("pdf")){
+            //  webView.loadUrl("https://drive.google.com/viewerng/viewer?embedded=true&url="+pdfurl);
+            if (getFileExtension(url).equalsIgnoreCase("pdf")) {
                 try {
-                    webView.loadUrl("https://drive.google.com/viewerng/viewer?embedded=true&url="+URLEncoder.encode(url, "ISO-8859-1"));
+                    webView.loadUrl("https://drive.google.com/viewerng/viewer?embedded=true&url=" + URLEncoder.encode(url, "ISO-8859-1"));
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
-            }else {
+            } else {
                 webView.loadUrl(url);
 
             }

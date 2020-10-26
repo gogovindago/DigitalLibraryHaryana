@@ -472,6 +472,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             public void onClick(View v) {
                 Intent rvViewAll = new Intent(MainActivity.this, ViewAllDataActivity.class);
                 rvViewAll.putExtra("typeId", "1");
+                rvViewAll.putExtra("itemType", "Book");
                 rvViewAll.putExtra("titleOfPage", "All Digitals Libraries");
                 startActivity(rvViewAll);
             }
@@ -482,6 +483,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             public void onClick(View v) {
                 Intent rvViewAll = new Intent(MainActivity.this, ViewAllDataActivity.class);
                 rvViewAll.putExtra("typeId", "2");
+                rvViewAll.putExtra("itemType", "Book");
                 rvViewAll.putExtra("titleOfPage", "All Ebooks");
                 startActivity(rvViewAll);
             }
@@ -492,6 +494,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             public void onClick(View v) {
                 Intent rvViewAll = new Intent(MainActivity.this, ViewAllDataActivity.class);
                 rvViewAll.putExtra("typeId", "3");
+                rvViewAll.putExtra("itemType", "Book");
                 rvViewAll.putExtra("titleOfPage", "All Journals");
                 startActivity(rvViewAll);
             }
@@ -502,6 +505,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             public void onClick(View v) {
                 Intent rvViewAll = new Intent(MainActivity.this, ViewAllDataActivity.class);
                 rvViewAll.putExtra("typeId", "4");
+                rvViewAll.putExtra("itemType", "Video");
                 rvViewAll.putExtra("titleOfPage", "All Videos");
                 startActivity(rvViewAll);
             }
@@ -512,6 +516,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             public void onClick(View v) {
                 Intent rvViewAll = new Intent(MainActivity.this, ViewAllDataActivity.class);
                 rvViewAll.putExtra("typeId", "5");
+                rvViewAll.putExtra("itemType", "Video");
                 rvViewAll.putExtra("titleOfPage", "Udaan Career counseling");
                 startActivity(rvViewAll);
             }
@@ -800,6 +805,9 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
     @Override
     public void onItemClick(HomePageResponse.TrendingeBook item, int currposition) {
 
+//           itemType = extras.getString("itemType");
+//                itemid = extras.getString("itemid");
+
         if (skiplogin) {
             Intent welcomeintent = new Intent(this, WelcomeActivity.class);
             startActivity(welcomeintent);
@@ -807,8 +815,11 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
         } else {
 
             Intent certificate = new Intent(this, OpenBooksActivity.class);
+            certificate.putExtra("typeId", "2");
             certificate.putExtra("bookurl", item.getBookIframeUrl());
             certificate.putExtra("title", item.getBookTitle());
+            certificate.putExtra("itemType","Book");
+            certificate.putExtra("itemid",item.getBookId());
             startActivity(certificate);
 
         }
@@ -826,8 +837,11 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
         } else {
 
             Intent certificate = new Intent(this, OpenBooksActivity.class);
+            certificate.putExtra("typeId", "4");
             certificate.putExtra("bookurl", item.getVideoIframeUrl());
             certificate.putExtra("title", item.getVideoTitle());
+            certificate.putExtra("itemType","Video");
+            certificate.putExtra("itemid",item.getVideoId());
             startActivity(certificate);
 
         }
@@ -844,8 +858,11 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
 
         } else {
             Intent certificate = new Intent(this, OpenBooksActivity.class);
+            certificate.putExtra("typeId", "3");
             certificate.putExtra("bookurl", item.getBookIframeUrl());
             certificate.putExtra("title", item.getBookTitle());
+            certificate.putExtra("itemType","Book");
+            certificate.putExtra("itemid",item.getBookId());
             startActivity(certificate);
 
         }
@@ -864,8 +881,11 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
 
         } else {
             Intent certificate = new Intent(this, OpenBooksActivity.class);
+            certificate.putExtra("typeId", "1");
             certificate.putExtra("bookurl", item.getLibraryUrl());
             certificate.putExtra("title", item.getLibraryName());
+            certificate.putExtra("itemType","Book");
+            certificate.putExtra("itemid",item.getLibraryId());
             startActivity(certificate);
 
         }
@@ -878,6 +898,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
         if (item.getUrl() != null) {
 
             Intent certificate = new Intent(this, OpenBooksActivity.class);
+            certificate.putExtra("typeId", "6");
             certificate.putExtra("bookurl", item.getUrl());
             certificate.putExtra("title", item.getTitle());
             startActivity(certificate);
@@ -896,8 +917,11 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
         } else {
 
             Intent certificate = new Intent(this, OpenBooksActivity.class);
+            certificate.putExtra("typeId", "5");
             certificate.putExtra("bookurl", item.getVideoIframeUrl());
             certificate.putExtra("title", item.getVideoTitle());
+            certificate.putExtra("itemType","Video");
+            certificate.putExtra("itemid",item.getVideoId());
             startActivity(certificate);
 
         }

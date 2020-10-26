@@ -16,6 +16,7 @@ import dhe.digital.library.haryana.R;
 import dhe.digital.library.haryana.adapter.ViewAllItemsAdapter;
 import dhe.digital.library.haryana.allinterface.GetAllData_interface;
 import dhe.digital.library.haryana.apicall.WebAPiCall;
+
 import dhe.digital.library.haryana.databinding.ActivityViewalldataBinding;
 import dhe.digital.library.haryana.models.ViewAllResponse;
 import dhe.digital.library.haryana.ui.welcome.WelcomeActivity;
@@ -37,8 +38,8 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_viewalldata);
 
-       // allItemsAdapter = new ViewAllItemsAdapter(this, arrayList, this, 6);
-       /// binding.recyclerView.setAdapter(allItemsAdapter);
+        // allItemsAdapter = new ViewAllItemsAdapter(this, arrayList, this, 6);
+        /// binding.recyclerView.setAdapter(allItemsAdapter);
         binding.simpleSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
 
@@ -95,12 +96,13 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
                 Intent certificate = new Intent(this, OpenBooksActivity.class);
                 certificate.putExtra("bookurl", item.getUrl());
                 certificate.putExtra("title", item.getDescription());
+                certificate.putExtra("typeId", typeId);
+                certificate.putExtra("itemid", item.getId());
                 startActivity(certificate);
             } else {
 
                 GlobalClass.dailogError(this, "No Url Found", "NO any url found to redirect to next page.");
             }
-
 
 
         }

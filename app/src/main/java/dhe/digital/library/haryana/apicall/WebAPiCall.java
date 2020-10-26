@@ -26,6 +26,8 @@ import dhe.digital.library.haryana.models.HomePageResponse;
 import dhe.digital.library.haryana.models.LoginRequest;
 import dhe.digital.library.haryana.models.LoginResponse;
 import dhe.digital.library.haryana.models.ProfileDataResponse;
+import dhe.digital.library.haryana.models.ReadViewsCountRequest;
+import dhe.digital.library.haryana.models.ReadViewsCountResponse;
 import dhe.digital.library.haryana.models.SignupRequest;
 import dhe.digital.library.haryana.models.SignupResponse;
 import dhe.digital.library.haryana.models.VerifyOtpRequest;
@@ -367,6 +369,48 @@ public class WebAPiCall {
             public void onFailure(Call<ForgotPasswordResponse> call, Throwable t) {
 
                 dailoghide(context);
+                t.printStackTrace();
+
+                Log.d("dddddd", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+
+
+    public void readCountDataMethod(final Activity activity, final Context context, ReadViewsCountRequest request) {
+
+       // loadershowwithMsg(context, "We are Sending auto generated password on your Registered Mobile number.");
+
+        // Call<LoginResponse> userpost_responseCall = ApiClient.getClient().LoginUser(PhoneNo, Password, FcmToken);
+        Call<ReadViewsCountResponse> userpost_responseCall = ApiClient.getClient().ReadCountIncreaseData(request);
+        userpost_responseCall.enqueue(new Callback<ReadViewsCountResponse>() {
+            @Override
+            public void onResponse(Call<ReadViewsCountResponse> call, Response<ReadViewsCountResponse> response) {
+             //   dailoghide(context);
+                if (response.isSuccessful()) {
+
+
+                    if (response.body().getResponse() == 200) {
+
+                      //  dailogsuccessWithActivity(context, activity, " Password has been Changed Successfully.", "New auto generated password has been sent on your Registered Mobile number .");
+
+
+                    } else {
+                       // dailogError(context, "Mobile Number Not Found!", "The Mobile Number You have entered is not Regitered with Us.");
+                    }
+
+
+                } else {
+                    GlobalClass.showtost(context, "Something went wrong. Please try after sometimes." + response.message());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ReadViewsCountResponse> call, Throwable t) {
+
+              //  dailoghide(context);
                 t.printStackTrace();
 
                 Log.d("dddddd", "onFailure: " + t.getMessage());
