@@ -175,7 +175,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 if (GlobalClass.isNetworkConnected(MainActivity.this)) {
 
                     WebAPiCall webapiCall = new WebAPiCall();
-                    webapiCall.getHomePageDataMethod(MainActivity.this, MainActivity.this, llmain, MainActivity.this);
+                    webapiCall.getHomePageDataMethod(MainActivity.this, MainActivity.this, llmain, mSwipeRefreshLayout, MainActivity.this);
 
                 } else {
 
@@ -186,10 +186,11 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             }
         });
 
+      //  mSwipeRefreshLayout.setRefreshing(true);
 
         if (GlobalClass.isNetworkConnected(MainActivity.this)) {
             WebAPiCall webapiCall = new WebAPiCall();
-            webapiCall.getHomePageDataMethod(MainActivity.this, MainActivity.this, llmain, this);
+            webapiCall.getHomePageDataMethod(MainActivity.this, MainActivity.this, llmain,mSwipeRefreshLayout, this);
 
         } else {
 

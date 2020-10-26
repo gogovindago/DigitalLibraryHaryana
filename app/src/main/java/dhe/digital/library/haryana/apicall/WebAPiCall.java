@@ -10,8 +10,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import dhe.digital.library.haryana.allinterface.GetAllData_interface;
@@ -163,18 +163,22 @@ public class WebAPiCall {
     }
 
 
-    public void getHomePageDataMethod(final Activity activity, final Context context, LinearLayout llmain, final GetbannersData_interface getbannersData_interface) {
+    public void getHomePageDataMethod(final Activity activity, final Context context, LinearLayout llmain, SwipeRefreshLayout mSwipeRefreshLayout, final GetbannersData_interface getbannersData_interface) {
 
-        loadershowwithMsg(context, "Loading...");
+       // loadershowwithMsg(context, "Loading...");
+        mSwipeRefreshLayout.setRefreshing(true);
 
         Call<HomePageResponse> responseCall = ApiClient.getClient().getHomePageDataAPi();
         responseCall.enqueue(new Callback<HomePageResponse>() {
             @Override
             public void onResponse(Call<HomePageResponse> call, Response<HomePageResponse> response) {
-                dailoghide(context);
+               // dailoghide(context);
                 if (response.isSuccessful()) {
 
                     if (response.body().getResponse() == 200) {
+
+                        mSwipeRefreshLayout.setRefreshing(false);
+
                         llmain.setVisibility(View.VISIBLE);
 
                         getbannersData_interface.GetbannersData(response.body().getData().getBanners());
@@ -198,8 +202,8 @@ public class WebAPiCall {
 
             @Override
             public void onFailure(Call<HomePageResponse> call, Throwable t) {
-
-                dailoghide(context);
+                mSwipeRefreshLayout.setRefreshing(false);
+               // dailoghide(context);
                 t.printStackTrace();
 
                 Log.d("dddddd", "onFailure: " + t.getMessage());
