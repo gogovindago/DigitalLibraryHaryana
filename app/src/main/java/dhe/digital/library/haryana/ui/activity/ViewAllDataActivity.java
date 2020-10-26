@@ -37,8 +37,8 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_viewalldata);
 
-        allItemsAdapter = new ViewAllItemsAdapter(this, arrayList, this);
-        binding.recyclerView.setAdapter(allItemsAdapter);
+       // allItemsAdapter = new ViewAllItemsAdapter(this, arrayList, this, 6);
+       /// binding.recyclerView.setAdapter(allItemsAdapter);
         binding.simpleSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
 
@@ -89,10 +89,19 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
 
         } else {
 
-            Intent certificate = new Intent(this, OpenBooksActivity.class);
-            certificate.putExtra("bookurl", item.getUrl());
-            certificate.putExtra("title", item.getDescription());
-            startActivity(certificate);
+
+            if (item.getUrl() != null) {
+
+                Intent certificate = new Intent(this, OpenBooksActivity.class);
+                certificate.putExtra("bookurl", item.getUrl());
+                certificate.putExtra("title", item.getDescription());
+                startActivity(certificate);
+            } else {
+
+                GlobalClass.dailogError(this, "No Url Found", "NO any url found to redirect to next page.");
+            }
+
+
 
         }
     }
@@ -157,9 +166,17 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
 
         arrayList.clear();
         arrayList.addAll(list);
-        GridLayoutManager manager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
+        GridLayoutManager manager;
+        if (typeId.equalsIgnoreCase("6")) {
+            manager = new GridLayoutManager(this, 1, GridLayoutManager.VERTICAL, false);
+
+        } else {
+            manager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
+
+
+        }
         binding.recyclerView.setLayoutManager(manager);
-        allItemsAdapter = new ViewAllItemsAdapter(this, arrayList, this);
+        allItemsAdapter = new ViewAllItemsAdapter(this, arrayList, this, typeId);
         binding.recyclerView.setAdapter(allItemsAdapter);
         allItemsAdapter.notifyDataSetChanged();
 

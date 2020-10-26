@@ -165,9 +165,9 @@
                         </LinearLayout>
 
                         <androidx.core.widget.NestedScrollView
-                            android:layout_marginTop="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
                             android:fillViewport="true">
 
                             <LinearLayout
@@ -177,15 +177,15 @@
 
 
                                 <LinearLayout
-                                    android:visibility="gone"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="vertical">
+                                    android:orientation="vertical"
+                                    android:visibility="gone">
 
                                     <RelativeLayout
-                                        android:layout_marginTop="8dp"
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content">
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="8dp">
 
 
                                         <TextView
@@ -203,26 +203,26 @@
 
                                         <TextView
 
-                                            android:background="@drawable/viewallbg"
-                                            android:layout_alignParentEnd="true"
                                             android:id="@+id/rvViewAll"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
+                                            android:layout_alignParentEnd="true"
+                                            android:layout_alignParentRight="true"
                                             android:layout_gravity="center"
                                             android:layout_marginStart="5dp"
                                             android:layout_marginLeft="5dp"
                                             android:layout_marginEnd="5dp"
+                                            android:background="@drawable/viewallbg"
                                             android:gravity="center"
-                                            android:text="View All"
-                                            android:textSize="14sp"
-                                            android:textStyle="bold"
-                                            android:textColor="@color/white"
-                                            android:layout_alignParentRight="true"
-                                            android:paddingLeft="16dp"
                                             android:paddingStart="16dp"
+                                            android:paddingLeft="16dp"
                                             android:paddingTop="5dp"
+                                            android:paddingEnd="16dp"
                                             android:paddingBottom="5dp"
-                                            android:paddingEnd="16dp"/>
+                                            android:text="View All"
+                                            android:textColor="@color/white"
+                                            android:textSize="14sp"
+                                            android:textStyle="bold" />
                                     </RelativeLayout>
 
                                     <androidx.recyclerview.widget.RecyclerView
@@ -243,9 +243,9 @@
 
 
                                     <RelativeLayout
-                                        android:layout_marginTop="8dp"
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content">
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="8dp">
 
                                         <TextView
                                             android:id="@+id/txttrandings"
@@ -261,27 +261,27 @@
 
                                         <TextView
 
-                                            android:background="@drawable/viewallbg"
-                                            android:layout_alignParentEnd="true"
                                             android:id="@+id/tebooksViewAll"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
+                                            android:layout_alignParentEnd="true"
+                                            android:layout_alignParentRight="true"
                                             android:layout_gravity="center"
                                             android:layout_marginStart="5dp"
                                             android:layout_marginLeft="5dp"
-                                            android:layout_marginEnd="5dp"                                            android:gravity="center"
-                                            android:text="View All"
-                                            android:textSize="14sp"
-                                            android:textStyle="bold"
-                                            android:textColor="@color/white"
-                                            android:layout_alignParentRight="true"
-                                            android:paddingLeft="16dp"
+                                            android:layout_marginEnd="5dp"
+                                            android:background="@drawable/viewallbg"
+                                            android:gravity="center"
                                             android:paddingStart="16dp"
+                                            android:paddingLeft="16dp"
                                             android:paddingTop="5dp"
+                                            android:paddingEnd="16dp"
                                             android:paddingBottom="5dp"
-                                            android:paddingEnd="16dp"/>
+                                            android:text="View All"
+                                            android:textColor="@color/white"
+                                            android:textSize="14sp"
+                                            android:textStyle="bold" />
                                     </RelativeLayout>
-
 
 
                                     <androidx.recyclerview.widget.RecyclerView
@@ -301,9 +301,9 @@
                                     android:orientation="vertical">
 
                                     <RelativeLayout
-                                        android:layout_marginTop="8dp"
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content">
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="8dp">
 
                                         <TextView
                                             android:id="@+id/txtJournals"
@@ -319,28 +319,27 @@
 
                                         <TextView
 
-                                            android:background="@drawable/viewallbg"
-                                            android:layout_alignParentEnd="true"
                                             android:id="@+id/JournalsViewAll"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
+                                            android:layout_alignParentEnd="true"
+                                            android:layout_alignParentRight="true"
                                             android:layout_gravity="center"
                                             android:layout_marginStart="5dp"
                                             android:layout_marginLeft="5dp"
-                                            android:layout_marginEnd="5dp"                                            android:gravity="center"
-                                            android:text="View All"
-                                            android:textSize="14sp"
-                                            android:textStyle="bold"
-                                            android:textColor="@color/white"
-                                            android:layout_alignParentRight="true"
-                                            android:paddingLeft="16dp"
+                                            android:layout_marginEnd="5dp"
+                                            android:background="@drawable/viewallbg"
+                                            android:gravity="center"
                                             android:paddingStart="16dp"
+                                            android:paddingLeft="16dp"
                                             android:paddingTop="5dp"
+                                            android:paddingEnd="16dp"
                                             android:paddingBottom="5dp"
-                                            android:paddingEnd="16dp"/>
+                                            android:text="View All"
+                                            android:textColor="@color/white"
+                                            android:textSize="14sp"
+                                            android:textStyle="bold" />
                                     </RelativeLayout>
-
-
 
 
                                     <androidx.recyclerview.widget.RecyclerView
@@ -358,10 +357,11 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical">
+
                                     <RelativeLayout
-                                        android:layout_marginTop="8dp"
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content">
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="8dp">
 
                                         <TextView
                                             android:id="@+id/txtVideos"
@@ -377,27 +377,27 @@
 
                                         <TextView
 
-                                            android:background="@drawable/viewallbg"
-                                            android:layout_alignParentEnd="true"
                                             android:id="@+id/VideosViewAll"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
+                                            android:layout_alignParentEnd="true"
+                                            android:layout_alignParentRight="true"
                                             android:layout_gravity="center"
                                             android:layout_marginStart="5dp"
                                             android:layout_marginLeft="5dp"
-                                            android:layout_marginEnd="5dp"                                            android:gravity="center"
-                                            android:text="View All"
-                                            android:textSize="14sp"
-                                            android:textStyle="bold"
-                                            android:textColor="@color/white"
-                                            android:layout_alignParentRight="true"
-                                            android:paddingLeft="16dp"
+                                            android:layout_marginEnd="5dp"
+                                            android:background="@drawable/viewallbg"
+                                            android:gravity="center"
                                             android:paddingStart="16dp"
+                                            android:paddingLeft="16dp"
                                             android:paddingTop="5dp"
+                                            android:paddingEnd="16dp"
                                             android:paddingBottom="5dp"
-                                            android:paddingEnd="16dp"/>
+                                            android:text="View All"
+                                            android:textColor="@color/white"
+                                            android:textSize="14sp"
+                                            android:textStyle="bold" />
                                     </RelativeLayout>
-
 
 
                                     <androidx.recyclerview.widget.RecyclerView
@@ -410,14 +410,16 @@
                                         android:scrollbars="vertical"
                                         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
                                 </LinearLayout>
+
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical">
+
                                     <RelativeLayout
-                                        android:layout_marginTop="8dp"
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content">
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="8dp">
 
                                         <TextView
                                             android:id="@+id/txtimportantlink"
@@ -433,27 +435,27 @@
 
                                         <TextView
 
-                                            android:background="@drawable/viewallbg"
-                                            android:layout_alignParentEnd="true"
                                             android:id="@+id/importantlinkViewAll"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
+                                            android:layout_alignParentEnd="true"
+                                            android:layout_alignParentRight="true"
                                             android:layout_gravity="center"
                                             android:layout_marginStart="5dp"
                                             android:layout_marginLeft="5dp"
-                                            android:layout_marginEnd="5dp"                                            android:gravity="center"
-                                            android:text="View All"
-                                            android:textSize="14sp"
-                                            android:textStyle="bold"
-                                            android:textColor="@color/white"
-                                            android:layout_alignParentRight="true"
-                                            android:paddingLeft="16dp"
+                                            android:layout_marginEnd="5dp"
+                                            android:background="@drawable/viewallbg"
+                                            android:gravity="center"
                                             android:paddingStart="16dp"
+                                            android:paddingLeft="16dp"
                                             android:paddingTop="5dp"
+                                            android:paddingEnd="16dp"
                                             android:paddingBottom="5dp"
-                                            android:paddingEnd="16dp"/>
+                                            android:text="View All"
+                                            android:textColor="@color/white"
+                                            android:textSize="14sp"
+                                            android:textStyle="bold" />
                                     </RelativeLayout>
-
 
 
                                     <androidx.recyclerview.widget.RecyclerView
@@ -466,14 +468,16 @@
                                         android:scrollbars="vertical"
                                         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
                                 </LinearLayout>
+
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical">
+
                                     <RelativeLayout
-                                        android:layout_marginTop="8dp"
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content">
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="8dp">
 
                                         <TextView
                                             android:id="@+id/txtudaan"
@@ -489,27 +493,27 @@
 
                                         <TextView
 
-                                            android:background="@drawable/viewallbg"
-                                            android:layout_alignParentEnd="true"
                                             android:id="@+id/udaanlinkViewAll"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
+                                            android:layout_alignParentEnd="true"
+                                            android:layout_alignParentRight="true"
                                             android:layout_gravity="center"
                                             android:layout_marginStart="5dp"
                                             android:layout_marginLeft="5dp"
-                                            android:layout_marginEnd="5dp"                                            android:gravity="center"
-                                            android:text="View All"
-                                            android:textSize="14sp"
-                                            android:textStyle="bold"
-                                            android:textColor="@color/white"
-                                            android:layout_alignParentRight="true"
-                                            android:paddingLeft="16dp"
+                                            android:layout_marginEnd="5dp"
+                                            android:background="@drawable/viewallbg"
+                                            android:gravity="center"
                                             android:paddingStart="16dp"
+                                            android:paddingLeft="16dp"
                                             android:paddingTop="5dp"
+                                            android:paddingEnd="16dp"
                                             android:paddingBottom="5dp"
-                                            android:paddingEnd="16dp"/>
+                                            android:text="View All"
+                                            android:textColor="@color/white"
+                                            android:textSize="14sp"
+                                            android:textStyle="bold" />
                                     </RelativeLayout>
-
 
 
                                     <androidx.recyclerview.widget.RecyclerView
@@ -563,17 +567,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="0.2">
+
                         <ImageView
-                            android:visibility="gone"
-                            android:layout_marginEnd="5dp"
-                            android:layout_centerInParent="true"
-                            android:src="@drawable/forward_white"
-                            android:layout_alignParentEnd="true"
                             android:id="@+id/goyesno"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
                             android:layout_alignParentRight="true"
-                            android:layout_marginRight="5dp">
+                            android:layout_centerInParent="true"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginRight="5dp"
+                            android:src="@drawable/forward_white"
+                            android:visibility="gone">
 
                         </ImageView>
 
@@ -619,11 +624,10 @@
                             android:layout_toRightOf="@+id/profile_image"
                             android:gravity="center|start"
                             android:text=""
-                            android:textSize="11sp"
-
                             android:textColor="@android:color/white"
-                            android:textStyle="bold"
-                             />
+
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/textView"
@@ -633,14 +637,14 @@
                             android:layout_centerInParent="true"
                             android:layout_marginStart="8dp"
                             android:layout_marginLeft="8dp"
+                            android:layout_toStartOf="@+id/goyesno"
+                            android:layout_toLeftOf="@+id/goyesno"
                             android:layout_toEndOf="@+id/profile_image"
                             android:layout_toRightOf="@+id/profile_image"
-                            android:layout_toLeftOf="@+id/goyesno"
-                            android:layout_toStartOf="@+id/goyesno"
                             android:gravity="center|start"
                             android:text=""
-android:textSize="11sp"
                             android:textColor="@android:color/white"
+                            android:textSize="11sp"
                             android:textStyle="bold" />
 
                         <TextView

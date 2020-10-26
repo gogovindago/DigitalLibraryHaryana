@@ -2,13 +2,22 @@
 <layout xmlns:fresco="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        app:cardBackgroundColor="@color/purple_700"
+        app:cardPreventCornerOverlap="true"
+        app:cardMaxElevation="10dp"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="5dp"
+        app:cardUseCompatPadding="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
 
 
     <RelativeLayout
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gray_btn_bg_color"
         android:minHeight="?android:attr/listPreferredItemHeightSmall"
         android:paddingLeft="8dp"
         android:paddingStart="8dp">
@@ -55,4 +64,6 @@
             android:background="#3F51B5"/>
       
     </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
 </layout>

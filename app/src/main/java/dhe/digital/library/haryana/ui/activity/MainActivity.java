@@ -66,11 +66,11 @@ import dhe.digital.library.haryana.adapter.TrendingsJournalsAdapter;
 import dhe.digital.library.haryana.adapter.TrendingsVideosAdapter;
 import dhe.digital.library.haryana.allinterface.GetbannersData_interface;
 import dhe.digital.library.haryana.apicall.WebAPiCall;
+import dhe.digital.library.haryana.models.DataModelLeftNew;
 import dhe.digital.library.haryana.models.HomePageResponse;
 import dhe.digital.library.haryana.ui.welcome.WelcomeActivity;
 import dhe.digital.library.haryana.utility.BaseActivity;
 import dhe.digital.library.haryana.utility.CSPreferences;
-import dhe.digital.library.haryana.utility.DataModelLeft;
 import dhe.digital.library.haryana.utility.GlobalClass;
 
 
@@ -86,7 +86,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
     ImageButton mainNotification;
     LinearLayout llmain;
     RelativeLayout uprofile;
-    TextView toolbartxt, uname, textView, txtrole, txtwelcome, rvViewAll, tebooksViewAll, JournalsViewAll, VideosViewAll,importantlinkViewAll,udaanlinkViewAll;
+    TextView toolbartxt, uname, textView, txtrole, txtwelcome, rvViewAll, tebooksViewAll, JournalsViewAll, VideosViewAll, importantlinkViewAll, udaanlinkViewAll;
     Toolbar toolbar;
     SwipeRefreshLayout mSwipeRefreshLayout;
 
@@ -95,7 +95,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
     private ListView mDrawerList;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
-    RecyclerView recyclerView, rvTrandingsEbooks, rvJournals, rvVideos, rvimportantlink,rvudaan;
+    RecyclerView recyclerView, rvTrandingsEbooks, rvJournals, rvVideos, rvimportantlink, rvudaan;
 
     List<HomePageResponse.Banner> sliderItemList = new ArrayList<HomePageResponse.Banner>();
     private List<HomePageResponse.OtherDigitalTrendingLibrary> otherDigitalTrendingLibraries = new ArrayList<HomePageResponse.OtherDigitalTrendingLibrary>();
@@ -104,6 +104,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
     private List<HomePageResponse.TrendingJournal> trendingJournals = new ArrayList<HomePageResponse.TrendingJournal>();
     private List<HomePageResponse.ImportantLink> importantLinkList = new ArrayList<HomePageResponse.ImportantLink>();
     List<HomePageResponse.TrendingUdaanVideo> trendingUdaanVideos = new ArrayList<HomePageResponse.TrendingUdaanVideo>();
+    List<DataModelLeftNew> dataModelLeftList;
 
     OthesDigitalLibAdapter adaptermain;
     TrendingsEBooksAdapter trendingsEBooksAdapter;
@@ -116,7 +117,8 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
     SliderView sliderView;
     SliderAdapter sliderAdapter;
     private ActionBarDrawerToggle mDrawerToggle;
-    DataModelLeft[] drawerItem;
+    //  DataModelLeft[] drawerItem;
+
 
     public static void drawerCheck() {
 
@@ -231,6 +233,56 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 goyesno.setVisibility(View.VISIBLE);
             }
 
+            dataModelLeftList = new ArrayList<DataModelLeftNew>();
+            dataModelLeftList.clear();
+
+            DataModelLeftNew publiclib = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, "Public Library", 0);
+            dataModelLeftList.add(publiclib);
+
+            DataModelLeftNew ebooks = new DataModelLeftNew(R.drawable.ic_baseline_book_online_24, "E-Books", 1);
+            dataModelLeftList.add(ebooks);
+
+            DataModelLeftNew journals = new DataModelLeftNew(R.drawable.ic_baseline_account_balance_wallet_24, "journals", 2);
+            dataModelLeftList.add(journals);
+
+            DataModelLeftNew Videos = new DataModelLeftNew(R.drawable.ic_baseline_video_library_24, "Videos", 3);
+            dataModelLeftList.add(Videos);
+
+            DataModelLeftNew OurOthersApps = new DataModelLeftNew(R.drawable.ic_baseline_apps_24, "Our Others Apps", 4);
+            dataModelLeftList.add(OurOthersApps);
+
+            DataModelLeftNew RateApp = new DataModelLeftNew(R.drawable.rate_review, "Rate App", 5);
+            dataModelLeftList.add(RateApp);
+
+            DataModelLeftNew ShareApp = new DataModelLeftNew(R.drawable.share, "Share App", 6);
+            dataModelLeftList.add(ShareApp);
+
+            if (skiplogin) {
+
+
+            } else {
+
+                DataModelLeftNew Notification = new DataModelLeftNew(R.drawable.notifications, "Notification", 7);
+                dataModelLeftList.add(Notification);
+
+            }
+
+            if (skiplogin) {
+
+
+                DataModelLeftNew LoginSignup = new DataModelLeftNew(R.drawable.personwhite, "Login/Signup", 8);
+                dataModelLeftList.add(LoginSignup);
+
+
+            } else {
+
+                DataModelLeftNew Logout = new DataModelLeftNew(R.drawable.ic_baseline_exit_to_app_24, "Logout", 8);
+                dataModelLeftList.add(Logout);
+
+
+            }
+
+/*
             drawerItem = new DataModelLeft[9];
 
 
@@ -248,10 +300,10 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             } else {
                 drawerItem[8] = new DataModelLeft(R.drawable.ic_baseline_exit_to_app_24, "Logout");
 
-            }
+            }*/
 
 
-            DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this, R.layout.list_view_item_row, drawerItem);
+            DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this, R.layout.list_view_item_row, dataModelLeftList);
             mDrawerList.setAdapter(adapter);
             mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
             mDrawerLayout = findViewById(R.id.drawer_layout);
@@ -465,7 +517,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             }
         });
 
-  importantlinkViewAll.setOnClickListener(new View.OnClickListener() {
+        importantlinkViewAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent rvViewAll = new Intent(MainActivity.this, ViewAllDataActivity.class);
@@ -482,7 +534,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
 
         Fragment fragment = null;
 
-        switch (position) {
+        switch (dataModelLeftList.get(position).id) {
             case 0:
                 mDrawerLayout.closeDrawers();
                 Intent AllothersDlib = new Intent(MainActivity.this, ViewAllDataActivity.class);
@@ -740,7 +792,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
         trendingUdaanVideos.addAll(list);
         LinearLayoutManager manager = new LinearLayoutManager(this, GridLayoutManager.HORIZONTAL, false);
         rvudaan.setLayoutManager(manager);
-        udaanVideosAdapter= new TrendingUdaanVideosAdapter(this, trendingUdaanVideos, this);
+        udaanVideosAdapter = new TrendingUdaanVideosAdapter(this, trendingUdaanVideos, this);
         rvudaan.setAdapter(udaanVideosAdapter);
         udaanVideosAdapter.notifyDataSetChanged();
     }
@@ -823,15 +875,15 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
 
     @Override
     public void onItemClick(HomePageResponse.ImportantLink item, int currposition) {
-        if (item.getUrl()!=null) {
+        if (item.getUrl() != null) {
 
             Intent certificate = new Intent(this, OpenBooksActivity.class);
             certificate.putExtra("bookurl", item.getUrl());
             certificate.putExtra("title", item.getTitle());
             startActivity(certificate);
-        }else {
+        } else {
 
-            GlobalClass.dailogError(MainActivity.this,"No Url Found","NO any url found to redirect to next page.");
+            GlobalClass.dailogError(MainActivity.this, "No Url Found", "NO any url found to redirect to next page.");
         }
     }
 

@@ -8,18 +8,17 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import java.util.List;
 import dhe.digital.library.haryana.R;
-import dhe.digital.library.haryana.utility.DataModelLeft;
+import dhe.digital.library.haryana.models.DataModelLeftNew;
 
-public class DrawerItemCustomAdapter extends ArrayAdapter<DataModelLeft> {
+public class DrawerItemCustomAdapter extends ArrayAdapter<DataModelLeftNew> {
 
     Context mContext;
     int layoutResourceId;
-    DataModelLeft data[] = null;
+    List<DataModelLeftNew> data ;
 
-
-    public DrawerItemCustomAdapter(Context mContext, int layoutResourceId, DataModelLeft[] data) {
+    public DrawerItemCustomAdapter(Context mContext, int layoutResourceId, List<DataModelLeftNew> data) {
 
         super(mContext, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
@@ -31,7 +30,6 @@ public class DrawerItemCustomAdapter extends ArrayAdapter<DataModelLeft> {
     public View getView(int position, View convertView, ViewGroup parent) {
 
 
-
         View listItem = convertView;
 
 
@@ -41,7 +39,7 @@ public class DrawerItemCustomAdapter extends ArrayAdapter<DataModelLeft> {
         ImageView imageViewIcon = (ImageView) listItem.findViewById(R.id.imageViewIcon);
         TextView textViewName = (TextView) listItem.findViewById(R.id.textViewName);
 
-        DataModelLeft folder = data[position];
+        DataModelLeftNew folder = data.get(position);
 
 
         imageViewIcon.setImageResource(folder.icon);

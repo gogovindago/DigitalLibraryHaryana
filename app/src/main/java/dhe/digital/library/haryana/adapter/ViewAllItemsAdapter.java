@@ -24,12 +24,14 @@ public class ViewAllItemsAdapter extends RecyclerView.Adapter<ViewAllItemsAdapte
     Context mContext;
     protected ItemListener mListener;
     int currposition;
+    String imptypeId;
 
-    public ViewAllItemsAdapter(Context context, List values, ItemListener itemListener) {
+    public ViewAllItemsAdapter(Context context, List values, ItemListener itemListener, String i) {
 
         mValues = values;
         mContext = context;
         mListener = itemListener;
+        imptypeId = i;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -71,8 +73,17 @@ public class ViewAllItemsAdapter extends RecyclerView.Adapter<ViewAllItemsAdapte
 
     @Override
     public ViewAllItemsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view;
 
-        View view = LayoutInflater.from(mContext).inflate(R.layout.recycler_view_itemall, parent, false);
+        if (imptypeId.equalsIgnoreCase("6")) {
+            view = LayoutInflater.from(mContext).inflate(R.layout.list_view_link_item_row, parent, false);
+
+        } else {
+
+            view = LayoutInflater.from(mContext).inflate(R.layout.recycler_view_itemall, parent, false);
+
+        }
+
 
         return new ViewHolder(view);
     }

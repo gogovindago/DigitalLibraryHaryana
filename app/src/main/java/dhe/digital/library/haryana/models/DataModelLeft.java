@@ -1,4 +1,4 @@
-package dhe.digital.library.haryana.utility;
+package dhe.digital.library.haryana.models;
 
 public class DataModelLeft {
     public int icon;

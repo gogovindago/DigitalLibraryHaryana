@@ -75,7 +75,7 @@ public class ImportantLinksAdapter extends RecyclerView.Adapter<ImportantLinksAd
     public ImportantLinksAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         //View view = LayoutInflater.from(mContext).inflate(R.layout.recycler_view_itemmain, parent, false);
-        View view = LayoutInflater.from(mContext).inflate(R.layout.list_view_link_item_row, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.recycler_view_itemmain, parent, false);
 
         return new ViewHolder(view);
     }
