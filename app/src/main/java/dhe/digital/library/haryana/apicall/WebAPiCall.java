@@ -15,6 +15,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import dhe.digital.library.haryana.allinterface.GetAllData_interface;
+import dhe.digital.library.haryana.allinterface.GetAllLibraryTypesData_interface;
+import dhe.digital.library.haryana.allinterface.GetLibTypeByIdData_interface;
 import dhe.digital.library.haryana.allinterface.GetbannersData_interface;
 import dhe.digital.library.haryana.allinterface.LoginData_interface;
 import dhe.digital.library.haryana.allinterface.OtpVerifyData_interface;
@@ -23,6 +25,8 @@ import dhe.digital.library.haryana.allinterface.SignupData_interface;
 import dhe.digital.library.haryana.models.ForgotPasswordRequest;
 import dhe.digital.library.haryana.models.ForgotPasswordResponse;
 import dhe.digital.library.haryana.models.HomePageResponse;
+import dhe.digital.library.haryana.models.LibraryTypeAndCoutResponse;
+import dhe.digital.library.haryana.models.LibraryTypeByIdResponse;
 import dhe.digital.library.haryana.models.LoginRequest;
 import dhe.digital.library.haryana.models.LoginResponse;
 import dhe.digital.library.haryana.models.ProfileDataResponse;
@@ -212,15 +216,61 @@ public class WebAPiCall {
     }
 
 
-    public void getAllDataMethod(final Activity activity, final Context context, RecyclerView llmain, final GetAllData_interface getAllData_interface, String typeId) {
+    public void GetAllLibraryTypesDataMethod(final Activity activity, final Context context, RecyclerView llmain, SwipeRefreshLayout mSwipeRefreshLayout, final GetAllLibraryTypesData_interface getAllLibraryTypesData_interface) {
 
-        loadershowwithMsg(context, "Loading...");
+       // loadershowwithMsg(context, "Loading...");
+        mSwipeRefreshLayout.setRefreshing(true);
+
+        Call<LibraryTypeAndCoutResponse> responseCall = ApiClient.getClient().getAllLibraryTypeAPi();
+        responseCall.enqueue(new Callback<LibraryTypeAndCoutResponse>() {
+            @Override
+            public void onResponse(Call<LibraryTypeAndCoutResponse> call, Response<LibraryTypeAndCoutResponse> response) {
+               // dailoghide(context);
+                if (response.isSuccessful()) {
+
+                    if (response.body().getResponse() == 200) {
+
+                        mSwipeRefreshLayout.setRefreshing(false);
+
+                        llmain.setVisibility(View.VISIBLE);
+
+                        getAllLibraryTypesData_interface.GetLibrarytypesData(response.body().getData());
+
+
+                    } else {
+
+                    }
+
+
+                } else {
+                    GlobalClass.showtost(context, "" + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LibraryTypeAndCoutResponse> call, Throwable t) {
+                mSwipeRefreshLayout.setRefreshing(false);
+               // dailoghide(context);
+                t.printStackTrace();
+
+                Log.d("dddddd", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+
+    public void getAllDataMethod(final Activity activity, final Context context, RecyclerView llmain,SwipeRefreshLayout mSwipeRefreshLayout, final GetAllData_interface getAllData_interface, String typeId) {
+
+       // loadershowwithMsg(context, "Loading...");
+        mSwipeRefreshLayout.setRefreshing(true);
 
         Call<ViewAllResponse> responseCall = ApiClient.getClient().getAllDataAPi(typeId);
         responseCall.enqueue(new Callback<ViewAllResponse>() {
             @Override
             public void onResponse(Call<ViewAllResponse> call, Response<ViewAllResponse> response) {
-                dailoghide(context);
+               // dailoghide(context);
+                mSwipeRefreshLayout.setRefreshing(false);
+
                 if (response.isSuccessful()) {
 
                     if (response.body().getResponse() == 200) {
@@ -241,8 +291,50 @@ public class WebAPiCall {
 
             @Override
             public void onFailure(Call<ViewAllResponse> call, Throwable t) {
+                mSwipeRefreshLayout.setRefreshing(false);
 
-                dailoghide(context);
+               // dailoghide(context);
+                t.printStackTrace();
+
+                Log.d("dddddd", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+    public void getLibraryTypeByIdDataMethod(final Activity activity, final Context context, RecyclerView llmain, SwipeRefreshLayout mSwipeRefreshLayout, final GetLibTypeByIdData_interface getLibTypeByIdData_interface, String typeId) {
+
+       // loadershowwithMsg(context, "Loading...");
+        mSwipeRefreshLayout.setRefreshing(true);
+
+        Call<LibraryTypeByIdResponse> responseCall = ApiClient.getClient().getLibraryTypeByIdDataAPi(typeId);
+        responseCall.enqueue(new Callback<LibraryTypeByIdResponse>() {
+            @Override
+            public void onResponse(Call<LibraryTypeByIdResponse> call, Response<LibraryTypeByIdResponse> response) {
+               // dailoghide(context);
+                mSwipeRefreshLayout.setRefreshing(false);
+
+                if (response.isSuccessful()) {
+
+                    if (response.body().getResponse() == 200) {
+                        llmain.setVisibility(View.VISIBLE);
+
+                        getLibTypeByIdData_interface.GetAllLibTypeByIdData(response.body().getData());
+
+
+                    } else {
+
+                    }
+
+
+                } else {
+                    GlobalClass.showtost(context, "" + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LibraryTypeByIdResponse> call, Throwable t) {
+                mSwipeRefreshLayout.setRefreshing(false);
+
+               // dailoghide(context);
                 t.printStackTrace();
 
                 Log.d("dddddd", "onFailure: " + t.getMessage());

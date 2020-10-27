@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/tools"
     android:layout_width="200dp"
-    android:layout_height="wrap_content"
-    xmlns:fresco="http://schemas.android.com/tools">
+    android:layout_height="wrap_content">
+
     <com.google.android.material.card.MaterialCardView
 
         android:id="@+id/card_view"
@@ -42,10 +42,9 @@
                 android:layout_alignParentBottom="true"
                 android:background="@drawable/bg_homeslider"
                 android:gravity="center"
-                android:paddingLeft="2dp"
-                android:paddingTop="8dp"
-                android:paddingRight="2dp"
-                android:paddingBottom="2dp"
+                android:maxLines="1"
+               android:padding="8dp"
+                android:ems="16"
                 android:text="test"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
@@ -56,77 +55,77 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-  <!--  <LinearLayout
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginStart="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        card_view:layout_constraintBottom_toBottomOf="parent"
-        card_view:layout_constraintEnd_toEndOf="parent"
-        card_view:layout_constraintStart_toStartOf="parent"
-        card_view:layout_constraintTop_toTopOf="parent"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp">
+    <!--  <LinearLayout
+          android:layout_marginTop="1dp"
+          android:layout_marginEnd="5dp"
+          android:layout_marginStart="5dp"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical"
+          card_view:layout_constraintBottom_toBottomOf="parent"
+          card_view:layout_constraintEnd_toEndOf="parent"
+          card_view:layout_constraintStart_toStartOf="parent"
+          card_view:layout_constraintTop_toTopOf="parent"
+          android:layout_marginRight="5dp"
+          android:layout_marginLeft="5dp">
 
-        <androidx.cardview.widget.CardView
+          <androidx.cardview.widget.CardView
 
-            android:id="@+id/cardView"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            card_view:cardBackgroundColor="@color/white"
-            card_view:cardCornerRadius="2dp"
-            card_view:cardElevation="10dp"
-            card_view:cardMaxElevation="10dp"
-            card_view:contentPadding="2dp"
-            card_view:cardPreventCornerOverlap="true"
-            card_view:strokeColor="@color/purple_700"
-            card_view:strokeWidth="1dp">
-
-
-            <RelativeLayout
-                android:id="@+id/relativeLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <com.facebook.drawee.view.SimpleDraweeView
-
-                    android:scaleType="fitXY"
-                    fresco:fadeDuration="300"
-                    fresco:roundWithOverlayColor="@color/corner_color"
-                    fresco:roundingBorderWidth="2dp"
-                    fresco:roundingBorderColor="@color/border_color"
-                    android:id="@+id/imageView"
-                    android:layout_width="match_parent"
-                    android:layout_height="260dp"
-                    android:src="@color/purple_700"/>
+              android:id="@+id/cardView"
+              android:layout_width="match_parent"
+              android:layout_height="300dp"
+              card_view:cardBackgroundColor="@color/white"
+              card_view:cardCornerRadius="2dp"
+              card_view:cardElevation="10dp"
+              card_view:cardMaxElevation="10dp"
+              card_view:contentPadding="2dp"
+              card_view:cardPreventCornerOverlap="true"
+              card_view:strokeColor="@color/purple_700"
+              card_view:strokeWidth="1dp">
 
 
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/imageView"
-                    android:layout_alignParentBottom="true"
-                    android:background="@drawable/bg_homeslider"
-                    android:gravity="center"
-                    android:text="test"
-                    android:maxLines="2"
-                    android:paddingBottom="2dp"
-                    android:paddingLeft="2dp"
-                    android:paddingRight="2dp"
-                    android:textAllCaps="false"
-                    android:textColor="@android:color/white"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+              <RelativeLayout
+                  android:id="@+id/relativeLayout"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical">
+
+                  <com.facebook.drawee.view.SimpleDraweeView
+
+                      android:scaleType="fitXY"
+                      fresco:fadeDuration="300"
+                      fresco:roundWithOverlayColor="@color/corner_color"
+                      fresco:roundingBorderWidth="2dp"
+                      fresco:roundingBorderColor="@color/border_color"
+                      android:id="@+id/imageView"
+                      android:layout_width="match_parent"
+                      android:layout_height="260dp"
+                      android:src="@color/purple_700"/>
 
 
-            </RelativeLayout>
+                  <TextView
+                      android:id="@+id/textView"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_below="@+id/imageView"
+                      android:layout_alignParentBottom="true"
+                      android:background="@drawable/bg_homeslider"
+                      android:gravity="center"
+                      android:text="test"
+                      android:maxLines="2"
+                      android:paddingBottom="2dp"
+                      android:paddingLeft="2dp"
+                      android:paddingRight="2dp"
+                      android:textAllCaps="false"
+                      android:textColor="@android:color/white"
+                      android:textSize="14sp"
+                      android:textStyle="bold" />
 
-        </androidx.cardview.widget.CardView>
 
-    </LinearLayout>-->
+              </RelativeLayout>
+
+          </androidx.cardview.widget.CardView>
+
+      </LinearLayout>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

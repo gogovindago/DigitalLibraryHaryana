@@ -474,7 +474,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 Intent rvViewAll = new Intent(MainActivity.this, ViewAllDataActivity.class);
                 rvViewAll.putExtra("typeId", "1");
                 rvViewAll.putExtra("itemType", "Book");
-                rvViewAll.putExtra("titleOfPage", "All Digitals Libraries");
+                rvViewAll.putExtra("titleOfPage", "All Digital Libraries");
                 startActivity(rvViewAll);
             }
         });
@@ -545,7 +545,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 mDrawerLayout.closeDrawers();
                 Intent AllothersDlib = new Intent(MainActivity.this, ViewAllDataActivity.class);
                 AllothersDlib.putExtra("typeId", "1");
-                AllothersDlib.putExtra("titleOfPage", "All Digitals Libraries");
+                AllothersDlib.putExtra("titleOfPage", "All Digital Libraries");
                 startActivity(AllothersDlib);
                 break;
 

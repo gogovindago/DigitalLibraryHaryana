@@ -3,6 +3,8 @@ package dhe.digital.library.haryana.retrofitinterface;
 import dhe.digital.library.haryana.models.ForgotPasswordRequest;
 import dhe.digital.library.haryana.models.ForgotPasswordResponse;
 import dhe.digital.library.haryana.models.HomePageResponse;
+import dhe.digital.library.haryana.models.LibraryTypeAndCoutResponse;
+import dhe.digital.library.haryana.models.LibraryTypeByIdResponse;
 import dhe.digital.library.haryana.models.LoginRequest;
 import dhe.digital.library.haryana.models.LoginResponse;
 import dhe.digital.library.haryana.models.ProfileDataResponse;
@@ -29,6 +31,9 @@ public interface ApiInterface {
     //http://112.196.99.107:81/api/commonapi/GetAllHomeImages/1
     @GET("GetAllHomeImages/{typeId}")
     Call<ViewAllResponse> getAllDataAPi(@Path("typeId") String s);
+//https://localhost:44375/api/commonapi/GetLibrariesByTypeId/1
+    @GET("GetLibrariesByTypeId/{typeId}")
+    Call<LibraryTypeByIdResponse> getLibraryTypeByIdDataAPi(@Path("typeId") String s);
 
     //http://112.196.99.107:81/api/commonapi/GetProfile/9499486861
     @GET("GetProfile/{MobileNo}")
@@ -37,6 +42,10 @@ public interface ApiInterface {
 
     @GET("GetHomeImages")
     Call<HomePageResponse> getHomePageDataAPi();
+
+
+    @GET("GetAllLibrariesType")
+    Call<LibraryTypeAndCoutResponse> getAllLibraryTypeAPi();
 
 
     //http://112.196.99.107:81/DigitalLibrary/api/commonapi/UserLogin/7018401817/1234

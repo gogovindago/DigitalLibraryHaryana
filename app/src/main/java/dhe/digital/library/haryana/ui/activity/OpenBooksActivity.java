@@ -22,6 +22,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.appbar.AppBarLayout;
+
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -40,6 +42,7 @@ public class OpenBooksActivity extends AppCompatActivity implements View.OnClick
     private static ProgressBar webViewProgressBar, progressBar;
     private static ImageView back, forward, refresh, close;
     TextView toolbartitle;
+    AppBarLayout applay;
 
     private static String webViewUrl = "", PhoneNo, itemType, itemid;
 
@@ -68,6 +71,7 @@ public class OpenBooksActivity extends AppCompatActivity implements View.OnClick
         toolbartitle = (TextView) findViewById(R.id.toolbartitle);
         webViewProgressBar = (ProgressBar) findViewById(R.id.webViewProgressBar);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        applay =  findViewById(R.id.applay);
 
 
         try {
@@ -87,8 +91,10 @@ public class OpenBooksActivity extends AppCompatActivity implements View.OnClick
                 toolbartitle.setText(result);
 
                 if (typeId.equalsIgnoreCase("4")||typeId.equalsIgnoreCase("5")){
+                  //  applay.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                     itemType="video";
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
                 }else {
 
                     itemType="book";
