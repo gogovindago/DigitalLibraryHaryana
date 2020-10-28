@@ -599,6 +599,7 @@
                     android:paddingTop="0dp">
 
                     <RelativeLayout
+                        android:clickable="false"
                         android:id="@+id/uprofile"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"

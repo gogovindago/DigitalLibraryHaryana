@@ -436,21 +436,27 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             }
         });
 
+        if (skiplogin) {
+            uprofile.setClickable(false);
+            uprofile.setEnabled(false);
+            goyesno.setVisibility(View.GONE);
 
-//        if (skiplogin) {
-//            uprofile.setClickable(true);
-//            goyesno
-//
-//        } else {
-//
-//            uprofile.setClickable(true);
+        } else {
+            uprofile.setClickable(true);
+            uprofile.setEnabled(true);
+            goyesno.setVisibility(View.VISIBLE);
+        }
 
         uprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 mDrawerLayout.closeDrawers();
                 Intent notification = new Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(notification);
+
+
             }
         });
 
@@ -460,9 +466,11 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
         mainNotification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 mDrawerLayout.closeDrawers();
                 Intent notification = new Intent(MainActivity.this, NotificationsActivity.class);
                 startActivity(notification);
+
             }
         });
 
