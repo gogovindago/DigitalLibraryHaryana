@@ -56,11 +56,119 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
         binding.simpleSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
         // allItemsAdapter = new ViewAllItemsAdapter(this, arrayList, this, 6);
         /// binding.recyclerView.setAdapter(allItemsAdapter);
-      /*  binding.simpleSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+
+
+        skiplogin = CSPreferences.getBoolean(this, "skiplogin");
+        try {
+
+            Bundle extras = getIntent().getExtras();
+
+            if (extras != null) {
+
+
+                titleOfPage = extras.getString("titleOfPage");
+                typeId = extras.getString("typeId");
+                // webViewUrl = extras.getString("typeId");
+
+                binding.toolbar.tvToolbarTitle.setAllCaps(true);
+                binding.toolbar.tvToolbarTitle.setText(titleOfPage);
+
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+        if (typeId.equalsIgnoreCase("1")) {
+
+            binding.llstate.setVisibility(View.VISIBLE);
+
+            if (GlobalClass.isNetworkConnected(ViewAllDataActivity.this)) {
+
+                WebAPiCall webapiCall = new WebAPiCall();
+                webapiCall.GetAllLibraryTypesDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this);
+
+                //webapiCall.getLibraryTypeByIdDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this, userLibSelectedId);
+                // webapiCall.getAllDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView,  binding.simpleSwipeRefreshLayout,ViewAllDataActivity.this, typeId);
+
+            } else {
+
+                Toast.makeText(ViewAllDataActivity.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
+            }
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+        binding.simpleSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
 
             public void onRefresh() {
 
+        if (typeId.equalsIgnoreCase("1")) {
+
+            binding.llstate.setVisibility(View.VISIBLE);
+
+            if (spnLibCurrentPosition!=0) {
+
+                if (GlobalClass.isNetworkConnected(ViewAllDataActivity.this)) {
+
+                    WebAPiCall webapiCall = new WebAPiCall();
+                    webapiCall.getLibraryTypeByIdDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this, userLibSelectedId);
+
+                } else {
+
+                    Toast.makeText(ViewAllDataActivity.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
+                }
+
+            }else {
+
+
+                if (GlobalClass.isNetworkConnected(ViewAllDataActivity.this)) {
+
+                    WebAPiCall webapiCall = new WebAPiCall();
+                    webapiCall.GetAllLibraryTypesDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this);
+
+                    //webapiCall.getLibraryTypeByIdDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this, userLibSelectedId);
+                    // webapiCall.getAllDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView,  binding.simpleSwipeRefreshLayout,ViewAllDataActivity.this, typeId);
+
+                } else {
+
+                    Toast.makeText(ViewAllDataActivity.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
+                }
+            }
+
+
+        } else {
+
+            binding.llstate.setVisibility(View.GONE);
+            binding.recyclerView.setVisibility(View.VISIBLE);
+            if (GlobalClass.isNetworkConnected(ViewAllDataActivity.this)) {
+
+                WebAPiCall webapiCall = new WebAPiCall();
+
+                 webapiCall.getAllDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView,  binding.simpleSwipeRefreshLayout,ViewAllDataActivity.this, typeId);
+
+            } else {
+
+                Toast.makeText(ViewAllDataActivity.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
+            }
+        }
+
+/*
                 if (GlobalClass.isNetworkConnected(ViewAllDataActivity.this)) {
                     WebAPiCall webapiCall = new WebAPiCall();
                     webapiCall.getAllDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this, typeId);
@@ -71,8 +179,10 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
                 }
                 shuffle();
                 binding.simpleSwipeRefreshLayout.setRefreshing(false);
+                */
             }
-        });*/
+
+        });
 
         /**
          AutoFitGridLayoutManager that auto fits the cells by the column width defined.
@@ -154,20 +264,20 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
 
         if (typeId.equalsIgnoreCase("1")) {
 
-            binding.llstate.setVisibility(View.VISIBLE);
+           // binding.llstate.setVisibility(View.VISIBLE);
 
-            if (GlobalClass.isNetworkConnected(ViewAllDataActivity.this)) {
-
-                WebAPiCall webapiCall = new WebAPiCall();
-                webapiCall.GetAllLibraryTypesDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this);
-
-                //webapiCall.getLibraryTypeByIdDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this, userLibSelectedId);
-                // webapiCall.getAllDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView,  binding.simpleSwipeRefreshLayout,ViewAllDataActivity.this, typeId);
-
-            } else {
-
-                Toast.makeText(ViewAllDataActivity.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
-            }
+//            if (GlobalClass.isNetworkConnected(ViewAllDataActivity.this)) {
+//
+//                WebAPiCall webapiCall = new WebAPiCall();
+//                webapiCall.GetAllLibraryTypesDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this);
+//
+//                //webapiCall.getLibraryTypeByIdDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this, userLibSelectedId);
+//                // webapiCall.getAllDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView,  binding.simpleSwipeRefreshLayout,ViewAllDataActivity.this, typeId);
+//
+//            } else {
+//
+//                Toast.makeText(ViewAllDataActivity.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
+//            }
 
 
         } else {
