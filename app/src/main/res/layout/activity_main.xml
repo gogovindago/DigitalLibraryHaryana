@@ -307,7 +307,7 @@
                                     <View
                                         android:layout_width="match_parent"
                                         android:layout_height="2dp"
-                                        android:background="@color/purple_700">
+                                        android:background="@drawable/edit_text_borderdash">
 
                                     </View>
 
@@ -380,7 +380,7 @@
                                     <View
                                         android:layout_width="match_parent"
                                         android:layout_height="2dp"
-                                        android:background="@color/purple_700">
+                                        android:background="@drawable/edit_text_borderdash">
 
                                     </View>
                                 </LinearLayout>
@@ -452,7 +452,7 @@
                                     <View
                                         android:layout_width="match_parent"
                                         android:layout_height="2dp"
-                                        android:background="@color/purple_700">
+                                        android:background="@drawable/edit_text_borderdash">
 
                                     </View>
                                 </LinearLayout>
@@ -526,8 +526,7 @@
                                     <View
                                         android:layout_width="match_parent"
                                         android:layout_height="2dp"
-                                        android:background="@color/purple_700">
-
+                                        android:background="@drawable/edit_text_borderdash">
                                     </View>
                                 </LinearLayout>
 
