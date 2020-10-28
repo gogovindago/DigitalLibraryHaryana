@@ -447,7 +447,7 @@ public class WebAPiCall {
 
                     if (response.body().getResponse() == 200) {
 
-                        dailogsuccessWithActivity(context, activity, " Password has been Changed Successfully.", "New auto generated password has been sent on your Registered Mobile number .");
+                        dailogsuccessWithActivity(context, activity, " Password has been Changed and Sent Successfully.", "New auto generated password has been sent on your Registered Mobile number .");
 
 
                     } else {

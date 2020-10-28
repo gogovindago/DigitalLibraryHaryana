@@ -122,6 +122,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawableStart="@drawable/phone"
+                            android:digits="0123456789"
 
                             android:drawableLeft="@drawable/phone"
                             android:drawablePadding="16dp"
