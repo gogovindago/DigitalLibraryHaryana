@@ -2,12 +2,14 @@ package dhe.digital.library.haryana.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.ArrayList;
@@ -32,6 +34,7 @@ import dhe.digital.library.haryana.utility.GlobalClass;
 
 public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAdapter.ItemListener, GetAllData_interface, GetAllLibraryTypesData_interface, AdapterView.OnItemSelectedListener, GetLibTypeByIdData_interface, ViewLibByIdlItemsAdapter.ItemListener {
 
+    private static int firstVisibleInListview;
 
     ActivityViewalldataBinding binding;
     boolean skiplogin;
@@ -210,6 +213,13 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
     @Override
     public void onItemClick(ViewAllResponse.Datum item, int currposition) {
 
+
+
+
+
+
+
+
         if (skiplogin) {
             Intent welcomeintent = new Intent(this, WelcomeActivity.class);
             startActivity(welcomeintent);
@@ -301,8 +311,31 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
 
     }
 
+   /* public void onScrolled(RecyclerView recyclerView, int dx, int dy)
+    {
+        super.onScrolled(recyclerView, dx, dy);
+
+        int currentFirstVisible = yourLayoutManager.findFirstVisibleItemPosition();
+
+        if(currentFirstVisible > firstVisibleInListview)
+            Log.i("RecyclerView scrolled: ", "scroll up!");
+        else
+            Log.i("RecyclerView scrolled: ", "scroll down!");
+
+        firstVisibleInListview = currentFirstVisible;
+
+    }*/
+
     @Override
     public void initListeners() {
+
+
+        binding.gototop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.recyclerView.smoothScrollToPosition(0);
+            }
+        });
 
         binding.toolbar.back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -331,6 +364,8 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
 
         }
         binding.recyclerView.setLayoutManager(manager);
+        firstVisibleInListview = manager.findFirstVisibleItemPosition();
+
         allItemsAdapter = new ViewAllItemsAdapter(this, arrayList, this, typeId);
         binding.recyclerView.setAdapter(allItemsAdapter);
         allItemsAdapter.notifyDataSetChanged();
@@ -418,6 +453,8 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
 
         }
         binding.recyclerView.setLayoutManager(manager);
+        firstVisibleInListview = manager.findFirstVisibleItemPosition();
+
         viewLibByIdlItemsAdapter = new ViewLibByIdlItemsAdapter(this, libdataByIDlist, this, typeId);
         binding.recyclerView.setAdapter(viewLibByIdlItemsAdapter);
         viewLibByIdlItemsAdapter.notifyDataSetChanged();
