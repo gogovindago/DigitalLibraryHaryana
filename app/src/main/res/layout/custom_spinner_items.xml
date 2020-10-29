@@ -6,6 +6,8 @@
 
 
     <LinearLayout
+        android:padding="5dp"
+        android:layout_margin="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -16,18 +18,18 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_marginLeft="5dp"
             android:padding="5dp"
-            android:src="@mipmap/ic_launcher_round" /><!--Make sure image is present in Drawable folder-->
+            android:src="@drawable/ic_place" /><!--Make sure image is present in Drawable folder-->
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:padding="@dimen/cardview_compat_inset_shadow"
+            android:padding="5dp"
             android:text="Demo"
             android:textSize="18sp"
             android:textStyle="bold"

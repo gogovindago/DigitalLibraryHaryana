@@ -46,7 +46,7 @@ public class SpinnerLibraryTypeAdapter extends BaseAdapter {
         view = inflter.inflate(R.layout.custom_spinner_items, null);
         ImageView icon = (ImageView) view.findViewById(R.id.imageView);
         TextView names = (TextView) view.findViewById(R.id.textView);
-        icon.setImageResource(R.drawable.ic_college);
+        icon.setImageResource(R.drawable.ic_place);
         names.setText(allCollegeByDistrictID.get(i).getLibraryType());
         return view;
     }
