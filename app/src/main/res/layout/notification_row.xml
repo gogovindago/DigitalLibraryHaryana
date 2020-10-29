@@ -56,7 +56,7 @@
 
             <TextView
                 android:textColor="@android:color/white"
-                android:text="Hello students admission has satarted from 07-09-2020."
+                android:text="Hello students admission has satarted."
                 android:id="@+id/text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

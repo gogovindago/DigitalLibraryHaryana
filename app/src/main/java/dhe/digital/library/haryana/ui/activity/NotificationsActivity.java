@@ -31,7 +31,8 @@ public class NotificationsActivity extends BaseActivity implements RvNotificatio
 
         arrayList = new ArrayList();
         //arrayList.add(new DataModel("Plantation", R.drawable.notifications, "#4CAF50"));
-        arrayList.add(new DataModel("Admission", R.drawable.notifications, "#FF9800"));
+        arrayList.add(new DataModel("admission and counselling", R.drawable.notifications, "#FF9800"));
+        arrayList.add(new DataModel("admission", R.drawable.notifications, "#FF9800"));
 //        arrayList.add(new DataModel("Result Declare", R.drawable.notifications, "#F94336"));
 //        arrayList.add(new DataModel("New Events", R.drawable.notifications, "#4CAF50"));
 //        arrayList.add(new DataModel("Item 5", R.drawable.notifications, "#4CAF50"));
@@ -76,6 +77,8 @@ public class NotificationsActivity extends BaseActivity implements RvNotificatio
 
         // Toast.makeText(getApplicationContext(), item.text + " is clicked", Toast.LENGTH_SHORT).show();
         Intent captureplant = new Intent(this, NotificationDetailActivity.class);
+        captureplant.putExtra("titleOfPage", item.text);
+
         startActivity(captureplant);
     }
 

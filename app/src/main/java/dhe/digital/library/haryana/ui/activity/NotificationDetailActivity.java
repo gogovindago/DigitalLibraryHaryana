@@ -11,6 +11,9 @@ import dhe.digital.library.haryana.utility.BaseActivity;
 
 public class NotificationDetailActivity extends BaseActivity {
 ActivityNotificationDetailBinding binding;
+
+String titleOfPage,
+    detail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +23,29 @@ ActivityNotificationDetailBinding binding;
 
     @Override
     public void initData() {
+
+        try {
+
+            Bundle extras = getIntent().getExtras();
+
+            if (extras != null) {
+
+
+                titleOfPage = extras.getString("titleOfPage");
+                detail = extras.getString("detail");
+                // webViewUrl = extras.getString("typeId");
+
+                binding.toolbar.tvToolbarTitle.setAllCaps(true);
+                binding.toolbar.tvToolbarTitle.setText(titleOfPage);
+
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
         binding.toolbar.notifcation.setVisibility(View.GONE);
     }
 
