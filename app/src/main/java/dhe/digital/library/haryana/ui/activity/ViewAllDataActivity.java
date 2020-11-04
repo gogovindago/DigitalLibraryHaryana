@@ -107,10 +107,23 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
         } else if (typeId.equalsIgnoreCase("6")) {
             {
 
-                binding.llstate.setVisibility(View.VISIBLE);
+                binding.llstate.setVisibility(View.GONE);
             }
         } else {
+
             binding.llstate.setVisibility(View.GONE);
+            if (GlobalClass.isNetworkConnected(ViewAllDataActivity.this)) {
+
+                WebAPiCall webapiCall = new WebAPiCall();
+               // webapiCall.GetAllLibraryTypesDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this);
+
+               // webapiCall.getLibraryTypeByIdDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this, userLibSelectedId);
+                webapiCall.getAllDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView,  binding.simpleSwipeRefreshLayout,ViewAllDataActivity.this, typeId);
+
+            } else {
+
+                Toast.makeText(ViewAllDataActivity.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
+            }
 
         }
 
@@ -157,7 +170,7 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
                 } else if (typeId.equalsIgnoreCase("6")) {
 
 
-                        binding.llstate.setVisibility(View.VISIBLE);
+                        binding.llstate.setVisibility(View.GONE);
                         binding.recyclerView.setVisibility(View.VISIBLE);
                         if (GlobalClass.isNetworkConnected(ViewAllDataActivity.this)) {
 
@@ -171,7 +184,20 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
                         }
 
                 } else {
+
                     binding.llstate.setVisibility(View.GONE);
+                    if (GlobalClass.isNetworkConnected(ViewAllDataActivity.this)) {
+
+                        WebAPiCall webapiCall = new WebAPiCall();
+                        // webapiCall.GetAllLibraryTypesDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this);
+
+                        // webapiCall.getLibraryTypeByIdDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this, userLibSelectedId);
+                        webapiCall.getAllDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView,  binding.simpleSwipeRefreshLayout,ViewAllDataActivity.this, typeId);
+
+                    } else {
+
+                        Toast.makeText(ViewAllDataActivity.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
+                    }
 
                 }
 
@@ -290,7 +316,7 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
 
         } else if (typeId.equalsIgnoreCase("6")) {
 
-            binding.llstate.setVisibility(View.VISIBLE);
+            binding.llstate.setVisibility(View.GONE);
             binding.recyclerView.setVisibility(View.VISIBLE);
             if (GlobalClass.isNetworkConnected(ViewAllDataActivity.this)) {
 
