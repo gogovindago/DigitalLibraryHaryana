@@ -81,12 +81,12 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
     private static final String TAG = "MainActivity";
 
     private static DrawerLayout mDrawerLayout;
-    ImageView toggle, profile_image, goyesno;
+    ImageView toggle, profile_image, goyesno, imgsearch;
     ;
     ImageButton mainNotification;
     LinearLayout llmain;
     RelativeLayout uprofile;
-    TextView toolbartxt, uname, textView, txtrole, txtwelcome, rvViewAll, tebooksViewAll, JournalsViewAll, VideosViewAll, importantlinkViewAll, udaanlinkViewAll;
+    TextView toolbartxt, uname, textView, txtrole, txtwelcome, rvViewAll, tebooksViewAll, JournalsViewAll, VideosViewAll, importantlinkViewAll, udaanlinkViewAll, btnlogin;
     Toolbar toolbar;
     SwipeRefreshLayout mSwipeRefreshLayout;
 
@@ -139,6 +139,8 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
         mTextMessage = findViewById(R.id.message);
         goyesno = findViewById(R.id.goyesno);
         mainNotification = findViewById(R.id.notifcationmain);
+        btnlogin = findViewById(R.id.btnlogin);
+        imgsearch = findViewById(R.id.imgsearch);
 
         toggle = findViewById(R.id.toggle);
         toolbartxt = findViewById(R.id.toolbartxt);
@@ -186,11 +188,11 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             }
         });
 
-      //  mSwipeRefreshLayout.setRefreshing(true);
+        //  mSwipeRefreshLayout.setRefreshing(true);
 
         if (GlobalClass.isNetworkConnected(MainActivity.this)) {
             WebAPiCall webapiCall = new WebAPiCall();
-            webapiCall.getHomePageDataMethod(MainActivity.this, MainActivity.this, llmain,mSwipeRefreshLayout, this);
+            webapiCall.getHomePageDataMethod(MainActivity.this, MainActivity.this, llmain, mSwipeRefreshLayout, this);
 
         } else {
 
@@ -226,12 +228,17 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
         try {
             skiplogin = CSPreferences.getBoolean(this, "skiplogin");
             if (skiplogin) {
+
                 uprofile.setClickable(false);
                 goyesno.setVisibility(View.GONE);
+                btnlogin.setVisibility(View.VISIBLE);
+                mainNotification.setVisibility(View.INVISIBLE);
 
             } else {
                 uprofile.setClickable(true);
                 goyesno.setVisibility(View.VISIBLE);
+                btnlogin.setVisibility(View.INVISIBLE);
+                mainNotification.setVisibility(View.VISIBLE);
             }
 
             dataModelLeftList = new ArrayList<DataModelLeftNew>();
@@ -429,6 +436,29 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
 
     @Override
     public void initListeners() {
+
+
+        imgsearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent searchintent = new Intent(MainActivity.this, SearchActivity.class);
+                searchintent.putExtra("typeId", "2");
+                searchintent.putExtra("itemType", "Book");
+                searchintent.putExtra("titleOfPage", "Search ");
+                startActivity(searchintent);
+
+            }
+        });
+
+        btnlogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, WelcomeActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+
         toggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -827,8 +857,8 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             certificate.putExtra("typeId", "2");
             certificate.putExtra("bookurl", item.getBookIframeUrl());
             certificate.putExtra("title", item.getBookTitle());
-            certificate.putExtra("itemType","Book");
-            certificate.putExtra("itemid",item.getBookId());
+            certificate.putExtra("itemType", "Book");
+            certificate.putExtra("itemid", item.getBookId());
             startActivity(certificate);
 
         }
@@ -849,8 +879,8 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             certificate.putExtra("typeId", "4");
             certificate.putExtra("bookurl", item.getVideoIframeUrl());
             certificate.putExtra("title", item.getVideoTitle());
-            certificate.putExtra("itemType","Video");
-            certificate.putExtra("itemid",item.getVideoId());
+            certificate.putExtra("itemType", "Video");
+            certificate.putExtra("itemid", item.getVideoId());
             startActivity(certificate);
 
         }
@@ -870,8 +900,8 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             certificate.putExtra("typeId", "3");
             certificate.putExtra("bookurl", item.getBookIframeUrl());
             certificate.putExtra("title", item.getBookTitle());
-            certificate.putExtra("itemType","Book");
-            certificate.putExtra("itemid",item.getBookId());
+            certificate.putExtra("itemType", "Book");
+            certificate.putExtra("itemid", item.getBookId());
             startActivity(certificate);
 
         }
@@ -893,8 +923,8 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             certificate.putExtra("typeId", "1");
             certificate.putExtra("bookurl", item.getLibraryUrl());
             certificate.putExtra("title", item.getLibraryName());
-            certificate.putExtra("itemType","Book");
-            certificate.putExtra("itemid",item.getLibraryId());
+            certificate.putExtra("itemType", "Book");
+            certificate.putExtra("itemid", item.getLibraryId());
             startActivity(certificate);
 
         }
@@ -929,8 +959,8 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             certificate.putExtra("typeId", "5");
             certificate.putExtra("bookurl", item.getVideoIframeUrl());
             certificate.putExtra("title", item.getVideoTitle());
-            certificate.putExtra("itemType","Video");
-            certificate.putExtra("itemid",item.getVideoId());
+            certificate.putExtra("itemType", "Video");
+            certificate.putExtra("itemid", item.getVideoId());
             startActivity(certificate);
 
         }

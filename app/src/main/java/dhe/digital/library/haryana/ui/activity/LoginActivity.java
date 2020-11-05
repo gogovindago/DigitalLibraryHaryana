@@ -17,6 +17,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.credentials.Credential;
+import com.google.android.gms.auth.api.credentials.HintRequest;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,28 +27,24 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
+import java.util.regex.Pattern;
+
 import dhe.digital.library.haryana.R;
 import dhe.digital.library.haryana.allinterface.LoginData_interface;
 import dhe.digital.library.haryana.apicall.WebAPiCall;
 import dhe.digital.library.haryana.models.LoginRequest;
 import dhe.digital.library.haryana.models.LoginResponse;
-import dhe.digital.library.haryana.ui.welcome.WelcomeActivity;
 import dhe.digital.library.haryana.utility.BaseActivity;
 import dhe.digital.library.haryana.utility.CSPreferences;
 import dhe.digital.library.haryana.utility.GlobalClass;
 import dhe.digital.library.haryana.utility.MyLoaders;
-
-import com.google.android.gms.auth.api.credentials.Credential;
-import com.google.android.gms.auth.api.credentials.HintRequest;
-
-import java.util.regex.Pattern;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener, LoginData_interface, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     @TargetApi(Build.VERSION_CODES.O)
 
     GoogleApiClient mGoogleApiClient;
     private int RESOLVE_HINT = 2;
-    TextView login, createaccount, txtforget;
+    TextView login, createaccount, txtforget, btnskip;
     private TextInputEditText edtmobile;
     private TextInputEditText edtpass;
     Boolean firstTimelogin = true;
@@ -109,8 +107,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         txtforget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 Intent i = new Intent(LoginActivity.this, ForgetPasswordActivity.class);
-                   startActivity(i);
+                Intent i = new Intent(LoginActivity.this, ForgetPasswordActivity.class);
+                startActivity(i);
 
 
             }
@@ -153,11 +151,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     private void findViews() {
         login = (TextView) findViewById(R.id.button);
         txtforget = (TextView) findViewById(R.id.txtforget);
+        btnskip = (TextView) findViewById(R.id.btnskip);
         createaccount = (TextView) findViewById(R.id.button2);
         edtmobile = (TextInputEditText) findViewById(R.id.textInputEditText);
         edtpass = (TextInputEditText) findViewById(R.id.textInputEditText2);
         login.setOnClickListener(this);
     }
+
     private boolean isValidMobile(String phone) {
         if (!Pattern.matches("[a-zA-Z]+", phone)) {
             return phone.length() >= 10 && phone.length() < 11;
@@ -165,14 +165,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         }
         return false;
     }
+
     public boolean Check_Data(View view) {
 
         if (TextUtils.isEmpty(edtmobile.getText().toString().trim())) {
-                myLoaders.showSnackBar(view, "Please Enter Registered Mobile Number");
-                return false;
-            } else if (!isValidMobile(edtmobile.getText().toString().trim())) {
-                myLoaders.showSnackBar(view, "Please Enter 10 digits Registered Mobile Number");
-                return false;
+            myLoaders.showSnackBar(view, "Please Enter Registered Mobile Number");
+            return false;
+        } else if (!isValidMobile(edtmobile.getText().toString().trim())) {
+            myLoaders.showSnackBar(view, "Please Enter 10 digits Registered Mobile Number");
+            return false;
 
         } else if (TextUtils.isEmpty(edtpass.getText().toString().trim())) {
             myLoaders.showSnackBar(view, "Please Enter Password");
@@ -264,6 +265,42 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     @Override
     public void initListeners() {
+
+        btnskip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Intent intentsignup = new Intent(WelcomeActivity.this, SignupActivityold.class);
+
+                try {
+                    CSPreferences.putString(LoginActivity.this, "User_Name", "Digital Library Haryana");
+//                    CSPreferences.putString(WelcomeActivity.this, "Purpose", data2.getPurpose());
+//                    CSPreferences.putString(WelcomeActivity.this, "Status", data2.getStatus());
+//                    CSPreferences.putString(WelcomeActivity.this, "LibraryId", String.valueOf(data2.getLibraryId()));
+//                    CSPreferences.putString(WelcomeActivity.this, "otp", String.valueOf(data2.getOtp()));
+//                    CSPreferences.putString(WelcomeActivity.this, "PhoneNo", data2.getPhoneNo());
+//                    CSPreferences.putString(WelcomeActivity.this, "Email", data2.getEmail());
+//                    CSPreferences.putString(WelcomeActivity.this, "token", data2.getToken());
+                    //  CSPreferences.putBolean(WelcomeActivity.this, "firstTimelogin", firstTimelogin);
+                    CSPreferences.putBolean(LoginActivity.this, "skiplogin", true);
+
+
+//                    if (data2.getPic() == null) {
+//                        data2.setPic(imageurl);
+//                    }
+//
+//                    CSPreferences.putString(WelcomeActivity.this, "pic", data2.getPic());
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                intent.putExtra("skiplogin", "skiplogin");
+                CSPreferences.putBolean(LoginActivity.this, "skiplogin", true);
+                startActivity(intent);
+                finish();
+
+            }
+        });
 
 
     }

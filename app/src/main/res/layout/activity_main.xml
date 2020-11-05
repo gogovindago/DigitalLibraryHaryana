@@ -66,15 +66,15 @@
                                 android:layout_height="wrap_content"
                                 android:layout_centerInParent="true"
                                 android:layout_centerVertical="true"
-                                android:layout_marginStart="16dp"
-                                android:layout_marginLeft="16dp"
+                                android:layout_marginStart="1dp"
+                                android:layout_marginLeft="1dp"
                                 android:fontFamily="@font/roboto_bold"
                                 android:gravity="center"
                                 android:text="@string/home"
                                 android:textAllCaps="true"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                                 android:textColor="@android:color/white"
-                                android:textSize="20sp"
+                                android:textSize="16sp"
                                 android:textStyle="bold">
 
                             </TextView>
@@ -87,12 +87,24 @@
                                 android:layout_alignParentEnd="true"
                                 android:layout_alignParentRight="true"
                                 android:layout_centerInParent="true"
-                                android:layout_marginEnd="5dp"
-                                android:layout_marginRight="5dp"
                                 android:background="@android:color/transparent"
-                                android:padding="10dp"
+                                android:padding="1dp"
+                                android:layout_margin="8dp"
                                 android:src="@drawable/notifications_active"
                                 android:visibility="visible" />
+
+                            <androidx.appcompat.widget.AppCompatImageButton
+                                android:id="@+id/imgsearch"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_margin="8dp"
+                                android:layout_toLeftOf="@+id/btnlogin"
+                                android:background="@android:color/transparent"
+                                android:padding="1dp"
+                                android:src="@drawable/ic_baseline_search_24"
+                                android:visibility="visible"
+                                android:layout_toStartOf="@+id/btnlogin" />
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/value"
@@ -110,6 +122,20 @@
                                 android:text="0"
                                 android:textColor="@color/colorPrimary"
                                 android:visibility="gone" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/btnlogin"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:gravity="center|top"
+                                android:text="@string/login_signup"
+                                android:textAllCaps="false"
+                                android:layout_margin="8dp"
+                                android:textColor="@android:color/white"
+                                android:textSize="10sp"
+                                android:visibility="visible" />
 
                         </RelativeLayout>
 
@@ -252,22 +278,22 @@
 
                                         <TextView
 
-                                            android:layout_alignParentStart="true"
-                                            android:layout_toLeftOf="@+id/tebooksViewAll"
                                             android:id="@+id/txttrandings"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
+                                            android:layout_alignParentStart="true"
+                                            android:layout_alignParentLeft="true"
                                             android:layout_gravity="center"
                                             android:layout_marginStart="5dp"
                                             android:layout_marginLeft="5dp"
+                                            android:layout_toLeftOf="@+id/tebooksViewAll"
+                                            android:drawableEnd="@drawable/mainpage_arrow_forward_ios_24"
+                                            android:drawableRight="@drawable/mainpage_arrow_forward_ios_24"
                                             android:gravity="center|start"
                                             android:text="@string/trending_ebooks"
                                             android:textSize="20sp"
-                                            android:textStyle="bold"
-                                            android:drawableRight="@drawable/mainpage_arrow_forward_ios_24"
-                                            android:drawableEnd="@drawable/mainpage_arrow_forward_ios_24"
 
-                                            android:layout_alignParentLeft="true" />
+                                            android:textStyle="bold" />
 
                                         <TextView
 
@@ -325,18 +351,18 @@
 
                                         <TextView
 
-                                            android:layout_alignParentLeft="true"
-                                            android:layout_alignParentStart="true"
-                                            android:layout_toLeftOf="@+id/JournalsViewAll"
-                                            android:drawableRight="@drawable/mainpage_arrow_forward_ios_24"
-                                            android:drawableEnd="@drawable/mainpage_arrow_forward_ios_24"
-
                                             android:id="@+id/txtJournals"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
+                                            android:layout_alignParentStart="true"
+                                            android:layout_alignParentLeft="true"
+
                                             android:layout_gravity="center"
                                             android:layout_marginStart="5dp"
                                             android:layout_marginLeft="5dp"
+                                            android:layout_toLeftOf="@+id/JournalsViewAll"
+                                            android:drawableEnd="@drawable/mainpage_arrow_forward_ios_24"
+                                            android:drawableRight="@drawable/mainpage_arrow_forward_ios_24"
                                             android:gravity="center|start"
                                             android:text="@string/trending_journals"
                                             android:textSize="20sp"
@@ -396,19 +422,19 @@
                                         android:layout_marginTop="8dp">
 
                                         <TextView
-                                            android:layout_alignParentLeft="true"
-                                            android:layout_alignParentStart="true"
-                                            android:layout_toLeftOf="@+id/VideosViewAll"
-
-                                            android:drawableRight="@drawable/mainpage_arrow_forward_ios_24"
-                                            android:drawableEnd="@drawable/mainpage_arrow_forward_ios_24"
-
                                             android:id="@+id/txtVideos"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
+
+                                            android:layout_alignParentStart="true"
+                                            android:layout_alignParentLeft="true"
+
                                             android:layout_gravity="center"
                                             android:layout_marginStart="5dp"
                                             android:layout_marginLeft="5dp"
+                                            android:layout_toLeftOf="@+id/VideosViewAll"
+                                            android:drawableEnd="@drawable/mainpage_arrow_forward_ios_24"
+                                            android:drawableRight="@drawable/mainpage_arrow_forward_ios_24"
                                             android:gravity="center|start"
                                             android:text="@string/trending_videos"
                                             android:textSize="20sp"
@@ -470,23 +496,23 @@
 
                                         <TextView
 
-                                            android:layout_alignParentStart="true"
-                                            android:layout_toLeftOf="@+id/udaanlinkViewAll"
-
-                                            android:drawableRight="@drawable/mainpage_arrow_forward_ios_24"
-                                            android:drawableEnd="@drawable/mainpage_arrow_forward_ios_24"
                                             android:id="@+id/txtudaan"
                                             android:layout_width="match_parent"
+
                                             android:layout_height="wrap_content"
+                                            android:layout_alignParentStart="true"
+                                            android:layout_alignParentLeft="true"
                                             android:layout_gravity="center|start"
                                             android:layout_marginStart="5dp"
                                             android:layout_marginLeft="5dp"
+                                            android:layout_toStartOf="@+id/udaanlinkViewAll"
+                                            android:layout_toLeftOf="@+id/udaanlinkViewAll"
+                                            android:drawableEnd="@drawable/mainpage_arrow_forward_ios_24"
+                                            android:drawableRight="@drawable/mainpage_arrow_forward_ios_24"
                                             android:gravity="center|start"
                                             android:text="@string/Udaan_videos"
                                             android:textSize="18sp"
-                                            android:textStyle="bold"
-                                            android:layout_toStartOf="@+id/udaanlinkViewAll"
-                                            android:layout_alignParentLeft="true" />
+                                            android:textStyle="bold" />
 
                                         <TextView
 
@@ -526,8 +552,7 @@
                                     <View
                                         android:layout_width="match_parent"
                                         android:layout_height="2dp"
-                                        android:background="@drawable/edit_text_borderdash">
-                                    </View>
+                                        android:background="@drawable/edit_text_borderdash"></View>
                                 </LinearLayout>
 
                                 <LinearLayout
@@ -542,18 +567,18 @@
 
                                         <TextView
 
-                                            android:layout_alignParentLeft="true"
-                                            android:layout_alignParentStart="true"
-                                            android:layout_toLeftOf="@+id/importantlinkViewAll"
-                                            android:drawableRight="@drawable/mainpage_arrow_forward_ios_24"
-                                            android:drawableEnd="@drawable/mainpage_arrow_forward_ios_24"
-
                                             android:id="@+id/txtimportantlink"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
+                                            android:layout_alignParentStart="true"
+                                            android:layout_alignParentLeft="true"
+
                                             android:layout_gravity="center"
                                             android:layout_marginStart="5dp"
                                             android:layout_marginLeft="5dp"
+                                            android:layout_toLeftOf="@+id/importantlinkViewAll"
+                                            android:drawableEnd="@drawable/mainpage_arrow_forward_ios_24"
+                                            android:drawableRight="@drawable/mainpage_arrow_forward_ios_24"
                                             android:gravity="center|start"
                                             android:text="@string/importantlink"
                                             android:textSize="20sp"
