@@ -146,13 +146,13 @@ public class SearchActivity extends BaseActivity implements SearchAllItemsAdapte
             }
 
         }
- 
+
 
         binding.simpleSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
 
             public void onRefresh() {
-                hideKeybaord( binding.simpleSwipeRefreshLayout);
+                hideKeybaord(binding.simpleSwipeRefreshLayout);
 
                 if (typeId.equalsIgnoreCase("1")) {
 
@@ -285,8 +285,9 @@ public class SearchActivity extends BaseActivity implements SearchAllItemsAdapte
             public void onBeginningOfSpeech() {
                 //editText.setText("");
                 // binding.serachView.setQueryHint().setHint("Listening...");
-                //GlobalClass.showtost(SearchActivity.this, "Listening...");
-                binding.txtserach.setText("Listening...");
+                GlobalClass.showtost(SearchActivity.this, "Listening...");
+               // binding.txtserach.setHint("Listening...");
+                binding.txtserach.setEnabled(false);
             }
 
             @Override
@@ -301,6 +302,7 @@ public class SearchActivity extends BaseActivity implements SearchAllItemsAdapte
 
             @Override
             public void onEndOfSpeech() {
+                binding.txtserach.setEnabled(true);
 
             }
 
@@ -311,14 +313,19 @@ public class SearchActivity extends BaseActivity implements SearchAllItemsAdapte
 
             @Override
             public void onResults(Bundle bundle) {
+
+
+
                 binding.micButton.setImageResource(R.drawable.ic_mic_black_off);
                 ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                 /* editText.setText(data.get(0)); */
                 // binding.serachView.setQuery(data.get(0));
+                binding.txtserach.setEnabled(true);
                 GlobalClass.showtost(SearchActivity.this, data.get(0));
                 String searchData = data.get(0);
+
                 binding.txtserach.setText(searchData);
-hideKeybaord( binding.simpleSwipeRefreshLayout);
+                hideKeybaord(binding.simpleSwipeRefreshLayout);
                 if (GlobalClass.isNetworkConnected(SearchActivity.this)) {
 
                     WebAPiCall webapiCall = new WebAPiCall();
@@ -669,7 +676,7 @@ hideKeybaord( binding.simpleSwipeRefreshLayout);
         if (list.isEmpty()) {
             binding.txtmsg.setVisibility(View.VISIBLE);
 
-        }else {
+        } else {
             binding.txtmsg.setVisibility(View.GONE);
         }
 
@@ -687,7 +694,6 @@ hideKeybaord( binding.simpleSwipeRefreshLayout);
         searchallItemsAdapter = new SearchAllItemsAdapter(this, arrayList, this, typeId);
         binding.recyclerView.setAdapter(searchallItemsAdapter);
         searchallItemsAdapter.notifyDataSetChanged();
-
 
     }
 
