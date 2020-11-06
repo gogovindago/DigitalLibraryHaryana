@@ -70,7 +70,7 @@
             android:id="@+id/simpleSwipeRefreshLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -81,34 +81,79 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
+
                 <LinearLayout
                     android:id="@+id/llsearch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/edtbgwhite"
+                    android:layout_margin="2dp"
                     android:gravity="center|start"
                     android:orientation="horizontal">
 
+                    <com.google.android.material.textfield.TextInputLayout
 
-                    <androidx.appcompat.widget.SearchView
-                        android:id="@+id/serachView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="0.8"
+                        android:background="@drawable/edtbgwhite"
+                        android:elevation="8dp"
+                        app:boxStrokeWidth="2dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/txtserach"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:layout_marginBottom="8dp"
+                            android:background="@null"
+                            android:drawableStart="@drawable/editpencolor"
+                            android:drawableLeft="@drawable/editpencolor"
+                            android:gravity="center"
+                            android:hint="Type here to search..."
+                            android:imeOptions="actionSearch"
+                            android:maxLines="1"
+                            android:singleLine="true" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+                        android:id="@+id/cleartxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:layout_marginBottom="8dp"
-                        android:elevation="5dp"
-                        app:queryHint="Type here to search..." />
+                        android:padding="2dp"
+                        android:src="@drawable/ic_baseline_closecolor_24"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                    <androidx.appcompat.widget.AppCompatImageButton
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+                        android:id="@+id/btnsearch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="2dp"
+                        android:src="@drawable/ic_baseline_search_24"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
                         android:id="@+id/micButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
+                        android:layout_marginEnd="1dp"
+                        android:layout_marginRight="8dp"
+                        android:background="@android:color/transparent"
+                        android:padding="2dp"
                         android:src="@drawable/ic_mic_black_24dp"
                         android:visibility="visible"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+
 
                 </LinearLayout>
 
@@ -136,6 +181,20 @@
                     app:backgroundTint="@color/purple_700">
 
                 </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:visibility="gone"
+                    android:id="@+id/txtmsg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:drawableTop="@mipmap/ic_launcher"
+                    android:drawablePadding="8dp"
+                    android:gravity="center"
+                    android:lineSpacingExtra="2dp"
+                    android:text="Sorry,\n Nothing to Show in Your Database,\n Such type of things."
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/purple_700" />
             </RelativeLayout>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

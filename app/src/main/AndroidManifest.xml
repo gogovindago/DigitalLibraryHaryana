@@ -89,6 +89,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/DigitalLibraryHaryana" />
         <activity android:name=".ui.activity.SearchActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
             android:screenOrientation="portrait"
             android:theme="@style/DigitalLibraryHaryana"/>
     </application>

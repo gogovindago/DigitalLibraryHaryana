@@ -102,7 +102,7 @@
                                 android:layout_toLeftOf="@+id/btnlogin"
                                 android:background="@android:color/transparent"
                                 android:padding="1dp"
-                                android:src="@drawable/ic_baseline_search_24"
+                                android:src="@drawable/ic_baseline_searchwhite_24"
                                 android:visibility="visible"
                                 android:layout_toStartOf="@+id/btnlogin" />
 

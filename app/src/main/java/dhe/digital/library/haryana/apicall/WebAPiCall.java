@@ -21,6 +21,7 @@ import dhe.digital.library.haryana.allinterface.GetbannersData_interface;
 import dhe.digital.library.haryana.allinterface.LoginData_interface;
 import dhe.digital.library.haryana.allinterface.OtpVerifyData_interface;
 import dhe.digital.library.haryana.allinterface.ProfileData_interface;
+import dhe.digital.library.haryana.allinterface.SearchingData_interface;
 import dhe.digital.library.haryana.allinterface.SignupData_interface;
 import dhe.digital.library.haryana.models.ForgotPasswordRequest;
 import dhe.digital.library.haryana.models.ForgotPasswordResponse;
@@ -32,6 +33,7 @@ import dhe.digital.library.haryana.models.LoginResponse;
 import dhe.digital.library.haryana.models.ProfileDataResponse;
 import dhe.digital.library.haryana.models.ReadViewsCountRequest;
 import dhe.digital.library.haryana.models.ReadViewsCountResponse;
+import dhe.digital.library.haryana.models.SearchResponse;
 import dhe.digital.library.haryana.models.SignupRequest;
 import dhe.digital.library.haryana.models.SignupResponse;
 import dhe.digital.library.haryana.models.VerifyOtpRequest;
@@ -169,14 +171,14 @@ public class WebAPiCall {
 
     public void getHomePageDataMethod(final Activity activity, final Context context, LinearLayout llmain, SwipeRefreshLayout mSwipeRefreshLayout, final GetbannersData_interface getbannersData_interface) {
 
-       // loadershowwithMsg(context, "Loading...");
+        // loadershowwithMsg(context, "Loading...");
         mSwipeRefreshLayout.setRefreshing(true);
 
         Call<HomePageResponse> responseCall = ApiClient.getClient().getHomePageDataAPi();
         responseCall.enqueue(new Callback<HomePageResponse>() {
             @Override
             public void onResponse(Call<HomePageResponse> call, Response<HomePageResponse> response) {
-               // dailoghide(context);
+                // dailoghide(context);
                 if (response.isSuccessful()) {
 
                     if (response.body().getResponse() == 200) {
@@ -207,7 +209,7 @@ public class WebAPiCall {
             @Override
             public void onFailure(Call<HomePageResponse> call, Throwable t) {
                 mSwipeRefreshLayout.setRefreshing(false);
-               // dailoghide(context);
+                // dailoghide(context);
                 t.printStackTrace();
 
                 Log.d("dddddd", "onFailure: " + t.getMessage());
@@ -218,14 +220,14 @@ public class WebAPiCall {
 
     public void GetAllLibraryTypesDataMethod(final Activity activity, final Context context, RecyclerView llmain, SwipeRefreshLayout mSwipeRefreshLayout, final GetAllLibraryTypesData_interface getAllLibraryTypesData_interface) {
 
-       // loadershowwithMsg(context, "Loading...");
+        // loadershowwithMsg(context, "Loading...");
         mSwipeRefreshLayout.setRefreshing(true);
 
         Call<LibraryTypeAndCoutResponse> responseCall = ApiClient.getClient().getAllLibraryTypeAPi();
         responseCall.enqueue(new Callback<LibraryTypeAndCoutResponse>() {
             @Override
             public void onResponse(Call<LibraryTypeAndCoutResponse> call, Response<LibraryTypeAndCoutResponse> response) {
-               // dailoghide(context);
+                // dailoghide(context);
                 if (response.isSuccessful()) {
 
                     if (response.body().getResponse() == 200) {
@@ -250,7 +252,7 @@ public class WebAPiCall {
             @Override
             public void onFailure(Call<LibraryTypeAndCoutResponse> call, Throwable t) {
                 mSwipeRefreshLayout.setRefreshing(false);
-               // dailoghide(context);
+                // dailoghide(context);
                 t.printStackTrace();
 
                 Log.d("dddddd", "onFailure: " + t.getMessage());
@@ -259,16 +261,16 @@ public class WebAPiCall {
     }
 
 
-    public void getAllDataMethod(final Activity activity, final Context context, RecyclerView llmain,SwipeRefreshLayout mSwipeRefreshLayout, final GetAllData_interface getAllData_interface, String typeId) {
+    public void getAllDataMethod(final Activity activity, final Context context, RecyclerView llmain, SwipeRefreshLayout mSwipeRefreshLayout, final GetAllData_interface getAllData_interface, String typeId) {
 
-       // loadershowwithMsg(context, "Loading...");
+        // loadershowwithMsg(context, "Loading...");
         mSwipeRefreshLayout.setRefreshing(true);
 
         Call<ViewAllResponse> responseCall = ApiClient.getClient().getAllDataAPi(typeId);
         responseCall.enqueue(new Callback<ViewAllResponse>() {
             @Override
             public void onResponse(Call<ViewAllResponse> call, Response<ViewAllResponse> response) {
-               // dailoghide(context);
+                // dailoghide(context);
                 mSwipeRefreshLayout.setRefreshing(false);
 
                 if (response.isSuccessful()) {
@@ -293,23 +295,24 @@ public class WebAPiCall {
             public void onFailure(Call<ViewAllResponse> call, Throwable t) {
                 mSwipeRefreshLayout.setRefreshing(false);
 
-               // dailoghide(context);
+                // dailoghide(context);
                 t.printStackTrace();
 
                 Log.d("dddddd", "onFailure: " + t.getMessage());
             }
         });
     }
+
     public void getLibraryTypeByIdDataMethod(final Activity activity, final Context context, RecyclerView llmain, SwipeRefreshLayout mSwipeRefreshLayout, final GetLibTypeByIdData_interface getLibTypeByIdData_interface, String typeId) {
 
-       // loadershowwithMsg(context, "Loading...");
+        // loadershowwithMsg(context, "Loading...");
         mSwipeRefreshLayout.setRefreshing(true);
 
         Call<LibraryTypeByIdResponse> responseCall = ApiClient.getClient().getLibraryTypeByIdDataAPi(typeId);
         responseCall.enqueue(new Callback<LibraryTypeByIdResponse>() {
             @Override
             public void onResponse(Call<LibraryTypeByIdResponse> call, Response<LibraryTypeByIdResponse> response) {
-               // dailoghide(context);
+                // dailoghide(context);
                 mSwipeRefreshLayout.setRefreshing(false);
 
                 if (response.isSuccessful()) {
@@ -334,7 +337,7 @@ public class WebAPiCall {
             public void onFailure(Call<LibraryTypeByIdResponse> call, Throwable t) {
                 mSwipeRefreshLayout.setRefreshing(false);
 
-               // dailoghide(context);
+                // dailoghide(context);
                 t.printStackTrace();
 
                 Log.d("dddddd", "onFailure: " + t.getMessage());
@@ -374,6 +377,47 @@ public class WebAPiCall {
             public void onFailure(Call<ProfileDataResponse> call, Throwable t) {
 
                 dailoghide(context);
+                t.printStackTrace();
+
+                Log.d("dddddd", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+
+    public void SearchDataMethod(final Activity activity, final Context context, SwipeRefreshLayout swipeRefreshLayout, RecyclerView layout, final SearchingData_interface searchingData_interface, String searchingData) {
+
+        // loadershowwithMsg(context, "Searching...");
+        swipeRefreshLayout.setRefreshing(true);
+
+        Call<SearchResponse> responseCall = ApiClient.getClient().getsearchingDataAPi(searchingData);
+        responseCall.enqueue(new Callback<SearchResponse>() {
+            @Override
+            public void onResponse(Call<SearchResponse> call, Response<SearchResponse> response) {
+                //dailoghide(context);
+                swipeRefreshLayout.setRefreshing(false);
+                if (response.isSuccessful()) {
+
+                    if (response.body().getResponse() == 200) {
+                        layout.setVisibility(View.VISIBLE);
+
+                        searchingData_interface.userSearchingdata(response.body().getData());
+
+
+                    } else {
+
+                    }
+
+
+                } else {
+                    GlobalClass.showtost(context, "" + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SearchResponse> call, Throwable t) {
+                swipeRefreshLayout.setRefreshing(false);
+                // dailoghide(context);
                 t.printStackTrace();
 
                 Log.d("dddddd", "onFailure: " + t.getMessage());
@@ -473,27 +517,26 @@ public class WebAPiCall {
     }
 
 
-
     public void readCountDataMethod(final Activity activity, final Context context, ReadViewsCountRequest request) {
 
-       // loadershowwithMsg(context, "We are Sending auto generated password on your Registered Mobile number.");
+        // loadershowwithMsg(context, "We are Sending auto generated password on your Registered Mobile number.");
 
         // Call<LoginResponse> userpost_responseCall = ApiClient.getClient().LoginUser(PhoneNo, Password, FcmToken);
         Call<ReadViewsCountResponse> userpost_responseCall = ApiClient.getClient().ReadCountIncreaseData(request);
         userpost_responseCall.enqueue(new Callback<ReadViewsCountResponse>() {
             @Override
             public void onResponse(Call<ReadViewsCountResponse> call, Response<ReadViewsCountResponse> response) {
-             //   dailoghide(context);
+                //   dailoghide(context);
                 if (response.isSuccessful()) {
 
 
                     if (response.body().getResponse() == 200) {
 
-                      //  dailogsuccessWithActivity(context, activity, " Password has been Changed Successfully.", "New auto generated password has been sent on your Registered Mobile number .");
+                        //  dailogsuccessWithActivity(context, activity, " Password has been Changed Successfully.", "New auto generated password has been sent on your Registered Mobile number .");
 
 
                     } else {
-                       // dailogError(context, "Mobile Number Not Found!", "The Mobile Number You have entered is not Regitered with Us.");
+                        // dailogError(context, "Mobile Number Not Found!", "The Mobile Number You have entered is not Regitered with Us.");
                     }
 
 
@@ -506,7 +549,7 @@ public class WebAPiCall {
             @Override
             public void onFailure(Call<ReadViewsCountResponse> call, Throwable t) {
 
-              //  dailoghide(context);
+                //  dailoghide(context);
                 t.printStackTrace();
 
                 Log.d("dddddd", "onFailure: " + t.getMessage());
@@ -571,7 +614,7 @@ public class WebAPiCall {
 
                     if (response.body().getResponse() == 200) {
 
-                         dailogsuccess(context, "OTP Sent.", "Please check your Mobile. OTP is  valid for 10 minutes.");
+                        dailogsuccess(context, "OTP Sent.", "Please check your Mobile. OTP is  valid for 10 minutes.");
                         data_interface.alluserdata((SignupResponse.Data) response.body().getData());
 
                     } else if (response.body().getResponse() == 303) {

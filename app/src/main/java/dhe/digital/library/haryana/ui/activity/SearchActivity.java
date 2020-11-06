@@ -2,6 +2,7 @@ package dhe.digital.library.haryana.ui.activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -9,11 +10,16 @@ import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,23 +35,25 @@ import java.util.List;
 import java.util.Locale;
 
 import dhe.digital.library.haryana.R;
+import dhe.digital.library.haryana.adapter.SearchAllItemsAdapter;
 import dhe.digital.library.haryana.adapter.SpinnerLibraryTypeAdapter;
-import dhe.digital.library.haryana.adapter.ViewAllItemsAdapter;
 import dhe.digital.library.haryana.adapter.ViewLibByIdlItemsAdapter;
 import dhe.digital.library.haryana.allinterface.GetAllData_interface;
 import dhe.digital.library.haryana.allinterface.GetAllLibraryTypesData_interface;
 import dhe.digital.library.haryana.allinterface.GetLibTypeByIdData_interface;
+import dhe.digital.library.haryana.allinterface.SearchingData_interface;
 import dhe.digital.library.haryana.apicall.WebAPiCall;
 import dhe.digital.library.haryana.databinding.ActivitySearchBinding;
 import dhe.digital.library.haryana.models.LibraryTypeAndCoutResponse;
 import dhe.digital.library.haryana.models.LibraryTypeByIdResponse;
+import dhe.digital.library.haryana.models.SearchResponse;
 import dhe.digital.library.haryana.models.ViewAllResponse;
 import dhe.digital.library.haryana.ui.welcome.WelcomeActivity;
 import dhe.digital.library.haryana.utility.BaseActivity;
 import dhe.digital.library.haryana.utility.CSPreferences;
 import dhe.digital.library.haryana.utility.GlobalClass;
 
-public class SearchActivity extends BaseActivity implements ViewAllItemsAdapter.ItemListener, GetAllData_interface, GetAllLibraryTypesData_interface, AdapterView.OnItemSelectedListener, GetLibTypeByIdData_interface, ViewLibByIdlItemsAdapter.ItemListener {
+public class SearchActivity extends BaseActivity implements SearchAllItemsAdapter.ItemListener, GetAllData_interface, GetAllLibraryTypesData_interface, AdapterView.OnItemSelectedListener, GetLibTypeByIdData_interface, ViewLibByIdlItemsAdapter.ItemListener, SearchingData_interface {
 
 
     public static final Integer RecordAudioRequestCode = 1;
@@ -54,10 +62,10 @@ public class SearchActivity extends BaseActivity implements ViewAllItemsAdapter.
     GridLayoutManager manager;
     ActivitySearchBinding binding;
     boolean skiplogin;
-    private List<ViewAllResponse.Datum> arrayList = new ArrayList<ViewAllResponse.Datum>();
+    private List<SearchResponse.Datum> arrayList = new ArrayList<SearchResponse.Datum>();
     private List<LibraryTypeAndCoutResponse.Datum> librarydataArrayList = new ArrayList<LibraryTypeAndCoutResponse.Datum>();
     private List<LibraryTypeByIdResponse.Datum> libdataByIDlist = new ArrayList<LibraryTypeByIdResponse.Datum>();
-    ViewAllItemsAdapter allItemsAdapter;
+    SearchAllItemsAdapter searchallItemsAdapter;
     ViewLibByIdlItemsAdapter viewLibByIdlItemsAdapter;
     String typeId, titleOfPage,
             userLibSelectedId;
@@ -84,6 +92,7 @@ public class SearchActivity extends BaseActivity implements ViewAllItemsAdapter.
 
                 titleOfPage = extras.getString("titleOfPage");
                 typeId = extras.getString("typeId");
+                typeId = "2";
                 // webViewUrl = extras.getString("typeId");
 
                 binding.toolbar.tvToolbarTitle.setAllCaps(true);
@@ -129,7 +138,7 @@ public class SearchActivity extends BaseActivity implements ViewAllItemsAdapter.
                 // webapiCall.GetAllLibraryTypesDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this);
 
                 // webapiCall.getLibraryTypeByIdDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this, userLibSelectedId);
-                webapiCall.getAllDataMethod(SearchActivity.this, SearchActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, SearchActivity.this, typeId);
+                // webapiCall.SearchDataMethod(SearchActivity.this, SearchActivity.this, binding.simpleSwipeRefreshLayout, binding.recyclerView, SearchActivity.this, "Rohtak");
 
             } else {
 
@@ -137,12 +146,13 @@ public class SearchActivity extends BaseActivity implements ViewAllItemsAdapter.
             }
 
         }
-
+ 
 
         binding.simpleSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
 
             public void onRefresh() {
+                hideKeybaord( binding.simpleSwipeRefreshLayout);
 
                 if (typeId.equalsIgnoreCase("1")) {
 
@@ -203,7 +213,18 @@ public class SearchActivity extends BaseActivity implements ViewAllItemsAdapter.
                         // webapiCall.GetAllLibraryTypesDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this);
 
                         // webapiCall.getLibraryTypeByIdDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this, userLibSelectedId);
-                        webapiCall.getAllDataMethod(SearchActivity.this, SearchActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, SearchActivity.this, typeId);
+
+                        //  webapiCall.getAllDataMethod(SearchActivity.this, SearchActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, SearchActivity.this, typeId);
+
+                        if (binding.txtserach.getText().toString().trim().isEmpty()) {
+                            binding.simpleSwipeRefreshLayout.setRefreshing(false);
+                            GlobalClass.dailogError(SearchActivity.this, "Missing search Data", "Nothing to search, use Mic or type for search anything.");
+
+                        } else {
+                            webapiCall.SearchDataMethod(SearchActivity.this, SearchActivity.this, binding.simpleSwipeRefreshLayout, binding.recyclerView, SearchActivity.this, binding.txtserach.getText().toString().trim());
+
+                        }
+
 
                     } else {
 
@@ -263,8 +284,9 @@ public class SearchActivity extends BaseActivity implements ViewAllItemsAdapter.
             @Override
             public void onBeginningOfSpeech() {
                 //editText.setText("");
-               // binding.serachView.setQueryHint().setHint("Listening...");
-                GlobalClass.showtost(SearchActivity.this,"Listening...");
+                // binding.serachView.setQueryHint().setHint("Listening...");
+                //GlobalClass.showtost(SearchActivity.this, "Listening...");
+                binding.txtserach.setText("Listening...");
             }
 
             @Override
@@ -292,8 +314,26 @@ public class SearchActivity extends BaseActivity implements ViewAllItemsAdapter.
                 binding.micButton.setImageResource(R.drawable.ic_mic_black_off);
                 ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                 /* editText.setText(data.get(0)); */
-               // binding.serachView.setQuery(data.get(0));
-                GlobalClass.showtost(SearchActivity.this,data.get(0));
+                // binding.serachView.setQuery(data.get(0));
+                GlobalClass.showtost(SearchActivity.this, data.get(0));
+                String searchData = data.get(0);
+                binding.txtserach.setText(searchData);
+hideKeybaord( binding.simpleSwipeRefreshLayout);
+                if (GlobalClass.isNetworkConnected(SearchActivity.this)) {
+
+                    WebAPiCall webapiCall = new WebAPiCall();
+                    // webapiCall.GetAllLibraryTypesDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this);
+
+                    // webapiCall.getLibraryTypeByIdDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this, userLibSelectedId);
+                    //  webapiCall.getAllDataMethod(SearchActivity.this, SearchActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, SearchActivity.this, typeId);
+                    webapiCall.SearchDataMethod(SearchActivity.this, SearchActivity.this, binding.simpleSwipeRefreshLayout, binding.recyclerView, SearchActivity.this, searchData);
+
+
+                } else {
+
+                    Toast.makeText(SearchActivity.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
+                }
+
             }
 
             @Override
@@ -307,6 +347,7 @@ public class SearchActivity extends BaseActivity implements ViewAllItemsAdapter.
             }
         });
 
+
         binding.micButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -314,15 +355,60 @@ public class SearchActivity extends BaseActivity implements ViewAllItemsAdapter.
                     speechRecognizer.stopListening();
                 }
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                   binding.micButton.setImageResource(R.drawable.ic_mic_black_24dp);
+                    binding.micButton.setImageResource(R.drawable.ic_mic_black_24dp);
                     speechRecognizer.startListening(speechRecognizerIntent);
                 }
                 return false;
             }
         });
 
+
+        binding.txtserach.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                if (i2 > 0) {
+                    binding.cleartxt.setVisibility(View.VISIBLE);
+                    binding.btnsearch.setVisibility(View.VISIBLE);
+
+                } else {
+                    binding.cleartxt.setVisibility(View.GONE);
+                    binding.btnsearch.setVisibility(View.GONE);
+
+
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                if (binding.txtserach.getText().toString().trim().length() > 0) {
+                    binding.cleartxt.setVisibility(View.VISIBLE);
+                    binding.btnsearch.setVisibility(View.VISIBLE);
+
+
+                } else {
+
+                    binding.cleartxt.setVisibility(View.GONE);
+                    binding.btnsearch.setVisibility(View.GONE);
+                }
+
+
+            }
+        });
+
     }
 
+    private void hideKeybaord(View v) {
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
+    }
 
     @Override
     protected void onDestroy() {
@@ -347,14 +433,14 @@ public class SearchActivity extends BaseActivity implements ViewAllItemsAdapter.
 
     public void shuffle() {
         arrayList.clear();
-        allItemsAdapter.notifyDataSetChanged();
+        searchallItemsAdapter.notifyDataSetChanged();
 
         //  renewItems();
 
     }
 
     @Override
-    public void onItemClick(ViewAllResponse.Datum item, int currposition) {
+    public void onItemClick(SearchResponse.Datum item, int currposition) {
 
 
         if (skiplogin) {
@@ -369,7 +455,7 @@ public class SearchActivity extends BaseActivity implements ViewAllItemsAdapter.
                 Intent certificate = new Intent(this, OpenBooksActivity.class);
                 certificate.putExtra("bookurl", item.getUrl());
                 certificate.putExtra("title", item.getDescription());
-                certificate.putExtra("typeId", typeId);
+                certificate.putExtra("typeId", item.getType());
                 certificate.putExtra("itemid", item.getId());
                 startActivity(certificate);
             } else {
@@ -487,8 +573,73 @@ public class SearchActivity extends BaseActivity implements ViewAllItemsAdapter.
 
     }
 
+    private void performSearch() {
+        binding.txtserach.clearFocus();
+        InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(binding.txtserach.getWindowToken(), 0);
+        if (GlobalClass.isNetworkConnected(SearchActivity.this)) {
+
+            WebAPiCall webapiCall = new WebAPiCall();
+            // webapiCall.GetAllLibraryTypesDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this);
+
+            // webapiCall.getLibraryTypeByIdDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this, userLibSelectedId);
+            //  webapiCall.getAllDataMethod(SearchActivity.this, SearchActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, SearchActivity.this, typeId);
+            webapiCall.SearchDataMethod(SearchActivity.this, SearchActivity.this, binding.simpleSwipeRefreshLayout, binding.recyclerView, SearchActivity.this, binding.txtserach.getText().toString().trim());
+
+
+        } else {
+
+            Toast.makeText(SearchActivity.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
+        }
+    }
+
     @Override
     public void initListeners() {
+
+        binding.txtserach.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    performSearch();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
+        binding.cleartxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                hideKeybaord(view);
+                binding.txtserach.setText("");
+
+            }
+        });
+
+        binding.btnsearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hideKeybaord(view);
+
+                if (GlobalClass.isNetworkConnected(SearchActivity.this)) {
+
+                    WebAPiCall webapiCall = new WebAPiCall();
+                    // webapiCall.GetAllLibraryTypesDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this);
+
+                    // webapiCall.getLibraryTypeByIdDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this, userLibSelectedId);
+                    //  webapiCall.getAllDataMethod(SearchActivity.this, SearchActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, SearchActivity.this, typeId);
+                    webapiCall.SearchDataMethod(SearchActivity.this, SearchActivity.this, binding.simpleSwipeRefreshLayout, binding.recyclerView, SearchActivity.this, binding.txtserach.getText().toString().trim());
+
+
+                } else {
+
+                    Toast.makeText(SearchActivity.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
 
 
         binding.gototop.setOnClickListener(new View.OnClickListener() {
@@ -511,10 +662,16 @@ public class SearchActivity extends BaseActivity implements ViewAllItemsAdapter.
     }
 
     @Override
-    public void GetAllData(List<ViewAllResponse.Datum> list) {
+    public void userSearchingdata(List<SearchResponse.Datum> list) {
 
         arrayList.clear();
         arrayList.addAll(list);
+        if (list.isEmpty()) {
+            binding.txtmsg.setVisibility(View.VISIBLE);
+
+        }else {
+            binding.txtmsg.setVisibility(View.GONE);
+        }
 
         if (typeId.equalsIgnoreCase("6")) {
             manager = new GridLayoutManager(this, 1, GridLayoutManager.VERTICAL, false);
@@ -527,9 +684,9 @@ public class SearchActivity extends BaseActivity implements ViewAllItemsAdapter.
         binding.recyclerView.setLayoutManager(manager);
         firstVisibleInListview = manager.findFirstVisibleItemPosition();
 
-        allItemsAdapter = new ViewAllItemsAdapter(this, arrayList, this, typeId);
-        binding.recyclerView.setAdapter(allItemsAdapter);
-        allItemsAdapter.notifyDataSetChanged();
+        searchallItemsAdapter = new SearchAllItemsAdapter(this, arrayList, this, typeId);
+        binding.recyclerView.setAdapter(searchallItemsAdapter);
+        searchallItemsAdapter.notifyDataSetChanged();
 
 
     }
@@ -649,4 +806,11 @@ public class SearchActivity extends BaseActivity implements ViewAllItemsAdapter.
         }
 
     }
+
+    @Override
+    public void GetAllData(List<ViewAllResponse.Datum> list) {
+
+    }
+
+
 }

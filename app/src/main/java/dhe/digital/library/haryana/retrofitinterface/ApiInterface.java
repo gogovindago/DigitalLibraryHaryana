@@ -10,6 +10,7 @@ import dhe.digital.library.haryana.models.LoginResponse;
 import dhe.digital.library.haryana.models.ProfileDataResponse;
 import dhe.digital.library.haryana.models.ReadViewsCountRequest;
 import dhe.digital.library.haryana.models.ReadViewsCountResponse;
+import dhe.digital.library.haryana.models.SearchResponse;
 import dhe.digital.library.haryana.models.SignupRequest;
 import dhe.digital.library.haryana.models.SignupResponse;
 import dhe.digital.library.haryana.models.VerifyOtpRequest;
@@ -31,13 +32,18 @@ public interface ApiInterface {
     //http://112.196.99.107:81/api/commonapi/GetAllHomeImages/1
     @GET("GetAllHomeImages/{typeId}")
     Call<ViewAllResponse> getAllDataAPi(@Path("typeId") String s);
-//https://localhost:44375/api/commonapi/GetLibrariesByTypeId/1
+
+    //https://localhost:44375/api/commonapi/GetLibrariesByTypeId/1
     @GET("GetLibrariesByTypeId/{typeId}")
     Call<LibraryTypeByIdResponse> getLibraryTypeByIdDataAPi(@Path("typeId") String s);
 
     //http://112.196.99.107:81/api/commonapi/GetProfile/9499486861
     @GET("GetProfile/{MobileNo}")
     Call<ProfileDataResponse> getProfileDataAPi(@Path("MobileNo") String s);
+
+  //http://112.196.99.107:81/api/commonapi/SearchData/mri
+    @GET("SearchData/{searchingData}")
+    Call<SearchResponse> getsearchingDataAPi(@Path("searchingData") String s);
 
 
     @GET("GetHomeImages")
