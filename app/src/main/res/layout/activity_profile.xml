@@ -60,20 +60,25 @@
             </RelativeLayout>
 
             <TextView
+
                 android:id="@+id/txtAccountCreatedat"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
+                android:drawableStart="@drawable/back"
+                android:drawableLeft="@drawable/back"
                 android:gravity="start"
                 android:text=""
                 android:textColor="@color/white"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/materialCardView"
                 app:layout_constraintEnd_toStartOf="@+id/constraintLayout"
+                app:layout_constraintHorizontal_bias="0.91"
                 app:layout_constraintStart_toEndOf="@+id/constraintLayout"
                 app:layout_constraintTop_toTopOf="@+id/constraintLayout"
                 app:layout_constraintVertical_bias="0.0">

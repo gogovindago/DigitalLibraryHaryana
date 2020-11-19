@@ -329,11 +329,17 @@ public class SearchActivity extends BaseActivity implements SearchAllItemsAdapte
                 if (GlobalClass.isNetworkConnected(SearchActivity.this)) {
 
                     WebAPiCall webapiCall = new WebAPiCall();
-                    // webapiCall.GetAllLibraryTypesDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this);
 
-                    // webapiCall.getLibraryTypeByIdDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this, userLibSelectedId);
-                    //  webapiCall.getAllDataMethod(SearchActivity.this, SearchActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, SearchActivity.this, typeId);
+
                     webapiCall.SearchDataMethod(SearchActivity.this, SearchActivity.this, binding.simpleSwipeRefreshLayout, binding.recyclerView, SearchActivity.this, searchData);
+
+
+//                            Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
+//                           // String term = editText.getText().toString();
+//                            intent.putExtra(SearchManager.QUERY, searchData);
+//                            startActivity(intent);
+
+
 
 
                 } else {

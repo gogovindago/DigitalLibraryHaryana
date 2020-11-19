@@ -82,7 +82,6 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
 
     private static DrawerLayout mDrawerLayout;
     ImageView toggle, profile_image, goyesno, imgsearch;
-    ;
     ImageButton mainNotification;
     LinearLayout llmain;
     RelativeLayout uprofile;
@@ -255,6 +254,20 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
 
             DataModelLeftNew Videos = new DataModelLeftNew(R.drawable.ic_baseline_video_library_24, "Videos", 3);
             dataModelLeftList.add(Videos);
+//Competitive Exam
+//People's Collection
+
+            DataModelLeftNew DivyaangCorner = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, "Divyaang Corner", 31);
+            dataModelLeftList.add(DivyaangCorner);
+
+            DataModelLeftNew Competitive = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, "Competitive Exam", 32);
+            dataModelLeftList.add(Competitive);
+
+            DataModelLeftNew PeopleCollection = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, "People's Collection", 33);
+            dataModelLeftList.add(PeopleCollection);
+
+            DataModelLeftNew UdaanUrl = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, "Udaan Mental Health Counseling", 30);
+            dataModelLeftList.add(UdaanUrl);
 
             DataModelLeftNew OurOthersApps = new DataModelLeftNew(R.drawable.ic_baseline_apps_24, "Our Others Apps", 4);
             dataModelLeftList.add(OurOthersApps);
@@ -556,7 +569,8 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 Intent rvViewAll = new Intent(MainActivity.this, ViewAllDataActivity.class);
                 rvViewAll.putExtra("typeId", "5");
                 rvViewAll.putExtra("itemType", "Video");
-                rvViewAll.putExtra("titleOfPage", "Udaan Career counseling");
+                // rvViewAll.putExtra("titleOfPage", "Udaan Career counseling");
+                rvViewAll.putExtra("titleOfPage", "Udaan Mental Health Counseling");
                 startActivity(rvViewAll);
             }
         });
@@ -611,7 +625,33 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 startActivity(AllVideos);
                 break;
 
+            case 30:
+                mDrawerLayout.closeDrawers();
+
+                /*  String result = extras.getString("title");
+                webViewUrl = extras.getString("bookurl");
+*/
+                Intent touchbase = new Intent(MainActivity.this, OpenBooksActivity.class);
+                touchbase.putExtra("title", "Udaan Mental Health Counseling");
+                touchbase.putExtra("bookurl", "https://touchbase.live/");
+                startActivity(touchbase);
+                break;
+
+
+            case 31:
+                mDrawerLayout.closeDrawers();
+
+                /*  String result = extras.getString("title");
+                webViewUrl = extras.getString("bookurl");
+*/
+                Intent DivyaangCorner = new Intent(MainActivity.this, OpenBooksActivity.class);
+                DivyaangCorner.putExtra("title", "Divyaang Corner");
+                DivyaangCorner.putExtra("bookurl", "https://touchbase.live/");
+                startActivity(DivyaangCorner);
+                break;
+
             case 4:
+
                 mDrawerLayout.closeDrawers();
 
                 /*  String result = extras.getString("title");

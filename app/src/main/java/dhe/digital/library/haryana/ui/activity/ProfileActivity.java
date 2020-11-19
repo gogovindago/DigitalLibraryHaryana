@@ -4,9 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
 import androidx.databinding.DataBindingUtil;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import java.util.List;
+
 import dhe.digital.library.haryana.R;
 import dhe.digital.library.haryana.allinterface.ProfileData_interface;
 import dhe.digital.library.haryana.apicall.WebAPiCall;
@@ -26,6 +29,7 @@ public class ProfileActivity extends BaseActivity implements ProfileData_interfa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_profile);
+
         binding.simpleSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
 
@@ -75,6 +79,14 @@ public class ProfileActivity extends BaseActivity implements ProfileData_interfa
     public void initListeners() {
 
 
+        binding.txtAccountCreatedat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                finish();
+
+            }
+        });
         binding.btnLms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
