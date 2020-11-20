@@ -17,5 +17,6 @@
 
     <string name="already_existing_account_sign_in"><u> ALREADY EXISTING ACCOUNT ! SIGN IN </u></string>
     <string name="login_signup"><u> Login \n/\n Signup </u></string>
+    <string name="about"><u> About </u></string>
 
 </resources>

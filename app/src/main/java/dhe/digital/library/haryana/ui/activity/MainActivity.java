@@ -257,7 +257,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
 //Competitive Exam
 //People's Collection
 
-            DataModelLeftNew DivyaangCorner = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, "Divyaang Corner", 31);
+            DataModelLeftNew DivyaangCorner = new DataModelLeftNew(R.mipmap.divyandcorner, "Divyaang Corner", 31);
             dataModelLeftList.add(DivyaangCorner);
 
             DataModelLeftNew Competitive = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, "Competitive Exam", 32);
@@ -269,15 +269,6 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             DataModelLeftNew UdaanUrl = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, "Udaan Mental Health Counseling", 30);
             dataModelLeftList.add(UdaanUrl);
 
-            DataModelLeftNew OurOthersApps = new DataModelLeftNew(R.drawable.ic_baseline_apps_24, "Our Others Apps", 4);
-            dataModelLeftList.add(OurOthersApps);
-
-            DataModelLeftNew RateApp = new DataModelLeftNew(R.drawable.rate_review, "Rate App", 5);
-            dataModelLeftList.add(RateApp);
-
-            DataModelLeftNew ShareApp = new DataModelLeftNew(R.drawable.share, "Share App", 6);
-            dataModelLeftList.add(ShareApp);
-
             if (skiplogin) {
 
 
@@ -287,6 +278,16 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 dataModelLeftList.add(Notification);
 
             }
+
+            DataModelLeftNew OurOthersApps = new DataModelLeftNew(R.drawable.ic_baseline_apps_24, "Our Others Apps", 4);
+            dataModelLeftList.add(OurOthersApps);
+
+            DataModelLeftNew RateApp = new DataModelLeftNew(R.drawable.rate_review, "Rate App", 5);
+            dataModelLeftList.add(RateApp);
+
+            DataModelLeftNew ShareApp = new DataModelLeftNew(R.drawable.share, "Share App", 6);
+            dataModelLeftList.add(ShareApp);
+
 
             if (skiplogin) {
 
@@ -644,10 +645,22 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 /*  String result = extras.getString("title");
                 webViewUrl = extras.getString("bookurl");
 */
-                Intent DivyaangCorner = new Intent(MainActivity.this, OpenBooksActivity.class);
+                Intent DivyaangCorner = new Intent(MainActivity.this, DivyaangActivity.class);
                 DivyaangCorner.putExtra("title", "Divyaang Corner");
                 DivyaangCorner.putExtra("bookurl", "https://touchbase.live/");
                 startActivity(DivyaangCorner);
+                break;
+
+            case 32:
+                mDrawerLayout.closeDrawers();
+
+                /*  String result = extras.getString("title");
+                webViewUrl = extras.getString("bookurl");
+*/
+                Intent CompetitiveExam = new Intent(MainActivity.this, CompetitiveExamActivity.class);
+                CompetitiveExam.putExtra("typeId", "8");
+                CompetitiveExam.putExtra("titleOfPage", "Competitive Exam");
+                startActivity(CompetitiveExam);
                 break;
 
             case 4:

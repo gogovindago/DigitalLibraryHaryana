@@ -26,12 +26,13 @@
     <string name="trending_ebooks"><font color='black'> Trending </font> eBooks</string>
     <string name="trending_journals"><font color='black'> Trending </font> Journals</string>
     <string name="trending_videos"><font color='black'> Trending </font> Videos</string>
-<!--
+    <!--
     <string name="Udaan_videos"><font color='black'> Trending </font> Udaan Career counseling</string>
 -->
     <string name="Udaan_videos"><font color='black'> Trending </font> Udaan Mental Health  Counseling</string>
     <string name="importantlink"><font color='black'> Important Links </font></string>
     <string name="already_existing_account_sign_in"><u> ALREADY EXISTING ACCOUNT ! SIGN IN </u></string>
     <string name="login_signup"><u> Login \n/\n Signup </u></string>
+    <string name="about"> About </string>
 
 </resources>

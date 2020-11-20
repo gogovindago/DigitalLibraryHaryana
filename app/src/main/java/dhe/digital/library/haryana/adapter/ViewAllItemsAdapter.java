@@ -75,7 +75,7 @@ public class ViewAllItemsAdapter extends RecyclerView.Adapter<ViewAllItemsAdapte
     public ViewAllItemsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
 
-        if (imptypeId.equalsIgnoreCase("6")) {
+        if (imptypeId.equalsIgnoreCase("6")||imptypeId.equalsIgnoreCase("8")) {
             view = LayoutInflater.from(mContext).inflate(R.layout.list_view_link_item_row, parent, false);
 
         } else {

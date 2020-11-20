@@ -99,5 +99,9 @@ public class NotificationsActivity extends BaseActivity implements RvNotificatio
             }
         });
 
+
+
+
+
     }
 }

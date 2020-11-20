@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imageView"
                 android:layout_alignParentBottom="true"
-                android:background="@drawable/bg_homeslider"
+                android:background="@drawable/bg_bottomboder"
                 android:gravity="center"
                 android:maxLines="1"
                 android:padding="8dp"
