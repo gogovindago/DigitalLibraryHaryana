@@ -41,6 +41,7 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
     ActivityViewalldataBinding binding;
     boolean skiplogin;
     private List<ViewAllResponse.Datum> arrayList = new ArrayList<ViewAllResponse.Datum>();
+
     private List<LibraryTypeAndCoutResponse.Datum> librarydataArrayList = new ArrayList<LibraryTypeAndCoutResponse.Datum>();
 
     private List<LibraryTypeByIdResponse.Datum> libdataByIDlist = new ArrayList<LibraryTypeByIdResponse.Datum>();
@@ -63,27 +64,27 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
         /// binding.recyclerView.setAdapter(allItemsAdapter);
 
 
-        skiplogin = CSPreferences.getBoolean(this, "skiplogin");
-        try {
+            skiplogin = CSPreferences.getBoolean(this, "skiplogin");
+            try {
 
-            Bundle extras = getIntent().getExtras();
+                Bundle extras = getIntent().getExtras();
 
-            if (extras != null) {
-
-
-                titleOfPage = extras.getString("titleOfPage");
-                typeId = extras.getString("typeId");
-                // webViewUrl = extras.getString("typeId");
-
-                binding.toolbar.tvToolbarTitle.setAllCaps(true);
-                binding.toolbar.tvToolbarTitle.setText(titleOfPage);
+                if (extras != null) {
 
 
+                    titleOfPage = extras.getString("titleOfPage");
+                    typeId = extras.getString("typeId");
+                    // webViewUrl = extras.getString("typeId");
+
+                    binding.toolbar.tvToolbarTitle.setAllCaps(true);
+                    binding.toolbar.tvToolbarTitle.setText(titleOfPage);
+
+
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
 
         if (typeId.equalsIgnoreCase("1")) {

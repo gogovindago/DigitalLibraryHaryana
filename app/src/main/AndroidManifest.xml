@@ -20,12 +20,18 @@
         android:theme="@style/Theme.DigitalLibraryHaryana"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".ui.activity.DivyaangActivity"
+        <activity android:name=".ui.activity.PeopleCornerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/DigitalLibraryHaryana"
-            >
-
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden"
+            ></activity>
+        <activity
+            android:name=".ui.activity.HearingSpeechActivity"
+            android:theme="@style/DigitalLibraryHaryana"></activity>
+        <activity
+            android:name=".ui.activity.DivyaangActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DigitalLibraryHaryana" />
 
         <service
             android:name=".fcm.MyFirebaseMessagingService"
@@ -65,9 +71,7 @@
             android:name=".ui.activity.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/DigitalLibraryHaryana"
-            android:windowSoftInputMode="stateAlwaysHidden">
-
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".ui.activity.NotificationsActivity"
             android:screenOrientation="portrait"
@@ -99,9 +103,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/DigitalLibraryHaryana"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".ui.activity.CompetitiveExamActivity"
+        <activity
+            android:name=".ui.activity.CompetitiveExamActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/DigitalLibraryHaryana"/>
+            android:theme="@style/DigitalLibraryHaryana" />
     </application>
 
 </manifest>

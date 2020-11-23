@@ -90,7 +90,7 @@ public class OpenBooksActivity extends AppCompatActivity implements View.OnClick
                 toolbartitle.setAllCaps(true);
                 toolbartitle.setText(result);
 
-                if (typeId.equalsIgnoreCase("4")||typeId.equalsIgnoreCase("5")){
+                if (typeId.equalsIgnoreCase("4")||typeId.equalsIgnoreCase("5")||typeId.equalsIgnoreCase("9")){
                   //  applay.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                     itemType="video";
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);

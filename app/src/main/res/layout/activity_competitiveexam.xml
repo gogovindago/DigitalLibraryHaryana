@@ -69,7 +69,7 @@
                 android:layout_toLeftOf="@+id/tebooksViewAll"
                 android:gravity="center|start"
                 android:padding="5dp"
-                android:text="Competitive Exam Corner is established to help UPSC aspirants to provide them online study material at one place. Where they can find Magazines, current affairs,NCERT books ,GK material etc."
+                android:text="The competitive exam corner has been formulated to help the UPSC postulants and equip them with proficient study material. Our aim is to provide them with Magazines, Current Affairs, NCERT books and GK material all in one place. Our aim is to create a platform that motivates students and engulfs excitement."
                 android:textSize="15sp"
                 android:textStyle="normal" />
 
@@ -120,7 +120,8 @@
                 android:layout_toLeftOf="@+id/tebooksViewAll"
                 android:gravity="center|start"
                 android:padding="5dp"
-                android:text="Our mission is to provide online study material to UPSC,SSC aspirants on single platform, so that the migration rate of Haryana decreases to minimum ."
+                android:text="Our mission is to compile study material on a singular online podium for UPSC and SSC aspirants in order to limit immigration of students from Haryana.
+"
                 android:textSize="15sp"
                 android:textStyle="normal" />
 
@@ -171,7 +172,8 @@
                 android:layout_toLeftOf="@+id/tebooksViewAll"
                 android:gravity="center|start"
                 android:padding="5dp"
-                android:text="Competitive Exam Corner is formed with the sole aim of offering quality education online for UPSC,SSC aspirants."
+                android:text="The formulation of the competitive exam corner can be owed to the aim of providing quality education and superior training to UPSC and SSC aspirants.
+. "
                 android:textSize="15sp"
                 android:textStyle="normal" />
 

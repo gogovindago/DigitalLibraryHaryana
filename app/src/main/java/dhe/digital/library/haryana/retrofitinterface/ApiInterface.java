@@ -2,6 +2,7 @@ package dhe.digital.library.haryana.retrofitinterface;
 
 import dhe.digital.library.haryana.models.ForgotPasswordRequest;
 import dhe.digital.library.haryana.models.ForgotPasswordResponse;
+import dhe.digital.library.haryana.models.HearingSpeechimpairedDataResponse;
 import dhe.digital.library.haryana.models.HomePageResponse;
 import dhe.digital.library.haryana.models.LibraryTypeAndCoutResponse;
 import dhe.digital.library.haryana.models.LibraryTypeByIdResponse;
@@ -52,6 +53,10 @@ public interface ApiInterface {
 
     @GET("GetAllLibrariesType")
     Call<LibraryTypeAndCoutResponse> getAllLibraryTypeAPi();
+
+//http://112.196.99.107:81/api/commonapi/GetHearingSpeechimpairedData
+    @GET("GetHearingSpeechimpairedData")
+    Call<HearingSpeechimpairedDataResponse> getAllGetHearingSpeechimpairedDataAPi();
 
 
     //http://112.196.99.107:81/DigitalLibrary/api/commonapi/UserLogin/7018401817/1234

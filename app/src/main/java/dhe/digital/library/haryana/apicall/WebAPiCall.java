@@ -15,6 +15,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import dhe.digital.library.haryana.allinterface.GetAllData_interface;
+import dhe.digital.library.haryana.allinterface.GetAllHearingSpeechData_interface;
 import dhe.digital.library.haryana.allinterface.GetAllLibraryTypesData_interface;
 import dhe.digital.library.haryana.allinterface.GetLibTypeByIdData_interface;
 import dhe.digital.library.haryana.allinterface.GetbannersData_interface;
@@ -25,6 +26,7 @@ import dhe.digital.library.haryana.allinterface.SearchingData_interface;
 import dhe.digital.library.haryana.allinterface.SignupData_interface;
 import dhe.digital.library.haryana.models.ForgotPasswordRequest;
 import dhe.digital.library.haryana.models.ForgotPasswordResponse;
+import dhe.digital.library.haryana.models.HearingSpeechimpairedDataResponse;
 import dhe.digital.library.haryana.models.HomePageResponse;
 import dhe.digital.library.haryana.models.LibraryTypeAndCoutResponse;
 import dhe.digital.library.haryana.models.LibraryTypeByIdResponse;
@@ -251,6 +253,49 @@ public class WebAPiCall {
 
             @Override
             public void onFailure(Call<LibraryTypeAndCoutResponse> call, Throwable t) {
+                mSwipeRefreshLayout.setRefreshing(false);
+                // dailoghide(context);
+                t.printStackTrace();
+
+                Log.d("dddddd", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+
+    public void GetAllHearingSpeechDataMethod(final Activity activity, final Context context, RecyclerView llmain, SwipeRefreshLayout mSwipeRefreshLayout, final GetAllHearingSpeechData_interface getAllHearingSpeechData_interface) {
+
+        // loadershowwithMsg(context, "Loading...");
+        mSwipeRefreshLayout.setRefreshing(true);
+
+        Call<HearingSpeechimpairedDataResponse> responseCall = ApiClient.getClient().getAllGetHearingSpeechimpairedDataAPi();
+        responseCall.enqueue(new Callback<HearingSpeechimpairedDataResponse>() {
+            @Override
+            public void onResponse(Call<HearingSpeechimpairedDataResponse> call, Response<HearingSpeechimpairedDataResponse> response) {
+                // dailoghide(context);
+                if (response.isSuccessful()) {
+
+                    if (response.body().getResponse() == 200) {
+
+                        mSwipeRefreshLayout.setRefreshing(false);
+
+                        llmain.setVisibility(View.VISIBLE);
+
+                        getAllHearingSpeechData_interface.GetHearingSpeechData(response.body().getData());
+
+
+                    } else {
+
+                    }
+
+
+                } else {
+                    GlobalClass.showtost(context, "" + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<HearingSpeechimpairedDataResponse> call, Throwable t) {
                 mSwipeRefreshLayout.setRefreshing(false);
                 // dailoghide(context);
                 t.printStackTrace();

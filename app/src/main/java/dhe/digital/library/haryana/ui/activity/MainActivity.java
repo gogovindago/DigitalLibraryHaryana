@@ -263,8 +263,17 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             DataModelLeftNew Competitive = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, "Competitive Exam", 32);
             dataModelLeftList.add(Competitive);
 
-            DataModelLeftNew PeopleCollection = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, "People's Collection", 33);
-            dataModelLeftList.add(PeopleCollection);
+
+            if (skiplogin) {
+
+
+            } else {
+
+                DataModelLeftNew PeopleCollection = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, "People's Collection", 33);
+                dataModelLeftList.add(PeopleCollection);
+
+            }
+
 
             DataModelLeftNew UdaanUrl = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, "Udaan Mental Health Counseling", 30);
             dataModelLeftList.add(UdaanUrl);
@@ -646,8 +655,11 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 webViewUrl = extras.getString("bookurl");
 */
                 Intent DivyaangCorner = new Intent(MainActivity.this, DivyaangActivity.class);
-                DivyaangCorner.putExtra("title", "Divyaang Corner");
+                DivyaangCorner.putExtra("titleOfPage", "Divyaang Corner");
+                DivyaangCorner.putExtra("typeId", "9");
+
                 DivyaangCorner.putExtra("bookurl", "https://touchbase.live/");
+
                 startActivity(DivyaangCorner);
                 break;
 
@@ -661,6 +673,18 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 CompetitiveExam.putExtra("typeId", "8");
                 CompetitiveExam.putExtra("titleOfPage", "Competitive Exam");
                 startActivity(CompetitiveExam);
+                break;
+
+            case 33:
+                mDrawerLayout.closeDrawers();
+
+                /*  String result = extras.getString("title");
+                webViewUrl = extras.getString("bookurl");
+*/
+                Intent PeopleCorner = new Intent(MainActivity.this, PeopleCornerActivity.class);
+                PeopleCorner.putExtra("typeId", "10");
+                PeopleCorner.putExtra("titleOfPage", "People Corner");
+                startActivity(PeopleCorner);
                 break;
 
             case 4:
