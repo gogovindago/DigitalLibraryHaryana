@@ -269,8 +269,8 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
 
             } else {
 
-                DataModelLeftNew PeopleCollection = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, "People's Collection", 33);
-                dataModelLeftList.add(PeopleCollection);
+//                DataModelLeftNew PeopleCollection = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, "People's Collection", 33);
+//                dataModelLeftList.add(PeopleCollection);
 
             }
 
@@ -681,11 +681,14 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 /*  String result = extras.getString("title");
                 webViewUrl = extras.getString("bookurl");
 */
-                Intent PeopleCorner = new Intent(MainActivity.this, PeopleCornerActivity.class);
+                GlobalClass.showtost(MainActivity.this,"Coming Soon...");
+                break;
+               /* Intent PeopleCorner = new Intent(MainActivity.this, PeopleCornerActivity.class);
                 PeopleCorner.putExtra("typeId", "10");
                 PeopleCorner.putExtra("titleOfPage", "People Corner");
                 startActivity(PeopleCorner);
                 break;
+*/
 
             case 4:
 

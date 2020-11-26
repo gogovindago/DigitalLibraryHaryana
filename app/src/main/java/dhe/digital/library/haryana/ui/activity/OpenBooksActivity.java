@@ -98,7 +98,7 @@ public class OpenBooksActivity extends AppCompatActivity implements View.OnClick
                 }else {
 
                     itemType="book";
-                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
                 }
 
