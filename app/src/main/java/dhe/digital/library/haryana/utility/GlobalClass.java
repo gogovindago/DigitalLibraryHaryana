@@ -78,6 +78,7 @@ public class GlobalClass {
     }*/
 
 
+
     // Show toast
     public static void showtost(Context context, String message) {
         Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();

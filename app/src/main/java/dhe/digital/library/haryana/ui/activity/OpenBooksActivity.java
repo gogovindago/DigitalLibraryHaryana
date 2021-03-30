@@ -24,27 +24,26 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.appbar.AppBarLayout;
 
-import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import dhe.digital.library.haryana.R;
 import dhe.digital.library.haryana.apicall.WebAPiCall;
-import dhe.digital.library.haryana.databinding.ActivityOpenbooksBinding;
-import dhe.digital.library.haryana.models.ForgotPasswordRequest;
 import dhe.digital.library.haryana.models.ReadViewsCountRequest;
 import dhe.digital.library.haryana.utility.CSPreferences;
 import dhe.digital.library.haryana.utility.GlobalClass;
 
 public class OpenBooksActivity extends AppCompatActivity implements View.OnClickListener {
-    ActivityOpenbooksBinding binding;
+
     private static WebView webView;
     private static ProgressBar webViewProgressBar, progressBar;
     private static ImageView back, forward, refresh, close;
     TextView toolbartitle;
     AppBarLayout applay;
 
-    private static String webViewUrl = "", PhoneNo, itemType, itemid;
+    private static String webViewUrl = "", PhoneNo, itemType, typeId;
+    int itemid;
+    Boolean readCountdata = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +61,7 @@ public class OpenBooksActivity extends AppCompatActivity implements View.OnClick
 
     }
 
+
     private void initViews() {
 
         back = (ImageView) findViewById(R.id.webviewBack);
@@ -71,7 +71,7 @@ public class OpenBooksActivity extends AppCompatActivity implements View.OnClick
         toolbartitle = (TextView) findViewById(R.id.toolbartitle);
         webViewProgressBar = (ProgressBar) findViewById(R.id.webViewProgressBar);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        applay =  findViewById(R.id.applay);
+      //  applay = findViewById(R.id.applay);
 
 
         try {
@@ -84,13 +84,15 @@ public class OpenBooksActivity extends AppCompatActivity implements View.OnClick
                 String result = extras.getString("title");
                 webViewUrl = extras.getString("bookurl");
                 itemType = extras.getString("itemType");
-                int itemid = extras.getInt("itemid");
-                String typeId = extras.getString("typeId");
+                itemid = extras.getInt("itemid");
+                typeId = extras.getString("typeId");
 
                 toolbartitle.setAllCaps(true);
                 toolbartitle.setText(result);
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            //    applay.setBackgroundColor(getResources().getColor(android.R.color.transparent));
 
-                if (typeId.equalsIgnoreCase("4")||typeId.equalsIgnoreCase("5")||typeId.equalsIgnoreCase("9")){
+              /*  if (typeId.equalsIgnoreCase("4")||typeId.equalsIgnoreCase("5")||typeId.equalsIgnoreCase("9")){
                   //  applay.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                     itemType="video";
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -100,28 +102,32 @@ public class OpenBooksActivity extends AppCompatActivity implements View.OnClick
                     itemType="book";
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-                }
+                }*/
 
 
-                if (!typeId.equalsIgnoreCase("6")) {
+               // if (typeId.equalsIgnoreCase("6")) {
 
                     if (GlobalClass.isNetworkConnected(OpenBooksActivity.this)) {
 
-                        ReadViewsCountRequest readViewsCountRequest = new ReadViewsCountRequest();
+                        if (readCountdata) {
 
-                        readViewsCountRequest.setBookid(String.valueOf(itemid));
-                        readViewsCountRequest.setPhone(PhoneNo);
-                        readViewsCountRequest.setType(itemType);
+                            ReadViewsCountRequest readViewsCountRequest = new ReadViewsCountRequest();
 
-                        WebAPiCall webapiCall = new WebAPiCall();
-                        webapiCall.readCountDataMethod(OpenBooksActivity.this, OpenBooksActivity.this, readViewsCountRequest);
+                            readViewsCountRequest.setBookid(String.valueOf(itemid));
+                            readViewsCountRequest.setPhone(PhoneNo);
+                            readViewsCountRequest.setType(itemType);
 
+                            WebAPiCall webapiCall = new WebAPiCall();
+                            webapiCall.readCountDataMethod(OpenBooksActivity.this, OpenBooksActivity.this, readViewsCountRequest);
+
+                            readCountdata = false;
+                        }
 
                     } else {
 
                         Toast.makeText(OpenBooksActivity.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
                     }
-                }
+               // }
 
 
             }
@@ -231,17 +237,23 @@ public class OpenBooksActivity extends AppCompatActivity implements View.OnClick
     // To handle "Back" key press event for WebView to go back to previous screen.
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
             isWebViewCanGoBack();
             return true;
         }
         return super.onKeyDown(keyCode, event);
+
+
+
     }
 
 
     private void isWebViewCanGoBack() {
         if (webView.canGoBack())
-            webView.goBack();
+            finish();
+          //  webView.goBack();
         else
             finish();
     }
@@ -286,5 +298,6 @@ public class OpenBooksActivity extends AppCompatActivity implements View.OnClick
             return false;
 
     }
+
 
 }

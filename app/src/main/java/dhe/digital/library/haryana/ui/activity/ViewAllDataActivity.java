@@ -48,7 +48,7 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
 
     ViewAllItemsAdapter allItemsAdapter;
     ViewLibByIdlItemsAdapter viewLibByIdlItemsAdapter;
-    String typeId, titleOfPage,
+    String typeId, itemType, titleOfPage,
             userLibSelectedId;
     int spnLibCurrentPosition;
     SpinnerLibraryTypeAdapter spinnerLibraryTypeAdapter;
@@ -64,27 +64,28 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
         /// binding.recyclerView.setAdapter(allItemsAdapter);
 
 
-            skiplogin = CSPreferences.getBoolean(this, "skiplogin");
-            try {
+        skiplogin = CSPreferences.getBoolean(this, "skiplogin");
+        try {
 
-                Bundle extras = getIntent().getExtras();
+            Bundle extras = getIntent().getExtras();
 
-                if (extras != null) {
-
-
-                    titleOfPage = extras.getString("titleOfPage");
-                    typeId = extras.getString("typeId");
-                    // webViewUrl = extras.getString("typeId");
-
-                    binding.toolbar.tvToolbarTitle.setAllCaps(true);
-                    binding.toolbar.tvToolbarTitle.setText(titleOfPage);
+            if (extras != null) {
 
 
-                }
+                titleOfPage = extras.getString("titleOfPage");
+                typeId = extras.getString("typeId");
+                itemType = extras.getString("itemType");
+                // webViewUrl = extras.getString("typeId");
 
-            } catch (Exception e) {
-                e.printStackTrace();
+                binding.toolbar.tvToolbarTitle.setAllCaps(true);
+                binding.toolbar.tvToolbarTitle.setText(titleOfPage);
+
+
             }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
         if (typeId.equalsIgnoreCase("1")) {
@@ -116,10 +117,10 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
             if (GlobalClass.isNetworkConnected(ViewAllDataActivity.this)) {
 
                 WebAPiCall webapiCall = new WebAPiCall();
-               // webapiCall.GetAllLibraryTypesDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this);
+                // webapiCall.GetAllLibraryTypesDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this);
 
-               // webapiCall.getLibraryTypeByIdDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this, userLibSelectedId);
-                webapiCall.getAllDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView,  binding.simpleSwipeRefreshLayout,ViewAllDataActivity.this, typeId);
+                // webapiCall.getLibraryTypeByIdDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this, userLibSelectedId);
+                webapiCall.getAllDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this, typeId);
 
             } else {
 
@@ -171,18 +172,18 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
                 } else if (typeId.equalsIgnoreCase("6")) {
 
 
-                        binding.llstate.setVisibility(View.GONE);
-                        binding.recyclerView.setVisibility(View.VISIBLE);
-                        if (GlobalClass.isNetworkConnected(ViewAllDataActivity.this)) {
+                    binding.llstate.setVisibility(View.GONE);
+                    binding.recyclerView.setVisibility(View.VISIBLE);
+                    if (GlobalClass.isNetworkConnected(ViewAllDataActivity.this)) {
 
-                            WebAPiCall webapiCall = new WebAPiCall();
+                        WebAPiCall webapiCall = new WebAPiCall();
 
-                            webapiCall.getAllDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this, typeId);
+                        webapiCall.getAllDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this, typeId);
 
-                        } else {
+                    } else {
 
-                            Toast.makeText(ViewAllDataActivity.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
-                        }
+                        Toast.makeText(ViewAllDataActivity.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
+                    }
 
                 } else {
 
@@ -193,7 +194,7 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
                         // webapiCall.GetAllLibraryTypesDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this);
 
                         // webapiCall.getLibraryTypeByIdDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this, userLibSelectedId);
-                        webapiCall.getAllDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView,  binding.simpleSwipeRefreshLayout,ViewAllDataActivity.this, typeId);
+                        webapiCall.getAllDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this, typeId);
 
                     } else {
 
@@ -258,6 +259,7 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
                 certificate.putExtra("bookurl", item.getUrl());
                 certificate.putExtra("title", item.getDescription());
                 certificate.putExtra("typeId", typeId);
+                certificate.putExtra("itemType", itemType);
                 certificate.putExtra("itemid", item.getId());
                 startActivity(certificate);
             } else {
@@ -284,6 +286,7 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
 
                 titleOfPage = extras.getString("titleOfPage");
                 typeId = extras.getString("typeId");
+                itemType = extras.getString("itemType");
                 // webViewUrl = extras.getString("typeId");
 
                 binding.toolbar.tvToolbarTitle.setAllCaps(true);
@@ -526,6 +529,7 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
                 certificate.putExtra("bookurl", item.getUrl());
                 certificate.putExtra("title", item.getDescription());
                 certificate.putExtra("typeId", typeId);
+                certificate.putExtra("itemType", "importantlink");
                 certificate.putExtra("itemid", item.getId());
                 startActivity(certificate);
             } else {

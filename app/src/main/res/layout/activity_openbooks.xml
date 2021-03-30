@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
     <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.Activity.AdmissionActivity">
+        tools:context=".ui.activity.OpenBooksActivity">
 
 
         <!-- <include
@@ -15,37 +13,16 @@
              app:layout_constraintEnd_toEndOf="parent"
              app:layout_constraintStart_toStartOf="parent"
              app:layout_constraintTop_toTopOf="parent"/>-->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <com.google.android.material.appbar.AppBarLayout
-                android:background="@color/purple_700"
-                android:id="@+id/applay"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <androidx.appcompat.widget.Toolbar
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
 
 
-                    <RelativeLayout
-                        android:id="@+id/relativeLayout2"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:minHeight="?attr/actionBarSize"
-                        app:layout_constraintBottom_toTopOf="@+id/sitesWebView"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+
+
+
 
                         <ImageView
                             android:id="@+id/webviewBack"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
                             android:layout_margin="5dp"
                             android:background="@drawable/imageview_selector"
                             android:padding="5dp"
@@ -55,7 +32,6 @@
                             android:id="@+id/webviewForward"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
                             android:layout_margin="5dp"
                             android:layout_toRightOf="@+id/webviewBack"
                             android:background="@drawable/imageview_selector"
@@ -67,7 +43,6 @@
                             android:id="@+id/toolbartitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
                             android:layout_toStartOf="@+id/webviewReload"
                             android:layout_toLeftOf="@+id/webviewReload"
                             android:layout_toEndOf="@+id/webviewForward"
@@ -82,7 +57,6 @@
                             android:id="@+id/webviewReload"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
                             android:layout_margin="5dp"
                             android:layout_toLeftOf="@+id/webviewClose"
                             android:background="@drawable/imageview_selector"
@@ -94,7 +68,6 @@
                             android:id="@+id/webViewProgressBar"
                             android:layout_width="23dp"
                             android:layout_height="23dp"
-                            android:layout_centerVertical="true"
                             android:layout_gravity="end"
                             android:layout_margin="10dp"
                             android:layout_toLeftOf="@+id/webviewClose"
@@ -105,28 +78,20 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
                             android:layout_margin="5dp"
                             android:background="@drawable/imageview_selector"
                             android:padding="5dp"
                             android:src="@drawable/ic_baseline_close_24" />
 
-                    </RelativeLayout>
 
 
-                </androidx.appcompat.widget.Toolbar>
 
-            </com.google.android.material.appbar.AppBarLayout>
+
 
             <WebView
                 android:id="@+id/sitesWebView"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_below="@+id/applay"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_height="fill_parent">
 
                 <ProgressBar
                     android:id="@+id/progressBar"
@@ -134,7 +99,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </WebView>
-        </RelativeLayout>
+
 
     </FrameLayout>
-</layout>

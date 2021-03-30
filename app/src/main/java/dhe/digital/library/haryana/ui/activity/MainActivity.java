@@ -556,7 +556,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             public void onClick(View v) {
                 Intent rvViewAll = new Intent(MainActivity.this, ViewAllDataActivity.class);
                 rvViewAll.putExtra("typeId", "3");
-                rvViewAll.putExtra("itemType", "Book");
+                rvViewAll.putExtra("itemType", "Journal");
                 rvViewAll.putExtra("titleOfPage", "All Journals");
                 startActivity(rvViewAll);
             }
@@ -578,7 +578,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             public void onClick(View v) {
                 Intent rvViewAll = new Intent(MainActivity.this, ViewAllDataActivity.class);
                 rvViewAll.putExtra("typeId", "5");
-                rvViewAll.putExtra("itemType", "Video");
+                rvViewAll.putExtra("itemType", "udaan");
                 // rvViewAll.putExtra("titleOfPage", "Udaan Career counseling");
                 rvViewAll.putExtra("titleOfPage", "Udaan Mental Health Counseling");
                 startActivity(rvViewAll);
@@ -590,6 +590,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             public void onClick(View v) {
                 Intent rvViewAll = new Intent(MainActivity.this, ViewAllDataActivity.class);
                 rvViewAll.putExtra("typeId", "6");
+                rvViewAll.putExtra("itemType", "importantlink");
                 rvViewAll.putExtra("titleOfPage", "Important Links");
                 startActivity(rvViewAll);
             }
@@ -615,6 +616,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 mDrawerLayout.closeDrawers();
                 Intent Allebooks = new Intent(MainActivity.this, ViewAllDataActivity.class);
                 Allebooks.putExtra("typeId", "2");
+                Allebooks.putExtra("itemType", "Book");
                 Allebooks.putExtra("titleOfPage", "All E-books");
                 startActivity(Allebooks);
                 break;
@@ -623,6 +625,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 mDrawerLayout.closeDrawers();
                 Intent AllJournals = new Intent(MainActivity.this, ViewAllDataActivity.class);
                 AllJournals.putExtra("typeId", "3");
+                AllJournals.putExtra("itemType", "Journal");
                 AllJournals.putExtra("titleOfPage", "All Journals");
                 startActivity(AllJournals);
                 break;
@@ -631,6 +634,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 mDrawerLayout.closeDrawers();
                 Intent AllVideos = new Intent(MainActivity.this, ViewAllDataActivity.class);
                 AllVideos.putExtra("typeId", "4");
+                AllVideos.putExtra("itemType", "Video");
                 AllVideos.putExtra("titleOfPage", "All Videos");
                 startActivity(AllVideos);
                 break;
@@ -743,7 +747,6 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                     logout();
 
                 }
-
 
                 break;
 
@@ -980,7 +983,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             certificate.putExtra("typeId", "3");
             certificate.putExtra("bookurl", item.getBookIframeUrl());
             certificate.putExtra("title", item.getBookTitle());
-            certificate.putExtra("itemType", "Book");
+            certificate.putExtra("itemType", "Journal");
             certificate.putExtra("itemid", item.getBookId());
             startActivity(certificate);
 
@@ -1018,8 +1021,10 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
 
             Intent certificate = new Intent(this, OpenBooksActivity.class);
             certificate.putExtra("typeId", "6");
+            certificate.putExtra("itemType", "ImpLink");
             certificate.putExtra("bookurl", item.getUrl());
             certificate.putExtra("title", item.getTitle());
+            certificate.putExtra("itemid", item.getId());
             startActivity(certificate);
         } else {
 
@@ -1039,7 +1044,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             certificate.putExtra("typeId", "5");
             certificate.putExtra("bookurl", item.getVideoIframeUrl());
             certificate.putExtra("title", item.getVideoTitle());
-            certificate.putExtra("itemType", "Video");
+            certificate.putExtra("itemType", "udaan");
             certificate.putExtra("itemid", item.getVideoId());
             startActivity(certificate);
 

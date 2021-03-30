@@ -83,8 +83,10 @@
             android:theme="@style/DigitalLibraryHaryana"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
+            android:screenOrientation="landscape"
             android:name=".ui.activity.OpenBooksActivity"
-            android:theme="@style/DigitalLibraryHaryana"
+            android:configChanges="orientation"
+            android:theme="@style/AppFullScreenTheme"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".ui.activity.ViewAllDataActivity"
