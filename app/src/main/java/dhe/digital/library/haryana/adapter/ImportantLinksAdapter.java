@@ -18,6 +18,7 @@ import java.util.List;
 
 import dhe.digital.library.haryana.R;
 import dhe.digital.library.haryana.models.HomePageResponse;
+import dhe.digital.library.haryana.utility.CSPreferences;
 
 public class ImportantLinksAdapter extends RecyclerView.Adapter<ImportantLinksAdapter.ViewHolder> {
 
@@ -25,7 +26,7 @@ public class ImportantLinksAdapter extends RecyclerView.Adapter<ImportantLinksAd
     Context mContext;
     protected ItemListener mListener;
     int currposition;
-
+    String UserType;
     public ImportantLinksAdapter(Context context, List values, ItemListener itemListener) {
 
         mValues = values;
@@ -35,7 +36,7 @@ public class ImportantLinksAdapter extends RecyclerView.Adapter<ImportantLinksAd
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public TextView textView;
+        public TextView textView,txtview;
         public SimpleDraweeView imageView;
         public RelativeLayout relativeLayout;
         HomePageResponse.ImportantLink item;
@@ -46,9 +47,13 @@ public class ImportantLinksAdapter extends RecyclerView.Adapter<ImportantLinksAd
             super(v);
 
             v.setOnClickListener(this);
+            txtview = (TextView) v.findViewById(R.id.txtview);
             textView = (TextView) v.findViewById(R.id.textView);
             imageView = v.findViewById(R.id.imageView);
            // relativeLayout = (RelativeLayout) v.findViewById(R.id.relativeLayout);
+
+
+
 
         }
 
@@ -56,9 +61,46 @@ public class ImportantLinksAdapter extends RecyclerView.Adapter<ImportantLinksAd
             this.currposition = currposition;
             this.item = item;
            // textView.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
-            textView.setText(item.getTitle());
-            imageView.setImageURI(item.getImageLogo());
+
             // relativeLayout.setBackgroundColor(Color.parseColor(item.color));
+
+
+            try {
+
+                textView.setText(item.getTitle());
+                imageView.setImageURI(item.getImageLogo());
+
+                UserType = CSPreferences.readString(mContext, "AccountType");
+
+                if (UserType.equalsIgnoreCase("Admin")) {
+
+
+//                    ImageRequest request = ImageRequestBuilder.newBuilderWithSource(Uri.parse(item.getBookImage()))
+//                            .setPostprocessor(new IterativeBoxBlurPostProcessor(7))
+//                            .build();
+//
+//
+//                    DraweeController controller = Fresco.newDraweeControllerBuilder()
+//                            .setImageRequest(request)
+//                            .setOldController(imageView.getController())
+//                            .build();
+//
+//                    imageView.setController(controller);
+                    txtview.setVisibility(View.VISIBLE);
+
+                    txtview.setText(String.valueOf(item.getTotalCount()) + " view");
+
+
+                } else {
+
+
+                }
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
 
         }
 

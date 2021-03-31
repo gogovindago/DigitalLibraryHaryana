@@ -40,6 +40,7 @@
             android:src="@color/purple_200"/>
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:layout_below="@+id/txtview"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
             android:layout_margin="8dp"
@@ -48,8 +49,8 @@
             android:scaleType="fitXY"
             app:roundAsCircle="true"
             android:id="@+id/forward"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/forward_white"
             android:layout_alignParentEnd="true" />
 
@@ -70,6 +71,34 @@
             android:layout_toLeftOf="@+id/forward"
             android:paddingEnd="10dp"
             android:layout_toStartOf="@+id/forward" />
+
+
+
+
+        <TextView
+           android:drawablePadding="8dp"
+            android:drawableStart="@drawable/ic_baseline_remove_red_eye_24"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="0dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/spinner_bordergreen"
+            android:visibility="visible"
+            android:id="@+id/txtview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="000 view"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textStyle="bold"
+            android:layout_marginRight="0dp"
+            android:layout_alignParentRight="true"
+            android:drawableLeft="@drawable/ic_baseline_remove_red_eye_24"
+            android:paddingRight="8dp" />
+
         <View
             android:visibility="gone"
             android:layout_toRightOf="@+id/imageView"
