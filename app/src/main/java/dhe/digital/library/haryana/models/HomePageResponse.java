@@ -145,6 +145,18 @@ public class HomePageResponse {
         @Expose
         private String videoIframeUrl;
 
+        @SerializedName("totalCount")
+        @Expose
+        private Integer totalCount;
+
+        public Integer getTotalCount() {
+            return totalCount;
+        }
+
+        public void setTotalCount(Integer totalCount) {
+            this.totalCount = totalCount;
+        }
+
         public Integer getVideoId() {
             return videoId;
         }
@@ -193,6 +205,18 @@ public class HomePageResponse {
         @SerializedName("url")
         @Expose
         private String url;
+
+        @SerializedName("totalCount")
+        @Expose
+        private Integer totalCount;
+
+        public Integer getTotalCount() {
+            return totalCount;
+        }
+
+        public void setTotalCount(Integer totalCount) {
+            this.totalCount = totalCount;
+        }
 
         public Integer getId() {
             return id;
@@ -243,6 +267,20 @@ public class HomePageResponse {
         @SerializedName("bookIframeUrl")
         @Expose
         private String bookIframeUrl;
+
+
+
+        @SerializedName("totalCount")
+        @Expose
+        private Integer totalCount;
+
+        public Integer getTotalCount() {
+            return totalCount;
+        }
+
+        public void setTotalCount(Integer totalCount) {
+            this.totalCount = totalCount;
+        }
 
         public String getBookIframeUrl() {
             return bookIframeUrl;
@@ -406,6 +444,19 @@ public class HomePageResponse {
         @Expose
         private String videoIframeUrl;
 
+
+        @SerializedName("totalCount")
+        @Expose
+        private Integer totalCount;
+
+        public Integer getTotalCount() {
+            return totalCount;
+        }
+
+        public void setTotalCount(Integer totalCount) {
+            this.totalCount = totalCount;
+        }
+
         public String getVideoIframeUrl() {
             return videoIframeUrl;
         }
@@ -457,6 +508,19 @@ public class HomePageResponse {
         @SerializedName("bookIframeUrl")
         @Expose
         private String bookIframeUrl;
+
+
+        @SerializedName("totalCount")
+        @Expose
+        private Integer totalCount;
+
+        public Integer getTotalCount() {
+            return totalCount;
+        }
+
+        public void setTotalCount(Integer totalCount) {
+            this.totalCount = totalCount;
+        }
 
         public String getBookIframeUrl() {
             return bookIframeUrl;

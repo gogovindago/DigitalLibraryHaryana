@@ -51,7 +51,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     private String refreshedToken;
     private static final String TAG = "LoginActivity";
     private MyLoaders myLoaders;
-    String imageurl = "https://i.picsum.photos/id/599/200/200.jpg?hmac=2WLKs3sxIsaEQ-6WZaa6YMxgl6ZC4cNnid0aqupm2is";
+    String imageurl = "https://upload.wikimedia.org/wikipedia/commons/8/85/Library_book_shelves.jpg";
 
 
     @Override
@@ -241,6 +241,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             CSPreferences.putString(this, "Email", data.getEmail());
             CSPreferences.putString(this, "token", data.getToken());
             CSPreferences.putBolean(this, "firstTimelogin", firstTimelogin);
+            CSPreferences.putString(this, "AccountType", data.getUserType());
             CSPreferences.putBolean(this, "skiplogin", false);
 
 

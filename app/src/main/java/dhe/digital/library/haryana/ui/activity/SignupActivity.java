@@ -37,7 +37,7 @@ public class SignupActivity extends BaseActivity implements SignupData_interface
     private static final String TAG = "LoginActivity";
     private String refreshedToken, adminotp, userMobileno;
     Boolean firstTimelogin = true;
-    String imageurl = "https://i.picsum.photos/id/599/200/200.jpg?hmac=2WLKs3sxIsaEQ-6WZaa6YMxgl6ZC4cNnid0aqupm2is";
+    String imageurl = "https://upload.wikimedia.org/wikipedia/commons/8/85/Library_book_shelves.jpg";
     SignupResponse.Data data2;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
@@ -287,6 +287,7 @@ public class SignupActivity extends BaseActivity implements SignupData_interface
                 CSPreferences.putString(SignupActivity.this, "Email", data2.getEmail());
                 CSPreferences.putString(SignupActivity.this, "token", data2.getToken());
                 CSPreferences.putBolean(SignupActivity.this, "firstTimelogin", firstTimelogin);
+                CSPreferences.putString(this, "AccountType", data2.getUserType());
                 CSPreferences.putBolean(SignupActivity.this, "skiplogin", false);
 
 

@@ -81,6 +81,20 @@ public class LoginResponse {
         private String token;
 
 
+        @SerializedName("userType")
+        @Expose
+        private String userType;
+
+
+        public String getUserType() {
+            return userType;
+        }
+
+        public void setUserType(String userType) {
+            this.userType = userType;
+        }
+
+
         public String getPic() {
             return Pic;
         }

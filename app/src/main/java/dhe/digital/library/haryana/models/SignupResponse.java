@@ -11,7 +11,6 @@ import com.google.gson.annotations.SerializedName;
 public class SignupResponse {
 
 
-
     @SerializedName("response")
     @Expose
     private int response;
@@ -21,7 +20,6 @@ public class SignupResponse {
     @SerializedName("data")
     @Expose
     private Data data;
-
 
 
     public int getResponse() {
@@ -79,9 +77,26 @@ public class SignupResponse {
         private String token;
 
 
+
         @SerializedName("Pic")
         @Expose
         private String Pic;
+
+
+
+
+        @SerializedName("userType")
+        @Expose
+        private String userType;
+
+
+        public String getUserType() {
+            return userType;
+        }
+
+        public void setUserType(String userType) {
+            this.userType = userType;
+        }
 
         public void setPic(String pic) {
             Pic = pic;

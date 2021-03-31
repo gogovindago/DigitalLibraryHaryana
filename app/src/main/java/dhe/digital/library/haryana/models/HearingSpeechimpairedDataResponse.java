@@ -60,6 +60,19 @@ public class HearingSpeechimpairedDataResponse {
         @Expose
         private String youtubeLink;
 
+
+        @SerializedName("totalCount")
+        @Expose
+        private Integer totalCount;
+
+        public Integer getTotalCount() {
+            return totalCount;
+        }
+
+        public void setTotalCount(Integer totalCount) {
+            this.totalCount = totalCount;
+        }
+
         public Integer getSrno() {
             return srno;
         }

@@ -8,7 +8,6 @@ import java.util.List;
 public class ViewAllResponse {
 
 
-
     @SerializedName("response")
     @Expose
     private Integer response;
@@ -57,9 +56,23 @@ public class ViewAllResponse {
         @SerializedName("description")
         @Expose
         private String description;
- @SerializedName("url")
+
+
+        @SerializedName("url")
         @Expose
         private String url;
+
+        @SerializedName("totalCount")
+        @Expose
+        private Integer totalCount;
+
+        public Integer getTotalCount() {
+            return totalCount;
+        }
+
+        public void setTotalCount(Integer totalCount) {
+            this.totalCount = totalCount;
+        }
 
         public String getUrl() {
             return url;

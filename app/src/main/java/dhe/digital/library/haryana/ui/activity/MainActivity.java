@@ -111,7 +111,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
     TrendingsJournalsAdapter trendingsJournalsAdapter;
     ImportantLinksAdapter importantLinksAdapter;
     TrendingUdaanVideosAdapter udaanVideosAdapter;
-
+    String role;
     boolean skiplogin;
     SliderView sliderView;
     SliderAdapter sliderAdapter;
@@ -223,6 +223,8 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
 
     @Override
     public void initData() {
+        role = CSPreferences.readString(this, "AccountType");
+
 
         try {
             skiplogin = CSPreferences.getBoolean(this, "skiplogin");
@@ -360,7 +362,8 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             // textView.setText(CSPreferences.readString(this, "User_Email"));
             textView.setText(CSPreferences.readString(this, "Email"));
             toolbartxt.setText(CSPreferences.readString(this, "User_Name"));
-            // txtrole.setText(CSPreferences.readString(this, "Email"));
+            txtrole.setText(CSPreferences.readString(this, "AccountType"));
+            role = CSPreferences.readString(this, "AccountType");
             txtwelcome.setText("Welcome, " + CSPreferences.readString(this, "User_Name"));
 
 
@@ -685,7 +688,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 /*  String result = extras.getString("title");
                 webViewUrl = extras.getString("bookurl");
 */
-                GlobalClass.showtost(MainActivity.this,"Coming Soon...");
+                GlobalClass.showtost(MainActivity.this, "Coming Soon...");
                 break;
                /* Intent PeopleCorner = new Intent(MainActivity.this, PeopleCornerActivity.class);
                 PeopleCorner.putExtra("typeId", "10");

@@ -1,6 +1,7 @@
 package dhe.digital.library.haryana.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.postprocessors.IterativeBoxBlurPostProcessor;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +55,7 @@ public class TrendingUdaanVideosAdapter extends RecyclerView.Adapter<TrendingUda
             imageView = v.findViewById(R.id.imageView);
             relativeLayout = (RelativeLayout) v.findViewById(R.id.relativeLayout);
 
+
         }
 
         public void setData(HomePageResponse.TrendingUdaanVideo item, int currposition) {
@@ -57,6 +64,20 @@ public class TrendingUdaanVideosAdapter extends RecyclerView.Adapter<TrendingUda
             textView.setText(item.getVideoTitle());
             imageView.setImageURI(item.getVideoImage());
             // relativeLayout.setBackgroundColor(Color.parseColor(item.color));
+
+
+            ImageRequest request = ImageRequestBuilder.newBuilderWithSource(Uri.parse(item.getVideoImage()))
+                    .setPostprocessor(new IterativeBoxBlurPostProcessor(10))
+                    .build();
+
+
+            DraweeController controller = Fresco.newDraweeControllerBuilder()
+                    .setImageRequest(request)
+                    .setOldController(imageView.getController())
+                    .build();
+
+            imageView.setController(controller);
+
 
         }
 
