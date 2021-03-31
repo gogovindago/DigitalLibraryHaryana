@@ -17,6 +17,7 @@ import java.util.List;
 
 import dhe.digital.library.haryana.R;
 import dhe.digital.library.haryana.models.HomePageResponse;
+import dhe.digital.library.haryana.utility.CSPreferences;
 
 public class TrendingsJournalsAdapter extends RecyclerView.Adapter<TrendingsJournalsAdapter.ViewHolder> {
 
@@ -24,7 +25,7 @@ public class TrendingsJournalsAdapter extends RecyclerView.Adapter<TrendingsJour
     Context mContext;
     protected ItemListener mListener;
     int currposition;
-
+    String imptypeId, UserType;
     public TrendingsJournalsAdapter(Context context, List values, ItemListener itemListener) {
 
         mValues = values;
@@ -34,7 +35,7 @@ public class TrendingsJournalsAdapter extends RecyclerView.Adapter<TrendingsJour
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public TextView textView;
+        public TextView textView,txtview;
         public SimpleDraweeView imageView;
         public RelativeLayout relativeLayout;
         HomePageResponse.TrendingJournal item;
@@ -45,6 +46,7 @@ public class TrendingsJournalsAdapter extends RecyclerView.Adapter<TrendingsJour
             super(v);
 
             v.setOnClickListener(this);
+            txtview = (TextView) v.findViewById(R.id.txtview);
             textView = (TextView) v.findViewById(R.id.textView);
             imageView = v.findViewById(R.id.imageView);
             relativeLayout = (RelativeLayout) v.findViewById(R.id.relativeLayout);
@@ -54,9 +56,44 @@ public class TrendingsJournalsAdapter extends RecyclerView.Adapter<TrendingsJour
         public void setData(HomePageResponse.TrendingJournal item, int currposition) {
             this.currposition = currposition;
             this.item = item;
-            textView.setText(item.getBookTitle());
-            imageView.setImageURI(item.getBookImage());
+
             // relativeLayout.setBackgroundColor(Color.parseColor(item.color));
+
+            try {
+
+                textView.setText(item.getBookTitle());
+                imageView.setImageURI(item.getBookImage());
+
+                UserType = CSPreferences.readString(mContext, "AccountType");
+
+                if (UserType.equalsIgnoreCase("Admin")) {
+
+
+//                    ImageRequest request = ImageRequestBuilder.newBuilderWithSource(Uri.parse(item.getFilePath()))
+//                            .setPostprocessor(new IterativeBoxBlurPostProcessor(7))
+//                            .build();
+//
+//
+//                    DraweeController controller = Fresco.newDraweeControllerBuilder()
+//                            .setImageRequest(request)
+//                            .setOldController(imageView.getController())
+//                            .build();
+//
+//                    imageView.setController(controller);
+                    txtview.setVisibility(View.VISIBLE);
+
+                    txtview.setText(String.valueOf(item.getTotalCount()) + " view");
+
+
+                } else {
+
+
+                }
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
         }
 

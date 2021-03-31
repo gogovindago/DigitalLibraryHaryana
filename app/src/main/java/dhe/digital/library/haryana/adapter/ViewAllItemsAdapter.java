@@ -67,48 +67,41 @@ public class ViewAllItemsAdapter extends RecyclerView.Adapter<ViewAllItemsAdapte
 
             // relativeLayout.setBackgroundColor(Color.parseColor(item.color));
 
-try {
+            try {
 
-    textView.setText(item.getDescription());
-    imageView.setImageURI(item.getFilePath());
+                textView.setText(item.getDescription());
+                imageView.setImageURI(item.getFilePath());
 
-    UserType = CSPreferences.readString(mContext, "AccountType");
+                UserType = CSPreferences.readString(mContext, "AccountType");
 
-    if (UserType.equalsIgnoreCase("Admin")) {
-
-
-        ImageRequest request = ImageRequestBuilder.newBuilderWithSource(Uri.parse(item.getFilePath()))
-                .setPostprocessor(new IterativeBoxBlurPostProcessor(7))
-                .build();
+                if (UserType.equalsIgnoreCase("Admin")) {
 
 
-        DraweeController controller = Fresco.newDraweeControllerBuilder()
-                .setImageRequest(request)
-                .setOldController(imageView.getController())
-                .build();
+//                    ImageRequest request = ImageRequestBuilder.newBuilderWithSource(Uri.parse(item.getFilePath()))
+//                            .setPostprocessor(new IterativeBoxBlurPostProcessor(7))
+//                            .build();
+//
+//
+//                    DraweeController controller = Fresco.newDraweeControllerBuilder()
+//                            .setImageRequest(request)
+//                            .setOldController(imageView.getController())
+//                            .build();
+//
+//                    imageView.setController(controller);
+                    txtview.setVisibility(View.VISIBLE);
 
-        imageView.setController(controller);
-        txtview.setVisibility(View.VISIBLE);
-
-        txtview.setText(String.valueOf(item.getTotalCount())+" view");
-
-
-    } else {
-
-
-    }
-
-
-}catch (Exception e){
+                    txtview.setText(String.valueOf(item.getTotalCount()) + " view");
 
 
+                } else {
 
 
-    e.printStackTrace();
-}
+                }
 
 
-
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
 

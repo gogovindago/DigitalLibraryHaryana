@@ -23,6 +23,7 @@ import java.util.List;
 
 import dhe.digital.library.haryana.R;
 import dhe.digital.library.haryana.models.HomePageResponse;
+import dhe.digital.library.haryana.utility.CSPreferences;
 
 public class TrendingUdaanVideosAdapter extends RecyclerView.Adapter<TrendingUdaanVideosAdapter.ViewHolder> {
 
@@ -30,6 +31,7 @@ public class TrendingUdaanVideosAdapter extends RecyclerView.Adapter<TrendingUda
     Context mContext;
     protected ItemListener mListener;
     int currposition;
+    String UserType;
 
     public TrendingUdaanVideosAdapter(Context context, List values, ItemListener itemListener) {
 
@@ -40,7 +42,7 @@ public class TrendingUdaanVideosAdapter extends RecyclerView.Adapter<TrendingUda
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public TextView textView;
+        public TextView textView,txtview;
         public SimpleDraweeView imageView;
         public RelativeLayout relativeLayout;
         HomePageResponse.TrendingUdaanVideo item;
@@ -51,6 +53,7 @@ public class TrendingUdaanVideosAdapter extends RecyclerView.Adapter<TrendingUda
             super(v);
 
             v.setOnClickListener(this);
+            txtview = (TextView) v.findViewById(R.id.txtview);
             textView = (TextView) v.findViewById(R.id.textView);
             imageView = v.findViewById(R.id.imageView);
             relativeLayout = (RelativeLayout) v.findViewById(R.id.relativeLayout);
@@ -64,20 +67,41 @@ public class TrendingUdaanVideosAdapter extends RecyclerView.Adapter<TrendingUda
             textView.setText(item.getVideoTitle());
             imageView.setImageURI(item.getVideoImage());
             // relativeLayout.setBackgroundColor(Color.parseColor(item.color));
+            try {
+
+                textView.setText(item.getVideoTitle());
+                imageView.setImageURI(item.getVideoImage());
+
+                UserType = CSPreferences.readString(mContext, "AccountType");
+
+                if (UserType.equalsIgnoreCase("Admin")) {
 
 
-            ImageRequest request = ImageRequestBuilder.newBuilderWithSource(Uri.parse(item.getVideoImage()))
-                    .setPostprocessor(new IterativeBoxBlurPostProcessor(10))
-                    .build();
+//                    ImageRequest request = ImageRequestBuilder.newBuilderWithSource(Uri.parse(item.getFilePath()))
+//                            .setPostprocessor(new IterativeBoxBlurPostProcessor(7))
+//                            .build();
+//
+//
+//                    DraweeController controller = Fresco.newDraweeControllerBuilder()
+//                            .setImageRequest(request)
+//                            .setOldController(imageView.getController())
+//                            .build();
+//
+//                    imageView.setController(controller);
+                    txtview.setVisibility(View.VISIBLE);
+
+                    txtview.setText(String.valueOf(item.getTotalCount()) + " view");
 
 
-            DraweeController controller = Fresco.newDraweeControllerBuilder()
-                    .setImageRequest(request)
-                    .setOldController(imageView.getController())
-                    .build();
+                } else {
 
-            imageView.setController(controller);
 
+                }
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
         }
 

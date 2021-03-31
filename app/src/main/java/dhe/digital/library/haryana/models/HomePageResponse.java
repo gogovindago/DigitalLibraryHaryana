@@ -88,6 +88,7 @@ public class HomePageResponse {
         public void setImportantLinks(List<ImportantLink> importantLinks) {
             this.importantLinks = importantLinks;
         }
+
         public List<TrendingJournal> getTrendingJournals() {
             return trendingJournals;
         }
@@ -147,13 +148,13 @@ public class HomePageResponse {
 
         @SerializedName("totalCount")
         @Expose
-        private Integer totalCount;
+        private String totalCount;
 
-        public Integer getTotalCount() {
+        public String getTotalCount() {
             return totalCount;
         }
 
-        public void setTotalCount(Integer totalCount) {
+        public void setTotalCount(String totalCount) {
             this.totalCount = totalCount;
         }
 
@@ -208,13 +209,13 @@ public class HomePageResponse {
 
         @SerializedName("totalCount")
         @Expose
-        private Integer totalCount;
+        private String totalCount;
 
-        public Integer getTotalCount() {
+        public String getTotalCount() {
             return totalCount;
         }
 
-        public void setTotalCount(Integer totalCount) {
+        public void setTotalCount(String totalCount) {
             this.totalCount = totalCount;
         }
 
@@ -269,16 +270,15 @@ public class HomePageResponse {
         private String bookIframeUrl;
 
 
-
         @SerializedName("totalCount")
         @Expose
-        private Integer totalCount;
+        private String totalCount;
 
-        public Integer getTotalCount() {
+        public String getTotalCount() {
             return totalCount;
         }
 
-        public void setTotalCount(Integer totalCount) {
+        public void setTotalCount(String totalCount) {
             this.totalCount = totalCount;
         }
 
@@ -335,6 +335,21 @@ public class HomePageResponse {
         @SerializedName("libraryUrl")
         @Expose
         private String libraryUrl;
+
+
+        @SerializedName("totalCount")
+        @Expose
+        private String totalCount;
+
+
+        public String getTotalCount() {
+            return totalCount;
+        }
+
+        public void setTotalCount(String totalCount) {
+            this.totalCount = totalCount;
+        }
+
 
         public String getLibraryUrl() {
             return libraryUrl;
@@ -394,6 +409,21 @@ public class HomePageResponse {
         @Expose
         private String libraryUrl;
 
+
+        @SerializedName("totalCount")
+        @Expose
+        private String totalCount;
+
+
+        public String getTotalCount() {
+            return totalCount;
+        }
+
+        public void setTotalCount(String totalCount) {
+            this.totalCount = totalCount;
+        }
+
+
         public String getLibraryUrl() {
             return libraryUrl;
         }
@@ -447,15 +477,16 @@ public class HomePageResponse {
 
         @SerializedName("totalCount")
         @Expose
-        private Integer totalCount;
+        private String totalCount;
 
-        public Integer getTotalCount() {
+        public String getTotalCount() {
             return totalCount;
         }
 
-        public void setTotalCount(Integer totalCount) {
+        public void setTotalCount(String totalCount) {
             this.totalCount = totalCount;
         }
+
 
         public String getVideoIframeUrl() {
             return videoIframeUrl;
@@ -512,13 +543,14 @@ public class HomePageResponse {
 
         @SerializedName("totalCount")
         @Expose
-        private Integer totalCount;
+        private String totalCount;
 
-        public Integer getTotalCount() {
+
+        public String getTotalCount() {
             return totalCount;
         }
 
-        public void setTotalCount(Integer totalCount) {
+        public void setTotalCount(String totalCount) {
             this.totalCount = totalCount;
         }
 

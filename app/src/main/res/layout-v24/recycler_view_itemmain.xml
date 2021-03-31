@@ -51,17 +51,24 @@
                 android:textSize="14sp"
                 android:textStyle="bold" />
             <TextView
-                android:background="@color/green"
-                android:layout_centerInParent="true"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/bg_viewer"
+                android:visibility="gone"
                 android:id="@+id/txtview"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:padding="8dp"
-                android:text="1000 views"
+                android:paddingEnd="5dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:paddingStart="5dp"
+                android:text="000 view"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textStyle="bold" />
 
         </RelativeLayout>
