@@ -196,6 +196,7 @@ public class WebAPiCall {
                         getbannersData_interface.GetTrendingJournalData(response.body().getData().getTrendingJournals());
                         getbannersData_interface.GetImportantsLinkData(response.body().getData().getImportantLinks());
                         getbannersData_interface.GetUdaanVideosData(response.body().getData().getTrendingUdaanVideos());
+                        getbannersData_interface.GetRegisteredUserData(response.body().getData().getRegisteredUser());
 
 
                     } else {

@@ -88,9 +88,9 @@
                                 android:layout_alignParentEnd="true"
                                 android:layout_alignParentRight="true"
                                 android:layout_centerInParent="true"
+                                android:layout_margin="8dp"
                                 android:background="@android:color/transparent"
                                 android:padding="1dp"
-                                android:layout_margin="8dp"
                                 android:src="@drawable/notifications_active"
                                 android:visibility="visible" />
 
@@ -100,12 +100,12 @@
                                 android:layout_height="wrap_content"
                                 android:layout_centerInParent="true"
                                 android:layout_margin="8dp"
+                                android:layout_toStartOf="@+id/btnlogin"
                                 android:layout_toLeftOf="@+id/btnlogin"
                                 android:background="@android:color/transparent"
                                 android:padding="1dp"
                                 android:src="@drawable/ic_baseline_searchwhite_24"
-                                android:visibility="visible"
-                                android:layout_toStartOf="@+id/btnlogin" />
+                                android:visibility="visible" />
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/value"
@@ -130,10 +130,10 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
                                 android:layout_alignParentRight="true"
+                                android:layout_margin="8dp"
                                 android:gravity="center|top"
                                 android:text="@string/login_signup"
                                 android:textAllCaps="false"
-                                android:layout_margin="8dp"
                                 android:textColor="@android:color/white"
                                 android:textSize="10sp"
                                 android:visibility="visible" />
@@ -263,6 +263,68 @@
                                         android:layout_marginBottom="5dp"
                                         android:scrollbars="vertical"
                                         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+                                </LinearLayout>
+
+
+                                <LinearLayout
+
+                                    android:id="@+id/llregUser"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_margin="8dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/viewallbg"
+                                    android:gravity="center_horizontal"
+                                    android:orientation="vertical"
+                                    android:visibility="gone">
+
+                                    <RelativeLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center_horizontal">
+
+
+                                        <TextView
+                                            android:id="@+id/RegUsermessage"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center|start"
+                                            android:layout_marginStart="5dp"
+                                            android:layout_marginLeft="5dp"
+                                            android:layout_marginTop="0dp"
+                                            android:gravity="center|start"
+                                            android:text="Registered User : -"
+                                            android:textColor="@color/white"
+                                            android:textSize="20sp"
+                                            android:textStyle="bold" />
+
+                                        <TextView
+
+                                            android:id="@+id/txttotalcount"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_alignParentEnd="false"
+                                            android:layout_alignParentRight="false"
+                                            android:layout_gravity="center"
+                                            android:layout_marginStart="5dp"
+                                            android:layout_marginLeft="5dp"
+                                            android:layout_marginEnd="5dp"
+                                            android:layout_toRightOf="@+id/RegUsermessage"
+                                            android:background="@drawable/viewallbg"
+                                            android:gravity="center"
+                                            android:paddingStart="16dp"
+                                            android:paddingLeft="16dp"
+                                            android:paddingTop="0dp"
+                                            android:paddingEnd="16dp"
+                                            android:paddingBottom="5dp"
+                                            android:text="00"
+                                            android:textColor="@color/white"
+                                            android:textSize="24sp"
+                                            android:textStyle="bold" />
+                                    </RelativeLayout>
+
+
                                 </LinearLayout>
 
                                 <LinearLayout

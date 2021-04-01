@@ -83,9 +83,9 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
     private static DrawerLayout mDrawerLayout;
     ImageView toggle, profile_image, goyesno, imgsearch;
     ImageButton mainNotification;
-    LinearLayout llmain;
+    LinearLayout llmain,llregUser;
     RelativeLayout uprofile;
-    TextView toolbartxt, uname, textView, txtrole, txtwelcome, rvViewAll, tebooksViewAll, JournalsViewAll, VideosViewAll, importantlinkViewAll, udaanlinkViewAll, btnlogin;
+    TextView toolbartxt, uname, txttotalcount, textView, txtrole, txtwelcome, rvViewAll, tebooksViewAll, JournalsViewAll, VideosViewAll, importantlinkViewAll, udaanlinkViewAll, btnlogin;
     Toolbar toolbar;
     SwipeRefreshLayout mSwipeRefreshLayout;
 
@@ -139,6 +139,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
         goyesno = findViewById(R.id.goyesno);
         mainNotification = findViewById(R.id.notifcationmain);
         btnlogin = findViewById(R.id.btnlogin);
+        llregUser = findViewById(R.id.llregUser);
         imgsearch = findViewById(R.id.imgsearch);
 
         toggle = findViewById(R.id.toggle);
@@ -153,6 +154,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
         uprofile = findViewById(R.id.uprofile);
         uname = findViewById(R.id.uname);
         textView = findViewById(R.id.textView);
+        txttotalcount = findViewById(R.id.txttotalcount);
 
         rvViewAll = findViewById(R.id.rvViewAll);
         tebooksViewAll = findViewById(R.id.tebooksViewAll);
@@ -678,6 +680,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
 */
                 Intent CompetitiveExam = new Intent(MainActivity.this, CompetitiveExamActivity.class);
                 CompetitiveExam.putExtra("typeId", "8");
+                CompetitiveExam.putExtra("itemType", "CompetitiveExam");
                 CompetitiveExam.putExtra("titleOfPage", "Competitive Exam");
                 startActivity(CompetitiveExam);
                 break;
@@ -925,6 +928,18 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
         udaanVideosAdapter = new TrendingUdaanVideosAdapter(this, trendingUdaanVideos, this);
         rvudaan.setAdapter(udaanVideosAdapter);
         udaanVideosAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void GetRegisteredUserData(List<HomePageResponse.RegisteredUser> list) {
+        if (role.equalsIgnoreCase("Admin")) {
+
+            llregUser.setVisibility(View.VISIBLE);
+
+            txttotalcount.setText(list.get(0).getTotalCount());
+        }
+
+
     }
 
     @Override

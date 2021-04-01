@@ -32,7 +32,7 @@ public class HearingSpeechActivity extends BaseActivity implements GetAllHearing
 
 
     HearingSpeechAllItemsAdapter allItemsAdapter;
-    String typeId, titleOfPage;
+    String typeId, titleOfPage,itemType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +50,7 @@ public class HearingSpeechActivity extends BaseActivity implements GetAllHearing
 
                 titleOfPage = extras.getString("titleOfPage");
                 typeId = extras.getString("typeId");
+                itemType = extras.getString("itemType");
                 // webViewUrl = extras.getString("typeId");
 
                 binding.toolbar.tvToolbarTitle.setAllCaps(true);
@@ -121,6 +122,7 @@ public class HearingSpeechActivity extends BaseActivity implements GetAllHearing
                 certificate.putExtra("bookurl", item.getYoutubeLink());
                 certificate.putExtra("title", item.getTopic());
                 certificate.putExtra("typeId", typeId);
+                certificate.putExtra("itemType", itemType);
                 certificate.putExtra("itemid", item.getId());
                 startActivity(certificate);
             } else {

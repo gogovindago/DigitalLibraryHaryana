@@ -31,6 +31,7 @@ public class CompetitiveExamActivity extends BaseActivity implements GetAllData_
     String typeId, titleOfPage;
     boolean skiplogin;
     ViewAllItemsAdapter allItemsAdapter;
+    Boolean firstTime = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,15 +62,20 @@ public class CompetitiveExamActivity extends BaseActivity implements GetAllData_
             e.printStackTrace();
         }
 
-        if (GlobalClass.isNetworkConnected(CompetitiveExamActivity.this)) {
 
-            WebAPiCall webapiCall = new WebAPiCall();
+        if (firstTime) {
 
-            webapiCall.getAllDataMethod(CompetitiveExamActivity.this, CompetitiveExamActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, CompetitiveExamActivity.this, typeId);
+            if (GlobalClass.isNetworkConnected(CompetitiveExamActivity.this)) {
 
-        } else {
+                WebAPiCall webapiCall = new WebAPiCall();
 
-            Toast.makeText(CompetitiveExamActivity.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
+                webapiCall.getAllDataMethod(CompetitiveExamActivity.this, CompetitiveExamActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, CompetitiveExamActivity.this, typeId);
+                firstTime = false;
+
+            } else {
+
+                Toast.makeText(CompetitiveExamActivity.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
+            }
         }
 
 
@@ -171,6 +177,7 @@ public class CompetitiveExamActivity extends BaseActivity implements GetAllData_
                 certificate.putExtra("bookurl", item.getUrl());
                 certificate.putExtra("title", item.getDescription());
                 certificate.putExtra("typeId", typeId);
+                certificate.putExtra("itemType", "CompetitiveExam");
                 certificate.putExtra("itemid", item.getId());
                 startActivity(certificate);
             } else {

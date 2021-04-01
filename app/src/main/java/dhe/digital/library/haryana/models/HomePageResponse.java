@@ -71,6 +71,17 @@ public class HomePageResponse {
         @Expose
         private List<TrendingUdaanVideo> trendingUdaanVideos = new ArrayList<TrendingUdaanVideo>();
 
+          @SerializedName("registeredUser")
+        @Expose
+        private List<RegisteredUser> registeredUser = new ArrayList<RegisteredUser>();
+
+        public List<RegisteredUser> getRegisteredUser() {
+            return registeredUser;
+        }
+
+        public void setRegisteredUser(List<RegisteredUser> registeredUser) {
+            this.registeredUser = registeredUser;
+        }
 
         public List<TrendingUdaanVideo> getTrendingUdaanVideos() {
             return trendingUdaanVideos;
@@ -587,5 +598,71 @@ public class HomePageResponse {
         }
 
     }
+
+
+    public class RegisteredUser {
+
+        @SerializedName("id")
+        @Expose
+        private Integer id;
+        @SerializedName("title")
+        @Expose
+        private String title;
+        @SerializedName("imageLogo")
+        @Expose
+        private String imageLogo;
+        @SerializedName("url")
+        @Expose
+        private String url;
+        @SerializedName("totalCount")
+        @Expose
+        private String totalCount;
+
+        public Integer getId() {
+            return id;
+        }
+
+        public void setId(Integer id) {
+            this.id = id;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public String getImageLogo() {
+            return imageLogo;
+        }
+
+        public void setImageLogo(String imageLogo) {
+            this.imageLogo = imageLogo;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
+        public String getTotalCount() {
+            return totalCount;
+        }
+
+        public void setTotalCount(String totalCount) {
+            this.totalCount = totalCount;
+        }
+
+    }
+
+
+
+
+
 
 }

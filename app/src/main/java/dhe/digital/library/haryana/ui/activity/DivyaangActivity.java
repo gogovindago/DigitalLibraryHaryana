@@ -62,16 +62,18 @@ public class DivyaangActivity extends BaseActivity {
             }
         });
 
+
         binding.llvisually.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent rvViewAll = new Intent(DivyaangActivity.this, ViewAllDataActivity.class);
                 rvViewAll.putExtra("typeId", "7");
-                rvViewAll.putExtra("itemType", "Book");
+                rvViewAll.putExtra("itemType", "visuallyImpaired");
                 rvViewAll.putExtra("titleOfPage", "Divyaan Corner");
                 startActivity(rvViewAll);
             }
         });
+
 
         binding.llhearing.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,11 +82,13 @@ public class DivyaangActivity extends BaseActivity {
 
                 Intent rvViewAll = new Intent(DivyaangActivity.this, HearingSpeechActivity.class);
                 rvViewAll.putExtra("typeId", "9");
-                rvViewAll.putExtra("itemType", "video");
+                rvViewAll.putExtra("itemType", "HearingSpeechImpaired");
                 rvViewAll.putExtra("titleOfPage", "Divyaan Corner");
                 startActivity(rvViewAll);
             }
         });
+
+
 
     }
 }
