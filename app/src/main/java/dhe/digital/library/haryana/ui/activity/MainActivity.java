@@ -75,6 +75,7 @@ import dhe.digital.library.haryana.utility.GlobalClass;
 
 
 public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter.ItemListener, GetbannersData_interface, TrendingsEBooksAdapter.ItemListener, TrendingsVideosAdapter.ItemListener, TrendingsJournalsAdapter.ItemListener, ImportantLinksAdapter.ItemListener, TrendingUdaanVideosAdapter.ItemListener {
+    Boolean firstTime = true;
 
     private AppUpdateManager mAppUpdateManager;
     private static final int RC_APP_UPDATE = 11;
@@ -191,15 +192,18 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
 
         //  mSwipeRefreshLayout.setRefreshing(true);
 
-        if (GlobalClass.isNetworkConnected(MainActivity.this)) {
-            WebAPiCall webapiCall = new WebAPiCall();
-            webapiCall.getHomePageDataMethod(MainActivity.this, MainActivity.this, llmain, mSwipeRefreshLayout, this);
 
-        } else {
+        if (firstTime) {
 
-            Toast.makeText(this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
+            if (GlobalClass.isNetworkConnected(MainActivity.this)) {
+                WebAPiCall webapiCall = new WebAPiCall();
+                webapiCall.getHomePageDataMethod(MainActivity.this, MainActivity.this, llmain, mSwipeRefreshLayout, this);
+                firstTime = false;
+            } else {
+
+                Toast.makeText(this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
+            }
         }
-
         sliderView = findViewById(R.id.imageSlider);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         rvTrandingsEbooks = (RecyclerView) findViewById(R.id.rvTrandingsEbooks);
@@ -1039,7 +1043,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
 
             Intent certificate = new Intent(this, OpenBooksActivity.class);
             certificate.putExtra("typeId", "6");
-            certificate.putExtra("itemType", "ImpLink");
+            certificate.putExtra("itemType", "importantlink");
             certificate.putExtra("bookurl", item.getUrl());
             certificate.putExtra("title", item.getTitle());
             certificate.putExtra("itemid", item.getId());
