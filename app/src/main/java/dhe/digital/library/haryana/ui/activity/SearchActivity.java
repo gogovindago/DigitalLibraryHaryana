@@ -286,7 +286,7 @@ public class SearchActivity extends BaseActivity implements SearchAllItemsAdapte
                 //editText.setText("");
                 // binding.serachView.setQueryHint().setHint("Listening...");
                 GlobalClass.showtost(SearchActivity.this, "Listening...");
-               // binding.txtserach.setHint("Listening...");
+                // binding.txtserach.setHint("Listening...");
                 binding.txtserach.setEnabled(false);
             }
 
@@ -315,7 +315,6 @@ public class SearchActivity extends BaseActivity implements SearchAllItemsAdapte
             public void onResults(Bundle bundle) {
 
 
-
                 binding.micButton.setImageResource(R.drawable.ic_mic_black_off);
                 ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                 /* editText.setText(data.get(0)); */
@@ -338,8 +337,6 @@ public class SearchActivity extends BaseActivity implements SearchAllItemsAdapte
 //                           // String term = editText.getText().toString();
 //                            intent.putExtra(SearchManager.QUERY, searchData);
 //                            startActivity(intent);
-
-
 
 
                 } else {
@@ -454,7 +451,7 @@ public class SearchActivity extends BaseActivity implements SearchAllItemsAdapte
 
     @Override
     public void onItemClick(SearchResponse.Datum item, int currposition) {
-
+        String itemType = "";
 
         if (skiplogin) {
             Intent welcomeintent = new Intent(this, WelcomeActivity.class);
@@ -468,7 +465,43 @@ public class SearchActivity extends BaseActivity implements SearchAllItemsAdapte
                 Intent certificate = new Intent(this, OpenBooksActivity.class);
                 certificate.putExtra("bookurl", item.getUrl());
                 certificate.putExtra("title", item.getDescription());
+
+                if (item.getType().equalsIgnoreCase("1")) {
+                    itemType = "Book";
+
+
+                } else if (item.getType().equalsIgnoreCase("2")) {
+                    itemType = "Book";
+
+
+                } else if (item.getType().equalsIgnoreCase("3")) {
+
+                    itemType = "Journal";
+
+                } else if (item.getType().equalsIgnoreCase("4")) {
+                    itemType = "Video";
+
+                } else if (item.getType().equalsIgnoreCase("5")) {
+
+                    itemType = "udaan";
+                } else if (item.getType().equalsIgnoreCase("6")) {
+
+                    itemType = "importantlink";
+
+                } else if (item.getType().equalsIgnoreCase("7")) {
+                    itemType = "visuallyImpaired";
+
+                } else if (item.getType().equalsIgnoreCase("8")) {
+
+                    itemType = "CompetitiveExam";
+                } else if (item.getType().equalsIgnoreCase("9")) {
+
+                    itemType = "HearingSpeechImpaired";
+                }
+
+
                 certificate.putExtra("typeId", item.getType());
+                certificate.putExtra("itemType", itemType);
                 certificate.putExtra("itemid", item.getId());
                 startActivity(certificate);
             } else {
