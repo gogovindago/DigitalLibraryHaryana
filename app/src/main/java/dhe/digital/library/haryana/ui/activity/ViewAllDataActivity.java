@@ -40,10 +40,9 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
     GridLayoutManager manager;
     ActivityViewalldataBinding binding;
     boolean skiplogin;
+
     private List<ViewAllResponse.Datum> arrayList = new ArrayList<ViewAllResponse.Datum>();
-
     private List<LibraryTypeAndCoutResponse.Datum> librarydataArrayList = new ArrayList<LibraryTypeAndCoutResponse.Datum>();
-
     private List<LibraryTypeByIdResponse.Datum> libdataByIDlist = new ArrayList<LibraryTypeByIdResponse.Datum>();
 
     ViewAllItemsAdapter allItemsAdapter;

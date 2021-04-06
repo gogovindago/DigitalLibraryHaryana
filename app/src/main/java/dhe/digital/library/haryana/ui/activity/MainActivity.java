@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.IntentSender;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -84,7 +85,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
     private static DrawerLayout mDrawerLayout;
     ImageView toggle, profile_image, goyesno, imgsearch;
     ImageButton mainNotification;
-    LinearLayout llmain,llregUser;
+    LinearLayout llmain, llregUser;
     RelativeLayout uprofile;
     TextView toolbartxt, uname, txttotalcount, textView, txtrole, txtwelcome, rvViewAll, tebooksViewAll, JournalsViewAll, VideosViewAll, importantlinkViewAll, udaanlinkViewAll, btnlogin;
     Toolbar toolbar;
@@ -142,13 +143,13 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
         btnlogin = findViewById(R.id.btnlogin);
         llregUser = findViewById(R.id.llregUser);
         imgsearch = findViewById(R.id.imgsearch);
-
         toggle = findViewById(R.id.toggle);
         toolbartxt = findViewById(R.id.toolbartxt);
 
 
         /// mTitle = mDrawerTitle = getTitle();
         // mNavigationDrawerItemTitles = getResources().getStringArray(R.array.navigation_drawer_items_array);
+
         mDrawerLayout = findViewById(R.id.drawer_layout);
         llmain = findViewById(R.id.llmain);
         mDrawerList = findViewById(R.id.left_drawer);
@@ -190,20 +191,21 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             }
         });
 
-        //  mSwipeRefreshLayout.setRefreshing(true);
+       // calling api
 
-
-        if (firstTime) {
 
             if (GlobalClass.isNetworkConnected(MainActivity.this)) {
                 WebAPiCall webapiCall = new WebAPiCall();
                 webapiCall.getHomePageDataMethod(MainActivity.this, MainActivity.this, llmain, mSwipeRefreshLayout, this);
-                firstTime = false;
+
             } else {
 
                 Toast.makeText(this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
             }
-        }
+
+
+
+
         sliderView = findViewById(R.id.imageSlider);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         rvTrandingsEbooks = (RecyclerView) findViewById(R.id.rvTrandingsEbooks);

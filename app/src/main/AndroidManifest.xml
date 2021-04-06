@@ -21,10 +21,11 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity android:name=".ui.activity.PeopleCornerActivity"
-             
             android:theme="@style/DigitalLibraryHaryana"
             android:windowSoftInputMode="stateAlwaysHidden"
-            ></activity>
+            >
+
+        </activity>
         <activity
             android:name=".ui.activity.HearingSpeechActivity"
             android:theme="@style/DigitalLibraryHaryana"></activity>
@@ -69,45 +70,43 @@
         </activity>
         <activity
             android:name=".ui.activity.MainActivity"
-             
+             android:screenOrientation="portrait"
             android:theme="@style/DigitalLibraryHaryana"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".ui.activity.NotificationsActivity"
-             
+            android:screenOrientation="portrait"
             android:theme="@style/DigitalLibraryHaryana"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".ui.activity.NotificationDetailActivity"
-             
+            android:screenOrientation="portrait"
             android:theme="@style/DigitalLibraryHaryana"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:screenOrientation="landscape"
             android:name=".ui.activity.OpenBooksActivity"
-            android:configChanges="orientation"
             android:theme="@style/AppFullScreenTheme"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".ui.activity.ViewAllDataActivity"
-             
+            android:screenOrientation="portrait"
             android:theme="@style/DigitalLibraryHaryana" />
         <activity
             android:name=".ui.activity.ForgetPasswordActivity"
-             
+            android:screenOrientation="portrait"
             android:theme="@style/DigitalLibraryHaryana" />
         <activity
             android:name=".ui.activity.ProfileActivity"
-             
+            android:screenOrientation="portrait"
             android:theme="@style/DigitalLibraryHaryana" />
         <activity
             android:name=".ui.activity.SearchActivity"
-             
+            android:screenOrientation="portrait"
             android:theme="@style/DigitalLibraryHaryana"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".ui.activity.CompetitiveExamActivity"
-             
+            android:screenOrientation="portrait"
             android:theme="@style/DigitalLibraryHaryana" />
     </application>
 
