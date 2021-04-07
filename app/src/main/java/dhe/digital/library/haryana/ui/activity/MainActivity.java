@@ -191,19 +191,17 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             }
         });
 
-       // calling api
+        // calling api
 
 
-            if (GlobalClass.isNetworkConnected(MainActivity.this)) {
-                WebAPiCall webapiCall = new WebAPiCall();
-                webapiCall.getHomePageDataMethod(MainActivity.this, MainActivity.this, llmain, mSwipeRefreshLayout, this);
+        if (GlobalClass.isNetworkConnected(MainActivity.this)) {
+            WebAPiCall webapiCall = new WebAPiCall();
+            webapiCall.getHomePageDataMethod(MainActivity.this, MainActivity.this, llmain, mSwipeRefreshLayout, this);
 
-            } else {
+        } else {
 
-                Toast.makeText(this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
-            }
-
-
+            Toast.makeText(this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
+        }
 
 
         sliderView = findViewById(R.id.imageSlider);
@@ -715,7 +713,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
 */
                 Intent othersApps = new Intent(MainActivity.this, OpenBooksActivity.class);
                 othersApps.putExtra("title", "Our Other Apps");
-                othersApps.putExtra("bookurl", "https://play.google.com/store/apps/details?id=shikshasahyog.hry.edu.govt");
+                othersApps.putExtra("bookurl", GlobalClass.dheOtherAppsLink);
                 startActivity(othersApps);
                 break;
 
@@ -734,7 +732,8 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
                 shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Reach to more user");
-                String app_url = "https://play.google.com/store/apps/details?id=shikshasahyog.hry.edu.govt";
+                // String app_url = "https://play.google.com/store/apps/details?id=shikshasahyog.hry.edu.govt";
+                String app_url = "https://play.google.com/store/apps/details?id=dhe.digital.library.haryana";
                 shareIntent.putExtra(Intent.EXTRA_TEXT, app_url);
                 startActivity(Intent.createChooser(shareIntent, "Share via"));
 
