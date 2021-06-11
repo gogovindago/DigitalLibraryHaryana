@@ -1,5 +1,6 @@
 package dhe.digital.library.haryana.retrofitinterface;
 
+import dhe.digital.library.haryana.models.BookRecordByLibIdResponse;
 import dhe.digital.library.haryana.models.ForgotPasswordRequest;
 import dhe.digital.library.haryana.models.ForgotPasswordResponse;
 import dhe.digital.library.haryana.models.HearingSpeechimpairedDataResponse;
@@ -22,6 +23,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 
 public interface ApiInterface {
@@ -30,8 +32,13 @@ public interface ApiInterface {
     @POST("UserRegister")
     Call<SignupResponse> signupUser(@Body SignupRequest request);
 
-    //http://112.196.99.107:81/api/commonapi/GetAllHomeImages/1
-    @GET("GetAllHomeImages/{typeId}")
+   // http://112.196.99.107:81/api/commonapi/GetBookRecord
+   @GET("GetBookRecord/")
+    Call<BookRecordByLibIdResponse> getBookRecordByLibIdResponseDataAPi(@Query("LibraryId") String s);
+
+
+
+ @GET("GetAllHomeImages/{typeId}")
     Call<ViewAllResponse> getAllDataAPi(@Path("typeId") String s);
 
     //https://localhost:44375/api/commonapi/GetLibrariesByTypeId/1

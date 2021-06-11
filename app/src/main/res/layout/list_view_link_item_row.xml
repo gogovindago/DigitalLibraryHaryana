@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.cardview.widget.CardView
+        android:theme="@style/Theme.MaterialComponents.Light"
         app:cardBackgroundColor="@color/purple_700"
         app:cardPreventCornerOverlap="true"
         app:cardMaxElevation="10dp"

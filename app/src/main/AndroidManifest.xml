@@ -20,18 +20,19 @@
         android:theme="@style/Theme.DigitalLibraryHaryana"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".ui.activity.PeopleCornerActivity"
-            android:theme="@style/DigitalLibraryHaryana"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            >
-
-        </activity>
         <activity
-            android:name=".ui.activity.HearingSpeechActivity"
+            android:name=".ui.activity.BooksAvailableinLibrary"
+            android:label="@string/title_activity_books_availablein_library"
             android:theme="@style/DigitalLibraryHaryana"></activity>
         <activity
+            android:name=".ui.activity.PeopleCornerActivity"
+            android:theme="@style/DigitalLibraryHaryana"
+            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+        <activity
+            android:name=".ui.activity.HearingSpeechActivity"
+            android:theme="@style/DigitalLibraryHaryana" />
+        <activity
             android:name=".ui.activity.DivyaangActivity"
-             
             android:theme="@style/DigitalLibraryHaryana" />
 
         <service
@@ -44,22 +45,18 @@
 
         <activity
             android:name=".ui.activity.SignupActivity"
-             
             android:theme="@style/DigitalLibraryHaryana"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".ui.welcome.WelcomeActivity"
-             
             android:theme="@style/DigitalLibraryHaryana"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".ui.activity.LoginActivity"
-             
             android:theme="@style/DigitalLibraryHaryana"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".ui.splash.SplashActivity"
-             
             android:theme="@style/AppFullScreenTheme"
             android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
@@ -70,7 +67,7 @@
         </activity>
         <activity
             android:name=".ui.activity.MainActivity"
-             android:screenOrientation="portrait"
+            android:screenOrientation="portrait"
             android:theme="@style/DigitalLibraryHaryana"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
