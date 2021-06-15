@@ -1,6 +1,8 @@
 package dhe.digital.library.haryana.ui.activity;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.Toast;
 
@@ -19,62 +21,53 @@ import dhe.digital.library.haryana.apicall.WebAPiCall;
 import dhe.digital.library.haryana.databinding.ActivityBooksAvailableinLibraryBinding;
 import dhe.digital.library.haryana.models.BookRecordByLibIdRequest;
 import dhe.digital.library.haryana.models.BookRecordByLibIdResponse;
-import dhe.digital.library.haryana.models.DataModel;
 import dhe.digital.library.haryana.utility.BaseActivity;
 import dhe.digital.library.haryana.utility.GlobalClass;
 
 public class BooksAvailableinLibrary extends BaseActivity implements GetBookRecordByLibIdData_interface, RvBookRecordLibIdAdapter.ItemListener {
+    LinearLayoutManager manager;
 
-    ArrayList arrayList;
+
     private ActivityBooksAvailableinLibraryBinding binding;
+    String typeId, itemType, titleOfPage;
+
+    RvBookRecordLibIdAdapter adaptermain;
+    private List<BookRecordByLibIdResponse.Datum> arrayList = new ArrayList<BookRecordByLibIdResponse.Datum>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_books_availablein_library);
 
+        try {
 
-        arrayList = new ArrayList();
-        //arrayList.add(new DataModel("Plantation", R.drawable.notifications, "#4CAF50"));
-        arrayList.add(new DataModel("admission and counselling", R.drawable.notifications, "#FF9800"));
-        arrayList.add(new DataModel("admission", R.drawable.notifications, "#FF9800"));
-//        arrayList.add(new DataModel("Result Declare", R.drawable.notifications, "#F94336"));
-//        arrayList.add(new DataModel("New Events", R.drawable.notifications, "#4CAF50"));
-//        arrayList.add(new DataModel("Item 5", R.drawable.notifications, "#4CAF50"));
-//        arrayList.add(new DataModel("Item 2", R.drawable.notifications, "#3E51B1"));
-//        arrayList.add(new DataModel("Item 3", R.drawable.notifications, "#673BB7"));
-//        arrayList.add(new DataModel("Result Declare", R.drawable.notifications, "#F94336"));
-//        arrayList.add(new DataModel("New Events", R.drawable.notifications, "#4CAF50"));
-//        arrayList.add(new DataModel("Item 5", R.drawable.notifications, "#4CAF50"));
-//        arrayList.add(new DataModel("Item 4", R.drawable.notifications, "#4BAA50"));
-//        arrayList.add(new DataModel("Item 1", R.drawable.notifications, "#09A9FF"));
-//        arrayList.add(new DataModel("Item 2", R.drawable.notifications, "#3E51B1"));
-//        arrayList.add(new DataModel("Item 3", R.drawable.notifications, "#673BB7"));
-//        arrayList.add(new DataModel("Item 4", R.drawable.notifications, "#4BAA50"));
-//        arrayList.add(new DataModel("Item 5", R.drawable.notifications, "#F94336"));
-//        arrayList.add(new DataModel("Item 2", R.drawable.notifications, "#3E51B1"));
-//        arrayList.add(new DataModel("Item 3", R.drawable.notifications, "#673BB7"));
-//        arrayList.add(new DataModel("Item 4", R.drawable.notifications, "#4BAA50"));
-//        arrayList.add(new DataModel("Item 5", R.drawable.notifications, "#F94336"));
-//        arrayList.add(new DataModel("Item 6", R.drawable.notifications, "#0A9B88"));
+            Bundle extras = getIntent().getExtras();
 
-        RvBookRecordLibIdAdapter adaptermain = new RvBookRecordLibIdAdapter(this, arrayList, this);
-        binding.recyclerView.setAdapter(adaptermain);
+            if (extras != null) {
 
 
-        /**
-         AutoFitGridLayoutManager that auto fits the cells by the column width defined.
-         **/
+                titleOfPage = extras.getString("title");
+                typeId = extras.getString("typeId");
+                //  itemType = extras.getString("itemType");
+                // webViewUrl = extras.getString("typeId");
 
-        /*AutoFitGridLayoutManager layoutManager = new AutoFitGridLayoutManager(this, 500);
-        recyclerView.setLayoutManager(layoutManager);*/
+                //  binding.toolbar.tvToolbarTitle.setAllCaps(true);
+                // binding.toolbar.tvToolbarTitle.setText("Books Available in "+titleOfPage);
 
 
-        /**
-         Simple GridLayoutManager that spans two columns
-         **/
-        LinearLayoutManager manager = new LinearLayoutManager(this, GridLayoutManager.VERTICAL, false);
-        binding.recyclerView.setLayoutManager(manager);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    binding.toolbar.tvToolbarTitle.setText(Html.fromHtml("<h6>Books Available in </h6>" + titleOfPage + "</h6>", Html.FROM_HTML_MODE_COMPACT));
+                } else {
+                    binding.toolbar.tvToolbarTitle.setText(Html.fromHtml("<h6>Books Available in " + titleOfPage + "</h6>"));
+                }
+
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
         if (GlobalClass.isNetworkConnected(BooksAvailableinLibrary.this)) {
@@ -84,7 +77,7 @@ public class BooksAvailableinLibrary extends BaseActivity implements GetBookReco
 
             WebAPiCall webapiCall = new WebAPiCall();
 
-          //  webapiCall.getBookRecordByLibIdDataMethod(BooksAvailableinLibrary.this, BooksAvailableinLibrary.this, "1", binding.rrmain, binding.simpleSwipeRefreshLayout, BooksAvailableinLibrary.this);
+            webapiCall.getBookRecordByLibIdDataMethod(BooksAvailableinLibrary.this, BooksAvailableinLibrary.this, "1", binding.rrmain, binding.simpleSwipeRefreshLayout, BooksAvailableinLibrary.this);
 
         } else {
 
@@ -103,7 +96,7 @@ public class BooksAvailableinLibrary extends BaseActivity implements GetBookReco
 
                     WebAPiCall webapiCall = new WebAPiCall();
 
-                  //  webapiCall.getBookRecordByLibIdDataMethod(BooksAvailableinLibrary.this, BooksAvailableinLibrary.this, "1", binding.rrmain, binding.simpleSwipeRefreshLayout, BooksAvailableinLibrary.this);
+                    webapiCall.getBookRecordByLibIdDataMethod(BooksAvailableinLibrary.this, BooksAvailableinLibrary.this, "1", binding.rrmain, binding.simpleSwipeRefreshLayout, BooksAvailableinLibrary.this);
 
                 } else {
 
@@ -118,7 +111,7 @@ public class BooksAvailableinLibrary extends BaseActivity implements GetBookReco
 
     @Override
     public void initData() {
-        binding.toolbar.tvToolbarTitle.setText("Books Available");
+        // binding.toolbar.tvToolbarTitle.setText("Books Available");
     }
 
     @Override
@@ -136,10 +129,27 @@ public class BooksAvailableinLibrary extends BaseActivity implements GetBookReco
     @Override
     public void GetBookRecordByLibIdData(List<BookRecordByLibIdResponse.Datum> list) {
 
+/* LinearLayoutManager manager = new LinearLayoutManager(this, GridLayoutManager.HORIZONTAL, false);
+        rvimportantlink.setLayoutManager(manager);
+        importantLinksAdapter = new ImportantLinksAdapter(this, importantLinkList, this);
+        rvimportantlink.setAdapter(importantLinksAdapter);
+        importantLinksAdapter.notifyDataSetChanged();*/
+
+        arrayList.clear();
+        arrayList.addAll(list);
+
+        manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        binding.recyclerView.setLayoutManager(manager);
+        adaptermain = new RvBookRecordLibIdAdapter(this, (ArrayList) arrayList, this);
+        binding.recyclerView.setAdapter(adaptermain);
+
+        // adaptermain.notifyDataSetChanged();
+
+
     }
 
     @Override
-    public void onItemClick(DataModel item, int currposition) {
+    public void onItemClick(BookRecordByLibIdResponse.Datum item, int currposition) {
 
     }
 }

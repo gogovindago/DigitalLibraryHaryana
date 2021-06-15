@@ -1,11 +1,12 @@
 package dhe.digital.library.haryana.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,15 +15,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import dhe.digital.library.haryana.R;
-import dhe.digital.library.haryana.models.DataModel;
+import dhe.digital.library.haryana.models.BookRecordByLibIdResponse;
 
 public class RvBookRecordLibIdAdapter extends RecyclerView.Adapter<RvBookRecordLibIdAdapter.ViewHolder> {
 
-    ArrayList<DataModel> mValues = new ArrayList<DataModel>();
+    ArrayList<BookRecordByLibIdResponse.Datum> mValues = new ArrayList<BookRecordByLibIdResponse.Datum>();
 
     Context mContext;
     protected ItemListener mListener;
     public int currposition;
+
     public RvBookRecordLibIdAdapter(Context context, ArrayList values, ItemListener itemListener) {
 
         mValues = values;
@@ -32,30 +34,39 @@ public class RvBookRecordLibIdAdapter extends RecyclerView.Adapter<RvBookRecordL
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public int currposition;
-        public TextView textView,text;
+        public TextView textViewTitle, textViewAuthor, txtpublisher, textViewquantity, txtserialno;
         public ImageView imageView;
-        public LinearLayout ll;
-        DataModel item;
+        public RelativeLayout ll;
+        BookRecordByLibIdResponse.Datum item;
 
         public ViewHolder(View v) {
 
             super(v);
 
             v.setOnClickListener(this);
-//            textView = (TextView) v.findViewById(R.id.title);
-//            text = (TextView) v.findViewById(R.id.text);
-//            imageView = (ImageView) v.findViewById(R.id.image);
-//            ll = (LinearLayout) v.findViewById(R.id.ll);
+
+            textViewTitle = (TextView) v.findViewById(R.id.textViewTitle);
+            textViewAuthor = (TextView) v.findViewById(R.id.textViewAuthor);
+            txtpublisher = (TextView) v.findViewById(R.id.txtpublisher);
+            textViewquantity = (TextView) v.findViewById(R.id.textViewquantity);
+            txtserialno = (TextView) v.findViewById(R.id.txtserialno);
+            ll = (RelativeLayout) v.findViewById(R.id.ll);
 
         }
 
-        public void setData(DataModel item,  int currposition) {
+        public void setData(BookRecordByLibIdResponse.Datum item, int currposition) {
             this.item = item;
             this.currposition = currposition;
 
-//            textView.setText(item.text);
-//            imageView.setImageResource(item.drawable);
-           // ll.setBackgroundColor(Color.parseColor(item.color));
+            textViewTitle.setText("Book Title:-\n " + item.getBookTitle());
+            textViewAuthor.setText("Author:-\n" + item.getAuthor());
+            txtpublisher.setText("Publisher:-\n " + item.getPublishers());
+            textViewquantity.setText("Quantity:-" + String.valueOf(item.getQuantity()));
+            txtserialno.setText("Sr.no. " + String.valueOf(item.getSrno()));
+
+//if (currposition%2==0) {
+//    ll.setBackgroundColor(R.drawable.spinner_border);
+//}
 
         }
 
@@ -78,8 +89,8 @@ public class RvBookRecordLibIdAdapter extends RecyclerView.Adapter<RvBookRecordL
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        currposition=position;
-        holder.setData(mValues.get(position),currposition);
+        currposition = position;
+        holder.setData(mValues.get(position), currposition);
 
     }
 
@@ -92,6 +103,6 @@ public class RvBookRecordLibIdAdapter extends RecyclerView.Adapter<RvBookRecordL
     }
 
     public interface ItemListener {
-        void onItemClick(DataModel item, int currposition);
+        void onItemClick(BookRecordByLibIdResponse.Datum item, int currposition);
     }
 }

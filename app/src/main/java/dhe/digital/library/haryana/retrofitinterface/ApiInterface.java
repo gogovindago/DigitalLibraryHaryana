@@ -33,8 +33,8 @@ public interface ApiInterface {
     Call<SignupResponse> signupUser(@Body SignupRequest request);
 
    // http://112.196.99.107:81/api/commonapi/GetBookRecord
-   @GET("GetBookRecord/")
-    Call<BookRecordByLibIdResponse> getBookRecordByLibIdResponseDataAPi(@Query("LibraryId") String s);
+   @GET("GetBookRecord/{LibraryId}")
+    Call<BookRecordByLibIdResponse> getBookRecordByLibIdResponseDataAPi(@Path("LibraryId") String s);
 
 
 

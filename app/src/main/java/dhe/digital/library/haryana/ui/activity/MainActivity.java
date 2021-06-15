@@ -626,9 +626,11 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
 
             case 10:
                 mDrawerLayout.closeDrawers();
-                Intent Books_Available_in_Library = new Intent(MainActivity.this, BooksAvailableinLibrary.class);
+               // Intent Books_Available_in_Library = new Intent(MainActivity.this, BooksAvailableinLibrary.class);
+                Intent Books_Available_in_Library = new Intent(MainActivity.this, ViewAllDataActivity.class);
                 Books_Available_in_Library.putExtra("typeId", "1");
-                Books_Available_in_Library.putExtra("titleOfPage", "All Digital Libraries");
+                Books_Available_in_Library.putExtra("typeReq", "BooksAvailableinLibrary");
+                Books_Available_in_Library.putExtra("titleOfPage", "Books Available");
                 startActivity(Books_Available_in_Library);
                 break;
 
