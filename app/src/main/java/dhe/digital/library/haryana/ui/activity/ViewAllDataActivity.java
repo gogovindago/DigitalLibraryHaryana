@@ -47,7 +47,7 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
 
     ViewAllItemsAdapter allItemsAdapter;
     ViewLibByIdlItemsAdapter viewLibByIdlItemsAdapter;
-    String typeId, itemType, titleOfPage,
+    String typeId, itemType, titleOfPage,typeReq,ttttt="BooksAvailableinLibrary",
             userLibSelectedId;
     int spnLibCurrentPosition;
     SpinnerLibraryTypeAdapter spinnerLibraryTypeAdapter;
@@ -71,6 +71,7 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
             if (extras != null) {
 
 
+                typeReq = extras.getString("typeReq");
                 titleOfPage = extras.getString("titleOfPage");
                 typeId = extras.getString("typeId");
                 itemType = extras.getString("itemType");
@@ -515,29 +516,44 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
     @Override
     public void onItemClick(LibraryTypeByIdResponse.Datum item, int currposition) {
 
-        if (skiplogin) {
-            Intent welcomeintent = new Intent(this, WelcomeActivity.class);
-            startActivity(welcomeintent);
+        if (ttttt.equalsIgnoreCase(typeReq)) {
+
+            // Intent certificate = new Intent(this, OpenBooksActivity.class);
+            Intent booksAvailableinLibrary = new Intent(this, BooksAvailableinLibrary.class);
+          //  booksAvailableinLibrary.putExtra("bookurl", item.getUrl());
+            booksAvailableinLibrary.putExtra("title", item.getDescription());
+//            booksAvailableinLibrary.putExtra("itemType", "importantlink");
+            booksAvailableinLibrary.putExtra("itemid", item.getId());
+            startActivity(booksAvailableinLibrary);
+
 
         } else {
 
 
-            if (item.getUrl() != null) {
+            if (skiplogin) {
+                Intent welcomeintent = new Intent(this, WelcomeActivity.class);
+                startActivity(welcomeintent);
 
-                Intent certificate = new Intent(this, OpenBooksActivity.class);
-                certificate.putExtra("bookurl", item.getUrl());
-                certificate.putExtra("title", item.getDescription());
-                certificate.putExtra("typeId", typeId);
-                certificate.putExtra("itemType", "importantlink");
-                certificate.putExtra("itemid", item.getId());
-                startActivity(certificate);
             } else {
 
-                GlobalClass.dailogError(this, "No Url Found", "NO any url found to redirect to next page.");
+
+                if (item.getUrl() != null) {
+
+                     Intent certificate = new Intent(this, OpenBooksActivity.class);
+                    certificate.putExtra("bookurl", item.getUrl());
+                    certificate.putExtra("title", item.getDescription());
+                    certificate.putExtra("typeId", typeId);
+                    certificate.putExtra("itemType", "importantlink");
+                    certificate.putExtra("itemid", item.getId());
+                    startActivity(certificate);
+                } else {
+
+                    GlobalClass.dailogError(this, "No Url Found", "NO any url found to redirect to next page.");
+                }
+
+
             }
 
-
         }
-
     }
 }

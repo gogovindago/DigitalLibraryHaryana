@@ -28,7 +28,7 @@ public class HearingSpeechActivity extends BaseActivity implements GetAllHearing
     GridLayoutManager manager;
     ActivityHearingSpeechBinding binding;
     boolean skiplogin;
-    private List<HearingSpeechimpairedDataResponse.Datum> arrayList = new ArrayList<HearingSpeechimpairedDataResponse.Datum>();
+        private List<HearingSpeechimpairedDataResponse.Datum> arrayList = new ArrayList<HearingSpeechimpairedDataResponse.Datum>();
 
 
     HearingSpeechAllItemsAdapter allItemsAdapter;

@@ -56,7 +56,10 @@
                                 android:layout_marginBottom="7dp"
                                 android:layout_toRightOf="@+id/toggle"
                                 android:background="@mipmap/ic_launcher_round"
-                                android:visibility="gone">
+                                android:visibility="gone"
+                                android:layout_marginStart="-130dp"
+                                android:layout_alignStart="@+id/toolbartxt"
+                                android:layout_toEndOf="@+id/toggle">
 
                             </ImageView>
 

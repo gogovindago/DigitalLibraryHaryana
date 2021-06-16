@@ -7,7 +7,7 @@
     xmlns:fresco="http://schemas.android.com/tools">
 
         <com.google.android.material.card.MaterialCardView
-
+            android:theme="@style/Theme.MaterialComponents.Light"
             android:id="@+id/card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

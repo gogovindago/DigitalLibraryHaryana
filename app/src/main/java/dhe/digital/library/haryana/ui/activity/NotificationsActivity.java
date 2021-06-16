@@ -70,6 +70,8 @@ public class NotificationsActivity extends BaseActivity implements RvNotificatio
          **/
         LinearLayoutManager manager = new LinearLayoutManager(this, GridLayoutManager.VERTICAL, false);
         binding.recyclerView.setLayoutManager(manager);
+
+
     }
 
     @Override

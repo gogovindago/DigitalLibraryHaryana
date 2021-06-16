@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:fresco="http://schemas.android.com/tools"
     android:layout_width="200dp"
     android:layout_height="wrap_content">
 
     <com.google.android.material.card.MaterialCardView
-
+        android:theme="@style/Theme.MaterialComponents.Light"
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,8 +31,7 @@
                 android:scaleType="fitXY"
                 android:src="@color/purple_700"
                 fresco:fadeDuration="300"
-                fresco:roundWithOverlayColor="@color/corner_color"
-                fresco:roundingBorderColor="@color/border_color"
+
                 fresco:roundingBorderWidth="2dp" />
 
             <TextView
@@ -69,7 +69,6 @@
                 android:text="000 view"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textStyle="bold"
                 card_view:drawableStartCompat="@drawable/ic_baseline_remove_red_eye_24" />
 

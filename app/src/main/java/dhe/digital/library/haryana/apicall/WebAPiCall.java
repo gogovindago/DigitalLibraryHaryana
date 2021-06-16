@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +18,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import dhe.digital.library.haryana.allinterface.GetAllData_interface;
 import dhe.digital.library.haryana.allinterface.GetAllHearingSpeechData_interface;
 import dhe.digital.library.haryana.allinterface.GetAllLibraryTypesData_interface;
+import dhe.digital.library.haryana.allinterface.GetBookRecordByLibIdData_interface;
 import dhe.digital.library.haryana.allinterface.GetLibTypeByIdData_interface;
 import dhe.digital.library.haryana.allinterface.GetbannersData_interface;
 import dhe.digital.library.haryana.allinterface.LoginData_interface;
@@ -24,6 +26,8 @@ import dhe.digital.library.haryana.allinterface.OtpVerifyData_interface;
 import dhe.digital.library.haryana.allinterface.ProfileData_interface;
 import dhe.digital.library.haryana.allinterface.SearchingData_interface;
 import dhe.digital.library.haryana.allinterface.SignupData_interface;
+import dhe.digital.library.haryana.models.BookRecordByLibIdRequest;
+import dhe.digital.library.haryana.models.BookRecordByLibIdResponse;
 import dhe.digital.library.haryana.models.ForgotPasswordRequest;
 import dhe.digital.library.haryana.models.ForgotPasswordResponse;
 import dhe.digital.library.haryana.models.HearingSpeechimpairedDataResponse;
@@ -169,6 +173,55 @@ public class WebAPiCall {
         // pd.dismiss();
         pDialog.dismissWithAnimation();
     }
+
+
+
+    public void getBookRecordByLibIdDataMethod(final Activity activity, final Context context, String libId, RelativeLayout llmain, SwipeRefreshLayout mSwipeRefreshLayout, final GetBookRecordByLibIdData_interface getBookRecordByLibIdData_interface) {
+
+        // loadershowwithMsg(context, "Loading...");
+        mSwipeRefreshLayout.setRefreshing(true);
+
+        Call<BookRecordByLibIdResponse> responseCall = ApiClient.getClient().getBookRecordByLibIdResponseDataAPi(libId);
+        responseCall.enqueue(new Callback<BookRecordByLibIdResponse>() {
+            @Override
+            public void onResponse(Call<BookRecordByLibIdResponse> call, Response<BookRecordByLibIdResponse> response) {
+                // dailoghide(context);
+                if (response.isSuccessful()) {
+
+                    assert response.body() != null;
+                    if (response.body().getResponse() == 200) {
+
+                        mSwipeRefreshLayout.setRefreshing(false);
+
+                        llmain.setVisibility(View.VISIBLE);
+
+
+                        getBookRecordByLibIdData_interface.GetBookRecordByLibIdData(response.body().getData());
+
+
+
+                    } else {
+
+                    }
+
+
+                } else {
+                    GlobalClass.showtost(context, "" + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BookRecordByLibIdResponse> call, Throwable t) {
+                mSwipeRefreshLayout.setRefreshing(false);
+                // dailoghide(context);
+                t.printStackTrace();
+
+                Log.d("dddddd", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+
 
 
     public void getHomePageDataMethod(final Activity activity, final Context context, LinearLayout llmain, SwipeRefreshLayout mSwipeRefreshLayout, final GetbannersData_interface getbannersData_interface) {

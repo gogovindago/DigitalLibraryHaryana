@@ -254,6 +254,9 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             DataModelLeftNew publiclib = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, "Public Library", 0);
             dataModelLeftList.add(publiclib);
 
+            DataModelLeftNew Books_Available_in_Library = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, " Books Available in Library", 10);
+            dataModelLeftList.add(Books_Available_in_Library);
+
             DataModelLeftNew ebooks = new DataModelLeftNew(R.drawable.ic_baseline_book_online_24, "E-Books", 1);
             dataModelLeftList.add(ebooks);
 
@@ -619,6 +622,16 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 AllothersDlib.putExtra("typeId", "1");
                 AllothersDlib.putExtra("titleOfPage", "All Digital Libraries");
                 startActivity(AllothersDlib);
+                break;
+
+            case 10:
+                mDrawerLayout.closeDrawers();
+               // Intent Books_Available_in_Library = new Intent(MainActivity.this, BooksAvailableinLibrary.class);
+                Intent Books_Available_in_Library = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                Books_Available_in_Library.putExtra("typeId", "1");
+                Books_Available_in_Library.putExtra("typeReq", "BooksAvailableinLibrary");
+                Books_Available_in_Library.putExtra("titleOfPage", "Books Available");
+                startActivity(Books_Available_in_Library);
                 break;
 
             case 1:
