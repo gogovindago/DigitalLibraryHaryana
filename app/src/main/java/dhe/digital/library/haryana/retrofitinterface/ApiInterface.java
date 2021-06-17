@@ -1,6 +1,7 @@
 package dhe.digital.library.haryana.retrofitinterface;
 
 import dhe.digital.library.haryana.models.BookRecordByLibIdResponse;
+import dhe.digital.library.haryana.models.BooksDetailResponse;
 import dhe.digital.library.haryana.models.ForgotPasswordRequest;
 import dhe.digital.library.haryana.models.ForgotPasswordResponse;
 import dhe.digital.library.haryana.models.HearingSpeechimpairedDataResponse;
@@ -33,6 +34,10 @@ public interface ApiInterface {
     Call<SignupResponse> signupUser(@Body SignupRequest request);
 
    // http://112.196.99.107:81/api/commonapi/GetBookRecord
+   @GET("GetBookRecordDetail/{BookId}")
+    Call<BooksDetailResponse> getBookDetailByLibIdResponseDataAPi(@Path("BookId") String s);
+
+ // http://112.196.99.107:81/api/commonapi/GetBookRecord
    @GET("GetBookRecord/{LibraryId}")
     Call<BookRecordByLibIdResponse> getBookRecordByLibIdResponseDataAPi(@Path("LibraryId") String s);
 

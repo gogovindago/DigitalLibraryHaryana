@@ -18,6 +18,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import dhe.digital.library.haryana.allinterface.GetAllData_interface;
 import dhe.digital.library.haryana.allinterface.GetAllHearingSpeechData_interface;
 import dhe.digital.library.haryana.allinterface.GetAllLibraryTypesData_interface;
+import dhe.digital.library.haryana.allinterface.GetBookDetailData_interface;
 import dhe.digital.library.haryana.allinterface.GetBookRecordByLibIdData_interface;
 import dhe.digital.library.haryana.allinterface.GetLibTypeByIdData_interface;
 import dhe.digital.library.haryana.allinterface.GetbannersData_interface;
@@ -28,6 +29,7 @@ import dhe.digital.library.haryana.allinterface.SearchingData_interface;
 import dhe.digital.library.haryana.allinterface.SignupData_interface;
 import dhe.digital.library.haryana.models.BookRecordByLibIdRequest;
 import dhe.digital.library.haryana.models.BookRecordByLibIdResponse;
+import dhe.digital.library.haryana.models.BooksDetailResponse;
 import dhe.digital.library.haryana.models.ForgotPasswordRequest;
 import dhe.digital.library.haryana.models.ForgotPasswordResponse;
 import dhe.digital.library.haryana.models.HearingSpeechimpairedDataResponse;
@@ -174,6 +176,52 @@ public class WebAPiCall {
         pDialog.dismissWithAnimation();
     }
 
+
+
+    public void getBookDetailByLibIdDataMethod(final Activity activity, final Context context, String bookId, RelativeLayout llmain, SwipeRefreshLayout mSwipeRefreshLayout, final GetBookDetailData_interface anInterface) {
+
+        // loadershowwithMsg(context, "Loading...");
+        mSwipeRefreshLayout.setRefreshing(true);
+
+        Call<BooksDetailResponse> responseCall = ApiClient.getClient().getBookDetailByLibIdResponseDataAPi(bookId);
+        responseCall.enqueue(new Callback<BooksDetailResponse>() {
+            @Override
+            public void onResponse(Call<BooksDetailResponse> call, Response<BooksDetailResponse> response) {
+                // dailoghide(context);
+                if (response.isSuccessful()) {
+
+                    assert response.body() != null;
+                    if (response.body().getResponse() == 200) {
+
+                        mSwipeRefreshLayout.setRefreshing(false);
+
+                        llmain.setVisibility(View.VISIBLE);
+
+
+                        anInterface.GetBookDetailbyIdData(response.body().getData());
+
+
+
+                    } else {
+
+                    }
+
+
+                } else {
+                    GlobalClass.showtost(context, "" + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BooksDetailResponse> call, Throwable t) {
+                mSwipeRefreshLayout.setRefreshing(false);
+                // dailoghide(context);
+                t.printStackTrace();
+
+                Log.d("dddddd", "onFailure: " + t.getMessage());
+            }
+        });
+    }
 
 
     public void getBookRecordByLibIdDataMethod(final Activity activity, final Context context, String libId, RelativeLayout llmain, SwipeRefreshLayout mSwipeRefreshLayout, final GetBookRecordByLibIdData_interface getBookRecordByLibIdData_interface) {

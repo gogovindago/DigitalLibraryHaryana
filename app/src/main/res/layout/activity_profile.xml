@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.core.widget.NestedScrollView
+        android:theme="@style/Theme.MaterialComponents.Light"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/bg"
@@ -11,6 +13,8 @@
         tools:context=".ProfileActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:theme="@style/Theme.MaterialComponents.Light"
+
             android:visibility="visible"
             android:id="@+id/allconst"
             android:layout_width="match_parent"
@@ -86,6 +90,7 @@
             </TextView>
 
             <com.google.android.material.card.MaterialCardView
+                android:theme="@style/Theme.MaterialComponents.Light"
 
                 android:id="@+id/materialCardView"
                 android:layout_width="100dp"
@@ -134,6 +139,8 @@
                 app:layout_constraintVertical_bias="0.060000002">
 
                 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                    android:theme="@style/Theme.MaterialComponents.Light"
+
                     android:id="@+id/simpleSwipeRefreshLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -160,6 +167,8 @@
                             android:visibility="gone">
 
                             <com.google.android.material.textfield.TextInputEditText
+                                android:theme="@style/Theme.MaterialComponents.Light"
+
                                 android:id="@+id/edtRegistraionId"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -190,6 +199,8 @@
                             android:layout_marginEnd="16dp">
 
                             <com.google.android.material.textfield.TextInputEditText
+                                android:theme="@style/Theme.MaterialComponents.Light"
+
                                 android:id="@+id/name"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -223,6 +234,8 @@
                             android:visibility="gone">
 
                             <com.google.android.material.textfield.TextInputEditText
+                                android:theme="@style/Theme.MaterialComponents.Light"
+
                                 android:id="@+id/fathername"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -256,6 +269,8 @@
                             android:layout_marginEnd="16dp">
 
                             <com.google.android.material.textfield.TextInputEditText
+                                android:theme="@style/Theme.MaterialComponents.Light"
+
                                 android:id="@+id/edtmobile"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -293,6 +308,8 @@
                             android:layout_marginEnd="16dp">
 
                             <com.google.android.material.textfield.TextInputEditText
+                                android:theme="@style/Theme.MaterialComponents.Light"
+
                                 android:id="@+id/edtemail"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -333,6 +350,8 @@
                                 app:passwordToggleEnabled="true">
 
                                 <com.google.android.material.textfield.TextInputEditText
+                                    android:theme="@style/Theme.MaterialComponents.Light"
+
                                     android:id="@+id/edtwatchedvideo"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
@@ -371,6 +390,8 @@
                                 app:passwordToggleEnabled="true">
 
                                 <com.google.android.material.textfield.TextInputEditText
+                                    android:theme="@style/Theme.MaterialComponents.Light"
+
                                     android:id="@+id/edtreadbooks"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"

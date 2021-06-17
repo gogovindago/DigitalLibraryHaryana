@@ -2,6 +2,8 @@ package dhe.digital.library.haryana.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,14 +45,16 @@ public class RvBookRecordLibIdAdapter extends RecyclerView.Adapter<RvBookRecordL
 
             super(v);
 
-            v.setOnClickListener(this);
+          //  v.setOnClickListener(this);
 
             textViewTitle = (TextView) v.findViewById(R.id.textViewTitle);
             textViewAuthor = (TextView) v.findViewById(R.id.textViewAuthor);
             txtpublisher = (TextView) v.findViewById(R.id.txtpublisher);
-            textViewquantity = (TextView) v.findViewById(R.id.textViewquantity);
+            textViewquantity =  v.findViewById(R.id.textViewquantity);
             txtserialno = (TextView) v.findViewById(R.id.txtserialno);
             ll = (RelativeLayout) v.findViewById(R.id.ll);
+
+            textViewquantity.setOnClickListener(this);
 
         }
 
@@ -58,11 +62,40 @@ public class RvBookRecordLibIdAdapter extends RecyclerView.Adapter<RvBookRecordL
             this.item = item;
             this.currposition = currposition;
 
-            textViewTitle.setText("Book Title:-\n " + item.getBookTitle());
-            textViewAuthor.setText("Author:-\n" + item.getAuthor());
-            txtpublisher.setText("Publisher:-\n " + item.getPublishers());
-            textViewquantity.setText("Quantity:-" + String.valueOf(item.getQuantity()));
-            txtserialno.setText("Sr.no. " + String.valueOf(item.getSrno()));
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+
+
+              //  textViewTitle.setText("Book Title:-\n " + item.getBookTitle());
+                textViewAuthor.setText("Author:-\n" + item.getAuthor());
+                txtpublisher.setText("Publisher:-\n" + item.getPublishers());
+                textViewquantity.setText("Quantity:-" + String.valueOf(item.getQuantity()));
+                txtserialno.setText("Sr.no. " + String.valueOf(item.getSrno()));
+
+
+
+                textViewTitle.setText(Html.fromHtml("<strong>&#128196; Book Title:-<br> </strong>"+ item.getBookTitle(), Html.FROM_HTML_MODE_COMPACT));
+
+            } else {
+
+                textViewTitle.setText(Html.fromHtml("<strong> &#128196;Book Title:-<br></strong>"+ item.getBookTitle()));
+
+               // textViewTitle.setText("Book Title:-\n " + item.getBookTitle());
+                textViewAuthor.setText("Author:-\n" + item.getAuthor());
+                txtpublisher.setText("Publisher:-\n" + item.getPublishers());
+                textViewquantity.setText("Quantity:-" + String.valueOf(item.getQuantity()));
+                txtserialno.setText("Sr.no. " + String.valueOf(item.getSrno()));
+
+
+
+               // binding.toolbar.tvToolbarTitle.setText(Html.fromHtml("<h6>Books Available in " + titleOfPage + "</h6>"));
+            }
+
+//            textViewTitle.setText("Book Title:-\n " + item.getBookTitle());
+//            textViewAuthor.setText("Author:-\n" + item.getAuthor());
+//            txtpublisher.setText("Publisher:-\n " + item.getPublishers());
+//            textViewquantity.setText("Quantity:-" + String.valueOf(item.getQuantity()));
+//            txtserialno.setText("Sr.no. " + String.valueOf(item.getSrno()));
 
 //if (currposition%2==0) {
 //    ll.setBackgroundColor(R.drawable.spinner_border);
@@ -73,8 +106,27 @@ public class RvBookRecordLibIdAdapter extends RecyclerView.Adapter<RvBookRecordL
 
         @Override
         public void onClick(View view) {
-            if (mListener != null) {
-                mListener.onItemClick(item, currposition);
+
+
+
+//            if (mListener != null) {
+//                mListener.onItemClick(item, currposition);
+
+
+                switch (view.getId()){
+
+                    case R.id.textViewquantity:
+
+                        if (mListener != null) {
+
+                            mListener.onItemClick(item, currposition,"bookdetail");
+
+
+                        }
+                        break;
+
+
+
             }
         }
     }
@@ -103,6 +155,6 @@ public class RvBookRecordLibIdAdapter extends RecyclerView.Adapter<RvBookRecordL
     }
 
     public interface ItemListener {
-        void onItemClick(BookRecordByLibIdResponse.Datum item, int currposition);
+        void onItemClick(BookRecordByLibIdResponse.Datum item, int currposition,String type);
     }
 }

@@ -1,6 +1,5 @@
 package dhe.digital.library.haryana.ui.activity;
 
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
@@ -8,7 +7,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -16,30 +14,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dhe.digital.library.haryana.R;
-import dhe.digital.library.haryana.adapter.RvBookRecordLibIdAdapter;
-import dhe.digital.library.haryana.allinterface.GetBookRecordByLibIdData_interface;
+import dhe.digital.library.haryana.adapter.BookDetailAdapter;
+import dhe.digital.library.haryana.allinterface.GetBookDetailData_interface;
 import dhe.digital.library.haryana.apicall.WebAPiCall;
-import dhe.digital.library.haryana.databinding.ActivityBooksAvailableinLibraryBinding;
+import dhe.digital.library.haryana.databinding.ActivityBooksDetailBinding;
 import dhe.digital.library.haryana.models.BookRecordByLibIdRequest;
-import dhe.digital.library.haryana.models.BookRecordByLibIdResponse;
+import dhe.digital.library.haryana.models.BooksDetailResponse;
 import dhe.digital.library.haryana.utility.BaseActivity;
 import dhe.digital.library.haryana.utility.GlobalClass;
 
-public class BooksAvailableinLibrary extends BaseActivity implements GetBookRecordByLibIdData_interface, RvBookRecordLibIdAdapter.ItemListener {
+public class BooksDeatilActivity extends BaseActivity implements GetBookDetailData_interface, BookDetailAdapter.ItemListener {
     LinearLayoutManager manager;
 
 
-    private ActivityBooksAvailableinLibraryBinding binding;
-    String typeId, itemType, titleOfPage;
-
-    RvBookRecordLibIdAdapter adaptermain;
-    private List<BookRecordByLibIdResponse.Datum> arrayList = new ArrayList<BookRecordByLibIdResponse.Datum>();
+    private ActivityBooksDetailBinding binding;
+    String  titleOfPage;
+int bookserial_Id;
+    BookDetailAdapter adaptermain;
+    private List<BooksDetailResponse.Datum> arrayList = new ArrayList<BooksDetailResponse.Datum>();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_books_availablein_library);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_books_detail);
 
         try {
 
@@ -48,8 +46,8 @@ public class BooksAvailableinLibrary extends BaseActivity implements GetBookReco
             if (extras != null) {
 
 
-                titleOfPage = extras.getString("title");
-                typeId = extras.getString("typeId");
+              //  titleOfPage = extras.getString("title");
+                bookserial_Id = extras.getInt("bookserial_Id");
                 //  itemType = extras.getString("itemType");
                 // webViewUrl = extras.getString("typeId");
 
@@ -57,11 +55,7 @@ public class BooksAvailableinLibrary extends BaseActivity implements GetBookReco
                 // binding.toolbar.tvToolbarTitle.setText("Books Available in "+titleOfPage);
 
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    binding.toolbar.tvToolbarTitle.setText(Html.fromHtml("<h6>Books Available in </h6>" + titleOfPage + "</h6>", Html.FROM_HTML_MODE_COMPACT));
-                } else {
-                    binding.toolbar.tvToolbarTitle.setText(Html.fromHtml("<h6>Books Available in " + titleOfPage + "</h6>"));
-                }
+
 
 
             }
@@ -71,18 +65,18 @@ public class BooksAvailableinLibrary extends BaseActivity implements GetBookReco
         }
 
 
-        if (GlobalClass.isNetworkConnected(BooksAvailableinLibrary.this)) {
+        if (GlobalClass.isNetworkConnected(BooksDeatilActivity.this)) {
 
             BookRecordByLibIdRequest record = new BookRecordByLibIdRequest();
             record.setLibraryId("1");
 
             WebAPiCall webapiCall = new WebAPiCall();
 
-            webapiCall.getBookRecordByLibIdDataMethod(BooksAvailableinLibrary.this, BooksAvailableinLibrary.this, "1", binding.rrmain, binding.simpleSwipeRefreshLayout, BooksAvailableinLibrary.this);
+            webapiCall.getBookDetailByLibIdDataMethod(BooksDeatilActivity.this, BooksDeatilActivity.this, String.valueOf(bookserial_Id), binding.rrmain, binding.simpleSwipeRefreshLayout, BooksDeatilActivity.this);
 
         } else {
 
-            Toast.makeText(BooksAvailableinLibrary.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
+            Toast.makeText(BooksDeatilActivity.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
         }
 
 
@@ -91,17 +85,17 @@ public class BooksAvailableinLibrary extends BaseActivity implements GetBookReco
 
             public void onRefresh() {
 
-                if (GlobalClass.isNetworkConnected(BooksAvailableinLibrary.this)) {
+                if (GlobalClass.isNetworkConnected(BooksDeatilActivity.this)) {
                     BookRecordByLibIdRequest record = new BookRecordByLibIdRequest();
                     record.setLibraryId("1");
 
                     WebAPiCall webapiCall = new WebAPiCall();
 
-                    webapiCall.getBookRecordByLibIdDataMethod(BooksAvailableinLibrary.this, BooksAvailableinLibrary.this, "1", binding.rrmain, binding.simpleSwipeRefreshLayout, BooksAvailableinLibrary.this);
+                    webapiCall.getBookDetailByLibIdDataMethod(BooksDeatilActivity.this, BooksDeatilActivity.this, String.valueOf(bookserial_Id), binding.rrmain, binding.simpleSwipeRefreshLayout, BooksDeatilActivity.this);
 
                 } else {
 
-                    Toast.makeText(BooksAvailableinLibrary.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
+                    Toast.makeText(BooksDeatilActivity.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
                 }
                 binding.simpleSwipeRefreshLayout.setRefreshing(false);
             }
@@ -128,7 +122,7 @@ public class BooksAvailableinLibrary extends BaseActivity implements GetBookReco
     }
 
     @Override
-    public void GetBookRecordByLibIdData(List<BookRecordByLibIdResponse.Datum> list) {
+    public void GetBookDetailbyIdData(List<BooksDetailResponse.Datum> list) {
 
 /* LinearLayoutManager manager = new LinearLayoutManager(this, GridLayoutManager.HORIZONTAL, false);
         rvimportantlink.setLayoutManager(manager);
@@ -141,8 +135,15 @@ public class BooksAvailableinLibrary extends BaseActivity implements GetBookReco
 
         manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         binding.recyclerView.setLayoutManager(manager);
-        adaptermain = new RvBookRecordLibIdAdapter(this, (ArrayList) arrayList, this);
+        adaptermain = new BookDetailAdapter(this, (ArrayList) arrayList, this);
         binding.recyclerView.setAdapter(adaptermain);
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            binding.toolbar.tvToolbarTitle.setText(Html.fromHtml("<h6>Books Available in </h6>" + arrayList.get(0).getLibraryName() + "</h6>", Html.FROM_HTML_MODE_COMPACT));
+        } else {
+            binding.toolbar.tvToolbarTitle.setText(Html.fromHtml("<h6>Books Available in " + arrayList.get(0).getLibraryName() + "</h6>"));
+        }
 
         // adaptermain.notifyDataSetChanged();
 
@@ -150,18 +151,7 @@ public class BooksAvailableinLibrary extends BaseActivity implements GetBookReco
     }
 
     @Override
-    public void onItemClick(BookRecordByLibIdResponse.Datum item, int currposition, String type) {
-
-
-        if (type.equalsIgnoreCase("bookdetail")) {
-
-            Intent intent = new Intent(this, BooksDeatilActivity.class);
-            intent.putExtra("bookserial_Id", item.getSrno());
-            startActivity(intent);
-
-
-        } else {
-        }
+    public void onItemClick(BooksDetailResponse.Datum item, int currposition) {
 
     }
 }

@@ -105,6 +105,9 @@
             android:name=".ui.activity.CompetitiveExamActivity"
             android:screenOrientation="portrait"
             android:theme="@style/DigitalLibraryHaryana" />
+        <activity android:name=".ui.activity.BooksDeatilActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DigitalLibraryHaryana" />
     </application>
 
 </manifest>
