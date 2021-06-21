@@ -73,13 +73,13 @@ public class BookDetailAdapter extends RecyclerView.Adapter<BookDetailAdapter.Vi
 
                 textViewTitle.setText(Html.fromHtml("<strong>&#128196; Book Title:-<br></strong>" + item.getBookTitle(), Html.FROM_HTML_MODE_COMPACT));
 
-                txtlinname.setText(Html.fromHtml("<strong>&#127979-;<br></strong>" + item.getLibraryName(), Html.FROM_HTML_MODE_COMPACT));
+                txtlinname.setText(Html.fromHtml("<strong>&#127979-</strong>" + item.getLibraryName(), Html.FROM_HTML_MODE_COMPACT));
 
             } else {
 
                 textViewTitle.setText(Html.fromHtml("<strong> &#128196;Book Title:-<br></strong>" + item.getBookTitle()));
 
-                txtlinname.setText(Html.fromHtml("<strong>&#127979;-<br></strong>" + item.getLibraryName()));
+                txtlinname.setText(Html.fromHtml("<strong>&#127979</strong>" + item.getLibraryName()));
 
                 // textViewTitle.setText("Book Title:-\n " + item.getBookTitle());
                 textViewAuthor.setText("Author:-\n" + item.getAuthorName());

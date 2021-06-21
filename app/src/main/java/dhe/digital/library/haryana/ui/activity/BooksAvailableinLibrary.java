@@ -156,7 +156,7 @@ public class BooksAvailableinLibrary extends BaseActivity implements GetBookReco
         if (type.equalsIgnoreCase("bookdetail")) {
 
             Intent intent = new Intent(this, BooksDeatilActivity.class);
-            intent.putExtra("bookserial_Id", item.getSrno());
+            intent.putExtra("bookserial_Id", item.getMaxID());
             startActivity(intent);
 
 

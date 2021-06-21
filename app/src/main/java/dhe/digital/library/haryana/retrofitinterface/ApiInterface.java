@@ -6,6 +6,7 @@ import dhe.digital.library.haryana.models.ForgotPasswordRequest;
 import dhe.digital.library.haryana.models.ForgotPasswordResponse;
 import dhe.digital.library.haryana.models.HearingSpeechimpairedDataResponse;
 import dhe.digital.library.haryana.models.HomePageResponse;
+import dhe.digital.library.haryana.models.LibraryFacilitiesResponse;
 import dhe.digital.library.haryana.models.LibraryTypeAndCoutResponse;
 import dhe.digital.library.haryana.models.LibraryTypeByIdResponse;
 import dhe.digital.library.haryana.models.LoginRequest;
@@ -33,7 +34,16 @@ public interface ApiInterface {
     @POST("UserRegister")
     Call<SignupResponse> signupUser(@Body SignupRequest request);
 
-   // http://112.196.99.107:81/api/commonapi/GetBookRecord
+   //http://112.196.99.107:81/api/commonapi/LibraryFacilities/8
+   @GET("LibraryFacilities/{LibraryId}")
+    Call<LibraryFacilitiesResponse> getLibraryFacilitiesByLibIdAPi(@Path("LibraryId") String s);
+
+
+
+
+
+
+ // http://112.196.99.107:81/api/commonapi/GetBookRecord
    @GET("GetBookRecordDetail/{BookId}")
     Call<BooksDetailResponse> getBookDetailByLibIdResponseDataAPi(@Path("BookId") String s);
 

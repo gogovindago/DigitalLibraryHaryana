@@ -257,6 +257,9 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             DataModelLeftNew Books_Available_in_Library = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, " Books Available in Library", 10);
             dataModelLeftList.add(Books_Available_in_Library);
 
+            DataModelLeftNew Library_Facilities = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, " Library Facilities", 101);
+            dataModelLeftList.add(Library_Facilities);
+
             DataModelLeftNew ebooks = new DataModelLeftNew(R.drawable.ic_baseline_book_online_24, "E-Books", 1);
             dataModelLeftList.add(ebooks);
 
@@ -626,12 +629,21 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
 
             case 10:
                 mDrawerLayout.closeDrawers();
-               // Intent Books_Available_in_Library = new Intent(MainActivity.this, BooksAvailableinLibrary.class);
+                // Intent Books_Available_in_Library = new Intent(MainActivity.this, BooksAvailableinLibrary.class);
                 Intent Books_Available_in_Library = new Intent(MainActivity.this, ViewAllDataActivity.class);
                 Books_Available_in_Library.putExtra("typeId", "1");
                 Books_Available_in_Library.putExtra("typeReq", "BooksAvailableinLibrary");
                 Books_Available_in_Library.putExtra("titleOfPage", "Books Available");
                 startActivity(Books_Available_in_Library);
+                break;
+                case 101:
+                mDrawerLayout.closeDrawers();
+                // Intent Books_Available_in_Library = new Intent(MainActivity.this, BooksAvailableinLibrary.class);
+                Intent Library_Facilities = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                    Library_Facilities.putExtra("typeId", "1");
+                    Library_Facilities.putExtra("typeReq", "Library_Facilities");
+                    Library_Facilities.putExtra("titleOfPage", "Library Facilities Available");
+                startActivity(Library_Facilities);
                 break;
 
             case 1:

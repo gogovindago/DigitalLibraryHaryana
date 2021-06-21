@@ -140,9 +140,11 @@ int bookserial_Id;
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            binding.toolbar.tvToolbarTitle.setText(Html.fromHtml("<h6>Books Available in </h6>" + arrayList.get(0).getLibraryName() + "</h6>", Html.FROM_HTML_MODE_COMPACT));
+            ///* + arrayList.get(0).getLibraryName() +*/
+            binding.toolbar.tvToolbarTitle.setText(Html.fromHtml("<h6>Books Available</h6>",Html.FROM_HTML_MODE_COMPACT));
         } else {
-            binding.toolbar.tvToolbarTitle.setText(Html.fromHtml("<h6>Books Available in " + arrayList.get(0).getLibraryName() + "</h6>"));
+            // + arrayList.get(0).getLibraryName() + "</h6>"
+            binding.toolbar.tvToolbarTitle.setText(Html.fromHtml("<h6>Books Available"));
         }
 
         // adaptermain.notifyDataSetChanged();
