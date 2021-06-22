@@ -47,7 +47,7 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
 
     ViewAllItemsAdapter allItemsAdapter;
     ViewLibByIdlItemsAdapter viewLibByIdlItemsAdapter;
-    String typeId, itemType, titleOfPage,typeReq,ttttt="BooksAvailableinLibrary",
+    String typeId, itemType, titleOfPage, typeReq, ttttt = "BooksAvailableinLibrary",
             userLibSelectedId;
     int spnLibCurrentPosition;
     SpinnerLibraryTypeAdapter spinnerLibraryTypeAdapter;
@@ -520,11 +520,43 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
 
             // Intent certificate = new Intent(this, OpenBooksActivity.class);
             Intent booksAvailableinLibrary = new Intent(this, BooksAvailableinLibrary.class);
-          //  booksAvailableinLibrary.putExtra("bookurl", item.getUrl());
+            //  booksAvailableinLibrary.putExtra("bookurl", item.getUrl());
             booksAvailableinLibrary.putExtra("title", item.getDescription());
 //            booksAvailableinLibrary.putExtra("itemType", "importantlink");
             booksAvailableinLibrary.putExtra("itemid", item.getId());
             startActivity(booksAvailableinLibrary);
+
+
+        } else if (typeReq.equalsIgnoreCase("Library_Facilities")) {
+
+            Intent LibraryFacility = new Intent(this, LibraryFacility.class);
+            LibraryFacility.putExtra("title", item.getDescription());
+            LibraryFacility.putExtra("itemid", item.getId());
+            startActivity(LibraryFacility);
+
+
+        } else if (typeReq.equalsIgnoreCase("LibraryAlumniAchievements")) {
+
+            Intent LibraryFacility = new Intent(this, AlumniAchievements.class);
+            LibraryFacility.putExtra("title", item.getDescription());
+            LibraryFacility.putExtra("itemid", item.getId());
+            startActivity(LibraryFacility);
+
+
+        } else if (typeReq.equalsIgnoreCase("LibraryEventsandActivities")) {
+
+            Intent LibraryEventsandActivities = new Intent(this, LibraryEventsandActivities.class);
+            LibraryEventsandActivities.putExtra("title", item.getDescription());
+            LibraryEventsandActivities.putExtra("itemid", item.getId());
+            startActivity(LibraryEventsandActivities);
+
+
+        } else if (typeReq.equalsIgnoreCase("library_Gallery")) {
+
+            Intent LibraryEventsandActivities = new Intent(this, LibraryGalleryActivity.class);
+            LibraryEventsandActivities.putExtra("title", item.getDescription());
+            LibraryEventsandActivities.putExtra("itemid", item.getId());
+            startActivity(LibraryEventsandActivities);
 
 
         } else {
@@ -539,7 +571,7 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
 
                 if (item.getUrl() != null) {
 
-                     Intent certificate = new Intent(this, OpenBooksActivity.class);
+                    Intent certificate = new Intent(this, OpenBooksActivity.class);
                     certificate.putExtra("bookurl", item.getUrl());
                     certificate.putExtra("title", item.getDescription());
                     certificate.putExtra("typeId", typeId);

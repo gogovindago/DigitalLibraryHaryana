@@ -21,20 +21,26 @@ import dhe.digital.library.haryana.allinterface.GetAllLibraryTypesData_interface
 import dhe.digital.library.haryana.allinterface.GetBookDetailData_interface;
 import dhe.digital.library.haryana.allinterface.GetBookRecordByLibIdData_interface;
 import dhe.digital.library.haryana.allinterface.GetLibTypeByIdData_interface;
+import dhe.digital.library.haryana.allinterface.GetLibraryAlumniAchievementsByLibIdData_interface;
+import dhe.digital.library.haryana.allinterface.GetLibraryEventsandActivitiesByLibIdData_interface;
 import dhe.digital.library.haryana.allinterface.GetLibraryFacilitiesByLibIdData_interface;
+import dhe.digital.library.haryana.allinterface.GetLibraryGalleryData_interface;
 import dhe.digital.library.haryana.allinterface.GetbannersData_interface;
 import dhe.digital.library.haryana.allinterface.LoginData_interface;
 import dhe.digital.library.haryana.allinterface.OtpVerifyData_interface;
 import dhe.digital.library.haryana.allinterface.ProfileData_interface;
 import dhe.digital.library.haryana.allinterface.SearchingData_interface;
 import dhe.digital.library.haryana.allinterface.SignupData_interface;
+import dhe.digital.library.haryana.models.AlumniAchievementsResponse;
 import dhe.digital.library.haryana.models.BookRecordByLibIdResponse;
 import dhe.digital.library.haryana.models.BooksDetailResponse;
 import dhe.digital.library.haryana.models.ForgotPasswordRequest;
 import dhe.digital.library.haryana.models.ForgotPasswordResponse;
 import dhe.digital.library.haryana.models.HearingSpeechimpairedDataResponse;
 import dhe.digital.library.haryana.models.HomePageResponse;
+import dhe.digital.library.haryana.models.LibraryEventsActivitieResponse;
 import dhe.digital.library.haryana.models.LibraryFacilitiesResponse;
+import dhe.digital.library.haryana.models.LibraryGalleryResponse;
 import dhe.digital.library.haryana.models.LibraryTypeAndCoutResponse;
 import dhe.digital.library.haryana.models.LibraryTypeByIdResponse;
 import dhe.digital.library.haryana.models.LoginRequest;
@@ -178,7 +184,6 @@ public class WebAPiCall {
     }
 
 
-
     public void getBookDetailByLibIdDataMethod(final Activity activity, final Context context, String bookId, RelativeLayout llmain, SwipeRefreshLayout mSwipeRefreshLayout, final GetBookDetailData_interface anInterface) {
 
         // loadershowwithMsg(context, "Loading...");
@@ -202,7 +207,6 @@ public class WebAPiCall {
                         anInterface.GetBookDetailbyIdData(response.body().getData());
 
 
-
                     } else {
 
                     }
@@ -215,6 +219,59 @@ public class WebAPiCall {
 
             @Override
             public void onFailure(Call<BooksDetailResponse> call, Throwable t) {
+                mSwipeRefreshLayout.setRefreshing(false);
+                // dailoghide(context);
+                t.printStackTrace();
+
+                Log.d("dddddd", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+
+    public void getLibraryAlumniAchievementsByLibIdDataMethod(final Activity activity, final Context context, String libId, RelativeLayout llmain, SwipeRefreshLayout mSwipeRefreshLayout, final GetLibraryAlumniAchievementsByLibIdData_interface anInterface) {
+
+        // loadershowwithMsg(context, "Loading...");
+        mSwipeRefreshLayout.setRefreshing(true);
+
+        Call<AlumniAchievementsResponse> responseCall = ApiClient.getClient().getLibraryAlumniAchievementsByLibIdAPi(libId);
+        responseCall.enqueue(new Callback<AlumniAchievementsResponse>() {
+            @Override
+            public void onResponse(Call<AlumniAchievementsResponse> call, Response<AlumniAchievementsResponse> response) {
+                // dailoghide(context);
+                if (response.isSuccessful()) {
+
+                    assert response.body() != null;
+                    if (response.body().getResponse() == 200) {
+
+                        mSwipeRefreshLayout.setRefreshing(false);
+
+                        llmain.setVisibility(View.VISIBLE);
+
+
+                        anInterface.GetLibraryAlumniAchievementsByLibIdData(response.body().getData());
+
+
+                    } else if (response.body().getResponse() == 400) {
+
+
+                        mSwipeRefreshLayout.setRefreshing(false);
+
+                        llmain.setVisibility(View.VISIBLE);
+
+
+                        anInterface.GetLibraryAlumniAchievementsByLibIdData(response.body().getData());
+
+                    }
+
+
+                } else {
+                    GlobalClass.showtost(context, "" + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AlumniAchievementsResponse> call, Throwable t) {
                 mSwipeRefreshLayout.setRefreshing(false);
                 // dailoghide(context);
                 t.printStackTrace();
@@ -248,8 +305,15 @@ public class WebAPiCall {
                         anInterface.GetLibraryFacilitiesByLibIdData(response.body().getData());
 
 
+                    } else if (response.body().getResponse() == 400) {
 
-                    } else {
+
+                        mSwipeRefreshLayout.setRefreshing(false);
+
+                        llmain.setVisibility(View.VISIBLE);
+
+
+                        anInterface.GetLibraryFacilitiesByLibIdData(response.body().getData());
 
                     }
 
@@ -271,7 +335,49 @@ public class WebAPiCall {
     }
 
 
+    public void getLibraryEventsActivitiesLibIdDataMethod(final Activity activity, final Context context, String libId, RelativeLayout llmain, SwipeRefreshLayout mSwipeRefreshLayout, final GetLibraryEventsandActivitiesByLibIdData_interface anInterface) {
 
+        // loadershowwithMsg(context, "Loading...");
+        mSwipeRefreshLayout.setRefreshing(true);
+
+        Call<LibraryEventsActivitieResponse> responseCall = ApiClient.getClient().getLibraryEventsActivitiesLibIdResponseDataAPi(libId);
+        responseCall.enqueue(new Callback<LibraryEventsActivitieResponse>() {
+            @Override
+            public void onResponse(Call<LibraryEventsActivitieResponse> call, Response<LibraryEventsActivitieResponse> response) {
+                // dailoghide(context);
+                if (response.isSuccessful()) {
+
+                    assert response.body() != null;
+                    if (response.body().getResponse() == 200) {
+
+                        mSwipeRefreshLayout.setRefreshing(false);
+
+                        llmain.setVisibility(View.VISIBLE);
+
+
+                        anInterface.GetLibraryEventsandActivitiesByLibIdData(response.body().getData());
+
+
+                    } else {
+
+                    }
+
+
+                } else {
+                    GlobalClass.showtost(context, "" + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LibraryEventsActivitieResponse> call, Throwable t) {
+                mSwipeRefreshLayout.setRefreshing(false);
+                // dailoghide(context);
+                t.printStackTrace();
+
+                Log.d("dddddd", "onFailure: " + t.getMessage());
+            }
+        });
+    }
 
 
     public void getBookRecordByLibIdDataMethod(final Activity activity, final Context context, String libId, RelativeLayout llmain, SwipeRefreshLayout mSwipeRefreshLayout, final GetBookRecordByLibIdData_interface getBookRecordByLibIdData_interface) {
@@ -297,7 +403,6 @@ public class WebAPiCall {
                         getBookRecordByLibIdData_interface.GetBookRecordByLibIdData(response.body().getData());
 
 
-
                     } else {
 
                     }
@@ -320,6 +425,47 @@ public class WebAPiCall {
     }
 
 
+    public void getLibraryGalleryDataMethod(final Activity activity, final Context context, RelativeLayout llmain, String libId, SwipeRefreshLayout mSwipeRefreshLayout, final GetLibraryGalleryData_interface anInterface) {
+
+        // loadershowwithMsg(context, "Loading...");
+        mSwipeRefreshLayout.setRefreshing(true);
+
+        Call<LibraryGalleryResponse> responseCall = ApiClient.getClient().getLibraryGalleryDataAPi(libId);
+        responseCall.enqueue(new Callback<LibraryGalleryResponse>() {
+            @Override
+            public void onResponse(Call<LibraryGalleryResponse> call, Response<LibraryGalleryResponse> response) {
+                // dailoghide(context);
+                if (response.isSuccessful()) {
+
+                    if (response.body().getResponse() == 200) {
+
+                        mSwipeRefreshLayout.setRefreshing(false);
+
+                        llmain.setVisibility(View.VISIBLE);
+
+                        anInterface.GetLibraryGalleryData(response.body().getData());
+
+
+                    } else {
+
+                    }
+
+
+                } else {
+                    GlobalClass.showtost(context, "" + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LibraryGalleryResponse> call, Throwable t) {
+                mSwipeRefreshLayout.setRefreshing(false);
+                // dailoghide(context);
+                t.printStackTrace();
+
+                Log.d("dddddd", "onFailure: " + t.getMessage());
+            }
+        });
+    }
 
 
     public void getHomePageDataMethod(final Activity activity, final Context context, LinearLayout llmain, SwipeRefreshLayout mSwipeRefreshLayout, final GetbannersData_interface getbannersData_interface) {

@@ -260,6 +260,17 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             DataModelLeftNew Library_Facilities = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, " Library Facilities", 101);
             dataModelLeftList.add(Library_Facilities);
 
+
+            DataModelLeftNew LibraryAlumniAchievements = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, " Library Alumni Achievements", 102);
+            dataModelLeftList.add(LibraryAlumniAchievements);
+
+            DataModelLeftNew LibraryEventsandActivities = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, " Library Events & Activities", 103);
+            dataModelLeftList.add(LibraryEventsandActivities);
+
+
+            DataModelLeftNew libraryGalleryActivity = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, " Library Gallery ", 104);
+            dataModelLeftList.add(libraryGalleryActivity);
+
             DataModelLeftNew ebooks = new DataModelLeftNew(R.drawable.ic_baseline_book_online_24, "E-Books", 1);
             dataModelLeftList.add(ebooks);
 
@@ -636,14 +647,43 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 Books_Available_in_Library.putExtra("titleOfPage", "Books Available");
                 startActivity(Books_Available_in_Library);
                 break;
-                case 101:
+            case 101:
                 mDrawerLayout.closeDrawers();
                 // Intent Books_Available_in_Library = new Intent(MainActivity.this, BooksAvailableinLibrary.class);
                 Intent Library_Facilities = new Intent(MainActivity.this, ViewAllDataActivity.class);
-                    Library_Facilities.putExtra("typeId", "1");
-                    Library_Facilities.putExtra("typeReq", "Library_Facilities");
-                    Library_Facilities.putExtra("titleOfPage", "Library Facilities Available");
+                Library_Facilities.putExtra("typeId", "1");
+                Library_Facilities.putExtra("typeReq", "Library_Facilities");
+                Library_Facilities.putExtra("titleOfPage", "Library Facilities Available");
                 startActivity(Library_Facilities);
+                break;
+
+            case 102:
+                mDrawerLayout.closeDrawers();
+                // Intent Books_Available_in_Library = new Intent(MainActivity.this, BooksAvailableinLibrary.class);
+                Intent LibraryAlumniAchievements = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                LibraryAlumniAchievements.putExtra("typeId", "1");
+                LibraryAlumniAchievements.putExtra("typeReq", "LibraryAlumniAchievements");
+                LibraryAlumniAchievements.putExtra("titleOfPage", "Library Alumni Achievements");
+                startActivity(LibraryAlumniAchievements);
+                break;
+            case 103:
+                mDrawerLayout.closeDrawers();
+                // Intent Books_Available_in_Library = new Intent(MainActivity.this, BooksAvailableinLibrary.class);
+                Intent LibraryEventsandActivities = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                LibraryEventsandActivities.putExtra("typeId", "1");
+                LibraryEventsandActivities.putExtra("typeReq", "LibraryEventsandActivities");
+                LibraryEventsandActivities.putExtra("titleOfPage", "Library Events & Activities");
+                startActivity(LibraryEventsandActivities);
+                break;
+
+            case 104:
+                mDrawerLayout.closeDrawers();
+                // Intent Books_Available_in_Library = new Intent(MainActivity.this, BooksAvailableinLibrary.class);
+                Intent library_Gallery = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                library_Gallery.putExtra("typeId", "1");
+                library_Gallery.putExtra("typeReq", "library_Gallery");
+                library_Gallery.putExtra("titleOfPage", "library Gallery");
+                startActivity(library_Gallery);
                 break;
 
             case 1:

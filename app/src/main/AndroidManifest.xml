@@ -20,14 +20,17 @@
         android:theme="@style/Theme.DigitalLibraryHaryana"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity
-            android:name=".ui.activity.BooksAvailableinLibrary"
+        <activity android:name=".ui.activity.LibraryGalleryActivity"
             android:label="@string/title_activity_books_availablein_library"
             android:theme="@style/DigitalLibraryHaryana"></activity>
         <activity
+            android:name=".ui.activity.BooksAvailableinLibrary"
+            android:label="@string/title_activity_books_availablein_library"
+            android:theme="@style/DigitalLibraryHaryana" />
+        <activity
             android:name=".ui.activity.PeopleCornerActivity"
             android:theme="@style/DigitalLibraryHaryana"
-            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".ui.activity.HearingSpeechActivity"
             android:theme="@style/DigitalLibraryHaryana" />
@@ -105,7 +108,20 @@
             android:name=".ui.activity.CompetitiveExamActivity"
             android:screenOrientation="portrait"
             android:theme="@style/DigitalLibraryHaryana" />
-        <activity android:name=".ui.activity.BooksDeatilActivity"
+        <activity
+            android:name=".ui.activity.BooksDeatilActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DigitalLibraryHaryana" />
+        <activity
+            android:name=".ui.activity.LibraryFacility"
+            android:screenOrientation="portrait"
+            android:theme="@style/DigitalLibraryHaryana" />
+        <activity
+            android:name=".ui.activity.AlumniAchievements"
+            android:screenOrientation="portrait"
+            android:theme="@style/DigitalLibraryHaryana" />
+        <activity
+            android:name=".ui.activity.LibraryEventsandActivities"
             android:screenOrientation="portrait"
             android:theme="@style/DigitalLibraryHaryana" />
     </application>
