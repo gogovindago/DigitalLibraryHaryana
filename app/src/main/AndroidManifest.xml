@@ -20,9 +20,13 @@
         android:theme="@style/Theme.DigitalLibraryHaryana"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".ui.activity.LibraryGalleryActivity"
+        <activity android:name=".ui.activity.GrievanceActivity"
             android:label="@string/title_activity_books_availablein_library"
             android:theme="@style/DigitalLibraryHaryana"></activity>
+        <activity
+            android:name=".ui.activity.LibraryGalleryActivity"
+            android:label="@string/title_activity_books_availablein_library"
+            android:theme="@style/DigitalLibraryHaryana" />
         <activity
             android:name=".ui.activity.BooksAvailableinLibrary"
             android:label="@string/title_activity_books_availablein_library"

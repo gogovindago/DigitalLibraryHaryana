@@ -559,6 +559,14 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
             startActivity(LibraryEventsandActivities);
 
 
+        } else if (typeReq.equalsIgnoreCase("libraryGrievance")) {
+
+            Intent LibraryEventsandActivities = new Intent(this, GrievanceActivity.class);
+            LibraryEventsandActivities.putExtra("title", item.getDescription());
+            LibraryEventsandActivities.putExtra("itemid", item.getId());
+            startActivity(LibraryEventsandActivities);
+
+
         } else {
 
 
