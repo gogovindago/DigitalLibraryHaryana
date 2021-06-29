@@ -48,7 +48,7 @@ public class ComplaintSpinnerAdapter extends BaseAdapter {
         ImageView icon = (ImageView) view.findViewById(R.id.imageView);
         TextView names = (TextView) view.findViewById(R.id.textView);
         icon.setImageResource(R.drawable.person);
-        names.setText(allCollegeByDistrictID.get(i).getLibraryType());
+        names.setText(allCollegeByDistrictID.get(i).getComplaintTypeName());
         return view;
     }
 }

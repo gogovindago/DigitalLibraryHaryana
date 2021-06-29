@@ -8,6 +8,7 @@
         android:orientation="vertical"
         tools:context=".ui.activity.GrievanceActivity">
 
+
         <include
 
             android:id="@+id/toolbar"
@@ -16,19 +17,31 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_margin="16dp"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:id="@+id/txtmsg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textStyle="bold"
+            android:visibility="gone">
 
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+        </androidx.appcompat.widget.AppCompatTextView>
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
 
             <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_gravity="center|top"
-                android:gravity="center"
                 android:id="@+id/rrmain"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center|top"
+                android:gravity="center"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -94,7 +107,7 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginBottom="5dp"
-                    android:hint="User Name"
+                    android:hint="User First Name"
                     android:theme="@style/Theme.MaterialComponents.Light"
                     app:endIconCheckable="true"
                     app:endIconMode="custom"
@@ -102,11 +115,11 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/txtlytusername"
-                        android:imeOptions="actionNext"
-                        android:maxLines="1"
-                        android:inputType="text"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:maxLines="1" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -131,11 +144,11 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/txtlytmidname"
 
-                        android:imeOptions="actionNext"
-                        android:maxLines="1"
-                        android:inputType="text"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:maxLines="1" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -159,11 +172,11 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/txtlytLastName"
 
-                        android:imeOptions="actionNext"
-                        android:maxLines="1"
-                        android:inputType="text"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:maxLines="1" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -188,11 +201,11 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/txtlytemail"
 
-                        android:imeOptions="actionNext"
-                        android:maxLines="1"
-                        android:inputType="text"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -217,12 +230,12 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/txtlytmobile"
 
-                        android:imeOptions="actionNext"
-                        android:maxLines="1"
-                        android:maxLength="10"
-                        android:inputType="phone"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="phone"
+                        android:maxLength="10"
+                        android:maxLines="1" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -247,11 +260,11 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/txtlytDetailedComplaint"
 
-                        android:maxLines="1"
-                        android:inputType="text"
-                        android:imeOptions="actionDone"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionDone"
+                        android:inputType="text"
+                        android:maxLines="1" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -277,8 +290,7 @@
 
                 </androidx.appcompat.widget.AppCompatButton>
             </androidx.appcompat.widget.LinearLayoutCompat>
-            </ScrollView>
-
+        </ScrollView>
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>

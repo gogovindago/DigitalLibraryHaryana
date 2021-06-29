@@ -7,6 +7,8 @@ import dhe.digital.library.haryana.models.ForgotPasswordRequest;
 import dhe.digital.library.haryana.models.ForgotPasswordResponse;
 import dhe.digital.library.haryana.models.HearingSpeechimpairedDataResponse;
 import dhe.digital.library.haryana.models.HomePageResponse;
+import dhe.digital.library.haryana.models.InsertGrievanceRequest;
+import dhe.digital.library.haryana.models.InsertGrievanceResponse;
 import dhe.digital.library.haryana.models.LibraryEventsActivitieResponse;
 import dhe.digital.library.haryana.models.LibraryFacilitiesResponse;
 import dhe.digital.library.haryana.models.LibraryGalleryResponse;
@@ -28,10 +30,13 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 
 public interface ApiInterface {
+
+
+    @POST("InsertGrievance")
+    Call<InsertGrievanceResponse> insertGrievanceApi(@Body InsertGrievanceRequest request);
 
 
     @POST("UserRegister")

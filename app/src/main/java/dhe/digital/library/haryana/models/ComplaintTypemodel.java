@@ -9,27 +9,24 @@ public class ComplaintTypemodel {
     @SerializedName("ComplaintTypeId")
     @Expose
     private Integer ComplaintTypeId;
+
     @SerializedName("ComplaintTypeName")
     @Expose
     private String ComplaintTypeName;
 
-
-    public Integer getLibraryTypeId() {
+    public Integer getComplaintTypeId() {
         return ComplaintTypeId;
     }
 
-    public void setLibraryTypeId(Integer ComplaintTypeId) {
-        this.ComplaintTypeId = ComplaintTypeId;
+    public void setComplaintTypeId(Integer complaintTypeId) {
+        ComplaintTypeId = complaintTypeId;
     }
 
-    public String getLibraryType() {
+    public String getComplaintTypeName() {
         return ComplaintTypeName;
     }
 
-    public void setLibraryType(String ComplaintTypeName) {
-        this.ComplaintTypeName = ComplaintTypeName;
+    public void setComplaintTypeName(String complaintTypeName) {
+        ComplaintTypeName = complaintTypeName;
     }
-
-
-
 }

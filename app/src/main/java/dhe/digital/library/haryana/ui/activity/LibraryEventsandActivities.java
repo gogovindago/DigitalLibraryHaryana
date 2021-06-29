@@ -48,7 +48,7 @@ public class LibraryEventsandActivities extends BaseActivity implements GetLibra
 
 
                 titleOfPage = extras.getString("title");
-                typeId = extras.getString("typeId");
+                typeId = String.valueOf(extras.getInt("itemid"));
                 //  itemType = extras.getString("itemType");
                 // webViewUrl = extras.getString("typeId");
 

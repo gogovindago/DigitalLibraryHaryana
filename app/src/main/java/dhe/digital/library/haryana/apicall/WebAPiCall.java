@@ -26,6 +26,7 @@ import dhe.digital.library.haryana.allinterface.GetLibraryEventsandActivitiesByL
 import dhe.digital.library.haryana.allinterface.GetLibraryFacilitiesByLibIdData_interface;
 import dhe.digital.library.haryana.allinterface.GetLibraryGalleryData_interface;
 import dhe.digital.library.haryana.allinterface.GetbannersData_interface;
+import dhe.digital.library.haryana.allinterface.InsertionGrienvanceData_interface;
 import dhe.digital.library.haryana.allinterface.LoginData_interface;
 import dhe.digital.library.haryana.allinterface.OtpVerifyData_interface;
 import dhe.digital.library.haryana.allinterface.ProfileData_interface;
@@ -38,6 +39,8 @@ import dhe.digital.library.haryana.models.ForgotPasswordRequest;
 import dhe.digital.library.haryana.models.ForgotPasswordResponse;
 import dhe.digital.library.haryana.models.HearingSpeechimpairedDataResponse;
 import dhe.digital.library.haryana.models.HomePageResponse;
+import dhe.digital.library.haryana.models.InsertGrievanceRequest;
+import dhe.digital.library.haryana.models.InsertGrievanceResponse;
 import dhe.digital.library.haryana.models.LibraryEventsActivitieResponse;
 import dhe.digital.library.haryana.models.LibraryFacilitiesResponse;
 import dhe.digital.library.haryana.models.LibraryGalleryResponse;
@@ -933,6 +936,48 @@ public class WebAPiCall {
 
             @Override
             public void onFailure(Call<VerifyOtpResponse> call, Throwable t) {
+
+                dailoghide(context);
+                t.printStackTrace();
+
+                Log.d("dddddd", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+
+    public void InsertGrievancePostDataMethod(final Activity activity, final Context context, final InsertionGrienvanceData_interface data_interface, InsertGrievanceRequest request) {
+
+        loadershowwithMsg(context, "we are Registering your Complaint....");
+
+        Call<InsertGrievanceResponse> userpost_responseCall = ApiClient.getClient().insertGrievanceApi(request);
+        userpost_responseCall.enqueue(new Callback<InsertGrievanceResponse>() {
+            @Override
+            public void onResponse(Call<InsertGrievanceResponse> call, Response<InsertGrievanceResponse> response) {
+                dailoghide(context);
+                if (response.isSuccessful()) {
+
+
+                    if (response.body().getResponse() == 200) {
+
+                        dailogsuccess(context, "Successfully.", "Complaint Registered Successfully.");
+                        data_interface.allGrienvancedata( response.body().getResponse(),response.body().getSysMessage());
+
+                    }  else {
+
+                        dailogError(context, "Something went wrong !", "Please try after sometimes.");
+
+                    }
+
+
+                } else {
+                    GlobalClass.showtost(context, "" + response.message());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<InsertGrievanceResponse> call, Throwable t) {
 
                 dailoghide(context);
                 t.printStackTrace();
