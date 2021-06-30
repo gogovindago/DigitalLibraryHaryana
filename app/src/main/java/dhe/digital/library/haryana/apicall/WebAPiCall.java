@@ -32,6 +32,7 @@ import dhe.digital.library.haryana.allinterface.OtpVerifyData_interface;
 import dhe.digital.library.haryana.allinterface.ProfileData_interface;
 import dhe.digital.library.haryana.allinterface.SearchingData_interface;
 import dhe.digital.library.haryana.allinterface.SignupData_interface;
+import dhe.digital.library.haryana.allinterface.TrackGrienvanceData_interface;
 import dhe.digital.library.haryana.models.AlumniAchievementsResponse;
 import dhe.digital.library.haryana.models.BookRecordByLibIdResponse;
 import dhe.digital.library.haryana.models.BooksDetailResponse;
@@ -54,6 +55,7 @@ import dhe.digital.library.haryana.models.ReadViewsCountResponse;
 import dhe.digital.library.haryana.models.SearchResponse;
 import dhe.digital.library.haryana.models.SignupRequest;
 import dhe.digital.library.haryana.models.SignupResponse;
+import dhe.digital.library.haryana.models.TrackGrievanceResponse;
 import dhe.digital.library.haryana.models.VerifyOtpRequest;
 import dhe.digital.library.haryana.models.VerifyOtpResponse;
 import dhe.digital.library.haryana.models.ViewAllResponse;
@@ -230,6 +232,59 @@ public class WebAPiCall {
             }
         });
     }
+
+
+    public void getLibraryTrackGrievanceMethod(final Activity activity, final Context context, String TrackGrievanceId,View llmain,  final TrackGrienvanceData_interface anInterface) {
+
+        loadershowwithMsg(context, "Loading...");
+
+
+        Call<TrackGrievanceResponse> responseCall = ApiClient.getClient().getLibraryTrackGrievanceIdAPi(TrackGrievanceId);
+        responseCall.enqueue(new Callback<TrackGrievanceResponse>() {
+            @Override
+            public void onResponse(Call<TrackGrievanceResponse> call, Response<TrackGrievanceResponse> response) {
+                 dailoghide(context);
+                if (response.isSuccessful()) {
+
+                    assert response.body() != null;
+                    if (response.body().getResponse() == 200) {
+
+
+                        llmain.setVisibility(View.VISIBLE);
+
+
+                        anInterface.allTrackGrienvancedata(response.body().getData());
+
+
+                    } else if (response.body().getResponse() == 400) {
+
+
+
+                        llmain.setVisibility(View.VISIBLE);
+
+
+                        anInterface.allTrackGrienvancedata(response.body().getData());
+
+                    }
+
+
+                } else {
+                    GlobalClass.showtost(context, "" + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TrackGrievanceResponse> call, Throwable t) {
+                dailoghide(context);
+                t.printStackTrace();
+
+                Log.d("dddddd", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+
+
 
 
     public void getLibraryAlumniAchievementsByLibIdDataMethod(final Activity activity, final Context context, String libId, RelativeLayout llmain, SwipeRefreshLayout mSwipeRefreshLayout, final GetLibraryAlumniAchievementsByLibIdData_interface anInterface) {

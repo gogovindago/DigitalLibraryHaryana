@@ -274,6 +274,9 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             DataModelLeftNew libraryGrievanceActivity = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, " Library Grievance ", 105);
             dataModelLeftList.add(libraryGrievanceActivity);
 
+            DataModelLeftNew librarytrackGrievanceActivity = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, " Library Track Grievance ", 106);
+            dataModelLeftList.add(librarytrackGrievanceActivity);
+
             DataModelLeftNew ebooks = new DataModelLeftNew(R.drawable.ic_baseline_book_online_24, "E-Books", 1);
             dataModelLeftList.add(ebooks);
 
@@ -696,6 +699,16 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 libraryGrievanceintent.putExtra("typeReq", "libraryGrievance");
                 libraryGrievanceintent.putExtra("titleOfPage", "library Grievance");
                 startActivity(libraryGrievanceintent);
+                break;
+
+                case 106:
+                mDrawerLayout.closeDrawers();
+                // Intent Books_Available_in_Library = new Intent(MainActivity.this, BooksAvailableinLibrary.class);
+                Intent librarytrackGrievanceintent = new Intent(MainActivity.this, TrackGrievanceActivity.class);
+                    librarytrackGrievanceintent.putExtra("typeId", "1");
+                    librarytrackGrievanceintent.putExtra("typeReq", "libraryTrackGrievance");
+                    librarytrackGrievanceintent.putExtra("titleOfPage", "library Track Grievance");
+                startActivity(librarytrackGrievanceintent);
                 break;
 
             case 1:

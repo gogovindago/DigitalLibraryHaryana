@@ -118,6 +118,13 @@ public class GrievanceActivity extends BaseActivity implements AdapterView.OnIte
             }
         });
 
+        binding.btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
 
         binding.btncomplaintsbmt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -235,10 +242,11 @@ public class GrievanceActivity extends BaseActivity implements AdapterView.OnIte
         if (data == 200) {
             binding.rrmain.setVisibility(View.GONE);
             binding.txtmsg.setVisibility(View.VISIBLE);
+            binding.btnOk.setVisibility(View.VISIBLE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                binding.txtmsg.setText(Html.fromHtml("<h6> Registered Complaint Status:- <br> <br>" + sysMessage + "</h6>", Html.FROM_HTML_MODE_COMPACT));
+                binding.txtmsg.setText(Html.fromHtml("<h6> <b>Registered Complaint Status:- </b><br> <br>" + sysMessage + "</h6>", Html.FROM_HTML_MODE_COMPACT));
             } else {
-                binding.txtmsg.setText(Html.fromHtml("<h6> Registered Complaint Status:- <br> <br>" + sysMessage + "</h6>"));
+                binding.txtmsg.setText(Html.fromHtml("<h6><b> Registered Complaint Status:- </b><br> <br>" + sysMessage + "</h6>"));
             }
 
 

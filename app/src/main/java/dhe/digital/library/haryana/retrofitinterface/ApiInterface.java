@@ -22,6 +22,7 @@ import dhe.digital.library.haryana.models.ReadViewsCountResponse;
 import dhe.digital.library.haryana.models.SearchResponse;
 import dhe.digital.library.haryana.models.SignupRequest;
 import dhe.digital.library.haryana.models.SignupResponse;
+import dhe.digital.library.haryana.models.TrackGrievanceResponse;
 import dhe.digital.library.haryana.models.VerifyOtpRequest;
 import dhe.digital.library.haryana.models.VerifyOtpResponse;
 import dhe.digital.library.haryana.models.ViewAllResponse;
@@ -43,37 +44,35 @@ public interface ApiInterface {
     Call<SignupResponse> signupUser(@Body SignupRequest request);
 
 
-   //http://112.196.99.107:81/api/commonapi/LibraryFacilities/8
-   @GET("LibraryAlumniAchievements/{LibraryId}")
+    //http://112.196.99.107:81/api/commonapi/TrackGrievance/1001
+    @GET("TrackGrievance/{TrackGrievanceId}")
+    Call<TrackGrievanceResponse> getLibraryTrackGrievanceIdAPi(@Path("TrackGrievanceId") String s);
+
+
+    //http://112.196.99.107:81/api/commonapi/LibraryFacilities/8
+    @GET("LibraryAlumniAchievements/{LibraryId}")
     Call<AlumniAchievementsResponse> getLibraryAlumniAchievementsByLibIdAPi(@Path("LibraryId") String s);
 
 
-
-
-//http://112.196.99.107:81/api/commonapi/LibraryFacilities/8
-   @GET("LibraryFacilities/{LibraryId}")
+    //http://112.196.99.107:81/api/commonapi/LibraryFacilities/8
+    @GET("LibraryFacilities/{LibraryId}")
     Call<LibraryFacilitiesResponse> getLibraryFacilitiesByLibIdAPi(@Path("LibraryId") String s);
 
 
-
-
-
-
- // http://112.196.99.107:81/api/commonapi/GetBookRecordDetail
-   @GET("GetBookRecordDetail/{BookId}")
+    // http://112.196.99.107:81/api/commonapi/GetBookRecordDetail
+    @GET("GetBookRecordDetail/{BookId}")
     Call<BooksDetailResponse> getBookDetailByLibIdResponseDataAPi(@Path("BookId") String s);
 
- // http://112.196.99.107:81/api/commonapi/LibraryEventsActivities
-   @GET("LibraryEventsActivities/{LibraryId}")
+    // http://112.196.99.107:81/api/commonapi/LibraryEventsActivities
+    @GET("LibraryEventsActivities/{LibraryId}")
     Call<LibraryEventsActivitieResponse> getLibraryEventsActivitiesLibIdResponseDataAPi(@Path("LibraryId") String s);
 
-// http://112.196.99.107:81/api/commonapi/GetBookRecord
-   @GET("GetBookRecord/{LibraryId}")
+    // http://112.196.99.107:81/api/commonapi/GetBookRecord
+    @GET("GetBookRecord/{LibraryId}")
     Call<BookRecordByLibIdResponse> getBookRecordByLibIdResponseDataAPi(@Path("LibraryId") String s);
 
 
-
- @GET("GetAllHomeImages/{typeId}")
+    @GET("GetAllHomeImages/{typeId}")
     Call<ViewAllResponse> getAllDataAPi(@Path("typeId") String s);
 
     //https://localhost:44375/api/commonapi/GetLibrariesByTypeId/1
@@ -84,22 +83,22 @@ public interface ApiInterface {
     @GET("GetProfile/{MobileNo}")
     Call<ProfileDataResponse> getProfileDataAPi(@Path("MobileNo") String s);
 
-  //http://112.196.99.107:81/api/commonapi/SearchData/mri
+    //http://112.196.99.107:81/api/commonapi/SearchData/mri
     @GET("SearchData/{searchingData}")
     Call<SearchResponse> getsearchingDataAPi(@Path("searchingData") String s);
 
-//http://112.196.99.107:81/api/commonapi/LibraryGallery/8
+    //http://112.196.99.107:81/api/commonapi/LibraryGallery/8
     @GET("LibraryGallery/{LibraryId}")
     Call<LibraryGalleryResponse> getLibraryGalleryDataAPi(@Path("LibraryId") String s);
 
-  @GET("GetHomeImages")
+    @GET("GetHomeImages")
     Call<HomePageResponse> getHomePageDataAPi();
 
 
     @GET("GetAllLibrariesType")
     Call<LibraryTypeAndCoutResponse> getAllLibraryTypeAPi();
 
-//http://112.196.99.107:81/api/commonapi/GetHearingSpeechimpairedData
+    //http://112.196.99.107:81/api/commonapi/GetHearingSpeechimpairedData
     @GET("GetHearingSpeechimpairedData")
     Call<HearingSpeechimpairedDataResponse> getAllGetHearingSpeechimpairedDataAPi();
 
