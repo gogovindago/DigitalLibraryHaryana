@@ -1,3 +1,4 @@
+
 package dhe.digital.library.haryana.ui.activity;
 
 import android.annotation.SuppressLint;
@@ -18,14 +19,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dhe.digital.library.haryana.R;
+import dhe.digital.library.haryana.adapter.SpinnerImportantLinkTypeAdapter;
 import dhe.digital.library.haryana.adapter.SpinnerLibraryTypeAdapter;
 import dhe.digital.library.haryana.adapter.ViewAllItemsAdapter;
 import dhe.digital.library.haryana.adapter.ViewLibByIdlItemsAdapter;
 import dhe.digital.library.haryana.allinterface.GetAllData_interface;
 import dhe.digital.library.haryana.allinterface.GetAllLibraryTypesData_interface;
+import dhe.digital.library.haryana.allinterface.GetImportantLinksTypeData_interface;
 import dhe.digital.library.haryana.allinterface.GetLibTypeByIdData_interface;
 import dhe.digital.library.haryana.apicall.WebAPiCall;
 import dhe.digital.library.haryana.databinding.ActivityViewalldataBinding;
+import dhe.digital.library.haryana.models.ImportantLinksTypeResponse;
 import dhe.digital.library.haryana.models.LibraryTypeAndCoutResponse;
 import dhe.digital.library.haryana.models.LibraryTypeByIdResponse;
 import dhe.digital.library.haryana.models.ViewAllResponse;
@@ -34,13 +38,12 @@ import dhe.digital.library.haryana.utility.BaseActivity;
 import dhe.digital.library.haryana.utility.CSPreferences;
 import dhe.digital.library.haryana.utility.GlobalClass;
 
-public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAdapter.ItemListener, GetAllData_interface, GetAllLibraryTypesData_interface, AdapterView.OnItemSelectedListener, GetLibTypeByIdData_interface, ViewLibByIdlItemsAdapter.ItemListener {
+public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAdapter.ItemListener, GetAllData_interface, GetAllLibraryTypesData_interface, AdapterView.OnItemSelectedListener, GetLibTypeByIdData_interface, ViewLibByIdlItemsAdapter.ItemListener, GetImportantLinksTypeData_interface {
 
     private static int firstVisibleInListview;
     GridLayoutManager manager;
     ActivityViewalldataBinding binding;
     boolean skiplogin;
-
     private List<ViewAllResponse.Datum> arrayList = new ArrayList<ViewAllResponse.Datum>();
     private List<LibraryTypeAndCoutResponse.Datum> librarydataArrayList = new ArrayList<LibraryTypeAndCoutResponse.Datum>();
     private List<LibraryTypeByIdResponse.Datum> libdataByIDlist = new ArrayList<LibraryTypeByIdResponse.Datum>();
@@ -48,9 +51,14 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
     ViewAllItemsAdapter allItemsAdapter;
     ViewLibByIdlItemsAdapter viewLibByIdlItemsAdapter;
     String typeId, itemType, titleOfPage, typeReq, ttttt = "BooksAvailableinLibrary",
-            userLibSelectedId;
-    int spnLibCurrentPosition;
+            userLibSelectedId, linkTypeSelectedId;
+    int spnLibCurrentPosition, spnlinkTypeCurrentPosition;
+
     SpinnerLibraryTypeAdapter spinnerLibraryTypeAdapter;
+
+    SpinnerImportantLinkTypeAdapter linkTypeAdapter;
+    private List<ImportantLinksTypeResponse.Datum> data = new ArrayList<ImportantLinksTypeResponse.Datum>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +82,15 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
                 typeReq = extras.getString("typeReq");
                 titleOfPage = extras.getString("titleOfPage");
                 typeId = extras.getString("typeId");
+
+
+
                 itemType = extras.getString("itemType");
+
+
+
+
+
                 // webViewUrl = extras.getString("typeId");
 
                 binding.toolbar.tvToolbarTitle.setAllCaps(true);
@@ -110,6 +126,7 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
             {
 
                 binding.llstate.setVisibility(View.GONE);
+
             }
         } else {
 
@@ -175,6 +192,62 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
                     binding.llstate.setVisibility(View.GONE);
                     binding.recyclerView.setVisibility(View.VISIBLE);
                     if (GlobalClass.isNetworkConnected(ViewAllDataActivity.this)) {
+
+
+                        if (typeId.equalsIgnoreCase("6")) {
+                            if (spnlinkTypeCurrentPosition == 0) {
+                                typeId = "6";
+                                itemType = "importantlink";
+
+                            } else if (spnlinkTypeCurrentPosition == 1) {
+                                typeId = "6";
+                                itemType = "importantlink";
+
+                            } else if (spnlinkTypeCurrentPosition == 2) {
+                                typeId = "2";
+                                itemType = "Book";
+
+                            } else if (spnlinkTypeCurrentPosition == 3) {
+                                typeId = "4";
+                                itemType = "Video";
+
+
+                            } else if (spnlinkTypeCurrentPosition == 4) {
+                                typeId = "10";
+                                itemType = "Kids";
+
+                            } else if (spnlinkTypeCurrentPosition == 5) {
+
+                                typeId = "3";
+                                itemType = "Research_And_Journals";
+
+                            } else if (spnlinkTypeCurrentPosition == 6) {
+                                typeId = "12";
+                                itemType = "Courses";
+
+                            } else if (spnlinkTypeCurrentPosition == 7) {
+                                typeId = "9";
+                                itemType = "Magazines";
+
+                            } else if (spnlinkTypeCurrentPosition == 8) {
+                                typeId = "11";
+                                itemType = "OtherLibraries";
+
+                            } else if (spnlinkTypeCurrentPosition == 9) {
+                                typeId = "7";
+                                itemType = "visuallyImpaired";
+                            } else if (spnlinkTypeCurrentPosition == 10) {
+                                typeId = "8";
+                                itemType = "CompetitiveExam";
+                            }
+
+
+                    }else {
+                            typeId = typeId;
+
+                    }
+
+
 
                         WebAPiCall webapiCall = new WebAPiCall();
 
@@ -287,6 +360,61 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
                 titleOfPage = extras.getString("titleOfPage");
                 typeId = extras.getString("typeId");
                 itemType = extras.getString("itemType");
+                if (itemType.equalsIgnoreCase("importantlink")){
+
+
+                    if (typeId.equalsIgnoreCase("6")) {
+                        if (spnlinkTypeCurrentPosition == 0) {
+                            typeId = "6";
+                            itemType = "importantlink";
+
+                        } else if (spnlinkTypeCurrentPosition == 1) {
+                            typeId = "6";
+                            itemType = "importantlink";
+
+                        } else if (spnlinkTypeCurrentPosition == 2) {
+                            typeId = "2";
+                            itemType = "Book";
+
+                        } else if (spnlinkTypeCurrentPosition == 3) {
+                            typeId = "4";
+                            itemType = "Video";
+
+
+                        } else if (spnlinkTypeCurrentPosition == 4) {
+                            typeId = "10";
+                            itemType = "Kids";
+
+                        } else if (spnlinkTypeCurrentPosition == 5) {
+
+                            typeId = "3";
+                            itemType = "Research_And_Journals";
+
+                        } else if (spnlinkTypeCurrentPosition == 6) {
+                            typeId = "12";
+                            itemType = "Courses";
+
+                        } else if (spnlinkTypeCurrentPosition == 7) {
+                            typeId = "9";
+                            itemType = "Magazines";
+
+                        } else if (spnlinkTypeCurrentPosition == 8) {
+                            typeId = "11";
+                            itemType = "Other_Libraries";
+
+                        } else if (spnlinkTypeCurrentPosition == 9) {
+                            typeId = "7";
+                            itemType = "visuallyImpaired";
+                        } else if (spnlinkTypeCurrentPosition == 10) {
+                            typeId = "8";
+                            itemType = "CompetitiveExam";
+                        }
+                    }
+
+                }else {
+
+                    itemType = extras.getString("itemType");
+                }
                 // webViewUrl = extras.getString("typeId");
 
                 binding.toolbar.tvToolbarTitle.setAllCaps(true);
@@ -326,8 +454,9 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
 
                 WebAPiCall webapiCall = new WebAPiCall();
 
-                webapiCall.getAllDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this, typeId);
-
+                // webapiCall.getAllDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this, typeId);
+                webapiCall.getImportantLinksTypeMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.llimport, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this);
+                binding.spnimporttype.setSelection(0, true);
             } else {
 
                 Toast.makeText(ViewAllDataActivity.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
@@ -398,6 +527,7 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
 
 
         binding.spnlibrarytype.setOnItemSelectedListener(this);
+        binding.spnimporttype.setOnItemSelectedListener(this);
 
     }
 
@@ -445,25 +575,109 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
 
-        // int id = adapterView.getId();
+        int id = adapterView.getId();
 
-        //  if (id == binding.spnlibrarytype) {
-
-
-        //  if (AccountType.equalsIgnoreCase("1")) {
+        if (id == R.id.spnlibrarytype) {
 
 
-        if (position != 0) {
-            spnLibCurrentPosition = position;
-            userLibSelectedId = String.valueOf(librarydataArrayList.get(position).getLibraryTypeId());
+            //  if (AccountType.equalsIgnoreCase("1")) {
+
+
+            if (position != 0) {
+                spnLibCurrentPosition = position;
+                userLibSelectedId = String.valueOf(librarydataArrayList.get(position).getLibraryTypeId());
+
+                // Toast.makeText(getApplicationContext(), allDistrict.get(position).getDistrict(), Toast.LENGTH_LONG).show();
+                // Toast.makeText(getApplicationContext(), String.valueOf(allDistrict.get(position).getDistrictId()), Toast.LENGTH_LONG).show();
+
+                if (GlobalClass.isNetworkConnected(this)) {
+
+                    WebAPiCall webapiCall = new WebAPiCall();
+                    webapiCall.getLibraryTypeByIdDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this, userLibSelectedId);
+
+
+                } else {
+
+                    Toast.makeText(this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
+                }
+
+            } else {
+
+                spnLibCurrentPosition = position;
+                binding.recyclerView.setVisibility(View.GONE);
+
+
+            }
+
+
+        } else if (id == R.id.spnimporttype) {
+
+            if (itemType.equalsIgnoreCase("importantlink")){
+
+
+                if (typeId.equalsIgnoreCase("6")) {
+                    if (spnlinkTypeCurrentPosition == 0) {
+                        typeId = "6";
+                        itemType = "importantlink";
+
+                    } else if (spnlinkTypeCurrentPosition == 1) {
+                        typeId = "6";
+                        itemType = "importantlink";
+
+                    } else if (spnlinkTypeCurrentPosition == 2) {
+                        typeId = "2";
+                        itemType = "Book";
+
+                    } else if (spnlinkTypeCurrentPosition == 3) {
+                        typeId = "4";
+                        itemType = "Video";
+
+
+                    } else if (spnlinkTypeCurrentPosition == 4) {
+                        typeId = "10";
+                        itemType = "Kids";
+
+                    } else if (spnlinkTypeCurrentPosition == 5) {
+
+                        typeId = "3";
+                        itemType = "Research_And_Journals";
+
+                    } else if (spnlinkTypeCurrentPosition == 6) {
+                        typeId = "12";
+                        itemType = "Courses";
+
+                    } else if (spnlinkTypeCurrentPosition == 7) {
+                        typeId = "9";
+                        itemType = "Magazines";
+
+                    } else if (spnlinkTypeCurrentPosition == 8) {
+                        typeId = "11";
+                        itemType = "Other_Libraries";
+
+                    } else if (spnlinkTypeCurrentPosition == 9) {
+                        typeId = "7";
+                        itemType = "visuallyImpaired";
+                    } else if (spnlinkTypeCurrentPosition == 10) {
+                        typeId = "8";
+                        itemType = "CompetitiveExam";
+                    }
+                }
+
+            }else {
+
+
+            }
+            //  if (position != 0) {
+            spnlinkTypeCurrentPosition = position;
+            linkTypeSelectedId = String.valueOf(data.get(position).getTypeId());
 
             // Toast.makeText(getApplicationContext(), allDistrict.get(position).getDistrict(), Toast.LENGTH_LONG).show();
-            // Toast.makeText(getApplicationContext(), String.valueOf(allDistrict.get(position).getDistrictId()), Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), String.valueOf(data.get(position).getLinkType()), Toast.LENGTH_LONG).show();
 
             if (GlobalClass.isNetworkConnected(this)) {
 
                 WebAPiCall webapiCall = new WebAPiCall();
-                webapiCall.getLibraryTypeByIdDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this, userLibSelectedId);
+                webapiCall.getAllDataMethod(ViewAllDataActivity.this, ViewAllDataActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, ViewAllDataActivity.this, linkTypeSelectedId);
 
 
             } else {
@@ -471,10 +685,13 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
                 Toast.makeText(this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
             }
 
-        } else {
+            //   } else {
 
-            spnLibCurrentPosition = position;
-            binding.recyclerView.setVisibility(View.GONE);
+            //    spnlinkTypeCurrentPosition = position;
+            //  binding.recyclerView.setVisibility(View.GONE);
+
+
+            //  }
 
 
         }
@@ -565,6 +782,19 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
             LibraryEventsandActivities.putExtra("title", item.getDescription());
             LibraryEventsandActivities.putExtra("itemid", item.getId());
             startActivity(LibraryEventsandActivities);
+        }else if (typeReq.equalsIgnoreCase("Committee")) {
+
+            Intent LibraryEventsandActivities = new Intent(this, CommitteeDetailActivity.class);
+            LibraryEventsandActivities.putExtra("title", item.getDescription());
+            LibraryEventsandActivities.putExtra("itemid", item.getId());
+            startActivity(LibraryEventsandActivities);
+
+}else if (typeReq.equalsIgnoreCase("staff")) {
+
+            Intent LibraryEventsandActivities = new Intent(this, StaffDetailActivity.class);
+            LibraryEventsandActivities.putExtra("title", item.getDescription());
+            LibraryEventsandActivities.putExtra("itemid", item.getId());
+            startActivity(LibraryEventsandActivities);
 
 
         } else {
@@ -579,13 +809,58 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
 
                 if (item.getUrl() != null) {
 
+
+/*0
+linkTypeId : 7
+linkType : "Important Links"
+typeId : 6
+1
+linkTypeId : 1
+linkType : "E-Books"
+typeId : 2
+2
+linkTypeId : 2
+linkType : "Videos/Audios"
+typeId : 4
+3
+linkTypeId : 3
+linkType : "Kids"
+typeId : 10
+4
+linkTypeId : 4
+linkType : "Research & Journals"
+typeId : 3
+5
+linkTypeId : 5
+linkType : "Courses"
+typeId : null
+6
+linkTypeId : 6
+linkType : "Magazines"
+typeId : 9
+7
+linkTypeId : 8
+linkType : "Other Libraries"
+typeId : 11
+8
+linkTypeId : 9
+linkType : "Divyaang (Visually impaired)"
+typeId : 7
+9
+linkTypeId : 10
+linkType : "Competitive Exams"
+typeId : 8*/
+
+
                     Intent certificate = new Intent(this, OpenBooksActivity.class);
                     certificate.putExtra("bookurl", item.getUrl());
                     certificate.putExtra("title", item.getDescription());
                     certificate.putExtra("typeId", typeId);
-                    certificate.putExtra("itemType", "importantlink");
+                   // certificate.putExtra("itemType", "importantlink");
+                    certificate.putExtra("itemType", itemType);
                     certificate.putExtra("itemid", item.getId());
                     startActivity(certificate);
+
                 } else {
 
                     GlobalClass.dailogError(this, "No Url Found", "NO any url found to redirect to next page.");
@@ -595,5 +870,25 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
             }
 
         }
+
+    }
+
+    @Override
+    public void GetImportantLinksTypeData(List<ImportantLinksTypeResponse.Datum> list) {
+        data.clear();
+        data.addAll(list);
+
+        ImportantLinksTypeResponse.Datum datum = new ImportantLinksTypeResponse.Datum();
+        datum.setLinkType("All Types");
+        datum.setLinkTypeId(6);
+        datum.setTypeId(6);
+        data.add(0, datum);
+
+        linkTypeAdapter = new SpinnerImportantLinkTypeAdapter(getApplicationContext(), data);
+        binding.spnimporttype.setAdapter(linkTypeAdapter);
+        binding.spnimporttype.setSelection(0, true);
+        linkTypeAdapter.notifyDataSetChanged();
+
+
     }
 }

@@ -89,6 +89,7 @@ public class OpenBooksActivity extends AppCompatActivity implements View.OnClick
 
                 toolbartitle.setAllCaps(true);
                 toolbartitle.setText(result);
+
               //  setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
             //    applay.setBackgroundColor(getResources().getColor(android.R.color.transparent));
 
@@ -115,7 +116,7 @@ public class OpenBooksActivity extends AppCompatActivity implements View.OnClick
 
                             readViewsCountRequest.setBookid(String.valueOf(itemid));
                             readViewsCountRequest.setPhone(PhoneNo);
-                            readViewsCountRequest.setType(itemType);
+                                readViewsCountRequest.setType(itemType);
 
                             WebAPiCall webapiCall = new WebAPiCall();
                             webapiCall.readCountDataMethod(OpenBooksActivity.this, OpenBooksActivity.this, readViewsCountRequest);

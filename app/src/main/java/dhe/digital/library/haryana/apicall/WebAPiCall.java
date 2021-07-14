@@ -15,11 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import dhe.digital.library.haryana.allinterface.CommitteeDetail_Data_interface;
 import dhe.digital.library.haryana.allinterface.GetAllData_interface;
 import dhe.digital.library.haryana.allinterface.GetAllHearingSpeechData_interface;
 import dhe.digital.library.haryana.allinterface.GetAllLibraryTypesData_interface;
 import dhe.digital.library.haryana.allinterface.GetBookDetailData_interface;
 import dhe.digital.library.haryana.allinterface.GetBookRecordByLibIdData_interface;
+import dhe.digital.library.haryana.allinterface.GetImportantLinksTypeData_interface;
 import dhe.digital.library.haryana.allinterface.GetLibTypeByIdData_interface;
 import dhe.digital.library.haryana.allinterface.GetLibraryAlumniAchievementsByLibIdData_interface;
 import dhe.digital.library.haryana.allinterface.GetLibraryEventsandActivitiesByLibIdData_interface;
@@ -33,13 +35,16 @@ import dhe.digital.library.haryana.allinterface.ProfileData_interface;
 import dhe.digital.library.haryana.allinterface.SearchingData_interface;
 import dhe.digital.library.haryana.allinterface.SignupData_interface;
 import dhe.digital.library.haryana.allinterface.TrackGrienvanceData_interface;
+import dhe.digital.library.haryana.allinterface.staffDetail_Data_interface;
 import dhe.digital.library.haryana.models.AlumniAchievementsResponse;
 import dhe.digital.library.haryana.models.BookRecordByLibIdResponse;
 import dhe.digital.library.haryana.models.BooksDetailResponse;
+import dhe.digital.library.haryana.models.CommitteeDetailsResponse;
 import dhe.digital.library.haryana.models.ForgotPasswordRequest;
 import dhe.digital.library.haryana.models.ForgotPasswordResponse;
 import dhe.digital.library.haryana.models.HearingSpeechimpairedDataResponse;
 import dhe.digital.library.haryana.models.HomePageResponse;
+import dhe.digital.library.haryana.models.ImportantLinksTypeResponse;
 import dhe.digital.library.haryana.models.InsertGrievanceRequest;
 import dhe.digital.library.haryana.models.InsertGrievanceResponse;
 import dhe.digital.library.haryana.models.LibraryEventsActivitieResponse;
@@ -55,6 +60,7 @@ import dhe.digital.library.haryana.models.ReadViewsCountResponse;
 import dhe.digital.library.haryana.models.SearchResponse;
 import dhe.digital.library.haryana.models.SignupRequest;
 import dhe.digital.library.haryana.models.SignupResponse;
+import dhe.digital.library.haryana.models.StaffDetailsResponse;
 import dhe.digital.library.haryana.models.TrackGrievanceResponse;
 import dhe.digital.library.haryana.models.VerifyOtpRequest;
 import dhe.digital.library.haryana.models.VerifyOtpResponse;
@@ -234,7 +240,109 @@ public class WebAPiCall {
     }
 
 
-    public void getLibraryTrackGrievanceMethod(final Activity activity, final Context context, String TrackGrievanceId,View llmain,  final TrackGrienvanceData_interface anInterface) {
+    public void getstaffDetailsMethod(final Activity activity, final Context context, String libId,SwipeRefreshLayout mSwipeRefreshLayout, RelativeLayout llmain, final staffDetail_Data_interface anInterface) {
+
+        loadershowwithMsg(context, "Loading...");
+
+
+        Call<StaffDetailsResponse> responseCall = ApiClient.getClient().getStaffDetailsAPi(libId);
+        responseCall.enqueue(new Callback<StaffDetailsResponse>() {
+            @Override
+            public void onResponse(Call<StaffDetailsResponse> call, Response<StaffDetailsResponse> response) {
+                dailoghide(context);
+                if (response.isSuccessful()) {
+
+                    assert response.body() != null;
+                    if (response.body().getResponse() == 200) {
+
+                        mSwipeRefreshLayout.setRefreshing(false);
+                        llmain.setVisibility(View.VISIBLE);
+                        anInterface.allstaffDetaildata(response.body().getData());
+
+                    } else if (response.body().getResponse() == 400) {
+
+                        llmain.setVisibility(View.VISIBLE);
+
+                        anInterface.allstaffDetaildata(response.body().getData());
+
+                    }
+
+
+                } else {
+                    GlobalClass.showtost(context, "" + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<StaffDetailsResponse> call, Throwable t) {
+                dailoghide(context);
+                t.printStackTrace();
+
+                Log.d("dddddd", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+
+
+
+
+
+
+
+    public void getCommitteeDetailsMethod(final Activity activity, final Context context, String libId,SwipeRefreshLayout mSwipeRefreshLayout, RelativeLayout llmain, final CommitteeDetail_Data_interface anInterface) {
+
+        loadershowwithMsg(context, "Loading...");
+
+
+        Call<CommitteeDetailsResponse> responseCall = ApiClient.getClient().getCommitteeDetailsAPi(libId);
+        responseCall.enqueue(new Callback<CommitteeDetailsResponse>() {
+            @Override
+            public void onResponse(Call<CommitteeDetailsResponse> call, Response<CommitteeDetailsResponse> response) {
+                dailoghide(context);
+                if (response.isSuccessful()) {
+
+                    assert response.body() != null;
+                    if (response.body().getResponse() == 200) {
+
+                        mSwipeRefreshLayout.setRefreshing(false);
+                        llmain.setVisibility(View.VISIBLE);
+
+
+                        anInterface.allCommitteeDetaildata(response.body().getData());
+
+
+                    } else if (response.body().getResponse() == 400) {
+
+
+                        llmain.setVisibility(View.VISIBLE);
+
+
+                        anInterface.allCommitteeDetaildata(response.body().getData());
+
+                    }
+
+
+                } else {
+                    GlobalClass.showtost(context, "" + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CommitteeDetailsResponse> call, Throwable t) {
+                dailoghide(context);
+                t.printStackTrace();
+
+                Log.d("dddddd", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+
+
+
+
+    public void getLibraryTrackGrievanceMethod(final Activity activity, final Context context, String TrackGrievanceId, View llmain, final TrackGrienvanceData_interface anInterface) {
 
         loadershowwithMsg(context, "Loading...");
 
@@ -243,7 +351,7 @@ public class WebAPiCall {
         responseCall.enqueue(new Callback<TrackGrievanceResponse>() {
             @Override
             public void onResponse(Call<TrackGrievanceResponse> call, Response<TrackGrievanceResponse> response) {
-                 dailoghide(context);
+                dailoghide(context);
                 if (response.isSuccessful()) {
 
                     assert response.body() != null;
@@ -257,7 +365,6 @@ public class WebAPiCall {
 
 
                     } else if (response.body().getResponse() == 400) {
-
 
 
                         llmain.setVisibility(View.VISIBLE);
@@ -282,9 +389,6 @@ public class WebAPiCall {
             }
         });
     }
-
-
-
 
 
     public void getLibraryAlumniAchievementsByLibIdDataMethod(final Activity activity, final Context context, String libId, RelativeLayout llmain, SwipeRefreshLayout mSwipeRefreshLayout, final GetLibraryAlumniAchievementsByLibIdData_interface anInterface) {
@@ -516,6 +620,50 @@ public class WebAPiCall {
 
             @Override
             public void onFailure(Call<LibraryGalleryResponse> call, Throwable t) {
+                mSwipeRefreshLayout.setRefreshing(false);
+                // dailoghide(context);
+                t.printStackTrace();
+
+                Log.d("dddddd", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+
+    public void getImportantLinksTypeMethod(final Activity activity, final Context context, LinearLayout llmain, SwipeRefreshLayout mSwipeRefreshLayout, final GetImportantLinksTypeData_interface anInterface) {
+
+        // loadershowwithMsg(context, "Loading...");
+        mSwipeRefreshLayout.setRefreshing(true);
+
+        Call<ImportantLinksTypeResponse> responseCall = ApiClient.getClient().getImportantLinksTypeAPi();
+        responseCall.enqueue(new Callback<ImportantLinksTypeResponse>() {
+            @Override
+            public void onResponse(Call<ImportantLinksTypeResponse> call, Response<ImportantLinksTypeResponse> response) {
+                // dailoghide(context);
+                if (response.isSuccessful()) {
+
+                    if (response.body().getResponse() == 200) {
+
+                        mSwipeRefreshLayout.setRefreshing(false);
+
+                        llmain.setVisibility(View.VISIBLE);
+
+
+                        anInterface.GetImportantLinksTypeData(response.body().getData());
+
+
+                    } else {
+
+                    }
+
+
+                } else {
+                    GlobalClass.showtost(context, "" + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ImportantLinksTypeResponse> call, Throwable t) {
                 mSwipeRefreshLayout.setRefreshing(false);
                 // dailoghide(context);
                 t.printStackTrace();
@@ -1016,9 +1164,9 @@ public class WebAPiCall {
                     if (response.body().getResponse() == 200) {
 
                         dailogsuccess(context, "Successfully.", "Complaint Registered Successfully.");
-                        data_interface.allGrienvancedata( response.body().getResponse(),response.body().getSysMessage());
+                        data_interface.allGrienvancedata(response.body().getResponse(), response.body().getSysMessage());
 
-                    }  else {
+                    } else {
 
                         dailogError(context, "Something went wrong !", "Please try after sometimes.");
 

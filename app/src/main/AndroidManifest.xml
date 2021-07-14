@@ -20,11 +20,14 @@
         android:theme="@style/Theme.DigitalLibraryHaryana"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <activity android:name=".ui.activity.CommitteeDetailActivity"
+            android:theme="@style/DigitalLibraryHaryana"
+            android:windowSoftInputMode="stateAlwaysHidden" ></activity>
         <activity
             android:name=".ui.activity.GrievanceActivity"
             android:label="@string/title_activity_books_availablein_library"
             android:theme="@style/DigitalLibraryHaryana"
-            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".ui.activity.LibraryGalleryActivity"
             android:label="@string/title_activity_books_availablein_library"
@@ -130,11 +133,13 @@
             android:name=".ui.activity.LibraryEventsandActivities"
             android:screenOrientation="portrait"
             android:theme="@style/DigitalLibraryHaryana" />
-
         <activity
             android:name=".ui.activity.TrackGrievanceActivity"
             android:screenOrientation="portrait"
             android:theme="@style/DigitalLibraryHaryana" />
+        <activity android:name=".ui.activity.StaffDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DigitalLibraryHaryana"/>
     </application>
 
 </manifest>

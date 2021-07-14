@@ -3,10 +3,12 @@ package dhe.digital.library.haryana.retrofitinterface;
 import dhe.digital.library.haryana.models.AlumniAchievementsResponse;
 import dhe.digital.library.haryana.models.BookRecordByLibIdResponse;
 import dhe.digital.library.haryana.models.BooksDetailResponse;
+import dhe.digital.library.haryana.models.CommitteeDetailsResponse;
 import dhe.digital.library.haryana.models.ForgotPasswordRequest;
 import dhe.digital.library.haryana.models.ForgotPasswordResponse;
 import dhe.digital.library.haryana.models.HearingSpeechimpairedDataResponse;
 import dhe.digital.library.haryana.models.HomePageResponse;
+import dhe.digital.library.haryana.models.ImportantLinksTypeResponse;
 import dhe.digital.library.haryana.models.InsertGrievanceRequest;
 import dhe.digital.library.haryana.models.InsertGrievanceResponse;
 import dhe.digital.library.haryana.models.LibraryEventsActivitieResponse;
@@ -22,6 +24,7 @@ import dhe.digital.library.haryana.models.ReadViewsCountResponse;
 import dhe.digital.library.haryana.models.SearchResponse;
 import dhe.digital.library.haryana.models.SignupRequest;
 import dhe.digital.library.haryana.models.SignupResponse;
+import dhe.digital.library.haryana.models.StaffDetailsResponse;
 import dhe.digital.library.haryana.models.TrackGrievanceResponse;
 import dhe.digital.library.haryana.models.VerifyOtpRequest;
 import dhe.digital.library.haryana.models.VerifyOtpResponse;
@@ -43,6 +46,20 @@ public interface ApiInterface {
     @POST("UserRegister")
     Call<SignupResponse> signupUser(@Body SignupRequest request);
 
+
+    //http://112.196.99.107:81/api/commonapi/ImportantLinksType
+    @GET("ImportantLinksType")
+    Call<ImportantLinksTypeResponse> getImportantLinksTypeAPi() ;
+
+
+
+    //http://112.196.99.107:81/api/commonapi/StaffDetails/8
+    @GET("StaffDetails/{LibraryId}")
+    Call<StaffDetailsResponse> getStaffDetailsAPi(@Path("LibraryId") String s);
+
+    //http://112.196.99.107:81/api/commonapi/CommitteeDetails/8
+    @GET("CommitteeDetails/{LibraryId}")
+    Call<CommitteeDetailsResponse> getCommitteeDetailsAPi(@Path("LibraryId") String s);
 
     //http://112.196.99.107:81/api/commonapi/TrackGrievance/1001
     @GET("TrackGrievance/{TrackGrievanceId}")

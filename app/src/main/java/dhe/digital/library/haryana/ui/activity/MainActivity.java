@@ -277,6 +277,12 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             DataModelLeftNew librarytrackGrievanceActivity = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, " Library Track Grievance ", 106);
             dataModelLeftList.add(librarytrackGrievanceActivity);
 
+            DataModelLeftNew Committee = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, " Committee Detail ", 107);
+            dataModelLeftList.add(Committee);
+
+            DataModelLeftNew Staff = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, " Staff's Detail ", 108);
+            dataModelLeftList.add(Staff);
+
             DataModelLeftNew ebooks = new DataModelLeftNew(R.drawable.ic_baseline_book_online_24, "E-Books", 1);
             dataModelLeftList.add(ebooks);
 
@@ -701,14 +707,34 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 startActivity(libraryGrievanceintent);
                 break;
 
-                case 106:
+            case 106:
                 mDrawerLayout.closeDrawers();
                 // Intent Books_Available_in_Library = new Intent(MainActivity.this, BooksAvailableinLibrary.class);
                 Intent librarytrackGrievanceintent = new Intent(MainActivity.this, TrackGrievanceActivity.class);
-                    librarytrackGrievanceintent.putExtra("typeId", "1");
-                    librarytrackGrievanceintent.putExtra("typeReq", "libraryTrackGrievance");
-                    librarytrackGrievanceintent.putExtra("titleOfPage", "library Track Grievance");
+                librarytrackGrievanceintent.putExtra("typeId", "1");
+                librarytrackGrievanceintent.putExtra("typeReq", "libraryTrackGrievance");
+                librarytrackGrievanceintent.putExtra("titleOfPage", "library Track Grievance");
                 startActivity(librarytrackGrievanceintent);
+                break;
+
+            case 107:
+
+                mDrawerLayout.closeDrawers();
+                Intent committeedetail = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                committeedetail.putExtra("typeId", "1");
+                committeedetail.putExtra("typeReq", "Committee");
+                committeedetail.putExtra("titleOfPage", "All Digital Libraries");
+                startActivity(committeedetail);
+                break;
+
+                case 108:
+
+                mDrawerLayout.closeDrawers();
+                Intent staffdetail = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                staffdetail.putExtra("typeId", "1");
+                staffdetail.putExtra("typeReq", "staff");
+                staffdetail.putExtra("titleOfPage", "All Digital Libraries");
+                startActivity(staffdetail);
                 break;
 
             case 1:
