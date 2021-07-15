@@ -4,6 +4,8 @@ import dhe.digital.library.haryana.models.AlumniAchievementsResponse;
 import dhe.digital.library.haryana.models.BookRecordByLibIdResponse;
 import dhe.digital.library.haryana.models.BooksDetailResponse;
 import dhe.digital.library.haryana.models.CommitteeDetailsResponse;
+import dhe.digital.library.haryana.models.ContactUsRequest;
+import dhe.digital.library.haryana.models.ContactUsResponse;
 import dhe.digital.library.haryana.models.ForgotPasswordRequest;
 import dhe.digital.library.haryana.models.ForgotPasswordResponse;
 import dhe.digital.library.haryana.models.HearingSpeechimpairedDataResponse;
@@ -118,6 +120,12 @@ public interface ApiInterface {
     //http://112.196.99.107:81/api/commonapi/GetHearingSpeechimpairedData
     @GET("GetHearingSpeechimpairedData")
     Call<HearingSpeechimpairedDataResponse> getAllGetHearingSpeechimpairedDataAPi();
+
+
+    //http://112.196.99.107:81/DigitalLibrary/api/commonapi/ContactUs
+    @POST("ContactUs")
+    Call<ContactUsResponse> contactusapi(@Body ContactUsRequest request);
+
 
 
     //http://112.196.99.107:81/DigitalLibrary/api/commonapi/UserLogin/7018401817/1234

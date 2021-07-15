@@ -325,6 +325,10 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
 
             }
 
+            DataModelLeftNew contactus = new DataModelLeftNew(R.drawable.ic_baseline_contact_mail_24, "Contact Us", 109);
+            dataModelLeftList.add(contactus);
+
+
             DataModelLeftNew OurOthersApps = new DataModelLeftNew(R.drawable.ic_baseline_apps_24, "Our Others Apps", 4);
             dataModelLeftList.add(OurOthersApps);
 
@@ -859,6 +863,14 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 mDrawerLayout.closeDrawers();
                 Intent notification = new Intent(this, NotificationsActivity.class);
                 startActivity(notification);
+                break;
+
+
+                case 109:
+
+                mDrawerLayout.closeDrawers();
+                Intent contactUsIntent = new Intent(this, ContactUsActivity.class);
+                startActivity(contactUsIntent);
                 break;
             case 8:
 
