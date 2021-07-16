@@ -84,11 +84,7 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
                 typeId = extras.getString("typeId");
 
 
-
                 itemType = extras.getString("itemType");
-
-
-
 
 
                 // webViewUrl = extras.getString("typeId");
@@ -242,11 +238,10 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
                             }
 
 
-                    }else {
+                        } else {
                             typeId = typeId;
 
-                    }
-
+                        }
 
 
                         WebAPiCall webapiCall = new WebAPiCall();
@@ -360,7 +355,7 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
                 titleOfPage = extras.getString("titleOfPage");
                 typeId = extras.getString("typeId");
                 itemType = extras.getString("itemType");
-                if (itemType.equalsIgnoreCase("importantlink")){
+                if (itemType.equalsIgnoreCase("importantlink")) {
 
 
                     if (typeId.equalsIgnoreCase("6")) {
@@ -411,7 +406,7 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
                         }
                     }
 
-                }else {
+                } else {
 
                     itemType = extras.getString("itemType");
                 }
@@ -612,7 +607,7 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
 
         } else if (id == R.id.spnimporttype) {
 
-            if (itemType.equalsIgnoreCase("importantlink")){
+            if (itemType.equalsIgnoreCase("importantlink")) {
 
 
                 if (typeId.equalsIgnoreCase("6")) {
@@ -663,7 +658,7 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
                     }
                 }
 
-            }else {
+            } else {
 
 
             }
@@ -782,19 +777,27 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
             LibraryEventsandActivities.putExtra("title", item.getDescription());
             LibraryEventsandActivities.putExtra("itemid", item.getId());
             startActivity(LibraryEventsandActivities);
-        }else if (typeReq.equalsIgnoreCase("Committee")) {
+        } else if (typeReq.equalsIgnoreCase("Committee")) {
 
             Intent LibraryEventsandActivities = new Intent(this, CommitteeDetailActivity.class);
             LibraryEventsandActivities.putExtra("title", item.getDescription());
             LibraryEventsandActivities.putExtra("itemid", item.getId());
             startActivity(LibraryEventsandActivities);
 
-}else if (typeReq.equalsIgnoreCase("staff")) {
+        } else if (typeReq.equalsIgnoreCase("staff")) {
 
             Intent LibraryEventsandActivities = new Intent(this, StaffDetailActivity.class);
             LibraryEventsandActivities.putExtra("title", item.getDescription());
             LibraryEventsandActivities.putExtra("itemid", item.getId());
             startActivity(LibraryEventsandActivities);
+
+        } else if (typeReq.equalsIgnoreCase("contactUs")) {
+
+            Intent contactUsintent = new Intent(this, ContactUsActivity.class);
+            contactUsintent.putExtra("title", item.getDescription());
+            contactUsintent.putExtra("itemid", item.getId());
+            contactUsintent.putExtra("liburl", item.getUrl());
+            startActivity(contactUsintent);
 
 
         } else {
@@ -856,7 +859,7 @@ typeId : 8*/
                     certificate.putExtra("bookurl", item.getUrl());
                     certificate.putExtra("title", item.getDescription());
                     certificate.putExtra("typeId", typeId);
-                   // certificate.putExtra("itemType", "importantlink");
+                    // certificate.putExtra("itemType", "importantlink");
                     certificate.putExtra("itemType", itemType);
                     certificate.putExtra("itemid", item.getId());
                     startActivity(certificate);

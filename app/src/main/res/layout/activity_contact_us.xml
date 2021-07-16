@@ -15,13 +15,27 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+        <ScrollView
+
+            android:gravity="center|top"
+            android:orientation="vertical"
+            android:paddingTop="4dip"
+            android:paddingBottom="4dip"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
 
         <LinearLayout
 
             android:id="@+id/ll"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center|top"
             android:orientation="vertical"
             android:paddingTop="4dip"
             android:paddingBottom="4dip"
@@ -29,6 +43,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:textStyle="bold"
+                style="@style/TextAppearance.AppCompat.Headline"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:id="@+id/txtmsgcontactus"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Contact Us:-"
+                android:layout_marginBottom="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </androidx.appcompat.widget.AppCompatTextView>
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -189,5 +218,6 @@
 
 
         </LinearLayout>
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

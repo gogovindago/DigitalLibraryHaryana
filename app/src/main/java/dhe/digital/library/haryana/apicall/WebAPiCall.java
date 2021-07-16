@@ -16,6 +16,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import dhe.digital.library.haryana.allinterface.CommitteeDetail_Data_interface;
+import dhe.digital.library.haryana.allinterface.ContactUsData_interface;
 import dhe.digital.library.haryana.allinterface.GetAllData_interface;
 import dhe.digital.library.haryana.allinterface.GetAllHearingSpeechData_interface;
 import dhe.digital.library.haryana.allinterface.GetAllLibraryTypesData_interface;
@@ -40,6 +41,8 @@ import dhe.digital.library.haryana.models.AlumniAchievementsResponse;
 import dhe.digital.library.haryana.models.BookRecordByLibIdResponse;
 import dhe.digital.library.haryana.models.BooksDetailResponse;
 import dhe.digital.library.haryana.models.CommitteeDetailsResponse;
+import dhe.digital.library.haryana.models.ContactUsRequest;
+import dhe.digital.library.haryana.models.ContactUsResponse;
 import dhe.digital.library.haryana.models.ForgotPasswordRequest;
 import dhe.digital.library.haryana.models.ForgotPasswordResponse;
 import dhe.digital.library.haryana.models.HearingSpeechimpairedDataResponse;
@@ -240,7 +243,7 @@ public class WebAPiCall {
     }
 
 
-    public void getstaffDetailsMethod(final Activity activity, final Context context, String libId,SwipeRefreshLayout mSwipeRefreshLayout, RelativeLayout llmain, final staffDetail_Data_interface anInterface) {
+    public void getstaffDetailsMethod(final Activity activity, final Context context, String libId, SwipeRefreshLayout mSwipeRefreshLayout, RelativeLayout llmain, final staffDetail_Data_interface anInterface) {
 
         loadershowwithMsg(context, "Loading...");
 
@@ -284,13 +287,7 @@ public class WebAPiCall {
     }
 
 
-
-
-
-
-
-
-    public void getCommitteeDetailsMethod(final Activity activity, final Context context, String libId,SwipeRefreshLayout mSwipeRefreshLayout, RelativeLayout llmain, final CommitteeDetail_Data_interface anInterface) {
+    public void getCommitteeDetailsMethod(final Activity activity, final Context context, String libId, SwipeRefreshLayout mSwipeRefreshLayout, RelativeLayout llmain, final CommitteeDetail_Data_interface anInterface) {
 
         loadershowwithMsg(context, "Loading...");
 
@@ -337,9 +334,6 @@ public class WebAPiCall {
             }
         });
     }
-
-
-
 
 
     public void getLibraryTrackGrievanceMethod(final Activity activity, final Context context, String TrackGrievanceId, View llmain, final TrackGrienvanceData_interface anInterface) {
@@ -975,8 +969,48 @@ public class WebAPiCall {
     }
 
 
-    //    @GET("UserLogin/{PhoneNo}/{Password}/{FcmToken}")
-    //  public void loginPostDataMethod(final Activity activity, final Context context, final LoginData_interface loginData_interface, String PhoneNo, String Password, String FcmToken) {
+    public void contactusDataMethod(final Activity activity, final Context context, final ContactUsData_interface anInterface, ContactUsRequest request) {
+
+        loadershowwithMsg(context, "Sending your message to Admin.");
+
+
+        Call<ContactUsResponse> userpost_responseCall = ApiClient.getClient().contactusapi(request);
+        userpost_responseCall.enqueue(new Callback<ContactUsResponse>() {
+            @Override
+            public void onResponse(Call<ContactUsResponse> call, Response<ContactUsResponse> response) {
+                dailoghide(context);
+                if (response.isSuccessful()) {
+
+
+                    if (response.body().getResponse() == 200) {
+                        dailogsuccessWithActivity(context,activity,"Message has sent Successfull.", "Your Message has been sent to admin.");
+                      //  dailogsuccess(context, "Message has sent Successfull.", "Your Message has been sent to admin.");
+                        anInterface.allcontactusdata(200);
+
+
+                    } else {
+                        dailogError(context, "Failed! something went wrong.", "Please try after sometimes.");
+                    }
+
+
+                } else {
+                    GlobalClass.showtost(context, "" + response.message());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ContactUsResponse> call, Throwable t) {
+
+                dailoghide(context);
+                t.printStackTrace();
+
+                Log.d("dddddd", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+
     public void loginPostDataMethod(final Activity activity, final Context context, final LoginData_interface loginData_interface, LoginRequest request) {
 
         loadershowwithMsg(context, "We are veryfing your Detail for login.");

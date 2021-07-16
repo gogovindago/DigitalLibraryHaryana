@@ -868,10 +868,26 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
 
                 case 109:
 
-                mDrawerLayout.closeDrawers();
+            /*    mDrawerLayout.closeDrawers();
                 Intent contactUsIntent = new Intent(this, ContactUsActivity.class);
                 startActivity(contactUsIntent);
                 break;
+*/
+
+
+            mDrawerLayout.closeDrawers();
+            Intent contactUsIntent = new Intent(MainActivity.this, ViewAllDataActivity.class);
+            contactUsIntent.putExtra("typeId", "1");
+            contactUsIntent.putExtra("typeReq", "contactUs");
+            contactUsIntent.putExtra("titleOfPage", "All Digital Libraries");
+            startActivity(contactUsIntent);
+            break;
+
+
+
+
+
+
             case 8:
 
 
