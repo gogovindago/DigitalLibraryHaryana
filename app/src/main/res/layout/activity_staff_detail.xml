@@ -62,6 +62,18 @@
                     app:backgroundTint="@color/purple_700">
 
                 </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:visibility="gone"
+                    android:gravity="center_horizontal"
+                    android:layout_centerInParent="true"
+                    android:text="No Data Found."
+                    android:id="@+id/txtnodata"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </androidx.appcompat.widget.AppCompatTextView>
             </RelativeLayout>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

@@ -650,6 +650,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 mDrawerLayout.closeDrawers();
                 Intent AllothersDlib = new Intent(MainActivity.this, ViewAllDataActivity.class);
                 AllothersDlib.putExtra("typeId", "1");
+                AllothersDlib.putExtra("typeReq", "Public_Library");
                 AllothersDlib.putExtra("titleOfPage", "All Digital Libraries");
                 startActivity(AllothersDlib);
                 break;

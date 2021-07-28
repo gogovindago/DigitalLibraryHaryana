@@ -116,6 +116,8 @@ public class CommitteeDetailActivity extends BaseActivity implements CommitteeDe
     @Override
     public void allCommitteeDetaildata(List<CommitteeDetailsResponse.Datum> list) {
         try {
+            binding.txtnodata.setVisibility(View.GONE);
+
             binding.recyclerView.setVisibility(View.VISIBLE);
             arrayList.clear();
             arrayList.addAll(list);
@@ -131,7 +133,7 @@ public class CommitteeDetailActivity extends BaseActivity implements CommitteeDe
 
         } catch (Exception e) {
 
-           // binding.txtnodata.setVisibility(View.VISIBLE);
+            binding.txtnodata.setVisibility(View.VISIBLE);
             binding.recyclerView.setVisibility(View.GONE);
             e.printStackTrace();
         }

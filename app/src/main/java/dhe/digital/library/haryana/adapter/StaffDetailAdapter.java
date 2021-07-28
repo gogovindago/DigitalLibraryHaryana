@@ -62,13 +62,14 @@ public class StaffDetailAdapter extends RecyclerView.Adapter<StaffDetailAdapter.
             txtStaffNamevalue.setText(item.getStaffName());
             txtdesignationvalue.setText(item.getDesignation());
 
-            if (item.getStaffId() == 1) {
+            textEmploymentvalue.setText(item.getEmploymentType());
+           /* if (item.getStaffId() == 1) {
                 textEmploymentvalue.setText("Contractual");
             } else if (item.getStaffId() == 2) {
                 textEmploymentvalue.setText("Regular");
 
             } else {
-            }
+            }*/
 
 
         }

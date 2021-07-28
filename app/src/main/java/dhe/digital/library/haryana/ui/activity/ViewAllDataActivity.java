@@ -800,7 +800,7 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
             startActivity(contactUsintent);
 
 
-        } else {
+        } else if (typeReq.equalsIgnoreCase("Public_Library")) {
 
 
             if (skiplogin) {

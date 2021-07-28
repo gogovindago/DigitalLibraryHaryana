@@ -115,6 +115,7 @@ public class StaffDetailActivity extends BaseActivity implements staffDetail_Dat
     @Override
     public void allstaffDetaildata(List<StaffDetailsResponse.Datum> list) {
         try {
+            binding.txtnodata.setVisibility(View.GONE);
             binding.recyclerView.setVisibility(View.VISIBLE);
             arrayList.clear();
             arrayList.addAll(list);
@@ -130,7 +131,7 @@ public class StaffDetailActivity extends BaseActivity implements staffDetail_Dat
 
         } catch (Exception e) {
 
-            // binding.txtnodata.setVisibility(View.VISIBLE);
+             binding.txtnodata.setVisibility(View.VISIBLE);
             binding.recyclerView.setVisibility(View.GONE);
             e.printStackTrace();
         }
