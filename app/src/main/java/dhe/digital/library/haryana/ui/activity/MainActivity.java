@@ -354,27 +354,6 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
 
             }
 
-/*
-            drawerItem = new DataModelLeft[9];
-
-
-            drawerItem[0] = new DataModelLeft(R.drawable.ic_baseline_library_books_24, "Public Library");
-            drawerItem[1] = new DataModelLeft(R.drawable.ic_baseline_book_online_24, "E-Books");
-            drawerItem[2] = new DataModelLeft(R.drawable.ic_baseline_account_balance_wallet_24, "journals");
-            drawerItem[3] = new DataModelLeft(R.drawable.ic_baseline_video_library_24, "Videos");
-            drawerItem[4] = new DataModelLeft(R.drawable.ic_baseline_apps_24, "Our Others Apps");
-            drawerItem[5] = new DataModelLeft(R.drawable.rate_review, "Rate App");
-            drawerItem[6] = new DataModelLeft(R.drawable.share, "Share App");
-            drawerItem[7] = new DataModelLeft(R.drawable.notifications, "Notification");
-            if (skiplogin) {
-                drawerItem[8] = new DataModelLeft(R.drawable.ic_baseline_exit_to_app_24, "Login/Signup");
-
-            } else {
-                drawerItem[8] = new DataModelLeft(R.drawable.ic_baseline_exit_to_app_24, "Logout");
-
-            }*/
-
-
             DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this, R.layout.list_view_item_row, dataModelLeftList);
             mDrawerList.setAdapter(adapter);
             mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
@@ -382,13 +361,11 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             mDrawerLayout.setDrawerListener(mDrawerToggle);
             setupDrawerToggle();
 
-
             if (CSPreferences.getBoolean(this, "firstTimelogin")) {
 
                 GlobalClass.dailogsuccess(this, "Login Successfull.", "Welcome to Digital Library,Haryana.");
                 CSPreferences.putBolean(this, "firstTimelogin", false);
                 mDrawerLayout.openDrawer(GravityCompat.START);
-
 
             } else {
 

@@ -57,9 +57,9 @@ public class LibraryEventsandActivities extends BaseActivity implements GetLibra
 
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    binding.toolbar.tvToolbarTitle.setText(Html.fromHtml("<h6>Books Available in </h6>" + titleOfPage + "</h6>", Html.FROM_HTML_MODE_COMPACT));
+                    binding.toolbar.tvToolbarTitle.setText(Html.fromHtml("<h6>Events & Activities in </h6>" + titleOfPage + "</h6>", Html.FROM_HTML_MODE_COMPACT));
                 } else {
-                    binding.toolbar.tvToolbarTitle.setText(Html.fromHtml("<h6>Books Available in " + titleOfPage + "</h6>"));
+                    binding.toolbar.tvToolbarTitle.setText(Html.fromHtml("<h6>Events & Activities in " + titleOfPage + "</h6>"));
                 }
 
 
@@ -129,11 +129,6 @@ public class LibraryEventsandActivities extends BaseActivity implements GetLibra
     @Override
     public void GetLibraryEventsandActivitiesByLibIdData(List<LibraryEventsActivitieResponse.Datum> list) {
 
-/* LinearLayoutManager manager = new LinearLayoutManager(this, GridLayoutManager.HORIZONTAL, false);
-        rvimportantlink.setLayoutManager(manager);
-        importantLinksAdapter = new ImportantLinksAdapter(this, importantLinkList, this);
-        rvimportantlink.setAdapter(importantLinksAdapter);
-        importantLinksAdapter.notifyDataSetChanged();*/
 
         arrayList.clear();
         arrayList.addAll(list);
@@ -143,16 +138,14 @@ public class LibraryEventsandActivities extends BaseActivity implements GetLibra
         adaptermain = new LibraryEventsandActivitiesLibIdAdapter(this, (ArrayList) arrayList, this);
         binding.recyclerView.setAdapter(adaptermain);
 
-        // adaptermain.notifyDataSetChanged();
-
-
+      
     }
 
     @Override
     public void onItemClick(LibraryEventsActivitieResponse.Datum item, int currposition, String type) {
 
 
-        if (type.equalsIgnoreCase("bookdetail")) {
+      /*  if (type.equalsIgnoreCase("bookdetail")) {
 
             Intent intent = new Intent(this, BooksDeatilActivity.class);
             intent.putExtra("bookserial_Id", item.getEventTitle());
@@ -160,7 +153,7 @@ public class LibraryEventsandActivities extends BaseActivity implements GetLibra
 
 
         } else {
-        }
+        }*/
 
     }
 }
