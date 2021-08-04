@@ -76,16 +76,7 @@
                 android:padding="15dp"
                 android:textStyle="normal"
                 android:singleLine="false"
-                android:text=" 1.   Haryana College Admission  Merit List 2020-21
-Haryana College Admission Merit List  UG Merit List  &amp; PG Collage  Admission Online Form. All Eligibility Candidates Read the Full Advertisement  Notification Before Apply Online Application .\n\n
-2.	Online submission of Admission form - End Date	21st September (Monday).\n\n
-3.	Document Verification &amp; preparation of Merit List	22nd to 25th September (Tuesday to Friday).
-\n\n4.	Display of 1st Merit List	26th September (Saturday).
-\n\n5.	Submission of fee	26th to 29th September (Saturday to Tuesday).
-\n\n6.	Display of 2nd Merit List	30th September, (Wednesday).
-\n\n7.	Submission of Fee	lst October to 5th October(Thursday to Monday).
-\n\n8.	Commencement of teaching	6th October (Tuesday).
-\n\n9.	Open Counselling	6th October (Tuesday).\n\n"
+                android:text="1.Online Admission 2021-22 for UG.\n\n 2.12th August 2021 to 20th August 2021"
                 android:textAlignment="textStart"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@color/purple_700"

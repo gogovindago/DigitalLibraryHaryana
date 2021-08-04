@@ -118,7 +118,7 @@ public class TrackGrievanceActivity extends BaseActivity implements TrackGrienva
 
         try {
             binding.llcontent.setVisibility(View.VISIBLE);
-
+            binding.textNodata.setVisibility(View.GONE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 binding.textGrievance.setText(Html.fromHtml("<strong>Grievance ID:- <br> </strong> " + list.get(0).getGrievanceId() + "</h6>", Html.FROM_HTML_MODE_COMPACT));
                 binding.textGrievanceStatus.setText(Html.fromHtml("<strong>Grievance Status:-<br>  </strong>" + list.get(0).getStatus() + "</h6>", Html.FROM_HTML_MODE_COMPACT));
