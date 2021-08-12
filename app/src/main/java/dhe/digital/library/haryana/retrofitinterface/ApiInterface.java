@@ -2,6 +2,8 @@ package dhe.digital.library.haryana.retrofitinterface;
 
 import dhe.digital.library.haryana.models.AlumniAchievementsResponse;
 import dhe.digital.library.haryana.models.BookRecordByLibIdResponse;
+import dhe.digital.library.haryana.models.BookSuggestionRequest;
+import dhe.digital.library.haryana.models.BookSuggestionResponse;
 import dhe.digital.library.haryana.models.BooksDetailResponse;
 import dhe.digital.library.haryana.models.CommitteeDetailsResponse;
 import dhe.digital.library.haryana.models.ContactUsRequest;
@@ -40,6 +42,9 @@ import retrofit2.http.Path;
 
 public interface ApiInterface {
 
+
+    @POST("BookSuggestion")
+    Call<BookSuggestionResponse> BookSuggestionApi(@Body BookSuggestionRequest request);
 
     @POST("InsertGrievance")
     Call<InsertGrievanceResponse> insertGrievanceApi(@Body InsertGrievanceRequest request);

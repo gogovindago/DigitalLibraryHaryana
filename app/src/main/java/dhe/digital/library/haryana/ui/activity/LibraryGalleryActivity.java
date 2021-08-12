@@ -79,7 +79,7 @@ public class LibraryGalleryActivity extends BaseActivity implements GetLibraryGa
                 if (GlobalClass.isNetworkConnected(LibraryGalleryActivity.this)) {
 
                     WebAPiCall webapiCall = new WebAPiCall();
-                    webapiCall.getLibraryGalleryDataMethod(LibraryGalleryActivity.this, LibraryGalleryActivity.this, binding.rrmain,"8",  binding.simpleSwipeRefreshLayout, LibraryGalleryActivity.this);
+                    webapiCall.getLibraryGalleryDataMethod(LibraryGalleryActivity.this, LibraryGalleryActivity.this, binding.rrmain,typeId,  binding.simpleSwipeRefreshLayout, LibraryGalleryActivity.this);
 
                 } else {
 
@@ -95,7 +95,7 @@ public class LibraryGalleryActivity extends BaseActivity implements GetLibraryGa
 
         if (GlobalClass.isNetworkConnected(LibraryGalleryActivity.this)) {
             WebAPiCall webapiCall = new WebAPiCall();
-            webapiCall.getLibraryGalleryDataMethod(LibraryGalleryActivity.this, LibraryGalleryActivity.this, binding.rrmain,"8",  binding.simpleSwipeRefreshLayout, LibraryGalleryActivity.this);
+            webapiCall.getLibraryGalleryDataMethod(LibraryGalleryActivity.this, LibraryGalleryActivity.this, binding.rrmain,typeId,  binding.simpleSwipeRefreshLayout, LibraryGalleryActivity.this);
 
         } else {
 

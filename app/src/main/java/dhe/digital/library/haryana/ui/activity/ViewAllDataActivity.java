@@ -777,6 +777,12 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
             LibraryEventsandActivities.putExtra("title", item.getDescription());
             LibraryEventsandActivities.putExtra("itemid", item.getId());
             startActivity(LibraryEventsandActivities);
+        } else if (typeReq.equalsIgnoreCase("booksuggestionforlibrary")) {
+
+            Intent LibraryEventsandActivities = new Intent(this, BookSuggestionActivity.class);
+            LibraryEventsandActivities.putExtra("title", item.getDescription());
+            LibraryEventsandActivities.putExtra("itemid", item.getId());
+            startActivity(LibraryEventsandActivities);
         } else if (typeReq.equalsIgnoreCase("Committee")) {
 
             Intent LibraryEventsandActivities = new Intent(this, CommitteeDetailActivity.class);

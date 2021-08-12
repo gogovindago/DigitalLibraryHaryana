@@ -145,6 +145,9 @@
             android:name=".ui.activity.StaffDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/DigitalLibraryHaryana" />
+        <activity android:name=".ui.activity.BookSuggestionActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DigitalLibraryHaryana"/>
     </application>
 
 </manifest>

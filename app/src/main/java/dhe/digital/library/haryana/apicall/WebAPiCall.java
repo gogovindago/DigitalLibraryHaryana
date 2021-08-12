@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import dhe.digital.library.haryana.allinterface.BookSuggestionData_interface;
 import dhe.digital.library.haryana.allinterface.CommitteeDetail_Data_interface;
 import dhe.digital.library.haryana.allinterface.ContactUsData_interface;
 import dhe.digital.library.haryana.allinterface.GetAllData_interface;
@@ -39,6 +40,8 @@ import dhe.digital.library.haryana.allinterface.TrackGrienvanceData_interface;
 import dhe.digital.library.haryana.allinterface.staffDetail_Data_interface;
 import dhe.digital.library.haryana.models.AlumniAchievementsResponse;
 import dhe.digital.library.haryana.models.BookRecordByLibIdResponse;
+import dhe.digital.library.haryana.models.BookSuggestionRequest;
+import dhe.digital.library.haryana.models.BookSuggestionResponse;
 import dhe.digital.library.haryana.models.BooksDetailResponse;
 import dhe.digital.library.haryana.models.CommitteeDetailsResponse;
 import dhe.digital.library.haryana.models.ContactUsRequest;
@@ -983,8 +986,8 @@ public class WebAPiCall {
 
 
                     if (response.body().getResponse() == 200) {
-                        dailogsuccessWithActivity(context,activity,"Message has sent Successfull.", "Your Message has been sent to admin.");
-                      //  dailogsuccess(context, "Message has sent Successfull.", "Your Message has been sent to admin.");
+                        dailogsuccessWithActivity(context, activity, "Message has sent Successfull.", "Your Message has been sent to admin.");
+                        //  dailogsuccess(context, "Message has sent Successfull.", "Your Message has been sent to admin.");
                         anInterface.allcontactusdata(200);
 
 
@@ -1215,6 +1218,48 @@ public class WebAPiCall {
 
             @Override
             public void onFailure(Call<InsertGrievanceResponse> call, Throwable t) {
+
+                dailoghide(context);
+                t.printStackTrace();
+
+                Log.d("dddddd", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+
+    public void BookSuggestionPostDataMethod(final Activity activity, final Context context, final BookSuggestionData_interface data_interface, BookSuggestionRequest request) {
+
+        loadershowwithMsg(context, "we are Sending your Suggestion....");
+
+        Call<BookSuggestionResponse> userpost_responseCall = ApiClient.getClient().BookSuggestionApi(request);
+        userpost_responseCall.enqueue(new Callback<BookSuggestionResponse>() {
+            @Override
+            public void onResponse(Call<BookSuggestionResponse> call, Response<BookSuggestionResponse> response) {
+                dailoghide(context);
+                if (response.isSuccessful()) {
+
+
+                    if (response.body().getResponse() == 200) {
+
+                        dailogsuccess(context, "Successfully.", "Suggestion Sent Successfully.");
+                        data_interface.allBookSuggestiondata(response.body().getResponse(), response.body().getSysMessage());
+
+                    } else {
+
+                        dailogError(context, "Something went wrong !", "Please try after sometimes.");
+
+                    }
+
+
+                } else {
+                    GlobalClass.showtost(context, "" + response.message());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<BookSuggestionResponse> call, Throwable t) {
 
                 dailoghide(context);
                 t.printStackTrace();

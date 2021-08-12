@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.IntentSender;
-import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -256,6 +255,18 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
 
             DataModelLeftNew Books_Available_in_Library = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, " Books Available in Library", 10);
             dataModelLeftList.add(Books_Available_in_Library);
+
+            if (skiplogin) {
+
+
+
+
+            }else {
+                DataModelLeftNew Bookssuggestio_for_Library = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, " Book Suggestion", 110);
+                dataModelLeftList.add(Bookssuggestio_for_Library);
+
+            }
+
 
             DataModelLeftNew Library_Facilities = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, " Library Facilities", 101);
             dataModelLeftList.add(Library_Facilities);
@@ -679,6 +690,16 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 library_Gallery.putExtra("titleOfPage", "library Gallery");
                 startActivity(library_Gallery);
                 break;
+            case 110:
+                mDrawerLayout.closeDrawers();
+                // Intent Books_Available_in_Library = new Intent(MainActivity.this, BooksAvailableinLibrary.class);
+                Intent booksuggestionforlibraryintent = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                booksuggestionforlibraryintent.putExtra("typeId", "1");
+                booksuggestionforlibraryintent.putExtra("typeReq", "booksuggestionforlibrary");
+                booksuggestionforlibraryintent.putExtra("titleOfPage", "Book Suggestion");
+                startActivity(booksuggestionforlibraryintent);
+                break;
+
             case 105:
                 mDrawerLayout.closeDrawers();
                 // Intent Books_Available_in_Library = new Intent(MainActivity.this, BooksAvailableinLibrary.class);
@@ -709,7 +730,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 startActivity(committeedetail);
                 break;
 
-                case 108:
+            case 108:
 
                 mDrawerLayout.closeDrawers();
                 Intent staffdetail = new Intent(MainActivity.this, ViewAllDataActivity.class);
@@ -844,7 +865,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 break;
 
 
-                case 109:
+            case 109:
 
             /*    mDrawerLayout.closeDrawers();
                 Intent contactUsIntent = new Intent(this, ContactUsActivity.class);
@@ -853,17 +874,13 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
 */
 
 
-            mDrawerLayout.closeDrawers();
-            Intent contactUsIntent = new Intent(MainActivity.this, ViewAllDataActivity.class);
-            contactUsIntent.putExtra("typeId", "1");
-            contactUsIntent.putExtra("typeReq", "contactUs");
-            contactUsIntent.putExtra("titleOfPage", "All Digital Libraries");
-            startActivity(contactUsIntent);
-            break;
-
-
-
-
+                mDrawerLayout.closeDrawers();
+                Intent contactUsIntent = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                contactUsIntent.putExtra("typeId", "1");
+                contactUsIntent.putExtra("typeReq", "contactUs");
+                contactUsIntent.putExtra("titleOfPage", "All Digital Libraries");
+                startActivity(contactUsIntent);
+                break;
 
 
             case 8:
