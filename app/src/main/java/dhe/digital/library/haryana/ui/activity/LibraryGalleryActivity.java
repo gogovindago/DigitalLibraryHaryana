@@ -56,9 +56,9 @@ public class LibraryGalleryActivity extends BaseActivity implements GetLibraryGa
 
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    binding.toolbar.tvToolbarTitle.setText(Html.fromHtml("<h6>Books Available in </h6>" + titleOfPage + "</h6>", Html.FROM_HTML_MODE_COMPACT));
+                    binding.toolbar.tvToolbarTitle.setText(Html.fromHtml("<h6>Gallery of </h6>" + titleOfPage + "</h6>", Html.FROM_HTML_MODE_COMPACT));
                 } else {
-                    binding.toolbar.tvToolbarTitle.setText(Html.fromHtml("<h6>Books Available in " + titleOfPage + "</h6>"));
+                    binding.toolbar.tvToolbarTitle.setText(Html.fromHtml("<h6>Gallery of " + titleOfPage + "</h6>"));
                 }
 
 
@@ -79,7 +79,7 @@ public class LibraryGalleryActivity extends BaseActivity implements GetLibraryGa
                 if (GlobalClass.isNetworkConnected(LibraryGalleryActivity.this)) {
 
                     WebAPiCall webapiCall = new WebAPiCall();
-                    webapiCall.getLibraryGalleryDataMethod(LibraryGalleryActivity.this, LibraryGalleryActivity.this, binding.rrmain,typeId,  binding.simpleSwipeRefreshLayout, LibraryGalleryActivity.this);
+                    webapiCall.getLibraryGalleryDataMethod(LibraryGalleryActivity.this, LibraryGalleryActivity.this, binding.rrmain,typeId,  binding.simpleSwipeRefreshLayout, binding.txtnodatamsg, LibraryGalleryActivity.this);
 
                 } else {
 
@@ -95,7 +95,7 @@ public class LibraryGalleryActivity extends BaseActivity implements GetLibraryGa
 
         if (GlobalClass.isNetworkConnected(LibraryGalleryActivity.this)) {
             WebAPiCall webapiCall = new WebAPiCall();
-            webapiCall.getLibraryGalleryDataMethod(LibraryGalleryActivity.this, LibraryGalleryActivity.this, binding.rrmain,typeId,  binding.simpleSwipeRefreshLayout, LibraryGalleryActivity.this);
+            webapiCall.getLibraryGalleryDataMethod(LibraryGalleryActivity.this, LibraryGalleryActivity.this, binding.rrmain,typeId,  binding.simpleSwipeRefreshLayout,binding.txtnodatamsg, LibraryGalleryActivity.this);
 
         } else {
 

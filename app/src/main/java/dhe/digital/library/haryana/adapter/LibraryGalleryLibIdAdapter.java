@@ -1,20 +1,20 @@
 package dhe.digital.library.haryana.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Build;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.facebook.drawee.view.DraweeView;
 
 import java.util.ArrayList;
 
@@ -39,7 +39,7 @@ public class LibraryGalleryLibIdAdapter extends RecyclerView.Adapter<LibraryGall
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public int currposition;
         public TextView textViewTitle, textViewAuthor, txtpublisher, textViewquantity, txtserialno;
-        public ImageView imageView;
+        public DraweeView imageView;
         public RelativeLayout ll;
         LibraryGalleryResponse.Datum item;
 
@@ -49,15 +49,12 @@ public class LibraryGalleryLibIdAdapter extends RecyclerView.Adapter<LibraryGall
 
             //  v.setOnClickListener(this);
 
-            imageView = (ImageView) v.findViewById(R.id.imageView);
+            imageView =  v.findViewById(R.id.imageView);
             textViewTitle = (TextView) v.findViewById(R.id.textViewTitle);
-            textViewAuthor = (TextView) v.findViewById(R.id.textViewAuthor);
-            txtpublisher = (TextView) v.findViewById(R.id.txtpublisher);
-            textViewquantity = v.findViewById(R.id.textViewquantity);
-            txtserialno = (TextView) v.findViewById(R.id.txtserialno);
+
             ll = (RelativeLayout) v.findViewById(R.id.ll);
 
-            textViewquantity.setOnClickListener(this);
+           // textViewquantity.setOnClickListener(this);
 
         }
 
@@ -69,58 +66,37 @@ public class LibraryGalleryLibIdAdapter extends RecyclerView.Adapter<LibraryGall
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
 
 
-                //  textViewTitle.setText("Book Title:-\n " + item.getBookTitle());
 
-                Glide.with(mContext)
+             /*   Glide.with(mContext)
                         .load(item.getImageURL()) // image url
                         .placeholder(R.mipmap.ic_launcher_round) // any placeholder to load at start
                         .error(R.mipmap.ic_launcher_round)  // any image in case of error
                         .override(140, 140) // resizing
                         .centerCrop()
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .into(imageView);
+                        .into(imageView);*/
+
+                imageView.setImageURI(Uri.parse(item.getImageURL()));
 
 
-                //  textViewAuthor.setText("Events/Activities Title:-\n" + item.getEventTitle());
-                txtpublisher.setText("Events/Activities Date:-\n" + item.getCreatedDate());
-                //textViewquantity.setText("Events/Activities Detail:-" + String.valueOf(item.getEventDetails()));
-                txtserialno.setText("Sr.no. " + String.valueOf(item.getSrno()));
-
-
-                textViewTitle.setText(Html.fromHtml("<strong>Events/Activities Title:-<br> </strong>" + item.getPhotoTitle(), Html.FROM_HTML_MODE_COMPACT));
+                textViewTitle.setText(Html.fromHtml("<strong> </strong>" + item.getPhotoTitle(), Html.FROM_HTML_MODE_COMPACT));
 
             } else {
 
-                textViewTitle.setText(Html.fromHtml("<strong>Events/Activities Title:-<br></strong>" + item.getPhotoTitle()));
+                textViewTitle.setText(Html.fromHtml("<strong></strong>" + item.getPhotoTitle()));
 
-                // textViewTitle.setText("Book Title:-\n " + item.getBookTitle());
 
-                Glide.with(mContext)
+               /* Glide.with(mContext)
                         .load(item.getImageURL()) // image url
                         .placeholder(R.mipmap.ic_launcher_round) // any placeholder to load at start
                         .error(R.mipmap.ic_launcher_round)  // any image in case of error
                         .override(140, 140) // resizing
                         .centerCrop()
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .into(imageView);
-                // textViewAuthor.setText("Events/Activities Title:-\n" + item.getEventTitle());
-                txtpublisher.setText("Events/Activities Date:-\n" + item.getCreatedDate());
-                //  textViewquantity.setText("Events/Activities Detail:-" + String.valueOf(item.getEventDetails()));
-                txtserialno.setText("Sr.no. " + String.valueOf(item.getSrno()));
+                        .into(imageView);*/
 
-
-                // binding.toolbar.tvToolbarTitle.setText(Html.fromHtml("<h6>Books Available in " + titleOfPage + "</h6>"));
             }
 
-//            textViewTitle.setText("Book Title:-\n " + item.getBookTitle());
-//            textViewAuthor.setText("Author:-\n" + item.getAuthor());
-//            txtpublisher.setText("Publisher:-\n " + item.getPublishers());
-//            textViewquantity.setText("Quantity:-" + String.valueOf(item.getQuantity()));
-//            txtserialno.setText("Sr.no. " + String.valueOf(item.getSrno()));
-
-//if (currposition%2==0) {
-//    ll.setBackgroundColor(R.drawable.spinner_border);
-//}
 
         }
 
@@ -133,6 +109,7 @@ public class LibraryGalleryLibIdAdapter extends RecyclerView.Adapter<LibraryGall
 //                mListener.onItemClick(item, currposition);
 
 
+/*
             switch (view.getId()) {
 
                 case R.id.textViewquantity:
@@ -147,19 +124,20 @@ public class LibraryGalleryLibIdAdapter extends RecyclerView.Adapter<LibraryGall
 
 
             }
+*/
         }
     }
 
     @Override
     public LibraryGalleryLibIdAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_books, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_libgallery, parent, false);
 
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         currposition = position;
         holder.setData(mValues.get(position), currposition);
 

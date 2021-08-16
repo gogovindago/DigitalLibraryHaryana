@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -584,7 +585,7 @@ public class WebAPiCall {
     }
 
 
-    public void getLibraryGalleryDataMethod(final Activity activity, final Context context, RelativeLayout llmain, String libId, SwipeRefreshLayout mSwipeRefreshLayout, final GetLibraryGalleryData_interface anInterface) {
+    public void getLibraryGalleryDataMethod(final Activity activity, final Context context, RelativeLayout llmain, String libId, SwipeRefreshLayout mSwipeRefreshLayout, AppCompatTextView txtnodatamsg, final GetLibraryGalleryData_interface anInterface) {
 
         // loadershowwithMsg(context, "Loading...");
         mSwipeRefreshLayout.setRefreshing(true);
@@ -606,7 +607,10 @@ public class WebAPiCall {
 
 
                     } else {
-
+                        llmain.setVisibility(View.VISIBLE);
+                        mSwipeRefreshLayout.setRefreshing(false);
+                        txtnodatamsg.setVisibility(View.VISIBLE);
+                        txtnodatamsg.setText("No Data Found! Gallery is Empty.");
                     }
 
 
