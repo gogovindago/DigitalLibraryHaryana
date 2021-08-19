@@ -83,7 +83,7 @@ public class LibraryEventsandActivitiesLibIdAdapter extends RecyclerView.Adapter
                 textViewTitle.setText(Html.fromHtml("<strong>Events/Activities Title:-<br> </strong>" + item.getEventTitle(), Html.FROM_HTML_MODE_COMPACT));
                 txtpublisher.setText(Html.fromHtml("<strong> Events/Activities Date:-<br> </strong>" + item.getEventDate(), Html.FROM_HTML_MODE_COMPACT));
                 textViewAuthor.setText(Html.fromHtml("<strong>Events/Activities Detail:-<br> </strong>" + item.getEventDetails(), Html.FROM_HTML_MODE_COMPACT));
-                txtserialno.setText(Html.fromHtml("<strong>Sr.no:-</strong>" + item.getSrno(), Html.FROM_HTML_MODE_COMPACT));
+                txtserialno.setText(Html.fromHtml("<strong></strong>" + item.getSrno(), Html.FROM_HTML_MODE_COMPACT));
 
             } else {
 
@@ -91,7 +91,7 @@ public class LibraryEventsandActivitiesLibIdAdapter extends RecyclerView.Adapter
 
                 txtpublisher.setText(Html.fromHtml("<strong> Events/Activities Date:- <br> </strong>" + item.getEventDate()));
                 textViewAuthor.setText(Html.fromHtml("<strong>Events/Activities Detail:-<br></strong>" + item.getEventDetails()));
-                txtserialno.setText(Html.fromHtml("<strong>Sr.no:-</strong>" + item.getSrno()));
+                txtserialno.setText(Html.fromHtml("<strong></strong>" + item.getSrno()));
 
                 Glide.with(mContext)
                         .load(item.getImageURL()) // image url

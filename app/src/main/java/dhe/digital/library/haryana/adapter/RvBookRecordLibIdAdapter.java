@@ -1,5 +1,6 @@
 package dhe.digital.library.haryana.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
@@ -70,7 +71,7 @@ public class RvBookRecordLibIdAdapter extends RecyclerView.Adapter<RvBookRecordL
                 textViewAuthor.setText("Author:-\n" + item.getAuthor());
                 txtpublisher.setText("Publisher:-\n" + item.getPublishers());
                 textViewquantity.setText("Quantity:-" + String.valueOf(item.getQuantity()));
-                txtserialno.setText("Sr.no. " + String.valueOf(item.getSrno()));
+                txtserialno.setText("" + String.valueOf(item.getSrno()));
 
 
 
@@ -84,7 +85,7 @@ public class RvBookRecordLibIdAdapter extends RecyclerView.Adapter<RvBookRecordL
                 textViewAuthor.setText("Author:-\n" + item.getAuthor());
                 txtpublisher.setText("Publisher:-\n" + item.getPublishers());
                 textViewquantity.setText("Quantity:-" + String.valueOf(item.getQuantity()));
-                txtserialno.setText("Sr.no. " + String.valueOf(item.getSrno()));
+                txtserialno.setText("" + String.valueOf(item.getSrno()));
 
 
 
@@ -140,7 +141,7 @@ public class RvBookRecordLibIdAdapter extends RecyclerView.Adapter<RvBookRecordL
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         currposition = position;
         holder.setData(mValues.get(position), currposition);
 

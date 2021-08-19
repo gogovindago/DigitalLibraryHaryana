@@ -519,6 +519,7 @@ public class WebAPiCall {
 
 
                     } else {
+                        mSwipeRefreshLayout.setRefreshing(false);
 
                     }
 

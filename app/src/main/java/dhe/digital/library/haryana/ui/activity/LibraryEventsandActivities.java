@@ -73,11 +73,11 @@ public class LibraryEventsandActivities extends BaseActivity implements GetLibra
         if (GlobalClass.isNetworkConnected(LibraryEventsandActivities.this)) {
 
             BookRecordByLibIdRequest record = new BookRecordByLibIdRequest();
-            record.setLibraryId("1");
+            record.setLibraryId(typeId);
 
             WebAPiCall webapiCall = new WebAPiCall();
 
-            webapiCall.getLibraryEventsActivitiesLibIdDataMethod(LibraryEventsandActivities.this, LibraryEventsandActivities.this, "8", binding.rrmain, binding.simpleSwipeRefreshLayout, LibraryEventsandActivities.this);
+            webapiCall.getLibraryEventsActivitiesLibIdDataMethod(LibraryEventsandActivities.this, LibraryEventsandActivities.this, typeId, binding.rrmain, binding.simpleSwipeRefreshLayout, LibraryEventsandActivities.this);
 
         } else {
 
@@ -96,7 +96,7 @@ public class LibraryEventsandActivities extends BaseActivity implements GetLibra
 
                     WebAPiCall webapiCall = new WebAPiCall();
 
-                    webapiCall.getLibraryEventsActivitiesLibIdDataMethod(LibraryEventsandActivities.this, LibraryEventsandActivities.this, "8", binding.rrmain, binding.simpleSwipeRefreshLayout, LibraryEventsandActivities.this);
+                    webapiCall.getLibraryEventsActivitiesLibIdDataMethod(LibraryEventsandActivities.this, LibraryEventsandActivities.this, typeId, binding.rrmain, binding.simpleSwipeRefreshLayout, LibraryEventsandActivities.this);
 
                 } else {
 
