@@ -54,7 +54,7 @@ import dhe.digital.library.haryana.models.HomePageResponse;
 import dhe.digital.library.haryana.models.ImportantLinksTypeResponse;
 import dhe.digital.library.haryana.models.InsertGrievanceRequest;
 import dhe.digital.library.haryana.models.InsertGrievanceResponse;
-import dhe.digital.library.haryana.models.LibraryEventsActivitieResponse;
+import dhe.digital.library.haryana.models.LibraryEventsActivitieAlbumResponse;
 import dhe.digital.library.haryana.models.LibraryFacilitiesResponse;
 import dhe.digital.library.haryana.models.LibraryGalleryResponse;
 import dhe.digital.library.haryana.models.LibraryTypeAndCoutResponse;
@@ -500,10 +500,10 @@ public class WebAPiCall {
         // loadershowwithMsg(context, "Loading...");
         mSwipeRefreshLayout.setRefreshing(true);
 
-        Call<LibraryEventsActivitieResponse> responseCall = ApiClient.getClient().getLibraryEventsActivitiesLibIdResponseDataAPi(libId);
-        responseCall.enqueue(new Callback<LibraryEventsActivitieResponse>() {
+        Call<LibraryEventsActivitieAlbumResponse> responseCall = ApiClient.getClient().getLibraryEventsActivitiesLibIdResponseDataAPi(libId);
+        responseCall.enqueue(new Callback<LibraryEventsActivitieAlbumResponse>() {
             @Override
-            public void onResponse(Call<LibraryEventsActivitieResponse> call, Response<LibraryEventsActivitieResponse> response) {
+            public void onResponse(Call<LibraryEventsActivitieAlbumResponse> call, Response<LibraryEventsActivitieAlbumResponse> response) {
                 // dailoghide(context);
                 if (response.isSuccessful()) {
 
@@ -530,7 +530,7 @@ public class WebAPiCall {
             }
 
             @Override
-            public void onFailure(Call<LibraryEventsActivitieResponse> call, Throwable t) {
+            public void onFailure(Call<LibraryEventsActivitieAlbumResponse> call, Throwable t) {
                 mSwipeRefreshLayout.setRefreshing(false);
                 // dailoghide(context);
                 t.printStackTrace();
@@ -541,7 +541,7 @@ public class WebAPiCall {
     }
 
 
-    public void getBookRecordByLibIdDataMethod(final Activity activity, final Context context, String libId, RelativeLayout llmain, SwipeRefreshLayout mSwipeRefreshLayout, final GetBookRecordByLibIdData_interface getBookRecordByLibIdData_interface) {
+    public void getBookRecordByLibIdDataMethod(final Activity activity, final Context context, String libId, RelativeLayout llmain, AppCompatTextView txtnodatamsg, SwipeRefreshLayout mSwipeRefreshLayout, final GetBookRecordByLibIdData_interface getBookRecordByLibIdData_interface) {
 
         // loadershowwithMsg(context, "Loading...");
         mSwipeRefreshLayout.setRefreshing(true);
@@ -566,6 +566,9 @@ public class WebAPiCall {
 
                     } else {
 
+                        mSwipeRefreshLayout.setRefreshing(false);
+                        txtnodatamsg.setVisibility(View.VISIBLE);
+                        txtnodatamsg.setText("No Data Found! ");
                     }
 
 

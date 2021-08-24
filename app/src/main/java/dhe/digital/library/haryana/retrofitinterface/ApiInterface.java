@@ -15,6 +15,7 @@ import dhe.digital.library.haryana.models.HomePageResponse;
 import dhe.digital.library.haryana.models.ImportantLinksTypeResponse;
 import dhe.digital.library.haryana.models.InsertGrievanceRequest;
 import dhe.digital.library.haryana.models.InsertGrievanceResponse;
+import dhe.digital.library.haryana.models.LibraryEventsActivitieAlbumResponse;
 import dhe.digital.library.haryana.models.LibraryEventsActivitieResponse;
 import dhe.digital.library.haryana.models.LibraryFacilitiesResponse;
 import dhe.digital.library.haryana.models.LibraryGalleryResponse;
@@ -88,8 +89,9 @@ public interface ApiInterface {
     Call<BooksDetailResponse> getBookDetailByLibIdResponseDataAPi(@Path("BookId") String s);
 
     // http://112.196.99.107:81/api/commonapi/LibraryEventsActivities
-    @GET("LibraryEventsActivities/{LibraryId}")
-    Call<LibraryEventsActivitieResponse> getLibraryEventsActivitiesLibIdResponseDataAPi(@Path("LibraryId") String s);
+   // @GET("LibraryEventsActivities/{LibraryId}")
+    @GET("GetEventsByRank/{LibraryId}")
+    Call<LibraryEventsActivitieAlbumResponse> getLibraryEventsActivitiesLibIdResponseDataAPi(@Path("LibraryId") String s);
 
     // http://112.196.99.107:81/api/commonapi/GetBookRecord
     @GET("GetBookRecord/{LibraryId}")

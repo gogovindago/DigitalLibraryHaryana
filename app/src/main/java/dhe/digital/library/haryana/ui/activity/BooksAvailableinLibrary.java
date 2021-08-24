@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -20,7 +19,6 @@ import dhe.digital.library.haryana.adapter.RvBookRecordLibIdAdapter;
 import dhe.digital.library.haryana.allinterface.GetBookRecordByLibIdData_interface;
 import dhe.digital.library.haryana.apicall.WebAPiCall;
 import dhe.digital.library.haryana.databinding.ActivityBooksAvailableinLibraryBinding;
-import dhe.digital.library.haryana.models.BookRecordByLibIdRequest;
 import dhe.digital.library.haryana.models.BookRecordByLibIdResponse;
 import dhe.digital.library.haryana.utility.BaseActivity;
 import dhe.digital.library.haryana.utility.GlobalClass;
@@ -73,12 +71,10 @@ public class BooksAvailableinLibrary extends BaseActivity implements GetBookReco
 
         if (GlobalClass.isNetworkConnected(BooksAvailableinLibrary.this)) {
 
-            BookRecordByLibIdRequest record = new BookRecordByLibIdRequest();
-            record.setLibraryId("1");
 
             WebAPiCall webapiCall = new WebAPiCall();
 
-            webapiCall.getBookRecordByLibIdDataMethod(BooksAvailableinLibrary.this, BooksAvailableinLibrary.this, "1", binding.rrmain, binding.simpleSwipeRefreshLayout, BooksAvailableinLibrary.this);
+            webapiCall.getBookRecordByLibIdDataMethod(BooksAvailableinLibrary.this, BooksAvailableinLibrary.this, typeId, binding.rrmain, binding.txtnodatamsg, binding.simpleSwipeRefreshLayout, BooksAvailableinLibrary.this);
 
         } else {
 
@@ -92,12 +88,10 @@ public class BooksAvailableinLibrary extends BaseActivity implements GetBookReco
             public void onRefresh() {
 
                 if (GlobalClass.isNetworkConnected(BooksAvailableinLibrary.this)) {
-                    BookRecordByLibIdRequest record = new BookRecordByLibIdRequest();
-                    record.setLibraryId("1");
 
                     WebAPiCall webapiCall = new WebAPiCall();
 
-                    webapiCall.getBookRecordByLibIdDataMethod(BooksAvailableinLibrary.this, BooksAvailableinLibrary.this, "1", binding.rrmain, binding.simpleSwipeRefreshLayout, BooksAvailableinLibrary.this);
+                    webapiCall.getBookRecordByLibIdDataMethod(BooksAvailableinLibrary.this, BooksAvailableinLibrary.this, typeId, binding.rrmain,binding.txtnodatamsg, binding.simpleSwipeRefreshLayout, BooksAvailableinLibrary.this);
 
                 } else {
 

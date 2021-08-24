@@ -69,9 +69,6 @@ public class LibraryFacility extends BaseActivity implements GetLibraryFacilitie
 
         if (GlobalClass.isNetworkConnected(LibraryFacility.this)) {
 
-            BookRecordByLibIdRequest record = new BookRecordByLibIdRequest();
-            record.setLibraryId("1");
-
             WebAPiCall webapiCall = new WebAPiCall();
 
             webapiCall.getLibraryFacilitydByLibIdDataMethod(LibraryFacility.this, LibraryFacility.this, String.valueOf(LibId), binding.rrmain, binding.simpleSwipeRefreshLayout, LibraryFacility.this);
@@ -88,11 +85,8 @@ public class LibraryFacility extends BaseActivity implements GetLibraryFacilitie
             public void onRefresh() {
 
                 if (GlobalClass.isNetworkConnected(LibraryFacility.this)) {
-                    BookRecordByLibIdRequest record = new BookRecordByLibIdRequest();
-                    record.setLibraryId("1");
 
                     WebAPiCall webapiCall = new WebAPiCall();
-
                     webapiCall.getLibraryFacilitydByLibIdDataMethod(LibraryFacility.this, LibraryFacility.this, String.valueOf(LibId), binding.rrmain, binding.simpleSwipeRefreshLayout, LibraryFacility.this);
 
                 } else {
@@ -129,6 +123,8 @@ public class LibraryFacility extends BaseActivity implements GetLibraryFacilitie
         try {
             arrayList=list;
             if (list.isEmpty()){
+                binding.txtdata.setVisibility(View.GONE);
+                binding.txtdata.setVisibility(View.VISIBLE);
                 binding.txtdata.setText("No Library Facility Data Availble");
 
             }else {
@@ -136,6 +132,7 @@ public class LibraryFacility extends BaseActivity implements GetLibraryFacilitie
 
             }
         }catch (Exception e){
+            binding.txtdata.setVisibility(View.VISIBLE);
             binding.txtdata.setText("No Library Facility Data Availble");
             e.getStackTrace();
         }

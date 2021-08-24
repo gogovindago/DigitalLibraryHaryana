@@ -1,15 +1,28 @@
 package dhe.digital.library.haryana.ui.activity;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.view.DraweeView;
+import com.facebook.imagepipeline.common.ResizeOptions;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +33,7 @@ import dhe.digital.library.haryana.allinterface.GetLibraryEventsandActivitiesByL
 import dhe.digital.library.haryana.apicall.WebAPiCall;
 import dhe.digital.library.haryana.databinding.ActivityLibraryeventsandactivitiesBinding;
 import dhe.digital.library.haryana.models.BookRecordByLibIdRequest;
-import dhe.digital.library.haryana.models.LibraryEventsActivitieResponse;
+import dhe.digital.library.haryana.models.LibraryEventsActivitieAlbumResponse;
 import dhe.digital.library.haryana.utility.BaseActivity;
 import dhe.digital.library.haryana.utility.GlobalClass;
 
@@ -32,7 +45,7 @@ public class LibraryEventsandActivities extends BaseActivity implements GetLibra
     String typeId, itemType, titleOfPage;
 
     LibraryEventsandActivitiesLibIdAdapter adaptermain;
-    private List<LibraryEventsActivitieResponse.Datum> arrayList = new ArrayList<LibraryEventsActivitieResponse.Datum>();
+    private List<LibraryEventsActivitieAlbumResponse.Datum> arrayList = new ArrayList<LibraryEventsActivitieAlbumResponse.Datum>();
 
 
     @Override
@@ -72,9 +85,6 @@ public class LibraryEventsandActivities extends BaseActivity implements GetLibra
 
         if (GlobalClass.isNetworkConnected(LibraryEventsandActivities.this)) {
 
-            BookRecordByLibIdRequest record = new BookRecordByLibIdRequest();
-            record.setLibraryId(typeId);
-
             WebAPiCall webapiCall = new WebAPiCall();
 
             webapiCall.getLibraryEventsActivitiesLibIdDataMethod(LibraryEventsandActivities.this, LibraryEventsandActivities.this, typeId, binding.rrmain, binding.simpleSwipeRefreshLayout, LibraryEventsandActivities.this);
@@ -91,8 +101,6 @@ public class LibraryEventsandActivities extends BaseActivity implements GetLibra
             public void onRefresh() {
 
                 if (GlobalClass.isNetworkConnected(LibraryEventsandActivities.this)) {
-                    BookRecordByLibIdRequest record = new BookRecordByLibIdRequest();
-                    record.setLibraryId("1");
 
                     WebAPiCall webapiCall = new WebAPiCall();
 
@@ -127,7 +135,7 @@ public class LibraryEventsandActivities extends BaseActivity implements GetLibra
     }
 
     @Override
-    public void GetLibraryEventsandActivitiesByLibIdData(List<LibraryEventsActivitieResponse.Datum> list) {
+    public void GetLibraryEventsandActivitiesByLibIdData(List<LibraryEventsActivitieAlbumResponse.Datum> list) {
 
 
         arrayList.clear();
@@ -138,11 +146,30 @@ public class LibraryEventsandActivities extends BaseActivity implements GetLibra
         adaptermain = new LibraryEventsandActivitiesLibIdAdapter(this, (ArrayList) arrayList, this);
         binding.recyclerView.setAdapter(adaptermain);
 
-      
+
     }
 
     @Override
-    public void onItemClick(LibraryEventsActivitieResponse.Datum item, int currposition, String type) {
+    public void onItemClick(LibraryEventsActivitieAlbumResponse.Datum item, int currposition) {
+
+
+
+
+            Intent intent = new Intent(this, BooksDeatilActivity.class);
+            intent.putExtra("bookserial_Id", item.getEventTitle());
+            startActivity(intent);
+
+
+
+
+
+
+
+    }
+
+
+    @Override
+    public void onImageItemClick(LibraryEventsActivitieAlbumResponse.Datum item, int currposition, String type) {
 
 
       /*  if (type.equalsIgnoreCase("bookdetail")) {
@@ -155,5 +182,50 @@ public class LibraryEventsandActivities extends BaseActivity implements GetLibra
         } else {
         }*/
 
+
+        openDialog(item);
+
     }
+
+    public void openDialog(LibraryEventsActivitieAlbumResponse.Datum item) {
+
+
+
+        final Dialog dialog = new Dialog(this, android.R.style.Theme_Light); // Context, this, etc.
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_demo);
+
+        //   dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+        ImageView dialog_img = dialog.findViewById(R.id.dialog_img);
+
+       /* ImageRequest request = ImageRequestBuilder.newBuilderWithSource(Uri.parse(item.getEventImage()))
+                .setResizeOptions(new ResizeOptions(150, 150))
+                .build();
+        dialog_img.setController(
+
+                Fresco.newDraweeControllerBuilder()
+                        .setOldController(dialog_img.getController())
+                        .setImageRequest(request)
+                        .build());*/
+
+         //dialog_img.setImageURI(Uri.parse(item.getEventImage()));
+
+        Glide.with(this).load(item.getEventImage())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(dialog_img);
+
+        Button dialogButton = (Button) dialog.findViewById(R.id.dialog_ok);
+
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+
+        dialog.show();
+    }
+
 }
