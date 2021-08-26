@@ -1,7 +1,6 @@
 package dhe.digital.library.haryana.ui.activity;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
@@ -12,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -22,29 +22,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dhe.digital.library.haryana.R;
-import dhe.digital.library.haryana.adapter.LibraryEventsandActivitiesLibIdAdapter;
-import dhe.digital.library.haryana.allinterface.GetLibraryEventsandActivitiesByLibIdData_interface;
+import dhe.digital.library.haryana.adapter.LibraryEventsandActivitiesLibIdGalleryDetailAdapter;
+import dhe.digital.library.haryana.allinterface.GetLibraryEventsandActivitiesByLibIdGallerydetailData_interface;
 import dhe.digital.library.haryana.apicall.WebAPiCall;
-import dhe.digital.library.haryana.databinding.ActivityLibraryeventsandactivitiesBinding;
-import dhe.digital.library.haryana.models.LibraryEventsActivitieAlbumResponse;
+import dhe.digital.library.haryana.databinding.ActivityLibraryeventsandactivitiesgalleryBinding;
+import dhe.digital.library.haryana.models.LibraryEventsActivitieAlbumDetailResponse;
 import dhe.digital.library.haryana.utility.BaseActivity;
 import dhe.digital.library.haryana.utility.GlobalClass;
 
-public class LibraryEventsandActivities extends BaseActivity implements GetLibraryEventsandActivitiesByLibIdData_interface, LibraryEventsandActivitiesLibIdAdapter.ItemListener {
+public class LibraryEventsandActivitiesGalleryDetail extends BaseActivity implements GetLibraryEventsandActivitiesByLibIdGallerydetailData_interface, LibraryEventsandActivitiesLibIdGalleryDetailAdapter.ItemListener {
     LinearLayoutManager manager;
 
 
-    private ActivityLibraryeventsandactivitiesBinding binding;
+    private ActivityLibraryeventsandactivitiesgalleryBinding binding;
     String typeId, itemType, titleOfPage;
 
-    LibraryEventsandActivitiesLibIdAdapter adaptermain;
-    private List<LibraryEventsActivitieAlbumResponse.Datum> arrayList = new ArrayList<LibraryEventsActivitieAlbumResponse.Datum>();
+    LibraryEventsandActivitiesLibIdGalleryDetailAdapter adaptermain;
+    private List<LibraryEventsActivitieAlbumDetailResponse.Datum> arrayList = new ArrayList<LibraryEventsActivitieAlbumDetailResponse.Datum>();
+    private String title, date;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_libraryeventsandactivities);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_libraryeventsandactivitiesgallery);
 
         try {
 
@@ -53,19 +54,19 @@ public class LibraryEventsandActivities extends BaseActivity implements GetLibra
             if (extras != null) {
 
 
-                titleOfPage = extras.getString("title");
-                typeId = String.valueOf(extras.getInt("itemid"));
-                //  itemType = extras.getString("itemType");
-                // webViewUrl = extras.getString("typeId");
+                titleOfPage = extras.getString("titleOfPage");
+                typeId = extras.getString("itemid");
+                date = extras.getString("date");
+                title = extras.getString("title");
 
                 //  binding.toolbar.tvToolbarTitle.setAllCaps(true);
                 // binding.toolbar.tvToolbarTitle.setText("Books Available in "+titleOfPage);
 
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    binding.toolbar.tvToolbarTitle.setText(Html.fromHtml("<h6>Events & Activities in </h6>" + titleOfPage + "</h6>", Html.FROM_HTML_MODE_COMPACT));
+                    binding.toolbar.tvToolbarTitle.setText(Html.fromHtml("<h6>Events & Activities Gallery of </h6>" + titleOfPage + "</h6>", Html.FROM_HTML_MODE_COMPACT));
                 } else {
-                    binding.toolbar.tvToolbarTitle.setText(Html.fromHtml("<h6>Events & Activities in " + titleOfPage + "</h6>"));
+                    binding.toolbar.tvToolbarTitle.setText(Html.fromHtml("<h6>Events & Activities Gallery of " + titleOfPage + "</h6>"));
                 }
 
 
@@ -76,15 +77,15 @@ public class LibraryEventsandActivities extends BaseActivity implements GetLibra
         }
 
 
-        if (GlobalClass.isNetworkConnected(LibraryEventsandActivities.this)) {
+        if (GlobalClass.isNetworkConnected(LibraryEventsandActivitiesGalleryDetail.this)) {
 
             WebAPiCall webapiCall = new WebAPiCall();
 
-            webapiCall.getLibraryEventsActivitiesLibIdDataMethod(LibraryEventsandActivities.this, LibraryEventsandActivities.this,binding.txtnodatamsg, typeId, binding.rrmain, binding.simpleSwipeRefreshLayout, LibraryEventsandActivities.this);
+            webapiCall.getLibraryEventsActivitieAlbumDetailDataMethod(LibraryEventsandActivitiesGalleryDetail.this, LibraryEventsandActivitiesGalleryDetail.this,binding.txtnodatamsg, title, date, typeId, binding.rrmain, binding.simpleSwipeRefreshLayout, LibraryEventsandActivitiesGalleryDetail.this);
 
         } else {
 
-            Toast.makeText(LibraryEventsandActivities.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
+            Toast.makeText(LibraryEventsandActivitiesGalleryDetail.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
         }
 
 
@@ -93,15 +94,15 @@ public class LibraryEventsandActivities extends BaseActivity implements GetLibra
 
             public void onRefresh() {
 
-                if (GlobalClass.isNetworkConnected(LibraryEventsandActivities.this)) {
+                if (GlobalClass.isNetworkConnected(LibraryEventsandActivitiesGalleryDetail.this)) {
 
                     WebAPiCall webapiCall = new WebAPiCall();
 
-                    webapiCall.getLibraryEventsActivitiesLibIdDataMethod(LibraryEventsandActivities.this, LibraryEventsandActivities.this, binding.txtnodatamsg, typeId, binding.rrmain, binding.simpleSwipeRefreshLayout, LibraryEventsandActivities.this);
+                    webapiCall.getLibraryEventsActivitieAlbumDetailDataMethod(LibraryEventsandActivitiesGalleryDetail.this, LibraryEventsandActivitiesGalleryDetail.this, binding.txtnodatamsg, title, date, typeId, binding.rrmain, binding.simpleSwipeRefreshLayout, LibraryEventsandActivitiesGalleryDetail.this);
 
                 } else {
 
-                    Toast.makeText(LibraryEventsandActivities.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
+                    Toast.makeText(LibraryEventsandActivitiesGalleryDetail.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
                 }
                 binding.simpleSwipeRefreshLayout.setRefreshing(false);
             }
@@ -127,34 +128,15 @@ public class LibraryEventsandActivities extends BaseActivity implements GetLibra
 
     }
 
-    @Override
-    public void GetLibraryEventsandActivitiesByLibIdData(List<LibraryEventsActivitieAlbumResponse.Datum> list) {
-
-
-        arrayList.clear();
-        arrayList.addAll(list);
-        manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        binding.recyclerView.setLayoutManager(manager);
-        adaptermain = new LibraryEventsandActivitiesLibIdAdapter(this, (ArrayList) arrayList, this);
-        binding.recyclerView.setAdapter(adaptermain);
-
-
-    }
 
     @Override
-    public void onItemClick(LibraryEventsActivitieAlbumResponse.Datum item, int currposition) {
+    public void onItemClick(LibraryEventsActivitieAlbumDetailResponse.Datum item, int currposition) {
 
-        Intent intent = new Intent(this, LibraryEventsandActivitiesGalleryDetail.class);
-        intent.putExtra("title", item.getEventTitle());
-        intent.putExtra("titleOfPage", titleOfPage);
-        intent.putExtra("date", item.getEventDate());
-        intent.putExtra("itemid", typeId);
-        startActivity(intent);
     }
 
 
     @Override
-    public void onImageItemClick(LibraryEventsActivitieAlbumResponse.Datum item, int currposition, String type) {
+    public void onImageItemClick(LibraryEventsActivitieAlbumDetailResponse.Datum item, int currposition, String type) {
 
 
       /*  if (type.equalsIgnoreCase("bookdetail")) {
@@ -172,7 +154,7 @@ public class LibraryEventsandActivities extends BaseActivity implements GetLibra
 
     }
 
-    public void openDialog(LibraryEventsActivitieAlbumResponse.Datum item) {
+    public void openDialog(LibraryEventsActivitieAlbumDetailResponse.Datum item) {
 
 
         final Dialog dialog = new Dialog(this, android.R.style.Theme_Light); // Context, this, etc.
@@ -212,4 +194,21 @@ public class LibraryEventsandActivities extends BaseActivity implements GetLibra
         dialog.show();
     }
 
+    @Override
+    public void GetLibraryEventsandActivitiesByLibIdGallerydetailData(List<LibraryEventsActivitieAlbumDetailResponse.Datum> list) {
+
+        binding.txteventsdetail.setText(list.get(0).getEventDetails());
+
+
+        arrayList.clear();
+        arrayList.addAll(list);
+       // manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        manager = new GridLayoutManager(this, 1, GridLayoutManager.VERTICAL, false);
+
+        binding.recyclerView.setLayoutManager(manager);
+        adaptermain = new LibraryEventsandActivitiesLibIdGalleryDetailAdapter(this, (ArrayList) arrayList, this);
+
+        binding.recyclerView.setAdapter(adaptermain);
+
+    }
 }

@@ -15,8 +15,8 @@ import dhe.digital.library.haryana.models.HomePageResponse;
 import dhe.digital.library.haryana.models.ImportantLinksTypeResponse;
 import dhe.digital.library.haryana.models.InsertGrievanceRequest;
 import dhe.digital.library.haryana.models.InsertGrievanceResponse;
+import dhe.digital.library.haryana.models.LibraryEventsActivitieAlbumDetailResponse;
 import dhe.digital.library.haryana.models.LibraryEventsActivitieAlbumResponse;
-import dhe.digital.library.haryana.models.LibraryEventsActivitieResponse;
 import dhe.digital.library.haryana.models.LibraryFacilitiesResponse;
 import dhe.digital.library.haryana.models.LibraryGalleryResponse;
 import dhe.digital.library.haryana.models.LibraryTypeAndCoutResponse;
@@ -90,8 +90,17 @@ public interface ApiInterface {
 
     // http://112.196.99.107:81/api/commonapi/LibraryEventsActivities
    // @GET("LibraryEventsActivities/{LibraryId}")
+
     @GET("GetEventsByRank/{LibraryId}")
     Call<LibraryEventsActivitieAlbumResponse> getLibraryEventsActivitiesLibIdResponseDataAPi(@Path("LibraryId") String s);
+//http://112.196.99.107:81/api/commonapi/AllEventsActivitiesByTitle/Celebration of 75th Independence Day/18-08-2021/16
+
+    @GET("AllEventsActivitiesByTitle/{EventTitle}/{EventDate}/{LibraryId}")
+    Call<LibraryEventsActivitieAlbumDetailResponse> getLibraryEventsActivitieAlbumDetailDataAPi(
+            @Path("EventTitle") String eventTitle,
+            @Path("EventDate") String eventDate,
+            @Path("LibraryId") String s);
+
 
     // http://112.196.99.107:81/api/commonapi/GetBookRecord
     @GET("GetBookRecord/{LibraryId}")

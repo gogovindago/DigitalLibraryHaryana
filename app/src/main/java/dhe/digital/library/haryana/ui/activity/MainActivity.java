@@ -259,11 +259,12 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             if (skiplogin) {
 
 
-
-
-            }else {
+            } else {
                 DataModelLeftNew Bookssuggestio_for_Library = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, " Book Suggestion", 110);
                 dataModelLeftList.add(Bookssuggestio_for_Library);
+
+                DataModelLeftNew blogs = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, " Create Blog", 111);
+                dataModelLeftList.add(blogs);
 
             }
 
@@ -698,6 +699,15 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 booksuggestionforlibraryintent.putExtra("typeReq", "booksuggestionforlibrary");
                 booksuggestionforlibraryintent.putExtra("titleOfPage", "Book Suggestion");
                 startActivity(booksuggestionforlibraryintent);
+                break;
+            case 111:
+                mDrawerLayout.closeDrawers();
+                // Intent Books_Available_in_Library = new Intent(MainActivity.this, BooksAvailableinLibrary.class);
+                Intent blogsIntent = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                blogsIntent.putExtra("typeId", "1");
+                blogsIntent.putExtra("typeReq", "blogforlibrary");
+                blogsIntent.putExtra("titleOfPage", "Blog");
+                startActivity(blogsIntent);
                 break;
 
             case 105:

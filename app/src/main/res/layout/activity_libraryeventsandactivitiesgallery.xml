@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -9,6 +9,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".ui.activity.LibraryEventsandActivities">
+
         <include
 
             android:id="@+id/toolbar"
@@ -33,52 +34,65 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <androidx.recyclerview.widget.RecyclerView
 
-                    android:id="@+id/recyclerView"
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:textColor="@color/black"
+                    android:background="@color/white"
+                    android:id="@+id/txteventsdetail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_marginBottom="5dp"
-                    android:paddingBottom="5dp"
+                    android:padding="5dp">
+
+                </androidx.appcompat.widget.AppCompatTextView>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txteventsdetail"
+                    android:layout_marginTop="5dp"
                     android:scrollbars="vertical"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:visibility="gone"
-                    android:layout_margin="8dp"
                     android:id="@+id/gototop"
-                    android:src="@drawable/ic_baseline_arrow_upward_24"
-                    app:backgroundTint="@color/purple_700"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
                     android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
                     android:layout_centerInParent="true"
-                    android:layout_alignParentRight="true">
+                    android:layout_margin="8dp"
+                    android:src="@drawable/ic_baseline_arrow_upward_24"
+                    android:visibility="gone"
+                    app:backgroundTint="@color/purple_700">
 
                 </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txtnodatamsg"
-                    android:textColor="@color/purple_700"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:layout_centerHorizontal="true"
                     android:layout_margin="8dp"
                     android:drawableStart="@drawable/ic_baseline_shopping_cart_24"
-                    android:visibility="gone"
-                    android:drawableLeft="@drawable/ic_baseline_shopping_cart_24">
+                    android:drawableLeft="@drawable/ic_baseline_shopping_cart_24"
+                    android:textColor="@color/purple_700"
+                    android:visibility="gone">
 
                 </androidx.appcompat.widget.AppCompatTextView>
             </RelativeLayout>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-        
-        
+
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

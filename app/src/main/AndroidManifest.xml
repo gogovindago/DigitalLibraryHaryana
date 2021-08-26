@@ -20,9 +20,18 @@
         android:theme="@style/Theme.DigitalLibraryHaryana"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".ui.activity.ContactUsActivity"
+        <activity
+            android:name=".CreateBlogActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.activity.BlogActivity"
+            android:exported="true"
             android:theme="@style/DigitalLibraryHaryana"
-            android:windowSoftInputMode="adjustResize" ></activity>
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.activity.ContactUsActivity"
+            android:theme="@style/DigitalLibraryHaryana"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.activity.CommitteeDetailActivity"
             android:theme="@style/DigitalLibraryHaryana"
@@ -145,9 +154,14 @@
             android:name=".ui.activity.StaffDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/DigitalLibraryHaryana" />
-        <activity android:name=".ui.activity.BookSuggestionActivity"
+        <activity
+            android:name=".ui.activity.BookSuggestionActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/DigitalLibraryHaryana"/>
+            android:theme="@style/DigitalLibraryHaryana" />
+        <activity
+            android:name=".ui.activity.LibraryEventsandActivitiesGalleryDetail"
+            android:screenOrientation="portrait"
+            android:theme="@style/DigitalLibraryHaryana" />
     </application>
 
 </manifest>

@@ -14,7 +14,7 @@
         android:layout_gravity="center"
         android:layout_margin="1dp"
         app:cardBackgroundColor="@color/cardview_light_background"
-        app:cardCornerRadius="2dp"
+        app:cardCornerRadius="1dp"
         app:cardUseCompatPadding="true">
 
         <RelativeLayout
@@ -33,6 +33,7 @@
                 android:padding="0dp" />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/textViewTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -44,24 +45,22 @@
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/textViewAuthor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txtpublisher"
                 android:layout_centerInParent="false"
                 android:layout_marginStart="5dp"
-                android:padding="2dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
-                android:drawableEnd="@drawable/ic_baseline_arrow_forward_ios_24"
-                android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
-                android:maxLines="3"
+                android:padding="2dp"
                 android:text=""
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/txtpublisher"
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textViewTitle"
@@ -69,7 +68,6 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
-
                 android:text="Publisher:- \n "
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 

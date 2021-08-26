@@ -806,6 +806,15 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
             startActivity(contactUsintent);
 
 
+        } else if (typeReq.equalsIgnoreCase("blogforlibrary")) {
+
+            Intent contactUsintent = new Intent(this, BlogActivity.class);
+            contactUsintent.putExtra("title", item.getDescription());
+            contactUsintent.putExtra("itemid", item.getId());
+            contactUsintent.putExtra("liburl", item.getUrl());
+            startActivity(contactUsintent);
+
+
         } else if (typeReq.equalsIgnoreCase("Public_Library")) {
 
 

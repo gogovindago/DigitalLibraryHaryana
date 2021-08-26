@@ -28,6 +28,7 @@ import dhe.digital.library.haryana.allinterface.GetImportantLinksTypeData_interf
 import dhe.digital.library.haryana.allinterface.GetLibTypeByIdData_interface;
 import dhe.digital.library.haryana.allinterface.GetLibraryAlumniAchievementsByLibIdData_interface;
 import dhe.digital.library.haryana.allinterface.GetLibraryEventsandActivitiesByLibIdData_interface;
+import dhe.digital.library.haryana.allinterface.GetLibraryEventsandActivitiesByLibIdGallerydetailData_interface;
 import dhe.digital.library.haryana.allinterface.GetLibraryFacilitiesByLibIdData_interface;
 import dhe.digital.library.haryana.allinterface.GetLibraryGalleryData_interface;
 import dhe.digital.library.haryana.allinterface.GetbannersData_interface;
@@ -54,6 +55,7 @@ import dhe.digital.library.haryana.models.HomePageResponse;
 import dhe.digital.library.haryana.models.ImportantLinksTypeResponse;
 import dhe.digital.library.haryana.models.InsertGrievanceRequest;
 import dhe.digital.library.haryana.models.InsertGrievanceResponse;
+import dhe.digital.library.haryana.models.LibraryEventsActivitieAlbumDetailResponse;
 import dhe.digital.library.haryana.models.LibraryEventsActivitieAlbumResponse;
 import dhe.digital.library.haryana.models.LibraryFacilitiesResponse;
 import dhe.digital.library.haryana.models.LibraryGalleryResponse;
@@ -495,7 +497,7 @@ public class WebAPiCall {
     }
 
 
-    public void getLibraryEventsActivitiesLibIdDataMethod(final Activity activity, final Context context, String libId, RelativeLayout llmain, SwipeRefreshLayout mSwipeRefreshLayout, final GetLibraryEventsandActivitiesByLibIdData_interface anInterface) {
+    public void getLibraryEventsActivitiesLibIdDataMethod(final Activity activity, final Context context, AppCompatTextView txtnodatamsg, String libId, RelativeLayout llmain, SwipeRefreshLayout mSwipeRefreshLayout, final GetLibraryEventsandActivitiesByLibIdData_interface anInterface) {
 
         // loadershowwithMsg(context, "Loading...");
         mSwipeRefreshLayout.setRefreshing(true);
@@ -520,6 +522,9 @@ public class WebAPiCall {
 
                     } else {
                         mSwipeRefreshLayout.setRefreshing(false);
+                        txtnodatamsg.setVisibility(View.VISIBLE);
+                        txtnodatamsg.setText("No Data Found! List is Empty.");
+
 
                     }
 
@@ -531,6 +536,53 @@ public class WebAPiCall {
 
             @Override
             public void onFailure(Call<LibraryEventsActivitieAlbumResponse> call, Throwable t) {
+                mSwipeRefreshLayout.setRefreshing(false);
+                // dailoghide(context);
+                t.printStackTrace();
+
+                Log.d("dddddd", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+    public void getLibraryEventsActivitieAlbumDetailDataMethod(final Activity activity, final Context context, AppCompatTextView txtnodatamsg, String title, String date, String libId, RelativeLayout llmain, SwipeRefreshLayout mSwipeRefreshLayout, final GetLibraryEventsandActivitiesByLibIdGallerydetailData_interface anInterface) {
+
+        // loadershowwithMsg(context, "Loading...");
+        mSwipeRefreshLayout.setRefreshing(true);
+
+        Call<LibraryEventsActivitieAlbumDetailResponse> responseCall = ApiClient.getClient().getLibraryEventsActivitieAlbumDetailDataAPi(title,date,libId);
+        responseCall.enqueue(new Callback<LibraryEventsActivitieAlbumDetailResponse>() {
+            @Override
+            public void onResponse(Call<LibraryEventsActivitieAlbumDetailResponse> call, Response<LibraryEventsActivitieAlbumDetailResponse> response) {
+                // dailoghide(context);
+                if (response.isSuccessful()) {
+
+                    assert response.body() != null;
+                    if (response.body().getResponse() == 200) {
+
+                        mSwipeRefreshLayout.setRefreshing(false);
+
+                        llmain.setVisibility(View.VISIBLE);
+
+
+                        anInterface.GetLibraryEventsandActivitiesByLibIdGallerydetailData(response.body().getData());
+
+
+                    } else {
+                        mSwipeRefreshLayout.setRefreshing(false);
+
+                        txtnodatamsg.setVisibility(View.VISIBLE);
+                        txtnodatamsg.setText("No Data Found! Gallery is Empty.");
+
+                    }
+
+
+                } else {
+                    GlobalClass.showtost(context, "" + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LibraryEventsActivitieAlbumDetailResponse> call, Throwable t) {
                 mSwipeRefreshLayout.setRefreshing(false);
                 // dailoghide(context);
                 t.printStackTrace();

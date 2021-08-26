@@ -4,18 +4,23 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidApps/Govind/2020/AllApps/Java/Live/DigitalLibraryHaryana/app/src/main/res/drawable/ic_baseline_shopping_cart_24.xml" value="0.3828125" />
+        <entry key="..\:/AndroidApps/Govind/2020/AllApps/Java/Live/DigitalLibraryHaryana/app/src/main/res/layout/activity_blog.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidApps/Govind/2020/AllApps/Java/Live/DigitalLibraryHaryana/app/src/main/res/layout/activity_books_availablein_library.xml" value="0.17831813576494426" />
+        <entry key="..\:/AndroidApps/Govind/2020/AllApps/Java/Live/DigitalLibraryHaryana/app/src/main/res/layout/activity_books_detail.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidApps/Govind/2020/AllApps/Java/Live/DigitalLibraryHaryana/app/src/main/res/layout/activity_booksuggestion.xml" value="0.67" />
+        <entry key="..\:/AndroidApps/Govind/2020/AllApps/Java/Live/DigitalLibraryHaryana/app/src/main/res/layout/activity_create_blog.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidApps/Govind/2020/AllApps/Java/Live/DigitalLibraryHaryana/app/src/main/res/layout/activity_grievance.xml" value="0.5" />
         <entry key="..\:/AndroidApps/Govind/2020/AllApps/Java/Live/DigitalLibraryHaryana/app/src/main/res/layout/activity_library_facility.xml" value="0.27037037037037037" />
         <entry key="..\:/AndroidApps/Govind/2020/AllApps/Java/Live/DigitalLibraryHaryana/app/src/main/res/layout/activity_library_gallery.xml" value="0.39439775910364144" />
         <entry key="..\:/AndroidApps/Govind/2020/AllApps/Java/Live/DigitalLibraryHaryana/app/src/main/res/layout/activity_libraryeventsandactivities.xml" value="0.24230072463768115" />
+        <entry key="..\:/AndroidApps/Govind/2020/AllApps/Java/Live/DigitalLibraryHaryana/app/src/main/res/layout/activity_libraryeventsandactivitiesgallery.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidApps/Govind/2020/AllApps/Java/Live/DigitalLibraryHaryana/app/src/main/res/layout/activity_login.xml" value="0.27037037037037037" />
         <entry key="..\:/AndroidApps/Govind/2020/AllApps/Java/Live/DigitalLibraryHaryana/app/src/main/res/layout/activity_notification_detail.xml" value="0.22" />
         <entry key="..\:/AndroidApps/Govind/2020/AllApps/Java/Live/DigitalLibraryHaryana/app/src/main/res/layout/activity_signup.xml" value="0.27037037037037037" />
         <entry key="..\:/AndroidApps/Govind/2020/AllApps/Java/Live/DigitalLibraryHaryana/app/src/main/res/layout/dialog_demo.xml" value="0.33" />
         <entry key="..\:/AndroidApps/Govind/2020/AllApps/Java/Live/DigitalLibraryHaryana/app/src/main/res/layout/layout_books.xml" value="0.75" />
         <entry key="..\:/AndroidApps/Govind/2020/AllApps/Java/Live/DigitalLibraryHaryana/app/src/main/res/layout/layout_lib_activity_events.xml" value="0.33" />
+        <entry key="..\:/AndroidApps/Govind/2020/AllApps/Java/Live/DigitalLibraryHaryana/app/src/main/res/layout/layout_lib_activity_events_detail.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidApps/Govind/2020/AllApps/Java/Live/DigitalLibraryHaryana/app/src/main/res/layout/layout_libgallery.xml" value="0.33" />
         <entry key="..\:/AndroidApps/Govind/2020/AllApps/Java/Live/DigitalLibraryHaryana/app/src/main/res/layout/lib_committee_list_row.xml" value="0.2269021739130435" />
       </map>
@@ -26,5 +31,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.36666666666666664" />
+      </ProjectState>
+    </option>
   </component>
 </project>
