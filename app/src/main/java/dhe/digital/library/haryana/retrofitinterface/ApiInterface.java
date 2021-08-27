@@ -1,6 +1,7 @@
 package dhe.digital.library.haryana.retrofitinterface;
 
 import dhe.digital.library.haryana.models.AlumniAchievementsResponse;
+import dhe.digital.library.haryana.models.BlogCreateResponse;
 import dhe.digital.library.haryana.models.BookRecordByLibIdResponse;
 import dhe.digital.library.haryana.models.BookSuggestionRequest;
 import dhe.digital.library.haryana.models.BookSuggestionResponse;
@@ -34,10 +35,14 @@ import dhe.digital.library.haryana.models.TrackGrievanceResponse;
 import dhe.digital.library.haryana.models.VerifyOtpRequest;
 import dhe.digital.library.haryana.models.VerifyOtpResponse;
 import dhe.digital.library.haryana.models.ViewAllResponse;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 
@@ -57,8 +62,7 @@ public interface ApiInterface {
 
     //http://112.196.99.107:81/api/commonapi/ImportantLinksType
     @GET("ImportantLinksType")
-    Call<ImportantLinksTypeResponse> getImportantLinksTypeAPi() ;
-
+    Call<ImportantLinksTypeResponse> getImportantLinksTypeAPi();
 
 
     //http://112.196.99.107:81/api/commonapi/StaffDetails/8
@@ -89,7 +93,7 @@ public interface ApiInterface {
     Call<BooksDetailResponse> getBookDetailByLibIdResponseDataAPi(@Path("BookId") String s);
 
     // http://112.196.99.107:81/api/commonapi/LibraryEventsActivities
-   // @GET("LibraryEventsActivities/{LibraryId}")
+    // @GET("LibraryEventsActivities/{LibraryId}")
 
     @GET("GetEventsByRank/{LibraryId}")
     Call<LibraryEventsActivitieAlbumResponse> getLibraryEventsActivitiesLibIdResponseDataAPi(@Path("LibraryId") String s);
@@ -100,6 +104,31 @@ public interface ApiInterface {
             @Path("EventTitle") String eventTitle,
             @Path("EventDate") String eventDate,
             @Path("LibraryId") String s);
+
+/*
+
+//http://112.196.99.107:81/api/commonapi/CreateBlog
+  @GET("CreateBlog/{EventTitle}/{EventDate}/{LibraryId}")
+    Call<BlogCreateResponse> CreateBlogDataAPi(
+            @Path("BlogTitle") String BlogTitle,
+            @Path("BlogBody") String BlogBody,
+            @Path("PhoneNo") String PhoneNo,
+            @Path("CreatedBy") String CreatedBy,
+            @Path("LibrayUrl") String LibrayUrl,
+            @Path("Blog_Image_ext") String Blog_Image_ext);
+*/
+
+
+//http://112.196.99.107:81/api/commonapi/CreateBlog
+    @Multipart
+    @POST("CreateBlog")
+    Call<BlogCreateResponse> CreateBlogDataAPi(@Path("BlogTitle") RequestBody BlogTitle,
+                                               @Path("BlogBody") RequestBody BlogBody,
+                                               @Path("PhoneNo") RequestBody PhoneNo,
+                                               @Path("CreatedBy") RequestBody CreatedBy,
+                                               @Path("LibraryUrl") RequestBody LibrayUrl,
+                                               @Part MultipartBody.Part Blog_Image_ext);
+
 
 
     // http://112.196.99.107:81/api/commonapi/GetBookRecord
@@ -141,7 +170,6 @@ public interface ApiInterface {
     //http://112.196.99.107:81/DigitalLibrary/api/commonapi/ContactUs
     @POST("ContactUs")
     Call<ContactUsResponse> contactusapi(@Body ContactUsRequest request);
-
 
 
     //http://112.196.99.107:81/DigitalLibrary/api/commonapi/UserLogin/7018401817/1234

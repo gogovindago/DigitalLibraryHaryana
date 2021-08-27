@@ -41,6 +41,7 @@ import dhe.digital.library.haryana.allinterface.SignupData_interface;
 import dhe.digital.library.haryana.allinterface.TrackGrienvanceData_interface;
 import dhe.digital.library.haryana.allinterface.staffDetail_Data_interface;
 import dhe.digital.library.haryana.models.AlumniAchievementsResponse;
+import dhe.digital.library.haryana.models.BlogCreateResponse;
 import dhe.digital.library.haryana.models.BookRecordByLibIdResponse;
 import dhe.digital.library.haryana.models.BookSuggestionRequest;
 import dhe.digital.library.haryana.models.BookSuggestionResponse;
@@ -77,6 +78,8 @@ import dhe.digital.library.haryana.models.ViewAllResponse;
 import dhe.digital.library.haryana.retrofitinterface.ApiClient;
 import dhe.digital.library.haryana.ui.activity.MainActivity;
 import dhe.digital.library.haryana.utility.GlobalClass;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -544,12 +547,13 @@ public class WebAPiCall {
             }
         });
     }
+
     public void getLibraryEventsActivitieAlbumDetailDataMethod(final Activity activity, final Context context, AppCompatTextView txtnodatamsg, String title, String date, String libId, RelativeLayout llmain, SwipeRefreshLayout mSwipeRefreshLayout, final GetLibraryEventsandActivitiesByLibIdGallerydetailData_interface anInterface) {
 
         // loadershowwithMsg(context, "Loading...");
         mSwipeRefreshLayout.setRefreshing(true);
 
-        Call<LibraryEventsActivitieAlbumDetailResponse> responseCall = ApiClient.getClient().getLibraryEventsActivitieAlbumDetailDataAPi(title,date,libId);
+        Call<LibraryEventsActivitieAlbumDetailResponse> responseCall = ApiClient.getClient().getLibraryEventsActivitieAlbumDetailDataAPi(title, date, libId);
         responseCall.enqueue(new Callback<LibraryEventsActivitieAlbumDetailResponse>() {
             @Override
             public void onResponse(Call<LibraryEventsActivitieAlbumDetailResponse> call, Response<LibraryEventsActivitieAlbumDetailResponse> response) {
@@ -1375,6 +1379,68 @@ public class WebAPiCall {
             }
         });
     }
+
+
+    public void CreateBlogDataMethod(final Activity activity, final Context context,
+
+                                     RequestBody BlogTitle,
+                                     RequestBody BlogBody,
+                                     RequestBody PhoneNo,
+                                     RequestBody CreatedBy,
+                                     RequestBody LibrayUrl,
+                                     MultipartBody.Part Blog_Image_ext
+
+    ) {
+
+        loadershowwithMsg(context, "Blog Uploading process is going on...");
+
+///SessionID
+//SemesterID
+//AsgnDesc
+//startdate
+//enddate
+//Document
+//createdBy
+        Call<BlogCreateResponse> userpost_responseCall = ApiClient.getClient().CreateBlogDataAPi(
+                BlogTitle,
+                BlogBody,
+                PhoneNo,
+                CreatedBy,
+                LibrayUrl,
+                Blog_Image_ext);
+        userpost_responseCall.enqueue(new Callback<BlogCreateResponse>() {
+
+            @Override
+            public void onResponse(Call<BlogCreateResponse> call, Response<BlogCreateResponse> response) {
+                dailoghide(context);
+                if (response.isSuccessful()) {
+                    if (response.body().getResponse() == 200) {
+                        dailogsuccessWithActivity(context, activity, "Blog Uploaded successfully", "Blog Uploading process completed successful.");
+                    } else {
+                        dailogError(context, "Error!", "Server is busy,Blog Uploading process failed!,Please try after sometimes");
+
+
+                    }
+
+
+                } else {
+                    GlobalClass.showtost(context, "" + response.message());
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<BlogCreateResponse> call, Throwable t) {
+
+                dailoghide(context);
+                t.printStackTrace();
+                Log.d("dddddd", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+
 
 
 
@@ -2314,7 +2380,7 @@ public class WebAPiCall {
 //enddate
 //Document
 //createdBy
-        Call<AddAssignmentResponse> userpost_responseCall = ApiClient.getClient().addAssignmentApi(
+        Call<BlogCreateResponse> userpost_responseCall = ApiClient.getClient().addAssignmentApi(
                 token,
                 SessionID,
                 SemesterID,
@@ -2323,10 +2389,10 @@ public class WebAPiCall {
                 assignment_end_date,
                 CreatedBy,
                 documentFileName);
-        userpost_responseCall.enqueue(new Callback<AddAssignmentResponse>() {
+        userpost_responseCall.enqueue(new Callback<BlogCreateResponse>() {
 
             @Override
-            public void onResponse(Call<AddAssignmentResponse> call, Response<AddAssignmentResponse> response) {
+            public void onResponse(Call<BlogCreateResponse> call, Response<BlogCreateResponse> response) {
                 dailoghide(context);
                 if (response.isSuccessful()) {
                     if (response.body().getResponse() == 200) {
@@ -2346,7 +2412,7 @@ public class WebAPiCall {
             }
 
             @Override
-            public void onFailure(Call<AddAssignmentResponse> call, Throwable t) {
+            public void onFailure(Call<BlogCreateResponse> call, Throwable t) {
 
                 dailoghide(context);
                 t.printStackTrace();

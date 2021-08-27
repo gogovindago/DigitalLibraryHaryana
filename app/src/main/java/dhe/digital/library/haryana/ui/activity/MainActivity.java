@@ -706,7 +706,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 Intent blogsIntent = new Intent(MainActivity.this, ViewAllDataActivity.class);
                 blogsIntent.putExtra("typeId", "1");
                 blogsIntent.putExtra("typeReq", "blogforlibrary");
-                blogsIntent.putExtra("titleOfPage", "Blog");
+                blogsIntent.putExtra("titleOfPage", "Digital Library Blog");
                 startActivity(blogsIntent);
                 break;
 
