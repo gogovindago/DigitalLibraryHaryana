@@ -8,7 +8,6 @@ import android.content.IntentSender;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,8 +23,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.regex.Pattern;
 
@@ -61,8 +59,29 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
 
         myLoaders = new MyLoaders(getApplicationContext());
-        refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        // Log.d(TAG, "Refreshed token: " + refreshedToken);
+
+
+
+
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            //  Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        refreshedToken = task.getResult();
+                        // Log.d("fcm",refreshedToken);
+
+                    }
+                });
+
+
+
+
         findViews();
 
         //set google api client for hint request
@@ -74,25 +93,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         getHintPhoneNumber();
 
 
-        FirebaseInstanceId.getInstance().getInstanceId()
-                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                        if (!task.isSuccessful()) {
-                            Log.w(TAG, "getInstanceId failed", task.getException());
-                            return;
-                        }
-
-                        // Get new Instance ID token
-                        String token = task.getResult().getToken();
-                        refreshedToken = task.getResult().getToken();
-
-                        // Log and toast
-                        String msg = token;
-                        // Log.d(TAG, msg);
-                        //Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
-                    }
-                });
 
 
         createaccount.setOnClickListener(new View.OnClickListener() {

@@ -3,7 +3,6 @@ package dhe.digital.library.haryana.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -12,8 +11,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.regex.Pattern;
 
@@ -25,7 +23,6 @@ import dhe.digital.library.haryana.databinding.ActivitySignupBinding;
 import dhe.digital.library.haryana.models.SignupRequest;
 import dhe.digital.library.haryana.models.SignupResponse;
 import dhe.digital.library.haryana.models.VerifyOtpRequest;
-import dhe.digital.library.haryana.ui.welcome.WelcomeActivity;
 import dhe.digital.library.haryana.utility.BaseActivity;
 import dhe.digital.library.haryana.utility.CSPreferences;
 import dhe.digital.library.haryana.utility.GlobalClass;
@@ -46,26 +43,20 @@ public class SignupActivity extends BaseActivity implements SignupData_interface
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_signup);
         myLoaders = new MyLoaders(getApplicationContext());
-        refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        // Log.d(TAG, "Refreshed token: " + refreshedToken);
 
-        FirebaseInstanceId.getInstance().getInstanceId()
-                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
                     @Override
-                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                    public void onComplete(@NonNull Task<String> task) {
                         if (!task.isSuccessful()) {
-                            Log.w(TAG, "getInstanceId failed", task.getException());
+                            //  Log.w(TAG, "Fetching FCM registration token failed", task.getException());
                             return;
                         }
 
-                        // Get new Instance ID token
-                        String token = task.getResult().getToken();
-                        refreshedToken = task.getResult().getToken();
+                        // Get new FCM registration token
+                        refreshedToken = task.getResult();
+                        // Log.d("fcm",refreshedToken);
 
-                        // Log and toast
-                        String msg = token;
-                        // Log.d(TAG, msg);
-                        //Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
                     }
                 });
         CSPreferences.putBolean(SignupActivity.this, "skiplogin", false);

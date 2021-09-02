@@ -18,75 +18,62 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edtTitleOfblog"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="8dp"
+            android:gravity="center"
+            android:theme="@style/Theme.MaterialComponents.Light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
+            <com.google.android.material.textfield.TextInputEditText
 
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edtTitleOfblog"
-                android:theme="@style/Theme.MaterialComponents.Light"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/txtInTitleblog"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/activity_horizontal_marginn"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:gravity="center"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_margin="2dp"
+                android:background="@null"
+                android:drawableStart="@drawable/editpencolor"
+                android:drawableLeft="@drawable/editpencolor"
+                android:gravity="center|start"
+                android:hint="Title Of your blog."
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLines="1"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtInTitleblog"
-                    android:layout_margin="2dp"
-                    android:background="@null"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:drawableStart="@drawable/editpencolor"
-                    android:drawableLeft="@drawable/editpencolor"
-                    android:drawablePadding="16dp"
-                    android:gravity="center|start"
-                    android:hint="Title Of your blog."
-                    android:imeOptions="actionNext"
-                    android:inputType="text"
-                    android:maxLines="1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-
+                tools:ignore="TouchTargetSizeCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:theme="@style/Theme.MaterialComponents.Light"
+
             android:id="@+id/edtblog"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_horizontal_marginn"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_height="150dp"
+            android:layout_margin="8dp"
             android:gravity="center"
+            android:theme="@style/Theme.MaterialComponents.Light"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edtTitleOfblog">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtInblogs"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
                 android:layout_margin="2dp"
                 android:background="@null"
-
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
                 android:drawableStart="@drawable/ic_baseline_edit_note_24"
                 android:drawableLeft="@drawable/ic_baseline_edit_note_24"
-                android:drawablePadding="16dp"
                 android:gravity="center|start"
                 android:hint="Write your blog here."
                 android:imeOptions="actionNext"

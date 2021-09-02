@@ -2,6 +2,7 @@ package dhe.digital.library.haryana.retrofitinterface;
 
 import dhe.digital.library.haryana.models.AlumniAchievementsResponse;
 import dhe.digital.library.haryana.models.BlogCreateResponse;
+import dhe.digital.library.haryana.models.BlogListResponse;
 import dhe.digital.library.haryana.models.BookRecordByLibIdResponse;
 import dhe.digital.library.haryana.models.BookSuggestionRequest;
 import dhe.digital.library.haryana.models.BookSuggestionResponse;
@@ -39,6 +40,8 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -119,16 +122,21 @@ public interface ApiInterface {
 */
 
 
-//http://112.196.99.107:81/api/commonapi/CreateBlog
+    //http://112.196.99.107:81/api/commonapi/CreateBlog
     @Multipart
     @POST("CreateBlog")
-    Call<BlogCreateResponse> CreateBlogDataAPi(@Path("BlogTitle") RequestBody BlogTitle,
-                                               @Path("BlogBody") RequestBody BlogBody,
-                                               @Path("PhoneNo") RequestBody PhoneNo,
-                                               @Path("CreatedBy") RequestBody CreatedBy,
-                                               @Path("LibraryUrl") RequestBody LibrayUrl,
+    Call<BlogCreateResponse> CreateBlogDataAPi(@Part("BlogTitle") RequestBody BlogTitle,
+                                               @Part("BlogBody") RequestBody BlogBody,
+                                               @Part("PhoneNo") RequestBody PhoneNo,
+                                               @Part("CreatedBy") RequestBody CreatedBy,
+                                               @Part("LibraryUrl") RequestBody LibrayUrl,
                                                @Part MultipartBody.Part Blog_Image_ext);
 
+
+
+    // http://112.196.99.107:81/api/commonapi/LibraryBlogs
+    @GET("LibraryBlogs/{LibraryId}")
+    Call<BlogListResponse> getBlogListDataAPi(@Path("LibraryId") String s);
 
 
     // http://112.196.99.107:81/api/commonapi/GetBookRecord

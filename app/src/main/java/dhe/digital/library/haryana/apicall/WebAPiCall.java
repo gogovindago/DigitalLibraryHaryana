@@ -22,6 +22,7 @@ import dhe.digital.library.haryana.allinterface.ContactUsData_interface;
 import dhe.digital.library.haryana.allinterface.GetAllData_interface;
 import dhe.digital.library.haryana.allinterface.GetAllHearingSpeechData_interface;
 import dhe.digital.library.haryana.allinterface.GetAllLibraryTypesData_interface;
+import dhe.digital.library.haryana.allinterface.GetBLogsByLibIdData_interface;
 import dhe.digital.library.haryana.allinterface.GetBookDetailData_interface;
 import dhe.digital.library.haryana.allinterface.GetBookRecordByLibIdData_interface;
 import dhe.digital.library.haryana.allinterface.GetImportantLinksTypeData_interface;
@@ -42,6 +43,7 @@ import dhe.digital.library.haryana.allinterface.TrackGrienvanceData_interface;
 import dhe.digital.library.haryana.allinterface.staffDetail_Data_interface;
 import dhe.digital.library.haryana.models.AlumniAchievementsResponse;
 import dhe.digital.library.haryana.models.BlogCreateResponse;
+import dhe.digital.library.haryana.models.BlogListResponse;
 import dhe.digital.library.haryana.models.BookRecordByLibIdResponse;
 import dhe.digital.library.haryana.models.BookSuggestionRequest;
 import dhe.digital.library.haryana.models.BookSuggestionResponse;
@@ -637,6 +639,51 @@ public class WebAPiCall {
             public void onFailure(Call<BookRecordByLibIdResponse> call, Throwable t) {
                 mSwipeRefreshLayout.setRefreshing(false);
                 // dailoghide(context);
+                t.printStackTrace();
+
+                Log.d("dddddd", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+
+    public void getBlogListByLibIdDataMethod(final Activity activity, final Context context, String libId, RecyclerView llmain , AppCompatTextView txtnodatamsg, final GetBLogsByLibIdData_interface anInterface) {
+
+         loadershowwithMsg(context, "Loading...");
+       /// mSwipeRefreshLayout.setRefreshing(true);
+
+        Call<BlogListResponse> responseCall = ApiClient.getClient().getBlogListDataAPi(libId);
+        responseCall.enqueue(new Callback<BlogListResponse>() {
+            @Override
+            public void onResponse(Call<BlogListResponse> call, Response<BlogListResponse> response) {
+                 dailoghide(context);
+                if (response.isSuccessful()) {
+
+                    assert response.body() != null;
+                    if (response.body().getResponse() == 200) {
+
+
+                        llmain.setVisibility(View.VISIBLE);
+
+
+                        anInterface.GetBlogsByLibIdData(response.body().getData());
+
+
+                    } else {
+
+                        txtnodatamsg.setVisibility(View.VISIBLE);
+                        txtnodatamsg.setText("No Data Found! ");
+                    }
+
+
+                } else {
+                    GlobalClass.showtost(context, "" + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BlogListResponse> call, Throwable t) {
+                 dailoghide(context);
                 t.printStackTrace();
 
                 Log.d("dddddd", "onFailure: " + t.getMessage());
@@ -1381,45 +1428,33 @@ public class WebAPiCall {
     }
 
 
-    public void CreateBlogDataMethod(final Activity activity, final Context context,
-
-                                     RequestBody BlogTitle,
-                                     RequestBody BlogBody,
-                                     RequestBody PhoneNo,
+    public void CreateBlogDataMethod(final Activity activity, final Context context, RequestBody BlogTitle, RequestBody BlogBody, RequestBody PhoneNo,
                                      RequestBody CreatedBy,
                                      RequestBody LibrayUrl,
-                                     MultipartBody.Part Blog_Image_ext
-
-    ) {
+                                     MultipartBody.Part Blog_Image_ext) {
 
         loadershowwithMsg(context, "Blog Uploading process is going on...");
 
-///SessionID
-//SemesterID
-//AsgnDesc
-//startdate
-//enddate
-//Document
-//createdBy
-        Call<BlogCreateResponse> userpost_responseCall = ApiClient.getClient().CreateBlogDataAPi(
+
+        Call<BlogCreateResponse> createBlogDataAPi = ApiClient.getClient().CreateBlogDataAPi(
                 BlogTitle,
                 BlogBody,
                 PhoneNo,
                 CreatedBy,
                 LibrayUrl,
                 Blog_Image_ext);
-        userpost_responseCall.enqueue(new Callback<BlogCreateResponse>() {
+        createBlogDataAPi.enqueue(new Callback<BlogCreateResponse>() {
 
             @Override
             public void onResponse(Call<BlogCreateResponse> call, Response<BlogCreateResponse> response) {
                 dailoghide(context);
                 if (response.isSuccessful()) {
+
+
                     if (response.body().getResponse() == 200) {
                         dailogsuccessWithActivity(context, activity, "Blog Uploaded successfully", "Blog Uploading process completed successful.");
                     } else {
                         dailogError(context, "Error!", "Server is busy,Blog Uploading process failed!,Please try after sometimes");
-
-
                     }
 
 

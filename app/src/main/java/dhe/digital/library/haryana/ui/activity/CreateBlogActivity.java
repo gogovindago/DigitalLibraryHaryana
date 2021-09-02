@@ -38,7 +38,7 @@ import okhttp3.RequestBody;
 
 public class CreateBlogActivity extends BaseActivity {
     Integer typeId;
-    String titleOfPage, liburl, PhoneNo, CreatedBy;
+    String titleOfPage, liburl, PhoneNo, CreatedBy, Titleblog, blogs;
     ActivityCreateBlogBinding binding;
     private MyLoaders myLoaders;
     File imagefile;
@@ -121,7 +121,6 @@ public class CreateBlogActivity extends BaseActivity {
     public void initListeners() {
 
 
-
         binding.txtimg.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
@@ -140,28 +139,25 @@ public class CreateBlogActivity extends BaseActivity {
                 if (Check_Data(view)) {
 
                     try {
-                        String Titleblog = binding.txtInTitleblog.getText().toString().trim();
-                        String blogs = binding.txtInblogs.getText().toString().trim();
 
+
+                        Titleblog = binding.txtInTitleblog.getText().toString().trim();
+                        blogs = binding.txtInblogs.getText().toString().trim();
 
                         RequestBody rq_Titleblog = RequestBody.create(MediaType.parse("multipart/form-data"), Titleblog);
                         RequestBody rq_blogs = RequestBody.create(MediaType.parse("multipart/form-data"), blogs);
                         RequestBody rq_liburl = RequestBody.create(MediaType.parse("multipart/form-data"), liburl);
                         RequestBody rq_PhoneNo = RequestBody.create(MediaType.parse("multipart/form-data"), PhoneNo);
                         RequestBody rq_CreatedBy = RequestBody.create(MediaType.parse("multipart/form-data"), CreatedBy);
-
-
                         RequestBody imagefilerequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), imagefile);
                         MultipartBody.Part imagefilebody = MultipartBody.Part.createFormData("Blog_Image_ext", imagefile.getName(), imagefilerequestFile);
 
+
                         if (GlobalClass.isNetworkConnected(CreateBlogActivity.this)) {
                             WebAPiCall aPiCall = new WebAPiCall();
-                            aPiCall.CreateBlogDataMethod(CreateBlogActivity.this, CreateBlogActivity.this, rq_Titleblog,
-                                    rq_blogs,
-                                    rq_CreatedBy,
-                                    rq_liburl,
-                                    rq_PhoneNo, imagefilebody);
-
+                            aPiCall.CreateBlogDataMethod(CreateBlogActivity.this, CreateBlogActivity.this, rq_Titleblog, rq_blogs, rq_PhoneNo,
+                                    rq_CreatedBy, rq_liburl,
+                                    imagefilebody);
 
                         } else {
 
