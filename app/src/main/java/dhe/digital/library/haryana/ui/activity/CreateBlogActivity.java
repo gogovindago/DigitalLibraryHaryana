@@ -114,11 +114,19 @@ public class CreateBlogActivity extends BaseActivity {
     @Override
     public void initData() {
 
-
     }
 
     @Override
     public void initListeners() {
+
+
+        binding.toolbar.back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
 
 
         binding.txtimg.setOnClickListener(new View.OnClickListener() {

@@ -152,6 +152,17 @@ public class BlogActivity extends BaseActivity implements GetBLogsByLibIdData_in
     public void onItemClick(BlogListResponse.Datum item, int currposition, String type) {
 
 
+        Intent CreateBlogintent = new Intent(BlogActivity.this, BlogCommentListctivity.class);
+        CreateBlogintent.putExtra("title", titleOfPage);
+        CreateBlogintent.putExtra("itemid", String.valueOf(item.getBlogId()));
+        CreateBlogintent.putExtra("CreatedBy", item.getCreatedBy());
+        CreateBlogintent.putExtra("CreatedDate", item.getCreatedDate());
+        CreateBlogintent.putExtra("ImageURL", item.getImageURL());
+        CreateBlogintent.putExtra("BlogBody", item.getBlogBody());
+        CreateBlogintent.putExtra("LibraryId", String.valueOf(item.getLibraryId()));
+        CreateBlogintent.putExtra("IsActive", item.getIsActive());
+        CreateBlogintent.putExtra("BlogTitle", item.getBlogTitle());
+        startActivity(CreateBlogintent);
 
     }
 }

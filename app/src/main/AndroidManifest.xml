@@ -21,10 +21,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
-            android:name=".ui.activity.CreateBlogActivity"
+            android:name=".ui.activity.BlogCommentListctivity"
             android:theme="@style/DigitalLibraryHaryana"
             android:windowSoftInputMode="adjustResize"
             android:exported="true" />
+        <activity
+            android:name=".ui.activity.CreateBlogActivity"
+            android:exported="true"
+            android:theme="@style/DigitalLibraryHaryana"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.activity.BlogActivity"
             android:exported="true"

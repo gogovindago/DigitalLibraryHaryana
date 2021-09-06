@@ -16,7 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import dhe.digital.library.haryana.allinterface.BlogCommentsData_interface;
 import dhe.digital.library.haryana.allinterface.BookSuggestionData_interface;
+import dhe.digital.library.haryana.allinterface.CommentsOnBlogData_interface;
 import dhe.digital.library.haryana.allinterface.CommitteeDetail_Data_interface;
 import dhe.digital.library.haryana.allinterface.ContactUsData_interface;
 import dhe.digital.library.haryana.allinterface.GetAllData_interface;
@@ -42,12 +44,15 @@ import dhe.digital.library.haryana.allinterface.SignupData_interface;
 import dhe.digital.library.haryana.allinterface.TrackGrienvanceData_interface;
 import dhe.digital.library.haryana.allinterface.staffDetail_Data_interface;
 import dhe.digital.library.haryana.models.AlumniAchievementsResponse;
+import dhe.digital.library.haryana.models.BlogCommentsListResponse;
 import dhe.digital.library.haryana.models.BlogCreateResponse;
 import dhe.digital.library.haryana.models.BlogListResponse;
 import dhe.digital.library.haryana.models.BookRecordByLibIdResponse;
 import dhe.digital.library.haryana.models.BookSuggestionRequest;
 import dhe.digital.library.haryana.models.BookSuggestionResponse;
 import dhe.digital.library.haryana.models.BooksDetailResponse;
+import dhe.digital.library.haryana.models.CommentsOnBlogRequest;
+import dhe.digital.library.haryana.models.CommentsOnBlogResponse;
 import dhe.digital.library.haryana.models.CommitteeDetailsResponse;
 import dhe.digital.library.haryana.models.ContactUsRequest;
 import dhe.digital.library.haryana.models.ContactUsResponse;
@@ -396,6 +401,109 @@ public class WebAPiCall {
     }
 
 
+    public void getCommentsByBlogsIdMethod(final Activity activity, final Context context, String BlogIdId, View llmain, final BlogCommentsData_interface anInterface) {
+
+        loadershowwithMsg(context, "Loading...");
+
+
+        Call<BlogCommentsListResponse> responseCall = ApiClient.getClient().getCommentsByBlogsIdAPi(BlogIdId);
+        responseCall.enqueue(new Callback<BlogCommentsListResponse>() {
+            @Override
+            public void onResponse(Call<BlogCommentsListResponse> call, Response<BlogCommentsListResponse> response) {
+                dailoghide(context);
+                if (response.isSuccessful()) {
+
+                    assert response.body() != null;
+                    if (response.body().getResponse() == 200) {
+
+
+                        llmain.setVisibility(View.VISIBLE);
+
+
+                        anInterface.allBlogCommentsdata(response.body().getData());
+
+
+                    } else if (response.body().getResponse() == 400) {
+
+
+                        llmain.setVisibility(View.VISIBLE);
+
+
+                        anInterface.allBlogCommentsdata(response.body().getData());
+
+                    }
+
+
+                } else {
+                    GlobalClass.showtost(context, "" + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BlogCommentsListResponse> call, Throwable t) {
+                dailoghide(context);
+                t.printStackTrace();
+
+                Log.d("dddddd", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+
+    public void CommentOnBlogDataMethod(final Activity activity, final Context context, CommentsOnBlogRequest request,final CommentsOnBlogData_interface anInterface) {
+
+        // loadershowwithMsg(context, "We are Sending auto generated password on your Registered Mobile number.");
+
+        // Call<LoginResponse> userpost_responseCall = ApiClient.getClient().LoginUser(PhoneNo, Password, FcmToken);
+        Call<CommentsOnBlogResponse> userpost_responseCall = ApiClient.getClient().CommentOnBlogData(request);
+        userpost_responseCall.enqueue(new Callback<CommentsOnBlogResponse>() {
+            @Override
+            public void onResponse(Call<CommentsOnBlogResponse> call, Response<CommentsOnBlogResponse> response) {
+                //   dailoghide(context);
+                if (response.isSuccessful()) {
+
+
+                    if (response.body().getResponse() == 200) {
+                        anInterface.commentsStatusdata(response.body().getResponse(),"Done");
+
+                        //  dailogsuccessWithActivity(context, activity, " Password has been Changed Successfully.", "New auto generated password has been sent on your Registered Mobile number .");
+
+
+                    } else {
+                        // dailogError(context, "Mobile Number Not Found!", "The Mobile Number You have entered is not Regitered with Us.");
+                    }
+
+
+                } else {
+                    GlobalClass.showtost(context, "Something went wrong. Please try after sometimes." + response.message());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<CommentsOnBlogResponse> call, Throwable t) {
+
+                //  dailoghide(context);
+                t.printStackTrace();
+
+                Log.d("dddddd", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public void getLibraryAlumniAchievementsByLibIdDataMethod(final Activity activity, final Context context, String libId, RelativeLayout llmain, SwipeRefreshLayout mSwipeRefreshLayout, final GetLibraryAlumniAchievementsByLibIdData_interface anInterface) {
 
         // loadershowwithMsg(context, "Loading...");
@@ -647,16 +755,16 @@ public class WebAPiCall {
     }
 
 
-    public void getBlogListByLibIdDataMethod(final Activity activity, final Context context, String libId, RecyclerView llmain , AppCompatTextView txtnodatamsg, final GetBLogsByLibIdData_interface anInterface) {
+    public void getBlogListByLibIdDataMethod(final Activity activity, final Context context, String libId, RecyclerView llmain, AppCompatTextView txtnodatamsg, final GetBLogsByLibIdData_interface anInterface) {
 
-         loadershowwithMsg(context, "Loading...");
-       /// mSwipeRefreshLayout.setRefreshing(true);
+        loadershowwithMsg(context, "Loading...");
+        /// mSwipeRefreshLayout.setRefreshing(true);
 
         Call<BlogListResponse> responseCall = ApiClient.getClient().getBlogListDataAPi(libId);
         responseCall.enqueue(new Callback<BlogListResponse>() {
             @Override
             public void onResponse(Call<BlogListResponse> call, Response<BlogListResponse> response) {
-                 dailoghide(context);
+                dailoghide(context);
                 if (response.isSuccessful()) {
 
                     assert response.body() != null;
@@ -683,7 +791,7 @@ public class WebAPiCall {
 
             @Override
             public void onFailure(Call<BlogListResponse> call, Throwable t) {
-                 dailoghide(context);
+                dailoghide(context);
                 t.printStackTrace();
 
                 Log.d("dddddd", "onFailure: " + t.getMessage());

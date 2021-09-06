@@ -26,7 +26,7 @@
                 android:layout_height="90dp"
                 android:layout_below="@+id/txtserialno"
                 android:padding="4dp"
-                android:src="@drawable/appcolorlibrary_books_24" />
+                android:src="@drawable/nophoto" />
 
             <TextView
                 android:id="@+id/textViewTitle"
@@ -44,13 +44,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textViewTitle"
+                android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
+                android:layout_toEndOf="@id/imageView"
                 android:layout_toRightOf="@id/imageView"
                 android:text="Author"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                android:layout_marginStart="5dp"
-                android:layout_toEndOf="@id/imageView" />
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 
             <TextView
                 android:id="@+id/txtpublisher"
@@ -66,11 +66,11 @@
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:visibility="gone"
                 android:id="@+id/textViewquantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txtpublisher"
-
                 android:layout_marginTop="5dp"
                 android:layout_toEndOf="@id/imageView"
                 android:layout_toRightOf="@id/imageView"
@@ -79,7 +79,6 @@
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
                 android:text=" Quantity:- 00"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
                 android:textStyle="bold" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -96,19 +95,31 @@
                 android:padding="2dp"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
-                android:text=" Date"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
-                android:textStyle="bold" />
+                android:text=" Date" />
 
             <TextView
+                android:padding="2dp"
+                android:gravity="center"
                 android:id="@+id/txtserialno"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@color/golden"
+                android:text="Sr.No. "
+                android:textStyle="bold" />
+
+            <TextView
+                android:gravity="center"
+                android:id="@+id/txtblogstatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
                 android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="0dp"
-                android:text="Sr.No. "
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:background="@color/golden"
+                android:padding="2dp"
+                android:text="Status "
+                android:textColor="@color/purple_200"
                 android:textStyle="bold" />
 
         </RelativeLayout>

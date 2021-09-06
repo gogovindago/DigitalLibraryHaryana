@@ -39,7 +39,7 @@ public class BlogListBYLibIdAdapter extends RecyclerView.Adapter<BlogListBYLibId
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public int currposition;
-        public TextView textViewTitle, textViewAuthor, txtpublisher, textViewquantity, txtserialno,txtblogcreatedDate;
+        public TextView textViewTitle, textViewAuthor, txtpublisher, textViewquantity, txtserialno,txtblogcreatedDate,txtblogstatus;
         public ImageView imageView;
         public RelativeLayout ll;
         BlogListResponse.Datum item;
@@ -50,14 +50,15 @@ public class BlogListBYLibIdAdapter extends RecyclerView.Adapter<BlogListBYLibId
 
               v.setOnClickListener(this);
 
-            imageView = (ImageView) v.findViewById(R.id.imageView);
-            textViewTitle = (TextView) v.findViewById(R.id.textViewTitle);
-            txtblogcreatedDate = (TextView) v.findViewById(R.id.txtblogcreatedDate);
-            textViewAuthor = (TextView) v.findViewById(R.id.textViewAuthor);
-            txtpublisher = (TextView) v.findViewById(R.id.txtpublisher);
+            imageView =  v.findViewById(R.id.imageView);
+            txtblogstatus =  v.findViewById(R.id.txtblogstatus);
+            textViewTitle =  v.findViewById(R.id.textViewTitle);
+            txtblogcreatedDate =  v.findViewById(R.id.txtblogcreatedDate);
+            textViewAuthor =  v.findViewById(R.id.textViewAuthor);
+            txtpublisher =  v.findViewById(R.id.txtpublisher);
             textViewquantity = v.findViewById(R.id.textViewquantity);
-            txtserialno = (TextView) v.findViewById(R.id.txtserialno);
-            ll = (RelativeLayout) v.findViewById(R.id.ll);
+            txtserialno =  v.findViewById(R.id.txtserialno);
+            ll =  v.findViewById(R.id.ll);
 
             textViewquantity.setOnClickListener(this);
 
@@ -73,33 +74,42 @@ public class BlogListBYLibIdAdapter extends RecyclerView.Adapter<BlogListBYLibId
 
                 textViewTitle.setText(Html.fromHtml("<strong>Blog Title:-<br> </strong>" + item.getBlogTitle(), Html.FROM_HTML_MODE_COMPACT));
                 txtblogcreatedDate.setText(Html.fromHtml("<strong>Created Date:-<br> </strong>" + item.getCreatedDate(), Html.FROM_HTML_MODE_COMPACT));
+                textViewAuthor.setText(Html.fromHtml("<strong>Created By:-<br> </strong>" + item.getCreatedBy(), Html.FROM_HTML_MODE_COMPACT));
+                txtpublisher.setText(Html.fromHtml("<strong>Blog:-<br> </strong>" + item.getBlogBody(), Html.FROM_HTML_MODE_COMPACT));
 
-                textViewAuthor.setText("Created By:-\n" + item.getCreatedBy());
-                txtpublisher.setText("Blog:-\n" + item.getBlogBody());
-                textViewquantity.setText("Created Date:-" + String.valueOf(item.getCreatedDate()));
-                txtserialno.setText("Status" + item.getIsActive());
+                txtserialno.setText(String.valueOf(++currposition));
+                txtblogstatus.setText(item.getIsActive());
+                Glide.with(mContext)
+                        .load(item.getImageURL()) // image url
+                        .placeholder(R.drawable.nophoto) // any placeholder to load at start
+                        .error(R.drawable.ic_baseline_image_not_supported_24)  // any image in case of error
+                        .override(50, 50) // resizing
+                        .centerCrop()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(imageView);
+
 
 
             } else {
 
                 textViewTitle.setText(Html.fromHtml("<strong> Book Title:-<br></strong>" + item.getBlogTitle()));
                 txtblogcreatedDate.setText(Html.fromHtml("<strong> Created Date:-<br></strong>" + item.getCreatedDate()));
+                textViewAuthor.setText(Html.fromHtml("<strong> Created By:-<br></strong>" + item.getCreatedBy()));
+                txtpublisher.setText(Html.fromHtml("<strong> Blog:-<br></strong>" + item.getBlogBody()));
 
-                textViewAuthor.setText("Created By:-\n" + item.getCreatedBy());
-                txtpublisher.setText("Blog:-\n" + item.getBlogBody());
-                textViewquantity.setText("Created Date:-" + String.valueOf(item.getCreatedDate()));
-                txtserialno.setText("Status" + item.getIsActive());
+                txtserialno.setText(String.valueOf(++currposition));
+                txtblogstatus.setText(item.getIsActive());
+
 
                 Glide.with(mContext)
                         .load(item.getImageURL()) // image url
-                        .placeholder(R.mipmap.ic_launcher_round) // any placeholder to load at start
-                        .error(R.mipmap.ic_launcher_round)  // any image in case of error
+                        .placeholder(R.drawable.nophoto)// any placeholder to load at start
+                        .error(R.drawable.ic_baseline_image_not_supported_24)  // any image in case of error
                         .override(50, 50) // resizing
                         .centerCrop()
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(imageView);
 
-                // binding.toolbar.tvToolbarTitle.setText(Html.fromHtml("<h6>Books Available in " + titleOfPage + "</h6>"));
             }
 
 //            textViewTitle.setText("Book Title:-\n " + item.getBookTitle());
@@ -119,11 +129,11 @@ public class BlogListBYLibIdAdapter extends RecyclerView.Adapter<BlogListBYLibId
         public void onClick(View view) {
 
 
-//            if (mListener != null) {
-//                mListener.onItemClick(item, currposition);
+            if (mListener != null) {
+                mListener.onItemClick(item, currposition,"BlogDetail");
 
 
-            switch (view.getId()) {
+          /*  switch (view.getId()) {
 
                 case R.id.textViewquantity:
 
@@ -136,6 +146,7 @@ public class BlogListBYLibIdAdapter extends RecyclerView.Adapter<BlogListBYLibId
                     break;
 
 
+            }*/
             }
         }
     }

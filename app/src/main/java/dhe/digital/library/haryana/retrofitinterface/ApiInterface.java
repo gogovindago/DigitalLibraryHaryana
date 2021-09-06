@@ -1,12 +1,15 @@
 package dhe.digital.library.haryana.retrofitinterface;
 
 import dhe.digital.library.haryana.models.AlumniAchievementsResponse;
+import dhe.digital.library.haryana.models.BlogCommentsListResponse;
 import dhe.digital.library.haryana.models.BlogCreateResponse;
 import dhe.digital.library.haryana.models.BlogListResponse;
 import dhe.digital.library.haryana.models.BookRecordByLibIdResponse;
 import dhe.digital.library.haryana.models.BookSuggestionRequest;
 import dhe.digital.library.haryana.models.BookSuggestionResponse;
 import dhe.digital.library.haryana.models.BooksDetailResponse;
+import dhe.digital.library.haryana.models.CommentsOnBlogRequest;
+import dhe.digital.library.haryana.models.CommentsOnBlogResponse;
 import dhe.digital.library.haryana.models.CommitteeDetailsResponse;
 import dhe.digital.library.haryana.models.ContactUsRequest;
 import dhe.digital.library.haryana.models.ContactUsResponse;
@@ -40,8 +43,6 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -72,13 +73,28 @@ public interface ApiInterface {
     @GET("StaffDetails/{LibraryId}")
     Call<StaffDetailsResponse> getStaffDetailsAPi(@Path("LibraryId") String s);
 
+
+
+
     //http://112.196.99.107:81/api/commonapi/CommitteeDetails/8
     @GET("CommitteeDetails/{LibraryId}")
     Call<CommitteeDetailsResponse> getCommitteeDetailsAPi(@Path("LibraryId") String s);
 
+
+
+
     //http://112.196.99.107:81/api/commonapi/TrackGrievance/1001
     @GET("TrackGrievance/{TrackGrievanceId}")
     Call<TrackGrievanceResponse> getLibraryTrackGrievanceIdAPi(@Path("TrackGrievanceId") String s);
+
+    //http://112.196.99.107:81/api/commonapi/LibraryBlogsComments/1
+    @GET("LibraryBlogsComments/{BlogId}")
+    Call<BlogCommentsListResponse> getCommentsByBlogsIdAPi(@Path("BlogId") String s);
+
+    // http://112.196.99.107:81/api/commonapi/BlogComments
+    @POST("BlogComments")
+    Call<CommentsOnBlogResponse> CommentOnBlogData(@Body CommentsOnBlogRequest request);
+
 
 
     //http://112.196.99.107:81/api/commonapi/LibraryFacilities/8
