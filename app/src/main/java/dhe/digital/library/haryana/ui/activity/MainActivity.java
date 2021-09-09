@@ -56,6 +56,7 @@ import java.util.Collection;
 import java.util.List;
 
 import dhe.digital.library.haryana.R;
+import dhe.digital.library.haryana.adapter.AdminImgAdapter;
 import dhe.digital.library.haryana.adapter.DrawerItemCustomAdapter;
 import dhe.digital.library.haryana.adapter.ImportantLinksAdapter;
 import dhe.digital.library.haryana.adapter.OthesDigitalLibAdapter;
@@ -74,7 +75,7 @@ import dhe.digital.library.haryana.utility.CSPreferences;
 import dhe.digital.library.haryana.utility.GlobalClass;
 
 
-public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter.ItemListener, GetbannersData_interface, TrendingsEBooksAdapter.ItemListener, TrendingsVideosAdapter.ItemListener, TrendingsJournalsAdapter.ItemListener, ImportantLinksAdapter.ItemListener, TrendingUdaanVideosAdapter.ItemListener {
+public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter.ItemListener, GetbannersData_interface, TrendingsEBooksAdapter.ItemListener, TrendingsVideosAdapter.ItemListener, TrendingsJournalsAdapter.ItemListener, ImportantLinksAdapter.ItemListener, TrendingUdaanVideosAdapter.ItemListener, AdminImgAdapter.ItemListener {
     Boolean firstTime = true;
 
     private AppUpdateManager mAppUpdateManager;
@@ -95,9 +96,11 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
     private ListView mDrawerList;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
-    RecyclerView recyclerView, rvTrandingsEbooks, rvJournals, rvVideos, rvimportantlink, rvudaan;
+    RecyclerView recyclerView, rvTrandingsEbooks, rvJournals, rvVideos, rvimportantlink, rvudaan, rvadminimage;
 
     List<HomePageResponse.Banner> sliderItemList = new ArrayList<HomePageResponse.Banner>();
+    private List<HomePageResponse.Officers> adminimagelist = new ArrayList<HomePageResponse.Officers>();
+
     private List<HomePageResponse.OtherDigitalTrendingLibrary> otherDigitalTrendingLibraries = new ArrayList<HomePageResponse.OtherDigitalTrendingLibrary>();
     private List<HomePageResponse.TrendingVideo> trendingVideos = new ArrayList<HomePageResponse.TrendingVideo>();
     private List<HomePageResponse.TrendingeBook> trendingeBooks = new ArrayList<HomePageResponse.TrendingeBook>();
@@ -210,7 +213,7 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
         rvVideos = (RecyclerView) findViewById(R.id.rvVideos);
         rvimportantlink = (RecyclerView) findViewById(R.id.rvimportantlink);
         rvudaan = (RecyclerView) findViewById(R.id.rvudaan);
-
+        rvadminimage = (RecyclerView) findViewById(R.id.rvadminimage);
 
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(videocall,
                 new IntentFilter("videocall"));
@@ -256,17 +259,12 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             DataModelLeftNew Books_Available_in_Library = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, " Books Available in Library", 10);
             dataModelLeftList.add(Books_Available_in_Library);
 
-            if (skiplogin) {
 
+            DataModelLeftNew Bookssuggestio_for_Library = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, " Book Suggestion", 110);
+            dataModelLeftList.add(Bookssuggestio_for_Library);
 
-            } else {
-                DataModelLeftNew Bookssuggestio_for_Library = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, " Book Suggestion", 110);
-                dataModelLeftList.add(Bookssuggestio_for_Library);
-
-                DataModelLeftNew blogs = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, " Create Blog", 111);
-                dataModelLeftList.add(blogs);
-
-            }
+            DataModelLeftNew blogs = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, " Create Blog", 111);
+            dataModelLeftList.add(blogs);
 
 
             DataModelLeftNew Library_Facilities = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, " Library Facilities", 101);
@@ -313,15 +311,8 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             dataModelLeftList.add(Competitive);
 
 
-            if (skiplogin) {
-
-
-            } else {
-
-//                DataModelLeftNew PeopleCollection = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, "People's Collection", 33);
-//                dataModelLeftList.add(PeopleCollection);
-
-            }
+            DataModelLeftNew PeopleCollection = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, "People's Collection", 33);
+            dataModelLeftList.add(PeopleCollection);
 
 
             DataModelLeftNew UdaanUrl = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, "Udaan Mental Health Counseling", 30);
@@ -636,204 +627,441 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
 
         switch (dataModelLeftList.get(position).id) {
             case 0:
-                mDrawerLayout.closeDrawers();
-                Intent AllothersDlib = new Intent(MainActivity.this, ViewAllDataActivity.class);
-                AllothersDlib.putExtra("typeId", "1");
-                AllothersDlib.putExtra("typeReq", "Public_Library");
-                AllothersDlib.putExtra("titleOfPage", "All Digital Libraries");
-                startActivity(AllothersDlib);
+
+
+                if (skiplogin) {
+                    mDrawerLayout.closeDrawers();
+                    Intent welcomeintent = new Intent(this, WelcomeActivity.class);
+                    startActivity(welcomeintent);
+                    finish();
+
+                } else {
+
+                    mDrawerLayout.closeDrawers();
+                    Intent AllothersDlib = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                    AllothersDlib.putExtra("typeId", "1");
+                    AllothersDlib.putExtra("typeReq", "Public_Library");
+                    AllothersDlib.putExtra("titleOfPage", "All Digital Libraries");
+                    startActivity(AllothersDlib);
+
+                }
+
+
                 break;
 
             case 10:
-                mDrawerLayout.closeDrawers();
-                // Intent Books_Available_in_Library = new Intent(MainActivity.this, BooksAvailableinLibrary.class);
-                Intent Books_Available_in_Library = new Intent(MainActivity.this, ViewAllDataActivity.class);
-                Books_Available_in_Library.putExtra("typeId", "1");
-                Books_Available_in_Library.putExtra("typeReq", "BooksAvailableinLibrary");
-                Books_Available_in_Library.putExtra("titleOfPage", "Books Available");
-                startActivity(Books_Available_in_Library);
+
+
+                if (skiplogin) {
+                    mDrawerLayout.closeDrawers();
+                    Intent welcomeintent = new Intent(this, WelcomeActivity.class);
+                    startActivity(welcomeintent);
+                    finish();
+
+                } else {
+
+                    mDrawerLayout.closeDrawers();
+                    Intent Books_Available_in_Library = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                    Books_Available_in_Library.putExtra("typeId", "1");
+                    Books_Available_in_Library.putExtra("typeReq", "BooksAvailableinLibrary");
+                    Books_Available_in_Library.putExtra("titleOfPage", "Books Available");
+                    startActivity(Books_Available_in_Library);
+
+
+                }
+
+
                 break;
             case 101:
-                mDrawerLayout.closeDrawers();
-                // Intent Books_Available_in_Library = new Intent(MainActivity.this, BooksAvailableinLibrary.class);
-                Intent Library_Facilities = new Intent(MainActivity.this, ViewAllDataActivity.class);
-                Library_Facilities.putExtra("typeId", "1");
-                Library_Facilities.putExtra("typeReq", "Library_Facilities");
-                Library_Facilities.putExtra("titleOfPage", "Library Facilities Available");
-                startActivity(Library_Facilities);
+
+
+                if (skiplogin) {
+                    mDrawerLayout.closeDrawers();
+                    Intent welcomeintent = new Intent(this, WelcomeActivity.class);
+                    startActivity(welcomeintent);
+                    finish();
+
+                } else {
+
+                    mDrawerLayout.closeDrawers();
+                    // Intent Books_Available_in_Library = new Intent(MainActivity.this, BooksAvailableinLibrary.class);
+                    Intent Library_Facilities = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                    Library_Facilities.putExtra("typeId", "1");
+                    Library_Facilities.putExtra("typeReq", "Library_Facilities");
+                    Library_Facilities.putExtra("titleOfPage", "Library Facilities Available");
+                    startActivity(Library_Facilities);
+
+                }
+
+
                 break;
 
             case 102:
-                mDrawerLayout.closeDrawers();
-                // Intent Books_Available_in_Library = new Intent(MainActivity.this, BooksAvailableinLibrary.class);
-                Intent LibraryAlumniAchievements = new Intent(MainActivity.this, ViewAllDataActivity.class);
-                LibraryAlumniAchievements.putExtra("typeId", "1");
-                LibraryAlumniAchievements.putExtra("typeReq", "LibraryAlumniAchievements");
-                LibraryAlumniAchievements.putExtra("titleOfPage", "Library Alumni Achievements");
-                startActivity(LibraryAlumniAchievements);
+
+
+                if (skiplogin) {
+                    mDrawerLayout.closeDrawers();
+                    Intent welcomeintent = new Intent(this, WelcomeActivity.class);
+                    startActivity(welcomeintent);
+                    finish();
+
+                } else {
+                    mDrawerLayout.closeDrawers();
+                    // Intent Books_Available_in_Library = new Intent(MainActivity.this, BooksAvailableinLibrary.class);
+                    Intent LibraryAlumniAchievements = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                    LibraryAlumniAchievements.putExtra("typeId", "1");
+                    LibraryAlumniAchievements.putExtra("typeReq", "LibraryAlumniAchievements");
+                    LibraryAlumniAchievements.putExtra("titleOfPage", "Library Alumni Achievements");
+                    startActivity(LibraryAlumniAchievements);
+
+                }
+
+
                 break;
             case 103:
-                mDrawerLayout.closeDrawers();
-                // Intent Books_Available_in_Library = new Intent(MainActivity.this, BooksAvailableinLibrary.class);
-                Intent LibraryEventsandActivities = new Intent(MainActivity.this, ViewAllDataActivity.class);
-                LibraryEventsandActivities.putExtra("typeId", "1");
-                LibraryEventsandActivities.putExtra("typeReq", "LibraryEventsandActivities");
-                LibraryEventsandActivities.putExtra("titleOfPage", "Library Events & Activities");
-                startActivity(LibraryEventsandActivities);
+
+
+                if (skiplogin) {
+                    mDrawerLayout.closeDrawers();
+                    Intent welcomeintent = new Intent(this, WelcomeActivity.class);
+                    startActivity(welcomeintent);
+                    finish();
+
+                } else {
+                    mDrawerLayout.closeDrawers();
+                    // Intent Books_Available_in_Library = new Intent(MainActivity.this, BooksAvailableinLibrary.class);
+                    Intent LibraryEventsandActivities = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                    LibraryEventsandActivities.putExtra("typeId", "1");
+                    LibraryEventsandActivities.putExtra("typeReq", "LibraryEventsandActivities");
+                    LibraryEventsandActivities.putExtra("titleOfPage", "Library Events & Activities");
+                    startActivity(LibraryEventsandActivities);
+
+                }
+
+
                 break;
 
             case 104:
-                mDrawerLayout.closeDrawers();
-                // Intent Books_Available_in_Library = new Intent(MainActivity.this, BooksAvailableinLibrary.class);
-                Intent library_Gallery = new Intent(MainActivity.this, ViewAllDataActivity.class);
-                library_Gallery.putExtra("typeId", "1");
-                library_Gallery.putExtra("typeReq", "library_Gallery");
-                library_Gallery.putExtra("titleOfPage", "library Gallery");
-                startActivity(library_Gallery);
+
+
+                if (skiplogin) {
+                    mDrawerLayout.closeDrawers();
+                    Intent welcomeintent = new Intent(this, WelcomeActivity.class);
+                    startActivity(welcomeintent);
+                    finish();
+
+                } else {
+                    mDrawerLayout.closeDrawers();
+                    // Intent Books_Available_in_Library = new Intent(MainActivity.this, BooksAvailableinLibrary.class);
+                    Intent library_Gallery = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                    library_Gallery.putExtra("typeId", "1");
+                    library_Gallery.putExtra("typeReq", "library_Gallery");
+                    library_Gallery.putExtra("titleOfPage", "library Gallery");
+                    startActivity(library_Gallery);
+                }
+
                 break;
+
             case 110:
-                mDrawerLayout.closeDrawers();
-                // Intent Books_Available_in_Library = new Intent(MainActivity.this, BooksAvailableinLibrary.class);
-                Intent booksuggestionforlibraryintent = new Intent(MainActivity.this, ViewAllDataActivity.class);
-                booksuggestionforlibraryintent.putExtra("typeId", "1");
-                booksuggestionforlibraryintent.putExtra("typeReq", "booksuggestionforlibrary");
-                booksuggestionforlibraryintent.putExtra("titleOfPage", "Book Suggestion");
-                startActivity(booksuggestionforlibraryintent);
+
+
+                if (skiplogin) {
+                    mDrawerLayout.closeDrawers();
+                    Intent welcomeintent = new Intent(this, WelcomeActivity.class);
+                    startActivity(welcomeintent);
+                    finish();
+
+                } else {
+                    mDrawerLayout.closeDrawers();
+                    // Intent Books_Available_in_Library = new Intent(MainActivity.this, BooksAvailableinLibrary.class);
+                    Intent booksuggestionforlibraryintent = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                    booksuggestionforlibraryintent.putExtra("typeId", "1");
+                    booksuggestionforlibraryintent.putExtra("typeReq", "booksuggestionforlibrary");
+                    booksuggestionforlibraryintent.putExtra("titleOfPage", "Book Suggestion");
+                    startActivity(booksuggestionforlibraryintent);
+                }
                 break;
+
             case 111:
-                mDrawerLayout.closeDrawers();
-                // Intent Books_Available_in_Library = new Intent(MainActivity.this, BooksAvailableinLibrary.class);
-                Intent blogsIntent = new Intent(MainActivity.this, ViewAllDataActivity.class);
-                blogsIntent.putExtra("typeId", "1");
-                blogsIntent.putExtra("typeReq", "blogforlibrary");
-                blogsIntent.putExtra("titleOfPage", "Digital Library Blog");
-                startActivity(blogsIntent);
+
+
+                if (skiplogin) {
+                    mDrawerLayout.closeDrawers();
+                    Intent welcomeintent = new Intent(this, WelcomeActivity.class);
+                    startActivity(welcomeintent);
+                    finish();
+
+                } else {
+                    mDrawerLayout.closeDrawers();
+                    // Intent Books_Available_in_Library = new Intent(MainActivity.this, BooksAvailableinLibrary.class);
+                    Intent blogsIntent = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                    blogsIntent.putExtra("typeId", "1");
+                    blogsIntent.putExtra("typeReq", "blogforlibrary");
+                    blogsIntent.putExtra("titleOfPage", "Digital Library Blog");
+                    startActivity(blogsIntent);
+                }
+
+
                 break;
 
             case 105:
-                mDrawerLayout.closeDrawers();
-                // Intent Books_Available_in_Library = new Intent(MainActivity.this, BooksAvailableinLibrary.class);
-                Intent libraryGrievanceintent = new Intent(MainActivity.this, ViewAllDataActivity.class);
-                libraryGrievanceintent.putExtra("typeId", "1");
-                libraryGrievanceintent.putExtra("typeReq", "libraryGrievance");
-                libraryGrievanceintent.putExtra("titleOfPage", "library Grievance");
-                startActivity(libraryGrievanceintent);
+
+
+                if (skiplogin) {
+                    mDrawerLayout.closeDrawers();
+                    Intent welcomeintent = new Intent(this, WelcomeActivity.class);
+                    startActivity(welcomeintent);
+                    finish();
+
+                } else {
+
+
+                    mDrawerLayout.closeDrawers();
+                    // Intent Books_Available_in_Library = new Intent(MainActivity.this, BooksAvailableinLibrary.class);
+                    Intent libraryGrievanceintent = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                    libraryGrievanceintent.putExtra("typeId", "1");
+                    libraryGrievanceintent.putExtra("typeReq", "libraryGrievance");
+                    libraryGrievanceintent.putExtra("titleOfPage", "library Grievance");
+                    startActivity(libraryGrievanceintent);
+                }
+
+
                 break;
 
             case 106:
-                mDrawerLayout.closeDrawers();
-                // Intent Books_Available_in_Library = new Intent(MainActivity.this, BooksAvailableinLibrary.class);
-                Intent librarytrackGrievanceintent = new Intent(MainActivity.this, TrackGrievanceActivity.class);
-                librarytrackGrievanceintent.putExtra("typeId", "1");
-                librarytrackGrievanceintent.putExtra("typeReq", "libraryTrackGrievance");
-                librarytrackGrievanceintent.putExtra("titleOfPage", "library Track Grievance");
-                startActivity(librarytrackGrievanceintent);
+
+
+                if (skiplogin) {
+                    mDrawerLayout.closeDrawers();
+                    Intent welcomeintent = new Intent(this, WelcomeActivity.class);
+                    startActivity(welcomeintent);
+                    finish();
+
+                } else {
+
+
+                    mDrawerLayout.closeDrawers();
+                    // Intent Books_Available_in_Library = new Intent(MainActivity.this, BooksAvailableinLibrary.class);
+                    Intent librarytrackGrievanceintent = new Intent(MainActivity.this, TrackGrievanceActivity.class);
+                    librarytrackGrievanceintent.putExtra("typeId", "1");
+                    librarytrackGrievanceintent.putExtra("typeReq", "libraryTrackGrievance");
+                    librarytrackGrievanceintent.putExtra("titleOfPage", "library Track Grievance");
+                    startActivity(librarytrackGrievanceintent);
+                }
+
                 break;
 
             case 107:
 
-                mDrawerLayout.closeDrawers();
-                Intent committeedetail = new Intent(MainActivity.this, ViewAllDataActivity.class);
-                committeedetail.putExtra("typeId", "1");
-                committeedetail.putExtra("typeReq", "Committee");
-                committeedetail.putExtra("titleOfPage", "All Digital Libraries");
-                startActivity(committeedetail);
+
+                if (skiplogin) {
+                    mDrawerLayout.closeDrawers();
+                    Intent welcomeintent = new Intent(this, WelcomeActivity.class);
+                    startActivity(welcomeintent);
+                    finish();
+
+                } else {
+
+                    mDrawerLayout.closeDrawers();
+                    Intent committeedetail = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                    committeedetail.putExtra("typeId", "1");
+                    committeedetail.putExtra("typeReq", "Committee");
+                    committeedetail.putExtra("titleOfPage", "All Digital Libraries");
+                    startActivity(committeedetail);
+                }
                 break;
 
             case 108:
+                if (skiplogin) {
+                    mDrawerLayout.closeDrawers();
+                    Intent welcomeintent = new Intent(this, WelcomeActivity.class);
+                    startActivity(welcomeintent);
+                    finish();
 
-                mDrawerLayout.closeDrawers();
-                Intent staffdetail = new Intent(MainActivity.this, ViewAllDataActivity.class);
-                staffdetail.putExtra("typeId", "1");
-                staffdetail.putExtra("typeReq", "staff");
-                staffdetail.putExtra("titleOfPage", "All Digital Libraries");
-                startActivity(staffdetail);
+                } else {
+
+                    mDrawerLayout.closeDrawers();
+                    Intent staffdetail = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                    staffdetail.putExtra("typeId", "1");
+                    staffdetail.putExtra("typeReq", "staff");
+                    staffdetail.putExtra("titleOfPage", "All Digital Libraries");
+                    startActivity(staffdetail);
+                }
+
                 break;
 
             case 1:
-                mDrawerLayout.closeDrawers();
-                Intent Allebooks = new Intent(MainActivity.this, ViewAllDataActivity.class);
-                Allebooks.putExtra("typeId", "2");
-                Allebooks.putExtra("itemType", "Book");
-                Allebooks.putExtra("titleOfPage", "All E-books");
-                startActivity(Allebooks);
+
+
+                if (skiplogin) {
+                    mDrawerLayout.closeDrawers();
+                    Intent welcomeintent = new Intent(this, WelcomeActivity.class);
+                    startActivity(welcomeintent);
+                    finish();
+
+                } else {
+
+                    mDrawerLayout.closeDrawers();
+                    Intent Allebooks = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                    Allebooks.putExtra("typeId", "2");
+                    Allebooks.putExtra("itemType", "Book");
+                    Allebooks.putExtra("titleOfPage", "All E-books");
+                    startActivity(Allebooks);
+                }
+
+
                 break;
 
             case 2:
-                mDrawerLayout.closeDrawers();
-                Intent AllJournals = new Intent(MainActivity.this, ViewAllDataActivity.class);
-                AllJournals.putExtra("typeId", "3");
-                AllJournals.putExtra("itemType", "Journal");
-                AllJournals.putExtra("titleOfPage", "All Journals");
-                startActivity(AllJournals);
+
+
+                if (skiplogin) {
+                    mDrawerLayout.closeDrawers();
+                    Intent welcomeintent = new Intent(this, WelcomeActivity.class);
+                    startActivity(welcomeintent);
+                    finish();
+
+                } else {
+
+                    mDrawerLayout.closeDrawers();
+                    Intent AllJournals = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                    AllJournals.putExtra("typeId", "3");
+                    AllJournals.putExtra("itemType", "Journal");
+                    AllJournals.putExtra("titleOfPage", "All Journals");
+                    startActivity(AllJournals);
+                }
+
                 break;
 
             case 3:
-                mDrawerLayout.closeDrawers();
-                Intent AllVideos = new Intent(MainActivity.this, ViewAllDataActivity.class);
-                AllVideos.putExtra("typeId", "4");
-                AllVideos.putExtra("itemType", "Video");
-                AllVideos.putExtra("titleOfPage", "All Videos");
-                startActivity(AllVideos);
+
+
+                if (skiplogin) {
+                    mDrawerLayout.closeDrawers();
+                    Intent welcomeintent = new Intent(this, WelcomeActivity.class);
+                    startActivity(welcomeintent);
+                    finish();
+
+                } else {
+
+                    mDrawerLayout.closeDrawers();
+                    Intent AllVideos = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                    AllVideos.putExtra("typeId", "4");
+                    AllVideos.putExtra("itemType", "Video");
+                    AllVideos.putExtra("titleOfPage", "All Videos");
+                    startActivity(AllVideos);
+                }
+
+
                 break;
 
             case 30:
-                mDrawerLayout.closeDrawers();
+
+
+                if (skiplogin) {
+                    mDrawerLayout.closeDrawers();
+                    Intent welcomeintent = new Intent(this, WelcomeActivity.class);
+                    startActivity(welcomeintent);
+                    finish();
+
+                } else {
+
+                    mDrawerLayout.closeDrawers();
 
                 /*  String result = extras.getString("title");
                 webViewUrl = extras.getString("bookurl");
 */
-                Intent touchbase = new Intent(MainActivity.this, OpenBooksActivity.class);
-                touchbase.putExtra("title", "Udaan Mental Health Counseling");
-                touchbase.putExtra("bookurl", "https://touchbase.live/");
-                startActivity(touchbase);
+                    Intent touchbase = new Intent(MainActivity.this, OpenBooksActivity.class);
+                    touchbase.putExtra("title", "Udaan Mental Health Counseling");
+                    touchbase.putExtra("bookurl", "https://touchbase.live/");
+                    startActivity(touchbase);
+                }
+
                 break;
 
 
             case 31:
-                mDrawerLayout.closeDrawers();
+
+                if (skiplogin) {
+                    mDrawerLayout.closeDrawers();
+                    Intent welcomeintent = new Intent(this, WelcomeActivity.class);
+                    startActivity(welcomeintent);
+                    finish();
+
+                } else {
+
+                    mDrawerLayout.closeDrawers();
 
                 /*  String result = extras.getString("title");
                 webViewUrl = extras.getString("bookurl");
 */
-                Intent DivyaangCorner = new Intent(MainActivity.this, DivyaangActivity.class);
-                DivyaangCorner.putExtra("titleOfPage", "Divyaang Corner");
-                DivyaangCorner.putExtra("typeId", "9");
+                    mDrawerLayout.closeDrawers();
 
-                DivyaangCorner.putExtra("bookurl", "https://touchbase.live/");
+                /*  String result = extras.getString("title");
+                webViewUrl = extras.getString("bookurl");
+*/
+                    Intent DivyaangCorner = new Intent(MainActivity.this, DivyaangActivity.class);
+                    DivyaangCorner.putExtra("titleOfPage", "Divyaang Corner");
+                    DivyaangCorner.putExtra("typeId", "9");
 
-                startActivity(DivyaangCorner);
+                    DivyaangCorner.putExtra("bookurl", "https://touchbase.live/");
+
+                    startActivity(DivyaangCorner);
+                }
+
                 break;
 
             case 32:
-                mDrawerLayout.closeDrawers();
+
+
+                if (skiplogin) {
+                    mDrawerLayout.closeDrawers();
+                    Intent welcomeintent = new Intent(this, WelcomeActivity.class);
+                    startActivity(welcomeintent);
+                    finish();
+
+                } else {
+
+                    mDrawerLayout.closeDrawers();
+
+
 
                 /*  String result = extras.getString("title");
                 webViewUrl = extras.getString("bookurl");
 */
-                Intent CompetitiveExam = new Intent(MainActivity.this, CompetitiveExamActivity.class);
-                CompetitiveExam.putExtra("typeId", "8");
-                CompetitiveExam.putExtra("itemType", "CompetitiveExam");
-                CompetitiveExam.putExtra("titleOfPage", "Competitive Exam");
-                startActivity(CompetitiveExam);
+                    Intent CompetitiveExam = new Intent(MainActivity.this, CompetitiveExamActivity.class);
+                    CompetitiveExam.putExtra("typeId", "8");
+                    CompetitiveExam.putExtra("itemType", "CompetitiveExam");
+                    CompetitiveExam.putExtra("titleOfPage", "Competitive Exam");
+                    startActivity(CompetitiveExam);
+                }
+
+
                 break;
 
             case 33:
-                mDrawerLayout.closeDrawers();
 
-                /*  String result = extras.getString("title");
-                webViewUrl = extras.getString("bookurl");
-*/
-                GlobalClass.showtost(MainActivity.this, "Coming Soon...");
+
+                if (skiplogin) {
+                    mDrawerLayout.closeDrawers();
+                    Intent welcomeintent = new Intent(this, WelcomeActivity.class);
+                    startActivity(welcomeintent);
+                    finish();
+
+                } else {
+
+                    mDrawerLayout.closeDrawers();
+                    Intent PeopleCorner = new Intent(MainActivity.this, PeopleCornerActivity.class);
+                    PeopleCorner.putExtra("typeId", "10");
+                    PeopleCorner.putExtra("titleOfPage", "People Corner");
+                    startActivity(PeopleCorner);
+                }
+
                 break;
-               /* Intent PeopleCorner = new Intent(MainActivity.this, PeopleCornerActivity.class);
-                PeopleCorner.putExtra("typeId", "10");
-                PeopleCorner.putExtra("titleOfPage", "People Corner");
-                startActivity(PeopleCorner);
-                break;
-*/
+
 
             case 4:
+
 
                 mDrawerLayout.closeDrawers();
 
@@ -883,13 +1111,23 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 break;
 */
 
+                if (skiplogin) {
+                    mDrawerLayout.closeDrawers();
+                    Intent welcomeintent = new Intent(this, WelcomeActivity.class);
+                    startActivity(welcomeintent);
+                    finish();
 
-                mDrawerLayout.closeDrawers();
-                Intent contactUsIntent = new Intent(MainActivity.this, ViewAllDataActivity.class);
-                contactUsIntent.putExtra("typeId", "1");
-                contactUsIntent.putExtra("typeReq", "contactUs");
-                contactUsIntent.putExtra("titleOfPage", "All Digital Libraries");
-                startActivity(contactUsIntent);
+                } else {
+
+                    mDrawerLayout.closeDrawers();
+                    Intent contactUsIntent = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                    contactUsIntent.putExtra("typeId", "1");
+                    contactUsIntent.putExtra("typeReq", "contactUs");
+                    contactUsIntent.putExtra("titleOfPage", "All Digital Libraries");
+                    startActivity(contactUsIntent);
+                }
+
+
                 break;
 
 
@@ -988,6 +1226,20 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, null, R.string.app_name, R.string.app_name);
         //This is necessary to change the icon of the Drawer Toggle upon state change.
         mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void GetAdminAllData(List<HomePageResponse.Officers> list) {
+
+        adminimagelist.clear();
+        adminimagelist = new ArrayList();
+        adminimagelist.addAll(list);
+
+        AdminImgAdapter adapteradminimage = new AdminImgAdapter(this, (ArrayList) adminimagelist, this);
+        rvadminimage.setAdapter(adapteradminimage);
+        GridLayoutManager adminimagemanager = new GridLayoutManager(this, 4, GridLayoutManager.VERTICAL, false);
+        rvadminimage.setLayoutManager(adminimagemanager);
+
     }
 
     @Override
@@ -1221,6 +1473,11 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             startActivity(certificate);
 
         }
+    }
+
+    @Override
+    public void onadminimgItemClick(HomePageResponse.Officers item, int currposition) {
+
     }
 
 

@@ -1,5 +1,6 @@
 package dhe.digital.library.haryana.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -115,7 +116,7 @@ public class TrendingsJournalsAdapter extends RecyclerView.Adapter<TrendingsJour
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         currposition = position;
         holder.setData(mValues.get(position), currposition);
 

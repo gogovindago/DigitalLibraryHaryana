@@ -1,14 +1,21 @@
 package dhe.digital.library.haryana.ui.activity;
 
+import android.app.Dialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +25,7 @@ import dhe.digital.library.haryana.adapter.LibraryGalleryLibIdAdapter;
 import dhe.digital.library.haryana.allinterface.GetLibraryGalleryData_interface;
 import dhe.digital.library.haryana.apicall.WebAPiCall;
 import dhe.digital.library.haryana.databinding.ActivityLibraryGalleryBinding;
+import dhe.digital.library.haryana.models.LibraryEventsActivitieAlbumDetailResponse;
 import dhe.digital.library.haryana.models.LibraryGalleryResponse;
 import dhe.digital.library.haryana.utility.BaseActivity;
 import dhe.digital.library.haryana.utility.GlobalClass;
@@ -137,5 +145,45 @@ public class LibraryGalleryActivity extends BaseActivity implements GetLibraryGa
     @Override
     public void onItemClick(LibraryGalleryResponse.Datum item, int currposition, String type) {
 
+        openDialog(item);
+    }
+    public void openDialog(LibraryGalleryResponse.Datum item) {
+
+
+        final Dialog dialog = new Dialog(this, android.R.style.Theme_Light); // Context, this, etc.
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_demo);
+
+        //   dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+        ImageView dialog_img = dialog.findViewById(R.id.dialog_img);
+
+       /* ImageRequest request = ImageRequestBuilder.newBuilderWithSource(Uri.parse(item.getEventImage()))
+                .setResizeOptions(new ResizeOptions(150, 150))
+                .build();
+        dialog_img.setController(
+
+                Fresco.newDraweeControllerBuilder()
+                        .setOldController(dialog_img.getController())
+                        .setImageRequest(request)
+                        .build());*/
+
+        //dialog_img.setImageURI(Uri.parse(item.getEventImage()));
+
+        Glide.with(this).load(item.getImageURL())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(dialog_img);
+
+        Button dialogButton = (Button) dialog.findViewById(R.id.dialog_ok);
+
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+
+        dialog.show();
     }
 }

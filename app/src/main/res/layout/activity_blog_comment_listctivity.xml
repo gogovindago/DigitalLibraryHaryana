@@ -6,7 +6,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@color/purple_200"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.activity.BlogCommentListctivity">
@@ -157,7 +156,6 @@
             android:paddingStart="8dp"
             android:paddingLeft="8dp"
             android:text="@string/comments"
-            android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"

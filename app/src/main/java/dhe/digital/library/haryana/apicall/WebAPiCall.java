@@ -916,6 +916,7 @@ public class WebAPiCall {
                         getbannersData_interface.GetImportantsLinkData(response.body().getData().getImportantLinks());
                         getbannersData_interface.GetUdaanVideosData(response.body().getData().getTrendingUdaanVideos());
                         getbannersData_interface.GetRegisteredUserData(response.body().getData().getRegisteredUser());
+                        getbannersData_interface.GetAdminAllData(response.body().getData().getOfficers());
 
 
                     } else {

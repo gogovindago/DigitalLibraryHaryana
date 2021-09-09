@@ -187,7 +187,7 @@
                                     app:sliderIndicatorOrientation="horizontal"
                                     app:sliderIndicatorPadding="3dp"
                                     app:sliderIndicatorRadius="2dp"
-                                    app:sliderIndicatorSelectedColor="#2863AC"
+                                    app:sliderIndicatorSelectedColor="#ffffff"
                                     app:sliderIndicatorUnselectedColor="#FFA63E"
                                     app:sliderScrollTimeInSec="1"
                                     app:sliderStartAutoCycle="true" />
@@ -308,7 +308,7 @@
                                     <RelativeLayout
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginTop="8dp"
+                                        android:layout_marginTop="2dp"
                                         android:gravity="center_horizontal">
 
 
@@ -364,7 +364,7 @@
                                     <RelativeLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginTop="8dp">
+                                        android:layout_marginTop="2dp">
 
                                         <TextView
 

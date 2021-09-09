@@ -108,7 +108,6 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:gravity="center"
                 android:id="@+id/txtblogstatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -117,8 +116,27 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="0dp"
                 android:background="@color/golden"
+                android:gravity="center"
                 android:padding="2dp"
                 android:text="Status "
+                android:textColor="@color/purple_200"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtcomments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="0dp"
+                android:background="@color/golden"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="Write a Comment "
+                android:drawableLeft="@drawable/ic_baseline_edit_note_24"
                 android:textColor="@color/purple_200"
                 android:textStyle="bold" />
 

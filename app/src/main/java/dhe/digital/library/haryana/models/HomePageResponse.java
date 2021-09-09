@@ -49,6 +49,12 @@ public class HomePageResponse {
         @SerializedName("banners")
         @Expose
         private List<Banner> banners = new ArrayList<Banner>();
+
+        @SerializedName("officers")
+        @Expose
+        private List<Officers> officers = new ArrayList<Officers>();
+
+
         @SerializedName("otherDigitalTrendingLibraries")
         @Expose
         private List<OtherDigitalTrendingLibrary> otherDigitalTrendingLibraries = new ArrayList<OtherDigitalTrendingLibrary>();
@@ -74,6 +80,15 @@ public class HomePageResponse {
           @SerializedName("registeredUser")
         @Expose
         private List<RegisteredUser> registeredUser = new ArrayList<RegisteredUser>();
+
+
+        public List<Officers> getOfficers() {
+            return officers;
+        }
+
+        public void setOfficers(List<Officers> officers) {
+            this.officers = officers;
+        }
 
         public List<RegisteredUser> getRegisteredUser() {
             return registeredUser;
@@ -402,6 +417,57 @@ public class HomePageResponse {
             this.description = description;
         }
 
+    }
+
+
+    public class Officers {
+
+
+        @SerializedName("id")
+        @Expose
+        private Integer id;
+        @SerializedName("imageName")
+        @Expose
+        private String imageName;
+        @SerializedName("imagePath")
+        @Expose
+        private String imagePath;
+        @SerializedName("designation")
+        @Expose
+        private String designation;
+
+
+        public Integer getId() {
+            return id;
+        }
+
+        public void setId(Integer id) {
+            this.id = id;
+        }
+
+        public String getImageName() {
+            return imageName;
+        }
+
+        public void setImageName(String imageName) {
+            this.imageName = imageName;
+        }
+
+        public String getImagePath() {
+            return imagePath;
+        }
+
+        public void setImagePath(String imagePath) {
+            this.imagePath = imagePath;
+        }
+
+        public String getDesignation() {
+            return designation;
+        }
+
+        public void setDesignation(String designation) {
+            this.designation = designation;
+        }
     }
 
     public class OtherDigitalTrendingLibrary {

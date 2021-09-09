@@ -68,24 +68,31 @@ public class RvBookRecordLibIdAdapter extends RecyclerView.Adapter<RvBookRecordL
 
 
               //  textViewTitle.setText("Book Title:-\n " + item.getBookTitle());
-                textViewAuthor.setText("Author:-\n" + item.getAuthor());
-                txtpublisher.setText("Publisher:-\n" + item.getPublishers());
-                textViewquantity.setText("Quantity:-" + String.valueOf(item.getQuantity()));
-                txtserialno.setText("" + String.valueOf(item.getSrno()));
+//                textViewAuthor.setText("Author:-\n" + item.getAuthor());
+//                txtpublisher.setText("Publisher:-\n" + item.getPublishers());
+//                textViewquantity.setText("Quantity:-" + String.valueOf(item.getQuantity()));
+//                txtserialno.setText("" + String.valueOf(item.getSrno()));
 
 
 
-                textViewTitle.setText(Html.fromHtml("<strong>&#128196; Book Title:-<br> </strong>"+ item.getBookTitle(), Html.FROM_HTML_MODE_COMPACT));
+                textViewTitle.setText(Html.fromHtml("<strong> Book Title:-<br> </strong>"+ item.getBookTitle(), Html.FROM_HTML_MODE_COMPACT));
+                textViewAuthor.setText(Html.fromHtml("<strong> Author:-<br> </strong>"+ item.getAuthor(), Html.FROM_HTML_MODE_COMPACT));
+                txtpublisher.setText(Html.fromHtml("<strong> Publisher:-<br> </strong>"+ item.getPublishers(), Html.FROM_HTML_MODE_COMPACT));
+                textViewquantity.setText(Html.fromHtml("<strong> Quantity:-<br> </strong>"+ String.valueOf(item.getQuantity()), Html.FROM_HTML_MODE_COMPACT));
+                txtserialno.setText(Html.fromHtml("<strong></strong>"+ String.valueOf(item.getSrno()), Html.FROM_HTML_MODE_COMPACT));
 
             } else {
 
                 textViewTitle.setText(Html.fromHtml("<strong> &#128196;Book Title:-<br></strong>"+ item.getBookTitle()));
+                textViewAuthor.setText(Html.fromHtml("<strong> Author:-<br></strong>"+ item.getAuthor()));
+                txtpublisher.setText(Html.fromHtml("<strong>Publisher:-<br></strong>"+ item.getPublishers()));
+                textViewquantity.setText(Html.fromHtml("<strong>Quantity:-<br></strong>"+ String.valueOf(item.getQuantity())));
 
                // textViewTitle.setText("Book Title:-\n " + item.getBookTitle());
-                textViewAuthor.setText("Author:-\n" + item.getAuthor());
-                txtpublisher.setText("Publisher:-\n" + item.getPublishers());
-                textViewquantity.setText("Quantity:-" + String.valueOf(item.getQuantity()));
-                txtserialno.setText("" + String.valueOf(item.getSrno()));
+//                textViewAuthor.setText("Author:-\n" + item.getAuthor());
+//                txtpublisher.setText("Publisher:-\n" + item.getPublishers());
+//                textViewquantity.setText("Quantity:-" + String.valueOf(item.getQuantity()));
+//                txtserialno.setText("" + String.valueOf(item.getSrno()));
 
 
 

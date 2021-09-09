@@ -1,5 +1,6 @@
 package dhe.digital.library.haryana.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.text.Html;
@@ -65,27 +66,29 @@ public class BookDetailAdapter extends RecyclerView.Adapter<BookDetailAdapter.Vi
 
 
                 //  textViewTitle.setText("Book Title:-\n " + item.getBookTitle());
-                textViewAuthor.setText("Author:-\n" + item.getAuthorName());
-                txtpublisher.setText("Publisher:-\n " + item.getPublishers());
-                textViewquantity.setText("Year:-" + item.getBookYear());
+//                textViewAuthor.setText("Author:-\n" + item.getAuthorName());
+//                txtpublisher.setText("Publisher:-\n " + item.getPublishers());
+//                textViewquantity.setText("Year:-" + item.getBookYear());
                 // txtserialno.setText("Sr.no. " + String.valueOf(item.getSrno()));
 
 
-                textViewTitle.setText(Html.fromHtml("<strong>&#128196; Book Title:-<br></strong>" + item.getBookTitle(), Html.FROM_HTML_MODE_COMPACT));
-
-                txtlinname.setText(Html.fromHtml("<strong>&#127979-</strong>" + item.getLibraryName(), Html.FROM_HTML_MODE_COMPACT));
+                textViewTitle.setText(Html.fromHtml("<strong> Book Title:-<br> </strong>"+ item.getBookTitle(), Html.FROM_HTML_MODE_COMPACT));
+                textViewAuthor.setText(Html.fromHtml("<strong> Author:-<br> </strong>"+ item.getAuthorName(), Html.FROM_HTML_MODE_COMPACT));
+                txtpublisher.setText(Html.fromHtml("<strong> Publisher:-<br> </strong>"+ item.getPublishers(), Html.FROM_HTML_MODE_COMPACT));
+                textViewquantity.setText(Html.fromHtml("<strong>Year:- </strong>"+ String.valueOf(item.getBookYear()), Html.FROM_HTML_MODE_COMPACT));
 
             } else {
 
-                textViewTitle.setText(Html.fromHtml("<strong> &#128196;Book Title:-<br></strong>" + item.getBookTitle()));
-
-                txtlinname.setText(Html.fromHtml("<strong>&#127979</strong>" + item.getLibraryName()));
+                textViewTitle.setText(Html.fromHtml("<strong>Book Title:-<br></strong>"+ item.getBookTitle()));
+                textViewAuthor.setText(Html.fromHtml("<strong> Author:-<br></strong>"+ item.getAuthorName()));
+                txtpublisher.setText(Html.fromHtml("<strong>Publisher:-<br></strong>"+ item.getPublishers()));
+                textViewquantity.setText(Html.fromHtml("<strong>Year:-</strong>"+ String.valueOf(item.getBookYear())));
 
                 // textViewTitle.setText("Book Title:-\n " + item.getBookTitle());
-                textViewAuthor.setText("Author:-\n" + item.getAuthorName());
-                txtpublisher.setText("Publisher:-\n " + item.getPublishers());
-                textViewquantity.setText("Year:-" + item.getBookYear());
-                //  txtserialno.setText("Sr.no. " + String.valueOf(item.getSrno()));
+//                textViewAuthor.setText("Author:-\n" + item.getAuthorName());
+//                txtpublisher.setText("Publisher:-\n " + item.getPublishers());
+//                textViewquantity.setText("Year:-" + item.getBookYear());
+//                //  txtserialno.setText("Sr.no. " + String.valueOf(item.getSrno()));
 
 
                 // binding.toolbar.tvToolbarTitle.setText(Html.fromHtml("<h6>Books Available in " + titleOfPage + "</h6>"));
@@ -121,7 +124,7 @@ public class BookDetailAdapter extends RecyclerView.Adapter<BookDetailAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         currposition = position;
         holder.setData(mValues.get(position), currposition);
 

@@ -54,7 +54,7 @@ public class LibraryGalleryLibIdAdapter extends RecyclerView.Adapter<LibraryGall
 
             ll = (RelativeLayout) v.findViewById(R.id.ll);
 
-           // textViewquantity.setOnClickListener(this);
+            imageView.setOnClickListener(this);
 
         }
 
@@ -109,10 +109,10 @@ public class LibraryGalleryLibIdAdapter extends RecyclerView.Adapter<LibraryGall
 //                mListener.onItemClick(item, currposition);
 
 
-/*
+
             switch (view.getId()) {
 
-                case R.id.textViewquantity:
+                case R.id.imageView:
 
                     if (mListener != null) {
 
@@ -124,7 +124,7 @@ public class LibraryGalleryLibIdAdapter extends RecyclerView.Adapter<LibraryGall
 
 
             }
-*/
+
         }
     }
 

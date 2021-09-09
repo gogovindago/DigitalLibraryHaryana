@@ -9,6 +9,9 @@ import dhe.digital.library.haryana.models.HomePageResponse;
 public interface GetbannersData_interface {
 
 
+
+    void GetAdminAllData(List<HomePageResponse.Officers> list);
+
     void GetbannersData(List<HomePageResponse.Banner> list);
     void GetOtherDigitalTrendingLibraryData(List<HomePageResponse.OtherDigitalTrendingLibrary> list);
     void GetTrendingVideosData(List<HomePageResponse.TrendingVideo> list);
