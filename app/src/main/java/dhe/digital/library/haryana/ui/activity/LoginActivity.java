@@ -60,9 +60,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
         myLoaders = new MyLoaders(getApplicationContext());
 
-
-
-
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {
                     @Override

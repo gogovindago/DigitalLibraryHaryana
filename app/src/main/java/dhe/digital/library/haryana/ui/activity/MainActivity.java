@@ -310,9 +310,9 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             DataModelLeftNew Competitive = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, "Competitive Exam", 32);
             dataModelLeftList.add(Competitive);
 
-
-            DataModelLeftNew PeopleCollection = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, "People's Collection", 33);
-            dataModelLeftList.add(PeopleCollection);
+//
+//            DataModelLeftNew PeopleCollection = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, "People's Collection", 33);
+//            dataModelLeftList.add(PeopleCollection);
 
 
             DataModelLeftNew UdaanUrl = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, "Udaan Mental Health Counseling", 30);
