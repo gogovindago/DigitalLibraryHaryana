@@ -310,9 +310,9 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             DataModelLeftNew Competitive = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, "Competitive Exam", 32);
             dataModelLeftList.add(Competitive);
 
-//
-//            DataModelLeftNew PeopleCollection = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, "People's Collection", 33);
-//            dataModelLeftList.add(PeopleCollection);
+
+            DataModelLeftNew PeopleCollection = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, "People's Collection", 33);
+            dataModelLeftList.add(PeopleCollection);
 
 
             DataModelLeftNew UdaanUrl = new DataModelLeftNew(R.drawable.ic_baseline_library_books_24, "Udaan Mental Health Counseling", 30);
@@ -1051,10 +1051,20 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 } else {
 
                     mDrawerLayout.closeDrawers();
-                    Intent PeopleCorner = new Intent(MainActivity.this, PeopleCornerActivity.class);
-                    PeopleCorner.putExtra("typeId", "10");
-                    PeopleCorner.putExtra("titleOfPage", "People Corner");
-                    startActivity(PeopleCorner);
+                    Intent staffdetail = new Intent(MainActivity.this, ViewAllDataActivity.class);
+                    staffdetail.putExtra("typeId", "1");
+                    staffdetail.putExtra("typeReq", "People Corner");
+                    staffdetail.putExtra("titleOfPage", "All Digital Libraries");
+                    startActivity(staffdetail);
+
+
+//
+//                    Intent PeopleCorner = new Intent(MainActivity.this, PeopleCornerActivity.class);
+//                    PeopleCorner.putExtra("typeId", "10");
+//                    PeopleCorner.putExtra("titleOfPage", "People Corner");
+//                    startActivity(PeopleCorner);
+
+
                 }
 
                 break;

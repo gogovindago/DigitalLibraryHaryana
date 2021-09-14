@@ -815,6 +815,15 @@ public class ViewAllDataActivity extends BaseActivity implements ViewAllItemsAda
             startActivity(contactUsintent);
 
 
+        }else if (typeReq.equalsIgnoreCase("People Corner")) {
+
+            Intent contactUsintent = new Intent(this, PeopleCornerActivity.class);
+            contactUsintent.putExtra("title", item.getDescription());
+            contactUsintent.putExtra("itemid", item.getId());
+            contactUsintent.putExtra("liburl", item.getUrl());
+            startActivity(contactUsintent);
+
+
         } else if (typeReq.equalsIgnoreCase("Public_Library")) {
 
 

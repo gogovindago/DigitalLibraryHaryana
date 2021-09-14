@@ -7,8 +7,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -31,50 +33,94 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dhe.digital.library.haryana.R;
-import dhe.digital.library.haryana.adapter.SpinnerLibraryTypeAdapter;
+import dhe.digital.library.haryana.adapter.SpinnerBookTypeAdapter;
+import dhe.digital.library.haryana.adapter.SpinnerLanguageTypeAdapter;
+import dhe.digital.library.haryana.allinterface.GetBookTypeData_interface;
+import dhe.digital.library.haryana.allinterface.GetLanguageTypeData_interface;
+import dhe.digital.library.haryana.apicall.WebAPiCall;
 import dhe.digital.library.haryana.databinding.ActivityPeopleCornerBinding;
+import dhe.digital.library.haryana.models.GetbooktypeResponse;
+import dhe.digital.library.haryana.models.GetlanguageResponse;
 import dhe.digital.library.haryana.utility.BaseActivity;
 import dhe.digital.library.haryana.utility.CSPreferences;
 import dhe.digital.library.haryana.utility.FileUtils;
+import dhe.digital.library.haryana.utility.GlobalClass;
+import dhe.digital.library.haryana.utility.MyLoaders;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
-public class PeopleCornerActivity extends BaseActivity {
+public class PeopleCornerActivity extends BaseActivity implements GetBookTypeData_interface, AdapterView.OnItemSelectedListener, GetLanguageTypeData_interface {
     ActivityPeopleCornerBinding binding;
     boolean granted = false;
 
     File imagefile;
     private int REQUEST_CODE;
     boolean skiplogin;
-    String typeId, titleOfPage,
-            userLibSelectedId;
-    int spnLibCurrentPosition;
-    SpinnerLibraryTypeAdapter spinnerLibraryTypeAdapter;
+    String titleOfPage, userBooktype, userBooklanguagetype, username, liburl, BookIframe, BookIframeUrl, PhoneNo, CreatedBy, booktitle;
     RadioGroup btnRadiogroup;
     RadioButton checkedRadioButton;
+
+    SpinnerBookTypeAdapter spnBookAdapter;
+    SpinnerLanguageTypeAdapter languageTypeAdapter;
+    private List<GetbooktypeResponse.Datum> bookTypeList = new ArrayList<GetbooktypeResponse.Datum>();
+    private List<GetlanguageResponse.Datum> languageTypedataList = new ArrayList<GetlanguageResponse.Datum>();
+
+    private int spnBookTypeCurrentPosition = 0, spnLanguageTypeCurrentPosition = 0;
+    private MyLoaders myLoaders;
+    private int userBooklanguageLibId, userBookLibId, LibId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_people_corner);
+        myLoaders = new MyLoaders(getApplicationContext());
 
 
         skiplogin = CSPreferences.getBoolean(this, "skiplogin");
-
         try {
 
             Bundle extras = getIntent().getExtras();
+
             if (extras != null) {
 
-                titleOfPage = extras.getString("titleOfPage");
-                typeId = extras.getString("typeId");
-                // webViewUrl = extras.getString("typeId");
-                binding.toolbar.tvToolbarTitle.setAllCaps(true);
-                binding.toolbar.tvToolbarTitle.setText(titleOfPage);
+                titleOfPage = extras.getString("title");
+                LibId = extras.getInt("itemid");
+                liburl = extras.getString("liburl");
+                PhoneNo = CSPreferences.readString(this, "PhoneNo");
+                CreatedBy = CSPreferences.readString(this, "User_Name");
+                String string = liburl;
+                String[] parts = string.split("//", 2);
+                String part1 = parts[0]; // 004
+                String part2 = parts[1]; // 034556-42
+                liburl = part2;
+
+
+                // webViewUrl = extras.getString("LibId");
+
+                binding.toolbar.tvToolbarTitle.setAllCaps(false);
+                binding.toolbar.tvToolbarTitle.setText("Blog for:-" + titleOfPage);
+                // binding.txtmsgcontactus.setText("Contact us to:-"+titleOfPage);
+                binding.edtusername.setText(CreatedBy);
 
 
             }
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+
+        if (GlobalClass.isNetworkConnected(PeopleCornerActivity.this)) {
+
+            WebAPiCall webapiCall = new WebAPiCall();
+
+            // webapiCall.getAllDataMethod(PeopleCornerActivity.this, PeopleCornerActivity.this, binding.recyclerView, binding.simpleSwipeRefreshLayout, PeopleCornerActivity.this, LibId);
+            webapiCall.getbooktypeMethod(PeopleCornerActivity.this, PeopleCornerActivity.this, PeopleCornerActivity.this);
+            // binding.spnimporttype.setSelection(0, true);
+        } else {
+
+            Toast.makeText(PeopleCornerActivity.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
         }
 
 
@@ -99,7 +145,7 @@ public class PeopleCornerActivity extends BaseActivity {
                         case R.id.rbbookpdf:
 
                             binding.cardviewbookpdf.setVisibility(View.VISIBLE);
-                            binding.cardviewbookimage.setVisibility(View.VISIBLE);
+                            binding.cardviewbookimage.setVisibility(View.GONE);
                             binding.llbookiframe.setVisibility(View.GONE);
                             binding.llbookiframeUrl.setVisibility(View.GONE);
                             break;
@@ -107,7 +153,7 @@ public class PeopleCornerActivity extends BaseActivity {
                         case R.id.rbbookiframe:
 
                             binding.cardviewbookpdf.setVisibility(View.GONE);
-                            binding.cardviewbookimage.setVisibility(View.VISIBLE);
+                            binding.cardviewbookimage.setVisibility(View.GONE);
                             binding.llbookiframe.setVisibility(View.VISIBLE);
                             binding.llbookiframeUrl.setVisibility(View.VISIBLE);
 
@@ -135,7 +181,7 @@ public class PeopleCornerActivity extends BaseActivity {
         // Update with mime types
         intent.setType("*/*");
 
-        String[] mimeTypes = {"application/pdf"};
+        String[] mimeTypes = {"application/*"};
 
         // Update with additional mime types here using a String[].
         intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
@@ -326,6 +372,75 @@ public class PeopleCornerActivity extends BaseActivity {
         });
 
 
+        binding.spnbooktypetype.setOnItemSelectedListener(this);
+        binding.spnbooklang.setOnItemSelectedListener(this);
+
+
+        binding.btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (Check_Data(view)) {
+
+                    try {
+
+
+                        username = binding.edtusername.getText().toString().trim();
+                        booktitle = binding.edtbooktitle.getText().toString().trim();
+                        BookIframe = binding.edtbookiframe.getText().toString().trim();
+                        BookIframeUrl = binding.edtiframeurl.getText().toString().trim();
+
+                        RequestBody rq_Titleblog = RequestBody.create(MediaType.parse("multipart/form-data"), booktitle);
+                        RequestBody rq_username = RequestBody.create(MediaType.parse("multipart/form-data"), username);
+                        RequestBody rq_LibId = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(LibId));
+                        RequestBody rq_LanguageTypeId = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(userBooklanguageLibId));
+                        RequestBody rq_BookTypeId = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(userBookLibId));
+                        RequestBody rq_CreatedBy = RequestBody.create(MediaType.parse("multipart/form-data"), CreatedBy);
+                        RequestBody rq_BookIframe = RequestBody.create(MediaType.parse("multipart/form-data"), BookIframe);
+                        RequestBody rq_BookIframeUrl = RequestBody.create(MediaType.parse("multipart/form-data"), BookIframeUrl);
+                        RequestBody imagefilerequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), imagefile);
+                        MultipartBody.Part imagefilebody = MultipartBody.Part.createFormData("BookImageext", imagefile.getName(), imagefilerequestFile);
+
+                        if (GlobalClass.isNetworkConnected(PeopleCornerActivity.this)) {
+                            WebAPiCall aPiCall = new WebAPiCall();
+                            aPiCall.DonateBookDataMethod(PeopleCornerActivity.this, PeopleCornerActivity.this, rq_Titleblog, rq_LibId, rq_LanguageTypeId,
+                                    rq_CreatedBy, rq_BookTypeId, rq_BookIframe, rq_BookIframeUrl, imagefilebody);
+
+                            /*BlogTitle LibraryId LanguageId CreatedBy BookTypeId BookIframe BookIframeUrl BookImageext */
+
+                        } else {
+
+                            Toast.makeText(PeopleCornerActivity.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+
+
+    public boolean Check_Data(View view) {
+
+        if (TextUtils.isEmpty(binding.edtusername.getText().toString().trim())) {
+            myLoaders.showSnackBar(view, "Please Enter User name");
+            return false;
+        } else if (TextUtils.isEmpty(binding.edtbooktitle.getText().toString().trim())) {
+            myLoaders.showSnackBar(view, "Please write Title of Book.");
+            return false;
+
+        } else if (spnBookTypeCurrentPosition == 0) {
+            myLoaders.showSnackBar(view, " Please select Book Type.");
+            return false;
+
+        } else if (spnLanguageTypeCurrentPosition == 0) {
+            myLoaders.showSnackBar(view, "Please select Language type.");
+            return false;
+
+        }
+        return true;
     }
 
     PermissionListener permissionListener = new PermissionListener() {
@@ -366,6 +481,88 @@ public class PeopleCornerActivity extends BaseActivity {
 
         }
 
+
+    }
+
+    @Override
+    public void GetBookTypeData(List<GetbooktypeResponse.Datum> list) {
+
+        bookTypeList.clear();
+        bookTypeList.addAll(list);
+
+        GetbooktypeResponse.Datum datum = new GetbooktypeResponse.Datum();
+        datum.setBookType("Select your Book Type");
+        datum.setBookTypeId(0);
+        bookTypeList.add(0, datum);
+        spnBookAdapter = new SpinnerBookTypeAdapter(getApplicationContext(), bookTypeList);
+        binding.spnbooktypetype.setAdapter(spnBookAdapter);
+
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+        int id = adapterView.getId();
+        if (id == R.id.spnbooktypetype) {
+
+            if (position != 0) {
+
+                spnBookTypeCurrentPosition = position;
+
+                userBooktype = bookTypeList.get(position).getBookType();
+                userBookLibId = bookTypeList.get(position).getBookTypeId();
+                Toast.makeText(getApplicationContext(), bookTypeList.get(position).getBookType(), Toast.LENGTH_LONG).show();
+                binding.llbooklangtype.setVisibility(View.VISIBLE);
+
+                if (GlobalClass.isNetworkConnected(PeopleCornerActivity.this)) {
+
+                    WebAPiCall webapiCall = new WebAPiCall();
+
+                    webapiCall.getLanguagetypeMethod(PeopleCornerActivity.this, PeopleCornerActivity.this, PeopleCornerActivity.this);
+                    // binding.spnimporttype.setSelection(0, true);
+                } else {
+
+                    Toast.makeText(PeopleCornerActivity.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
+                }
+
+            } else {
+                binding.llbooklangtype.setVisibility(View.GONE);
+                spnBookTypeCurrentPosition = position;
+
+            }
+
+        } else if (id == R.id.spnbooklang) {
+
+            if (position != 0) {
+
+                spnLanguageTypeCurrentPosition = position;
+
+                userBooklanguagetype = languageTypedataList.get(position).getLanguage();
+                userBooklanguageLibId = languageTypedataList.get(position).getLanguageId();
+                Toast.makeText(getApplicationContext(), languageTypedataList.get(position).getLanguage(), Toast.LENGTH_LONG).show();
+            } else {
+                spnLanguageTypeCurrentPosition = position;
+            }
+
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
+    @Override
+    public void GetLanguageTypeData(List<GetlanguageResponse.Datum> list) {
+        languageTypedataList.clear();
+        languageTypedataList.addAll(list);
+
+        GetlanguageResponse.Datum languagedatum = new GetlanguageResponse.Datum();
+        languagedatum.setLanguage("Select your Book Language");
+        languagedatum.setLanguageId(0);
+        languageTypedataList.add(0, languagedatum);
+        languageTypeAdapter = new SpinnerLanguageTypeAdapter(getApplicationContext(), languageTypedataList);
+        binding.spnbooklang.setAdapter(languageTypeAdapter);
 
     }
 }

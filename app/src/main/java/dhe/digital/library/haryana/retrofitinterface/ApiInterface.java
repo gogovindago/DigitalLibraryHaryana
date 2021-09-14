@@ -13,8 +13,11 @@ import dhe.digital.library.haryana.models.CommentsOnBlogResponse;
 import dhe.digital.library.haryana.models.CommitteeDetailsResponse;
 import dhe.digital.library.haryana.models.ContactUsRequest;
 import dhe.digital.library.haryana.models.ContactUsResponse;
+import dhe.digital.library.haryana.models.DonateBookResponse;
 import dhe.digital.library.haryana.models.ForgotPasswordRequest;
 import dhe.digital.library.haryana.models.ForgotPasswordResponse;
+import dhe.digital.library.haryana.models.GetbooktypeResponse;
+import dhe.digital.library.haryana.models.GetlanguageResponse;
 import dhe.digital.library.haryana.models.HearingSpeechimpairedDataResponse;
 import dhe.digital.library.haryana.models.HomePageResponse;
 import dhe.digital.library.haryana.models.ImportantLinksTypeResponse;
@@ -64,6 +67,15 @@ public interface ApiInterface {
     Call<SignupResponse> signupUser(@Body SignupRequest request);
 
 
+    //http://112.196.99.107:81/api/commonapi/getbooktype
+    @GET("getbooktype")
+    Call<GetbooktypeResponse> getbooktypeAPi();
+
+    //http://112.196.99.107:81/api/commonapi/getlanguage
+    @GET("getlanguage")
+    Call<GetlanguageResponse> getlanguageAPi();
+
+
     //http://112.196.99.107:81/api/commonapi/ImportantLinksType
     @GET("ImportantLinksType")
     Call<ImportantLinksTypeResponse> getImportantLinksTypeAPi();
@@ -74,13 +86,9 @@ public interface ApiInterface {
     Call<StaffDetailsResponse> getStaffDetailsAPi(@Path("LibraryId") String s);
 
 
-
-
     //http://112.196.99.107:81/api/commonapi/CommitteeDetails/8
     @GET("CommitteeDetails/{LibraryId}")
     Call<CommitteeDetailsResponse> getCommitteeDetailsAPi(@Path("LibraryId") String s);
-
-
 
 
     //http://112.196.99.107:81/api/commonapi/TrackGrievance/1001
@@ -94,7 +102,6 @@ public interface ApiInterface {
     // http://112.196.99.107:81/api/commonapi/BlogComments
     @POST("BlogComments")
     Call<CommentsOnBlogResponse> CommentOnBlogData(@Body CommentsOnBlogRequest request);
-
 
 
     //http://112.196.99.107:81/api/commonapi/LibraryFacilities/8
@@ -124,18 +131,29 @@ public interface ApiInterface {
             @Path("EventDate") String eventDate,
             @Path("LibraryId") String s);
 
-/*
 
-//http://112.196.99.107:81/api/commonapi/CreateBlog
-  @GET("CreateBlog/{EventTitle}/{EventDate}/{LibraryId}")
-    Call<BlogCreateResponse> CreateBlogDataAPi(
-            @Path("BlogTitle") String BlogTitle,
-            @Path("BlogBody") String BlogBody,
-            @Path("PhoneNo") String PhoneNo,
-            @Path("CreatedBy") String CreatedBy,
-            @Path("LibrayUrl") String LibrayUrl,
-            @Path("Blog_Image_ext") String Blog_Image_ext);
-*/
+    //http://112.196.99.107:81/api/commonapi/DonateBook
+    @Multipart
+    @POST("DonateBook")
+    Call<DonateBookResponse> DonateBookDataAPi(@Part("Book_Title") RequestBody BlogTitle,
+                                               @Part("LibraryId") RequestBody LibraryId,
+                                               @Part("LanguageId") RequestBody LanguageId,
+                                               @Part("CreatedBy") RequestBody CreatedBy,
+                                               @Part("BookTypeId") RequestBody BookTypeId,
+                                               @Part("BookIframe") RequestBody BookIframe,
+                                               @Part("BookIframeUrl") RequestBody BookIframeUrl,
+                                               @Part MultipartBody.Part BookImageext);
+
+
+
+    /*[{"key":"Book_Title","value":"ABCDEFWZ","description":"","type":"text","enabled":true},
+    {"key":"LibraryId","value":"8","description":"","type":"text","enabled":true}
+    ,{"key":"LanguageId","value":"1","description":"","type":"text","enabled":true}
+    ,{"key":"CreatedBy","value":"ABCDEF","description":"","type":"text","enabled":true}
+    ,{"key":"BookTypeId","value":"1","description":"","type":"text","enabled":true}
+    ,{"key":"BookIframe","value":"","description":"","type":"text","enabled":true},
+    {"key":"BookIframeUrl","value":"","description":"","type":"text","enabled":true},
+    {"key":"BookImageext","description":"","type":"file","enabled":true,"value":*/
 
 
     //http://112.196.99.107:81/api/commonapi/CreateBlog
@@ -147,7 +165,6 @@ public interface ApiInterface {
                                                @Part("CreatedBy") RequestBody CreatedBy,
                                                @Part("LibraryUrl") RequestBody LibrayUrl,
                                                @Part MultipartBody.Part Blog_Image_ext);
-
 
 
     // http://112.196.99.107:81/api/commonapi/LibraryBlogs

@@ -62,7 +62,7 @@ public class AdminImgAdapter extends RecyclerView.Adapter<AdminImgAdapter.ViewHo
         public void setData(HomePageResponse.Officers item, int currposition) {
             this.currposition = currposition;
             this.item = item;
-            txtName.setText(item.getImageName()+"\n"+item.getDesignation());
+          //  txtName.setText(item.getImageName()+"\n"+item.getDesignation());
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
 

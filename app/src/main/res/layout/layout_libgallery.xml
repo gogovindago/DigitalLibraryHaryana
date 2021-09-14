@@ -36,14 +36,19 @@
                 android:layout_margin="2dp"
                 android:layout_centerHorizontal="true"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_margin="8dp"
-                android:layout_alignParentEnd="true"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ic_baseline_zoom_out_map_24"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true">
-            </androidx.appcompat.widget.AppCompatImageView>
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/ic_baseline_zoom_out_map_24"></androidx.appcompat.widget.AppCompatImageView>
 
         </RelativeLayout>
 

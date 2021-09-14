@@ -27,7 +27,9 @@ import dhe.digital.library.haryana.allinterface.GetAllLibraryTypesData_interface
 import dhe.digital.library.haryana.allinterface.GetBLogsByLibIdData_interface;
 import dhe.digital.library.haryana.allinterface.GetBookDetailData_interface;
 import dhe.digital.library.haryana.allinterface.GetBookRecordByLibIdData_interface;
+import dhe.digital.library.haryana.allinterface.GetBookTypeData_interface;
 import dhe.digital.library.haryana.allinterface.GetImportantLinksTypeData_interface;
+import dhe.digital.library.haryana.allinterface.GetLanguageTypeData_interface;
 import dhe.digital.library.haryana.allinterface.GetLibTypeByIdData_interface;
 import dhe.digital.library.haryana.allinterface.GetLibraryAlumniAchievementsByLibIdData_interface;
 import dhe.digital.library.haryana.allinterface.GetLibraryEventsandActivitiesByLibIdData_interface;
@@ -56,8 +58,11 @@ import dhe.digital.library.haryana.models.CommentsOnBlogResponse;
 import dhe.digital.library.haryana.models.CommitteeDetailsResponse;
 import dhe.digital.library.haryana.models.ContactUsRequest;
 import dhe.digital.library.haryana.models.ContactUsResponse;
+import dhe.digital.library.haryana.models.DonateBookResponse;
 import dhe.digital.library.haryana.models.ForgotPasswordRequest;
 import dhe.digital.library.haryana.models.ForgotPasswordResponse;
+import dhe.digital.library.haryana.models.GetbooktypeResponse;
+import dhe.digital.library.haryana.models.GetlanguageResponse;
 import dhe.digital.library.haryana.models.HearingSpeechimpairedDataResponse;
 import dhe.digital.library.haryana.models.HomePageResponse;
 import dhe.digital.library.haryana.models.ImportantLinksTypeResponse;
@@ -450,7 +455,7 @@ public class WebAPiCall {
     }
 
 
-    public void CommentOnBlogDataMethod(final Activity activity, final Context context, CommentsOnBlogRequest request,final CommentsOnBlogData_interface anInterface) {
+    public void CommentOnBlogDataMethod(final Activity activity, final Context context, CommentsOnBlogRequest request, final CommentsOnBlogData_interface anInterface) {
 
         // loadershowwithMsg(context, "We are Sending auto generated password on your Registered Mobile number.");
 
@@ -464,7 +469,7 @@ public class WebAPiCall {
 
 
                     if (response.body().getResponse() == 200) {
-                        anInterface.commentsStatusdata(response.body().getResponse(),"Done");
+                        anInterface.commentsStatusdata(response.body().getResponse(), "Done");
 
                         //  dailogsuccessWithActivity(context, activity, " Password has been Changed Successfully.", "New auto generated password has been sent on your Registered Mobile number .");
 
@@ -490,18 +495,6 @@ public class WebAPiCall {
             }
         });
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     public void getLibraryAlumniAchievementsByLibIdDataMethod(final Activity activity, final Context context, String libId, RelativeLayout llmain, SwipeRefreshLayout mSwipeRefreshLayout, final GetLibraryAlumniAchievementsByLibIdData_interface anInterface) {
@@ -838,6 +831,86 @@ public class WebAPiCall {
             public void onFailure(Call<LibraryGalleryResponse> call, Throwable t) {
                 mSwipeRefreshLayout.setRefreshing(false);
                 // dailoghide(context);
+                t.printStackTrace();
+
+                Log.d("dddddd", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+
+    public void getbooktypeMethod(final Activity activity, final Context context, final GetBookTypeData_interface anInterface) {
+
+        loadershowwithMsg(context, "Loading...");
+
+
+        Call<GetbooktypeResponse> responseCall = ApiClient.getClient().getbooktypeAPi();
+        responseCall.enqueue(new Callback<GetbooktypeResponse>() {
+            @Override
+            public void onResponse(Call<GetbooktypeResponse> call, Response<GetbooktypeResponse> response) {
+                dailoghide(context);
+                if (response.isSuccessful()) {
+
+                    if (response.body().getResponse() == 200) {
+
+
+                        anInterface.GetBookTypeData(response.body().getData());
+
+
+                    } else {
+
+                    }
+
+
+                } else {
+                    GlobalClass.showtost(context, "" + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetbooktypeResponse> call, Throwable t) {
+
+                dailoghide(context);
+                t.printStackTrace();
+
+                Log.d("dddddd", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+
+    public void getLanguagetypeMethod(final Activity activity, final Context context, final GetLanguageTypeData_interface anInterface) {
+
+        loadershowwithMsg(context, "Loading...");
+
+
+        Call<GetlanguageResponse> responseCall = ApiClient.getClient().getlanguageAPi();
+        responseCall.enqueue(new Callback<GetlanguageResponse>() {
+            @Override
+            public void onResponse(Call<GetlanguageResponse> call, Response<GetlanguageResponse> response) {
+                dailoghide(context);
+                if (response.isSuccessful()) {
+
+                    if (response.body().getResponse() == 200) {
+
+
+                        anInterface.GetLanguageTypeData(response.body().getData());
+
+
+                    } else {
+
+                    }
+
+
+                } else {
+                    GlobalClass.showtost(context, "" + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetlanguageResponse> call, Throwable t) {
+
+                dailoghide(context);
                 t.printStackTrace();
 
                 Log.d("dddddd", "onFailure: " + t.getMessage());
@@ -1576,6 +1649,59 @@ public class WebAPiCall {
 
             @Override
             public void onFailure(Call<BlogCreateResponse> call, Throwable t) {
+
+                dailoghide(context);
+                t.printStackTrace();
+                Log.d("dddddd", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+
+    public void DonateBookDataMethod(final Activity activity, final Context context, RequestBody BlogTitle, RequestBody LibraryId, RequestBody LanguageId,
+                                     RequestBody CreatedBy,
+                                     RequestBody BookTypeId,
+                                     RequestBody BookIframe,
+                                     RequestBody BookIframeUrl,
+                                     MultipartBody.Part BookImageext) {
+
+        loadershowwithMsg(context, "Book Uploading process is going on...");
+
+
+        Call<DonateBookResponse> createBlogDataAPi = ApiClient.getClient().DonateBookDataAPi(
+
+                BlogTitle,
+                LibraryId,
+                LanguageId,
+                CreatedBy,
+                BookTypeId,
+                BookIframe,
+                BookIframeUrl,
+                BookImageext);
+        createBlogDataAPi.enqueue(new Callback<DonateBookResponse>() {
+
+            @Override
+            public void onResponse(Call<DonateBookResponse> call, Response<DonateBookResponse> response) {
+                dailoghide(context);
+                if (response.isSuccessful()) {
+
+
+                    if (response.body().getResponse() == 200) {
+                        dailogsuccessWithActivity(context, activity, "Book Uploaded successfully", "Book Uploading process completed successful.");
+                    } else {
+                        dailogError(context, "Error!", "Server is busy,Book Uploading process failed!,Please try after sometimes");
+                    }
+
+
+                } else {
+                    GlobalClass.showtost(context, "" + response.message());
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<DonateBookResponse> call, Throwable t) {
 
                 dailoghide(context);
                 t.printStackTrace();

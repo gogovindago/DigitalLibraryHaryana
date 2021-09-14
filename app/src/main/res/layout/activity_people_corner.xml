@@ -70,6 +70,7 @@
                     android:layout_marginEnd="16dp">
 
                     <com.google.android.material.textfield.TextInputEditText
+                       android:enabled="false"
                         android:id="@+id/edtusername"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -197,7 +198,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:orientation="vertical"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/txtbooklangtype"
@@ -510,7 +511,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
 
-                android:id="@+id/btnotp"
+                android:id="@+id/btnSubmit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
