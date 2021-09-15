@@ -1663,7 +1663,8 @@ public class WebAPiCall {
                                      RequestBody BookTypeId,
                                      RequestBody BookIframe,
                                      RequestBody BookIframeUrl,
-                                     MultipartBody.Part BookImageext) {
+                                     MultipartBody.Part BookImageext,
+                                     MultipartBody.Part pdffilebody ) {
 
         loadershowwithMsg(context, "Book Uploading process is going on...");
 
@@ -1677,7 +1678,8 @@ public class WebAPiCall {
                 BookTypeId,
                 BookIframe,
                 BookIframeUrl,
-                BookImageext);
+                BookImageext,
+                pdffilebody);
         createBlogDataAPi.enqueue(new Callback<DonateBookResponse>() {
 
             @Override

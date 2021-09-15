@@ -57,6 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:orientation="vertical">
 
 
@@ -78,6 +79,7 @@
                         android:drawableLeft="@drawable/person"
                         android:drawablePadding="16dp"
                         android:hint="User Name"
+                        android:textColor="@color/black"
                         android:imeOptions="actionNext"
                         android:inputType="textPersonName"
                         app:layout_constraintEnd_toEndOf="parent"

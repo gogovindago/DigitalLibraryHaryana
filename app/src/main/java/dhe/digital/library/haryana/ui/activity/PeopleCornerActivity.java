@@ -54,10 +54,10 @@ public class PeopleCornerActivity extends BaseActivity implements GetBookTypeDat
     ActivityPeopleCornerBinding binding;
     boolean granted = false;
 
-    File imagefile;
+    File imagefile, pdf_file;
     private int REQUEST_CODE;
     boolean skiplogin;
-    String titleOfPage, userBooktype, userBooklanguagetype, username, liburl, BookIframe, BookIframeUrl, PhoneNo, CreatedBy, booktitle;
+    String titleOfPage, userBooktype, userBooklanguagetype, liburl, BookIframe, BookIframeUrl, PhoneNo, CreatedBy, booktitle;
     RadioGroup btnRadiogroup;
     RadioButton checkedRadioButton;
 
@@ -69,6 +69,7 @@ public class PeopleCornerActivity extends BaseActivity implements GetBookTypeDat
     private int spnBookTypeCurrentPosition = 0, spnLanguageTypeCurrentPosition = 0;
     private MyLoaders myLoaders;
     private int userBooklanguageLibId, userBookLibId, LibId;
+    private boolean Is_iframe = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +100,7 @@ public class PeopleCornerActivity extends BaseActivity implements GetBookTypeDat
                 // webViewUrl = extras.getString("LibId");
 
                 binding.toolbar.tvToolbarTitle.setAllCaps(false);
-                binding.toolbar.tvToolbarTitle.setText("Blog for:-" + titleOfPage);
+                binding.toolbar.tvToolbarTitle.setText("Book for - " + titleOfPage);
                 // binding.txtmsgcontactus.setText("Contact us to:-"+titleOfPage);
                 binding.edtusername.setText(CreatedBy);
 
@@ -144,16 +145,19 @@ public class PeopleCornerActivity extends BaseActivity implements GetBookTypeDat
                         //cardviewbookpdf  cardviewbookimage
                         case R.id.rbbookpdf:
 
+                            Is_iframe = false;
                             binding.cardviewbookpdf.setVisibility(View.VISIBLE);
-                            binding.cardviewbookimage.setVisibility(View.GONE);
+                            binding.cardviewbookimage.setVisibility(View.VISIBLE);
                             binding.llbookiframe.setVisibility(View.GONE);
                             binding.llbookiframeUrl.setVisibility(View.GONE);
                             break;
 
                         case R.id.rbbookiframe:
-
+                            Is_iframe = true;
+                            imagefile = null;
+                            pdf_file = null;
                             binding.cardviewbookpdf.setVisibility(View.GONE);
-                            binding.cardviewbookimage.setVisibility(View.GONE);
+                            binding.cardviewbookimage.setVisibility(View.VISIBLE);
                             binding.llbookiframe.setVisibility(View.VISIBLE);
                             binding.llbookiframeUrl.setVisibility(View.VISIBLE);
 
@@ -243,9 +247,9 @@ public class PeopleCornerActivity extends BaseActivity implements GetBookTypeDat
                 File file = null;
                 try {
                     file = new File(path);
-                    imagefile = file;
+                    pdf_file = file;
                     // binding.txtrequiredDocument.setText(imagefile.toString());
-                    binding.txtbookpdf.setText(imagefile.getName());
+                    binding.txtbookpdf.setText(pdf_file.getName());
                     // binding.txtrequiredDocument.setTextColor(R.color.drkgreeen);
                     binding.txtbookpdf.setTextColor(getResources().getColor(R.color.drkgreeen));
                     binding.imgpdfDone.setVisibility(View.VISIBLE);
@@ -260,6 +264,41 @@ public class PeopleCornerActivity extends BaseActivity implements GetBookTypeDat
 
             }
 
+
+        } else if (requestCode == 124) {
+
+            if (resultCode == RESULT_OK) {
+                Uri uri = data.getData();
+                String path = "";
+                int currentVersion = Build.VERSION.SDK_INT;
+                if (currentVersion >= Build.VERSION_CODES.N) {
+                    // Do something for lollipop and above versions
+                    path = FileUtils.getFilePathForN(uri, this);
+                } else {
+                    // do something for phones running an SDK before lollipop
+                    path = FileUtils.getPath(this, uri);
+                }
+                // "file:///mnt/sdcard/FileName.mp3"
+                Log.d("PATHS : ", path);
+                File file = null;
+                try {
+                    file = new File(path);
+                    imagefile = file;
+                    // binding.txtrequiredDocument.setText(imagefile.toString());
+                    binding.txtbookimage.setText(imagefile.getName());
+                    // binding.txtrequiredDocument.setTextColor(R.color.drkgreeen);
+                    binding.txtbookimage.setTextColor(getResources().getColor(R.color.drkgreeen));
+                    binding.imgbookDone.setVisibility(View.VISIBLE);
+                    binding.llbookimage.setBackgroundResource(R.drawable.spinner_bordergreen);
+                    // Log.d("PDF", file.getAbsolutePath());
+                    // Log.d("PDF", "" + file.getTotalSpace());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            } else {
+
+            }
 
         }
 
@@ -385,26 +424,80 @@ public class PeopleCornerActivity extends BaseActivity implements GetBookTypeDat
                     try {
 
 
-                        username = binding.edtusername.getText().toString().trim();
+                        if (Is_iframe) {
+
+                            BookIframe = binding.edtbookiframe.getText().toString().trim();
+                            BookIframeUrl = binding.edtiframeurl.getText().toString().trim();
+
+                        } else {
+                            BookIframe = null;
+                            BookIframeUrl = null;
+                        }
+
+
                         booktitle = binding.edtbooktitle.getText().toString().trim();
-                        BookIframe = binding.edtbookiframe.getText().toString().trim();
-                        BookIframeUrl = binding.edtiframeurl.getText().toString().trim();
 
                         RequestBody rq_Titleblog = RequestBody.create(MediaType.parse("multipart/form-data"), booktitle);
-                        RequestBody rq_username = RequestBody.create(MediaType.parse("multipart/form-data"), username);
                         RequestBody rq_LibId = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(LibId));
                         RequestBody rq_LanguageTypeId = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(userBooklanguageLibId));
                         RequestBody rq_BookTypeId = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(userBookLibId));
                         RequestBody rq_CreatedBy = RequestBody.create(MediaType.parse("multipart/form-data"), CreatedBy);
-                        RequestBody rq_BookIframe = RequestBody.create(MediaType.parse("multipart/form-data"), BookIframe);
-                        RequestBody rq_BookIframeUrl = RequestBody.create(MediaType.parse("multipart/form-data"), BookIframeUrl);
-                        RequestBody imagefilerequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), imagefile);
-                        MultipartBody.Part imagefilebody = MultipartBody.Part.createFormData("BookImageext", imagefile.getName(), imagefilerequestFile);
+
+
+                        RequestBody rq_BookIframe = null;
+                        try {
+                            rq_BookIframe = RequestBody.create(MediaType.parse("multipart/form-data"), BookIframe);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+
+                        RequestBody rq_BookIframeUrl = null;
+                        try {
+                            rq_BookIframeUrl = RequestBody.create(MediaType.parse("multipart/form-data"), BookIframeUrl);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+
+
+                        RequestBody imagefilerequestFile = null;
+                        MultipartBody.Part imagefilebody = null;
+
+                        if (imagefile == null) {
+                            imagefilebody = null;
+
+                        } else {
+
+                            try {
+                                imagefilerequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), imagefile);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            imagefilebody = MultipartBody.Part.createFormData("BookImageext", imagefile.getName(), imagefilerequestFile);
+                        }
+
+                        RequestBody pdffilerequestFile = null;
+                        MultipartBody.Part pdffilebody = null;
+
+                        if (pdf_file == null) {
+
+                            pdffilebody = null;
+
+                        } else {
+
+                            try {
+                                pdffilerequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), pdf_file);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            pdffilebody = MultipartBody.Part.createFormData("BookPDFext", pdf_file.getName(), pdffilerequestFile);
+                        }
 
                         if (GlobalClass.isNetworkConnected(PeopleCornerActivity.this)) {
                             WebAPiCall aPiCall = new WebAPiCall();
                             aPiCall.DonateBookDataMethod(PeopleCornerActivity.this, PeopleCornerActivity.this, rq_Titleblog, rq_LibId, rq_LanguageTypeId,
-                                    rq_CreatedBy, rq_BookTypeId, rq_BookIframe, rq_BookIframeUrl, imagefilebody);
+                                    rq_CreatedBy, rq_BookTypeId, rq_BookIframe, rq_BookIframeUrl, imagefilebody, pdffilebody);
 
                             /*BlogTitle LibraryId LanguageId CreatedBy BookTypeId BookIframe BookIframeUrl BookImageext */
 
@@ -417,6 +510,8 @@ public class PeopleCornerActivity extends BaseActivity implements GetBookTypeDat
                         e.printStackTrace();
                     }
                 }
+
+
             }
         });
     }

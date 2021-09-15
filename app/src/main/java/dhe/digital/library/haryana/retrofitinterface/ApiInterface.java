@@ -1,5 +1,7 @@
 package dhe.digital.library.haryana.retrofitinterface;
 
+import java.util.Map;
+
 import dhe.digital.library.haryana.models.AlumniAchievementsResponse;
 import dhe.digital.library.haryana.models.BlogCommentsListResponse;
 import dhe.digital.library.haryana.models.BlogCreateResponse;
@@ -50,6 +52,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 import retrofit2.http.Path;
 
 
@@ -142,7 +145,11 @@ public interface ApiInterface {
                                                @Part("BookTypeId") RequestBody BookTypeId,
                                                @Part("BookIframe") RequestBody BookIframe,
                                                @Part("BookIframeUrl") RequestBody BookIframeUrl,
-                                               @Part MultipartBody.Part BookImageext);
+                                               @Part MultipartBody.Part BookImageext,
+                                               @Part MultipartBody.Part BookPdfext);
+
+  //  Call<DonateBookResponse> editUser ( @PartMap Map<String, RequestBody> map);
+
 
 
 
