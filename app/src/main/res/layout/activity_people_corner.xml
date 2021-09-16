@@ -283,7 +283,8 @@
 
                         <RadioButton
                             android:textColor="@color/colorPrimaryDark"
-
+android:checked="true"
+                            android:layout_marginStart="8dp"
                             android:id="@+id/rbbookpdf"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -291,13 +292,14 @@
                             android:text="Book PDF"
                             android:textSize="15sp"
                             android:textStyle="bold"
-                            android:visibility="visible">
+                            android:visibility="visible"
+                            android:layout_marginLeft="8dp">
 
                         </RadioButton>
 
                         <RadioButton
                             android:textColor="@color/colorPrimaryDark"
-
+android:layout_marginStart="8dp"
                             android:id="@+id/rbbookiframe"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -305,7 +307,8 @@
                             android:textSize="15sp"
                             android:textStyle="bold"
 
-                            android:visibility="visible">
+                            android:visibility="visible"
+                            android:layout_marginLeft="8dp">
 
                         </RadioButton>
 
@@ -316,10 +319,10 @@
 
 
                 <androidx.cardview.widget.CardView
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:id="@+id/cardviewbookpdf"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="65dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
@@ -344,8 +347,8 @@
                             android:layout_margin="5dp"
                             android:layout_marginTop="5dp"
                             android:layout_weight="0.85"
-                            android:drawableStart="@drawable/ic_baseline_attach_file_24"
-                            android:drawableLeft="@drawable/ic_baseline_attach_file_24"
+                            android:drawableStart="@drawable/ic_baseline_colorattach_file_24"
+                            android:drawableLeft="@drawable/ic_baseline_colorattach_file_24"
                             android:gravity="center|start"
                             android:padding="5dp"
                             android:text="Click here to Upload your  Book as pdf."
@@ -450,14 +453,26 @@
                     android:ellipsize="end"
                     android:inputType="textImeMultiLine"
                     android:padding="5dp" />
+                    <TextView
+                        android:layout_marginStart="8dp"
+                        android:id="@+id/txtiframesize"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center|start"
+                        android:padding="5dp"
+                        android:text="* Set Iframe width:100%;height:550px * "
+                        android:textColor="@color/red"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="8dp" />
 
 
                 </LinearLayout>
                 <androidx.cardview.widget.CardView
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:id="@+id/cardviewbookimage"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="65dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
@@ -482,8 +497,8 @@
                             android:layout_margin="5dp"
                             android:layout_marginTop="5dp"
                             android:layout_weight="0.85"
-                            android:drawableStart="@drawable/ic_baseline_attach_file_24"
-                            android:drawableLeft="@drawable/ic_baseline_attach_file_24"
+                            android:drawableStart="@drawable/ic_baseline_colorattach_file_24"
+                            android:drawableLeft="@drawable/ic_baseline_colorattach_file_24"
                             android:gravity="center|start"
                             android:padding="5dp"
                             android:text="Click here to Upload your  Book Image."

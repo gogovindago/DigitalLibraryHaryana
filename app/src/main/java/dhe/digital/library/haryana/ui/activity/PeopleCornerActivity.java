@@ -145,17 +145,39 @@ public class PeopleCornerActivity extends BaseActivity implements GetBookTypeDat
                         //cardviewbookpdf  cardviewbookimage
                         case R.id.rbbookpdf:
 
+                            binding.edtbookiframe.setText("");
+                            binding.edtiframeurl.setText("");
+
                             Is_iframe = false;
+
                             binding.cardviewbookpdf.setVisibility(View.VISIBLE);
                             binding.cardviewbookimage.setVisibility(View.VISIBLE);
                             binding.llbookiframe.setVisibility(View.GONE);
                             binding.llbookiframeUrl.setVisibility(View.GONE);
+
                             break;
 
                         case R.id.rbbookiframe:
+
                             Is_iframe = true;
+
                             imagefile = null;
                             pdf_file = null;
+
+                            // binding.txtrequiredDocument.setText(imagefile.toString());
+                            binding.txtbookpdf.setText("Click here to Upload your  Book as pdf.");
+                            // binding.txtrequiredDocument.setTextColor(R.color.drkgreeen);
+                            binding.txtbookpdf.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                            binding.imgpdfDone.setVisibility(View.GONE);
+                            binding.llbookpdft.setBackgroundResource(R.drawable.bg_overlay);
+
+
+                            binding.txtbookimage.setText("Click here to Upload your  Book Image.");
+                            binding.txtbookimage.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                            binding.imgbookDone.setVisibility(View.GONE);
+                            binding.llbookimage.setBackgroundResource(R.drawable.bg_overlay);
+
+
                             binding.cardviewbookpdf.setVisibility(View.GONE);
                             binding.cardviewbookimage.setVisibility(View.VISIBLE);
                             binding.llbookiframe.setVisibility(View.VISIBLE);
@@ -183,9 +205,9 @@ public class PeopleCornerActivity extends BaseActivity implements GetBookTypeDat
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 
         // Update with mime types
-        intent.setType("*/*");
+       intent.setType("application/pdf");
 
-        String[] mimeTypes = {"application/*"};
+        String[] mimeTypes = {"application/pdf"};
 
         // Update with additional mime types here using a String[].
         intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
@@ -204,7 +226,7 @@ public class PeopleCornerActivity extends BaseActivity implements GetBookTypeDat
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 
         // Update with mime types
-        intent.setType("*/*");
+        intent.setType("image/*");
 
         // String[] mimeTypes = {"application/pdf"};
 
@@ -419,96 +441,184 @@ public class PeopleCornerActivity extends BaseActivity implements GetBookTypeDat
             @Override
             public void onClick(View view) {
 
-                if (Check_Data(view)) {
 
-                    try {
+                if (Is_iframe) {
 
+                    if (Check_Data(view)) {
 
-                        if (Is_iframe) {
+                        try {
+
 
                             BookIframe = binding.edtbookiframe.getText().toString().trim();
                             BookIframeUrl = binding.edtiframeurl.getText().toString().trim();
+                            booktitle = binding.edtbooktitle.getText().toString().trim();
 
-                        } else {
+                            RequestBody rq_Titleblog = RequestBody.create(MediaType.parse("multipart/form-data"), booktitle);
+                            RequestBody rq_LibId = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(LibId));
+                            RequestBody rq_LanguageTypeId = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(userBooklanguageLibId));
+                            RequestBody rq_BookTypeId = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(userBookLibId));
+                            RequestBody rq_CreatedBy = RequestBody.create(MediaType.parse("multipart/form-data"), CreatedBy);
+
+
+                            RequestBody rq_BookIframe = null;
+                            try {
+                                rq_BookIframe = RequestBody.create(MediaType.parse("multipart/form-data"), BookIframe);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+
+                            RequestBody rq_BookIframeUrl = null;
+                            try {
+                                rq_BookIframeUrl = RequestBody.create(MediaType.parse("multipart/form-data"), BookIframeUrl);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+
+                            RequestBody imagefilerequestFile = null;
+                            MultipartBody.Part imagefilebody = null;
+
+                            if (imagefile == null) {
+                                imagefilebody = null;
+
+                            } else {
+
+                                try {
+                                    imagefilerequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), imagefile);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                imagefilebody = MultipartBody.Part.createFormData("BookImageext", imagefile.getName(), imagefilerequestFile);
+                            }
+
+                            RequestBody pdffilerequestFile = null;
+                            MultipartBody.Part pdffilebody = null;
+
+                            if (pdf_file == null) {
+
+                                pdffilebody = null;
+
+                            } else {
+
+                                try {
+                                    pdffilerequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), pdf_file);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                pdffilebody = MultipartBody.Part.createFormData("BookPDFext", pdf_file.getName(), pdffilerequestFile);
+                            }
+
+                            if (GlobalClass.isNetworkConnected(PeopleCornerActivity.this)) {
+                                WebAPiCall aPiCall = new WebAPiCall();
+                                aPiCall.DonateBookDataMethod(PeopleCornerActivity.this, PeopleCornerActivity.this, rq_Titleblog, rq_LibId, rq_LanguageTypeId,
+                                        rq_CreatedBy, rq_BookTypeId, rq_BookIframe, rq_BookIframeUrl, imagefilebody, pdffilebody);
+
+                                /*BlogTitle LibraryId LanguageId CreatedBy BookTypeId BookIframe BookIframeUrl BookImageext */
+
+                            } else {
+
+                                Toast.makeText(PeopleCornerActivity.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                } else {
+
+                    if (Check_DataFOR_PDF(view)) {
+
+                        try {
+
+
+//                            if (Is_iframe) {
+//
+//                                BookIframe = binding.edtbookiframe.getText().toString().trim();
+//                                BookIframeUrl = binding.edtiframeurl.getText().toString().trim();
+//
+//                            } else {
                             BookIframe = null;
                             BookIframeUrl = null;
-                        }
+                            //  }
 
 
-                        booktitle = binding.edtbooktitle.getText().toString().trim();
+                            booktitle = binding.edtbooktitle.getText().toString().trim();
 
-                        RequestBody rq_Titleblog = RequestBody.create(MediaType.parse("multipart/form-data"), booktitle);
-                        RequestBody rq_LibId = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(LibId));
-                        RequestBody rq_LanguageTypeId = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(userBooklanguageLibId));
-                        RequestBody rq_BookTypeId = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(userBookLibId));
-                        RequestBody rq_CreatedBy = RequestBody.create(MediaType.parse("multipart/form-data"), CreatedBy);
-
-
-                        RequestBody rq_BookIframe = null;
-                        try {
-                            rq_BookIframe = RequestBody.create(MediaType.parse("multipart/form-data"), BookIframe);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                            RequestBody rq_Titleblog = RequestBody.create(MediaType.parse("multipart/form-data"), booktitle);
+                            RequestBody rq_LibId = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(LibId));
+                            RequestBody rq_LanguageTypeId = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(userBooklanguageLibId));
+                            RequestBody rq_BookTypeId = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(userBookLibId));
+                            RequestBody rq_CreatedBy = RequestBody.create(MediaType.parse("multipart/form-data"), CreatedBy);
 
 
-                        RequestBody rq_BookIframeUrl = null;
-                        try {
-                            rq_BookIframeUrl = RequestBody.create(MediaType.parse("multipart/form-data"), BookIframeUrl);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-
-
-                        RequestBody imagefilerequestFile = null;
-                        MultipartBody.Part imagefilebody = null;
-
-                        if (imagefile == null) {
-                            imagefilebody = null;
-
-                        } else {
-
+                            RequestBody rq_BookIframe = null;
                             try {
-                                imagefilerequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), imagefile);
+                                rq_BookIframe = RequestBody.create(MediaType.parse("multipart/form-data"), BookIframe);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-                            imagefilebody = MultipartBody.Part.createFormData("BookImageext", imagefile.getName(), imagefilerequestFile);
-                        }
 
-                        RequestBody pdffilerequestFile = null;
-                        MultipartBody.Part pdffilebody = null;
 
-                        if (pdf_file == null) {
-
-                            pdffilebody = null;
-
-                        } else {
-
+                            RequestBody rq_BookIframeUrl = null;
                             try {
-                                pdffilerequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), pdf_file);
+                                rq_BookIframeUrl = RequestBody.create(MediaType.parse("multipart/form-data"), BookIframeUrl);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-                            pdffilebody = MultipartBody.Part.createFormData("BookPDFext", pdf_file.getName(), pdffilerequestFile);
+
+
+                            RequestBody imagefilerequestFile = null;
+                            MultipartBody.Part imagefilebody = null;
+
+                            if (imagefile == null) {
+                                imagefilebody = null;
+
+                            } else {
+
+                                try {
+                                    imagefilerequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), imagefile);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                imagefilebody = MultipartBody.Part.createFormData("BookImageext", imagefile.getName(), imagefilerequestFile);
+                            }
+
+                            RequestBody pdffilerequestFile = null;
+                            MultipartBody.Part pdffilebody = null;
+
+                            if (pdf_file == null) {
+
+                                pdffilebody = null;
+
+                            } else {
+
+                                try {
+                                    pdffilerequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), pdf_file);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                pdffilebody = MultipartBody.Part.createFormData("BookPDFext", pdf_file.getName(), pdffilerequestFile);
+                            }
+
+                            if (GlobalClass.isNetworkConnected(PeopleCornerActivity.this)) {
+                                WebAPiCall aPiCall = new WebAPiCall();
+                                aPiCall.DonateBookDataMethod(PeopleCornerActivity.this, PeopleCornerActivity.this, rq_Titleblog, rq_LibId, rq_LanguageTypeId,
+                                        rq_CreatedBy, rq_BookTypeId, rq_BookIframe, rq_BookIframeUrl, imagefilebody, pdffilebody);
+
+                                /*BlogTitle LibraryId LanguageId CreatedBy BookTypeId BookIframe BookIframeUrl BookImageext */
+
+                            } else {
+
+                                Toast.makeText(PeopleCornerActivity.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-
-                        if (GlobalClass.isNetworkConnected(PeopleCornerActivity.this)) {
-                            WebAPiCall aPiCall = new WebAPiCall();
-                            aPiCall.DonateBookDataMethod(PeopleCornerActivity.this, PeopleCornerActivity.this, rq_Titleblog, rq_LibId, rq_LanguageTypeId,
-                                    rq_CreatedBy, rq_BookTypeId, rq_BookIframe, rq_BookIframeUrl, imagefilebody, pdffilebody);
-
-                            /*BlogTitle LibraryId LanguageId CreatedBy BookTypeId BookIframe BookIframeUrl BookImageext */
-
-                        } else {
-
-                            Toast.makeText(PeopleCornerActivity.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
-                        }
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
                     }
+
                 }
 
 
@@ -532,6 +642,47 @@ public class PeopleCornerActivity extends BaseActivity implements GetBookTypeDat
 
         } else if (spnLanguageTypeCurrentPosition == 0) {
             myLoaders.showSnackBar(view, "Please select Language type.");
+            return false;
+
+        } else if (TextUtils.isEmpty(binding.edtiframeurl.getText().toString().trim())) {
+            myLoaders.showSnackBar(view, "Please select Iframe Url for Book.");
+            return false;
+
+        } else if (TextUtils.isEmpty(binding.edtbookiframe.getText().toString().trim())) {
+            myLoaders.showSnackBar(view, "Please select Iframe for Book.");
+            return false;
+
+        }else if (imagefile == null) {
+            myLoaders.showSnackBar(view, "Please select Image for Book.");
+            return false;
+
+        }
+        return true;
+    }
+
+    public boolean Check_DataFOR_PDF(View view) {
+
+        if (TextUtils.isEmpty(binding.edtusername.getText().toString().trim())) {
+            myLoaders.showSnackBar(view, "Please Enter User name");
+            return false;
+        } else if (TextUtils.isEmpty(binding.edtbooktitle.getText().toString().trim())) {
+            myLoaders.showSnackBar(view, "Please write Title of Book.");
+            return false;
+
+        } else if (spnBookTypeCurrentPosition == 0) {
+            myLoaders.showSnackBar(view, " Please select Book Type.");
+            return false;
+
+        } else if (spnLanguageTypeCurrentPosition == 0) {
+            myLoaders.showSnackBar(view, "Please select Language type.");
+            return false;
+
+        } else if (pdf_file == null) {
+            myLoaders.showSnackBar(view, "Please select Pdf file for Book.");
+            return false;
+
+        } else if (imagefile == null) {
+            myLoaders.showSnackBar(view, "Please select Image for Book.");
             return false;
 
         }
