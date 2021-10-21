@@ -169,6 +169,10 @@
             android:name=".ui.activity.LibraryEventsandActivitiesGalleryDetail"
             android:screenOrientation="portrait"
             android:theme="@style/DigitalLibraryHaryana" />
+
+        <activity android:name=".ui.helpdesk.HelpDeskActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DigitalLibraryHaryana"/>
     </application>
 
 </manifest>

@@ -43,5 +43,8 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="address"><u> ADDRESS </u>\n\n Office of Director General,\n Higher Education Haryana Sector 5,\n Panchkula - INDIA\n</string>
+    <string name="contact"><u> CONTACT INFO </u>\n\n Phone: +91 0172-2565530, 2562029\n Email: divyangeduhry@gmail.com</string>
+
 
 </resources>

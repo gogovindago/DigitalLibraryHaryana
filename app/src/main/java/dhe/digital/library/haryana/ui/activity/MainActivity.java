@@ -69,6 +69,7 @@ import dhe.digital.library.haryana.allinterface.GetbannersData_interface;
 import dhe.digital.library.haryana.apicall.WebAPiCall;
 import dhe.digital.library.haryana.models.DataModelLeftNew;
 import dhe.digital.library.haryana.models.HomePageResponse;
+import dhe.digital.library.haryana.ui.helpdesk.HelpDeskActivity;
 import dhe.digital.library.haryana.ui.welcome.WelcomeActivity;
 import dhe.digital.library.haryana.utility.BaseActivity;
 import dhe.digital.library.haryana.utility.CSPreferences;
@@ -330,6 +331,9 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
 
             DataModelLeftNew contactus = new DataModelLeftNew(R.drawable.ic_baseline_contact_mail_24, "Contact Us", 109);
             dataModelLeftList.add(contactus);
+
+            DataModelLeftNew helpDesk = new DataModelLeftNew(R.drawable.ic_baseline_contact_mail_24, "Help Desk", 119);
+            dataModelLeftList.add(helpDesk);
 
 
             DataModelLeftNew OurOthersApps = new DataModelLeftNew(R.drawable.ic_baseline_apps_24, "Our Others Apps", 4);
@@ -1110,6 +1114,13 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
                 mDrawerLayout.closeDrawers();
                 Intent notification = new Intent(this, NotificationsActivity.class);
                 startActivity(notification);
+                break;
+
+            case 119:
+
+                mDrawerLayout.closeDrawers();
+                Intent helpdesk = new Intent(this, HelpDeskActivity.class);
+                startActivity(helpdesk);
                 break;
 
 
