@@ -74,6 +74,7 @@ import dhe.digital.library.haryana.ui.welcome.WelcomeActivity;
 import dhe.digital.library.haryana.utility.BaseActivity;
 import dhe.digital.library.haryana.utility.CSPreferences;
 import dhe.digital.library.haryana.utility.GlobalClass;
+import dhe.digital.library.haryana.utility.NetworkUtil;
 
 
 public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter.ItemListener, GetbannersData_interface, TrendingsEBooksAdapter.ItemListener, TrendingsVideosAdapter.ItemListener, TrendingsJournalsAdapter.ItemListener, ImportantLinksAdapter.ItemListener, TrendingUdaanVideosAdapter.ItemListener, AdminImgAdapter.ItemListener {
@@ -179,17 +180,17 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
             @Override
 
             public void onRefresh() {
-
+                llmain.setVisibility(View.GONE);
                 if (GlobalClass.isNetworkConnected(MainActivity.this)) {
 
                     WebAPiCall webapiCall = new WebAPiCall();
                     webapiCall.getHomePageDataMethod(MainActivity.this, MainActivity.this, llmain, mSwipeRefreshLayout, MainActivity.this);
-
+                    shuffle();
                 } else {
 
                     Toast.makeText(MainActivity.this, GlobalClass.nointernet, Toast.LENGTH_LONG).show();
                 }
-                shuffle();
+
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         });
@@ -511,7 +512,13 @@ public class MainActivity extends BaseActivity implements OthesDigitalLibAdapter
         toggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.drawerCheck();
+
+                if (NetworkUtil.isConnected(MainActivity.this)) {
+                    MainActivity.drawerCheck();
+                }else {
+
+                    GlobalClass.showtost(MainActivity.this,"No Internet Available.Plz check your internet connection.");
+                }
             }
         });
 

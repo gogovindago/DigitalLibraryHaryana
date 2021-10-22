@@ -993,7 +993,7 @@ public class WebAPiCall {
 
 
                     } else {
-
+                        llmain.setVisibility(View.GONE);
                     }
 
 
@@ -1004,6 +1004,7 @@ public class WebAPiCall {
 
             @Override
             public void onFailure(Call<HomePageResponse> call, Throwable t) {
+                llmain.setVisibility(View.GONE);
                 mSwipeRefreshLayout.setRefreshing(false);
                 // dailoghide(context);
                 t.printStackTrace();
