@@ -28,8 +28,8 @@ public class BooksDeatilActivity extends BaseActivity implements GetBookDetailDa
 
 
     private ActivityBooksDetailBinding binding;
-    String  titleOfPage;
-int bookserial_Id;
+    String titleOfPage;
+    int bookserial_Id;
     BookDetailAdapter adaptermain;
     private List<BooksDetailResponse.Datum> arrayList = new ArrayList<BooksDetailResponse.Datum>();
 
@@ -46,16 +46,13 @@ int bookserial_Id;
             if (extras != null) {
 
 
-              //  titleOfPage = extras.getString("title");
+                //  titleOfPage = extras.getString("title");
                 bookserial_Id = extras.getInt("bookserial_Id");
                 //  itemType = extras.getString("itemType");
                 // webViewUrl = extras.getString("typeId");
 
                 //  binding.toolbar.tvToolbarTitle.setAllCaps(true);
                 // binding.toolbar.tvToolbarTitle.setText("Books Available in "+titleOfPage);
-
-
-
 
 
             }
@@ -141,7 +138,7 @@ int bookserial_Id;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             ///* + arrayList.get(0).getLibraryName() +*/
-            binding.toolbar.tvToolbarTitle.setText(Html.fromHtml("<h6>Books Available</h6>",Html.FROM_HTML_MODE_COMPACT));
+            binding.toolbar.tvToolbarTitle.setText(Html.fromHtml("<h6>Books Available</h6>", Html.FROM_HTML_MODE_COMPACT));
         } else {
             // + arrayList.get(0).getLibraryName() + "</h6>"
             binding.toolbar.tvToolbarTitle.setText(Html.fromHtml("<h6>Books Available"));
