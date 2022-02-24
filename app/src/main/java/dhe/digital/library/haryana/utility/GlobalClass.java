@@ -40,7 +40,7 @@ public class GlobalClass {
 
 
     //Live url
-    public static String baseurl = "http://112.196.99.107:81/api/commonapi/";
+    public static String baseurl = "https://digitallibraryapi.highereduhry.ac.in/api/commonapi/";
     public static String nointernet = "No Internet Connection";
     public static String nodatafound = "No Data Found";
     public static String dheOtherAppsLink = "https://play.google.com/store/apps/collection/cluster?clp=igNAChkKEzU4NzQ0NzU1NTI1MDY5NDE4MDEQCBgDEiEKG2RoZS5kaWdpdGFsLmxpYnJhcnkuaGFyeWFuYRABGAMYAQ%3D%3D:S:ANO1ljIHeVw&gsr=CkOKA0AKGQoTNTg3NDQ3NTU1MjUwNjk0MTgwMRAIGAMSIQobZGhlLmRpZ2l0YWwubGlicmFyeS5oYXJ5YW5hEAEYAxgB:S:ANO1ljJnuKw";
